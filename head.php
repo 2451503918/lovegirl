@@ -298,6 +298,7 @@ function loadPhotos() {
 <link rel="stylesheet" href="/Style/css/lg-home-components.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-tooltip.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-context-menu.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-enhanced.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/APlayer.min.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/qweather-icons/qweather-icons.css?LikeGirl=<?php echo $version ?>">
 <script src="/Style/Font/font_leav/iconfont.js"></script>
