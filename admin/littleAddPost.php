@@ -1,15 +1,19 @@
 <?php
 session_start();
 $file = $_SERVER['PHP_SELF'];
-include_once 'connect.php';
+include_once 'Database.php';
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $title = htmlspecialchars(trim($_POST['articletitle']), ENT_QUOTES);
     $text = trim($_POST['articletext']);
     $name = trim($_POST['articlename']);
     $time = gmdate("Y-m-d", time() + 8 * 3600);
-    $charu = "insert into article (articletitle,articletext,articletime,articlename) values ('$title','$text','$time','$name')";
-    $result = mysqli_query($connect, $charu);
+    
+    $charu = "insert into article (articletitle,articletext,articletime,articlename) values (?,?,?,?)";
+    $stmt = $conn->prepare($charu);
+    $stmt->bind_param("ssss", $title, $text, $time, $name);
+    $result = $stmt->execute();
+    
     if ($result) {
         echo "1";
     } else {

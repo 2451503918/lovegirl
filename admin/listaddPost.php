@@ -14,11 +14,14 @@ if ($_POST['icon'] == 1) {
     $icon = 0;
 }
 
-include_once 'connect.php';
+include_once 'Database.php';
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
-    $charu = "insert into lovelist (eventname,icon,imgurl) values ('$name','$icon','$img')";
-    $result = mysqli_query($connect, $charu);
+    $charu = "insert into lovelist (eventname,icon,imgurl) values (?,?,?)";
+    $stmt = $conn->prepare($charu);
+    $stmt->bind_param("sis", $name, $icon, $img);
+    $result = $stmt->execute();
+    
     if ($result) {
         echo "1";
     } else {

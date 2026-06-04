@@ -3,9 +3,9 @@
 include_once 'Database.php';
 include_once 'Function.php';
 
-$name = trim($_POST['name']);
-$qq = trim($_POST['qq']);
-$text = trim($_POST['text']);
+$name = trim($_POST['name'] ?? '');
+$qq = trim($_POST['qq'] ?? '');
+$text = trim($_POST['text'] ?? '');
 $time = time();
 
 
@@ -13,9 +13,9 @@ $Filter_Name = replaceSpecialChar($name);
 $Filter_QQ = replaceSpecialChar($qq);
 $Filter_Text = replaceSpecialChar($text);
 $Filter_Time = replaceSpecialChar($time);
+$result = false;
+$User_City = '未知';
 
-
-// echo $Filter_Name.$Filter_QQ.$Filter_Text;
 
 $file = $_SERVER['PHP_SELF'];
 
@@ -23,7 +23,7 @@ $file = $_SERVER['PHP_SELF'];
 $whitelistQQ = ['2451503918'];
 $isWhitelist = in_array($Filter_QQ, $whitelistQQ);
 
-if (!$_COOKIE["KiCookie"] || $isWhitelist) {
+if (!isset($_COOKIE["KiCookie"]) || $isWhitelist) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -41,21 +41,23 @@ if (!$_COOKIE["KiCookie"] || $isWhitelist) {
 
                     $charu = "insert into leaving (name,QQ,text,time,ip,city) values (?,?,?,?,?,?)";
                     $stmt = $conn->prepare($charu);
-                    $stmt->bind_param("sissss", $Filter_Name, $Filter_QQ, $Filter_Text, $Filter_Time,$Filter_IP,$User_City);
+                    $stmt->bind_param("sissss", $Filter_Name, $Filter_QQ, $Filter_Text, $Filter_Time, $Filter_IP, $User_City);
                     $result = $stmt->execute();
                     if (!$result) {
                         error_log("leavingPost.php query error: " . $stmt->error);
                     }
-                    $stmt->fetch();
 
                 } else {
                     echo "3";
+                    exit;
                 }
             } else {
                 echo "4";
+                exit;
             }
         } else {
             echo "5";
+            exit;
         }
 
         if ($result) {
@@ -71,7 +73,7 @@ if (!$_COOKIE["KiCookie"] || $isWhitelist) {
             echo "0";
         }
     } else {
-        echo "<script>alert('非法操作，行为已记录');location.href = 'warning.php?route    =$file';</script>";
+        echo "<script>alert('非法操作，行为已记录');location.href = 'warning.php?route=$file';</script>";
     }
 } else {
     echo "8";

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $file = $_SERVER['PHP_SELF'];
-include_once 'connect.php';
+include_once 'Database.php';
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
 
     $id = 1;
@@ -30,8 +30,11 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $infod4 = trim($_POST['infod4']);
     $infod5 = trim($_POST['infod5']);
     
-    $sql = "update about set title = '$title',aboutimg = '$aboutimg',info1 = '$info1',info2 = '$info2',info3 = '$info3',btn1 = '$btn1',btn2 = '$btn2',infox1 = '$infox1',infox2 = '$infox2',infox3 = '$infox3',infox4 = '$infox4',infox5 = '$infox5',infox6 = '$infox6',btnx2 = '$btnx2',infof1 = '$infof1',infof2 = '$infof2',infof3 = '$infof3',infof4 = '$infof4',btnf3 = '$btnf3',infod1 = '$infod1',infod2 = '$infod2',infod3 = '$infod3',infod4 = '$infod4',infod5 = '$infod5' where id = '$id'";
-    $result = mysqli_query($connect, $sql);
+    $sql = "update about set title = ?,aboutimg = ?,info1 = ?,info2 = ?,info3 = ?,btn1 = ?,btn2 = ?,infox1 = ?,infox2 = ?,infox3 = ?,infox4 = ?,infox5 = ?,infox6 = ?,btnx2 = ?,infof1 = ?,infof2 = ?,infof3 = ?,infof4 = ?,btnf3 = ?,infod1 = ?,infod2 = ?,infod3 = ?,infod4 = ?,infod5 = ? where id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssssssssssssssssssi", $title, $aboutimg, $info1, $info2, $info3, $btn1, $btn2, $infox1, $infox2, $infox3, $infox4, $infox5, $infox6, $btnx2, $infof1, $infof2, $infof3, $infof4, $btnf3, $infod1, $infod2, $infod3, $infod4, $infod5, $id);
+    $result = $stmt->execute();
+    
     if ($result) {
         echo "1";
     } else {

@@ -11,7 +11,7 @@ function checkQQ($qq)
     }
 }
 
-include_once 'connect.php';
+include_once 'Database.php';
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $boy = htmlspecialchars(trim($_POST['boy']));
@@ -21,8 +21,11 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $startTime = trim($_POST['startTime']);
     
     if (checkQQ($boyimg) && checkQQ($girlimg)) {
-        $sql = "update text set startTime = '$startTime', girlimg = '$girlimg' , boyimg = '$boyimg', girl = '$girl' , boy = '$boy' ";
-        $result = mysqli_query($connect, $sql);
+        $sql = "update text set startTime = ?, girlimg = ?, boyimg = ?, girl = ?, boy = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssss", $startTime, $girlimg, $boyimg, $girl, $boy);
+        $result = $stmt->execute();
+        
         if ($result) {
             echo "1";
         } else {
