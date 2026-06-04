@@ -1,0 +1,31 @@
+# 敏感配置文件
+admin/Config_DB.php
+
+# 日志文件
+ip.txt
+*.log
+
+# 备份文件
+*.bak
+*.bak.*
+
+# 系统文件
+.htaccess
+.user.ini
+
+# 上传目录中的文件（保留目录结构）
+admin/uploads/*
+!admin/uploads/.gitkeep
+
+# 回收站
+.Recycle_bin/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,51 @@
+/* ============================================
+   自定义右键菜单
+   ============================================ */
+.lg-ctx-menu {
+    position: fixed;
+    z-index: 100001;
+    min-width: 180px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 0.8rem;
+    padding: 0.4rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+}
+.lg-ctx-menu.lg-ctx-menu--show {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+.lg-ctx-menu__item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-decoration: none;
+    user-select: none;
+}
+.lg-ctx-menu__item:hover {
+    background: rgba(0,0,0,0.05);
+}
+.lg-ctx-menu__item i {
+    font-size: 16px;
+    color: #666;
+    width: 20px;
+    text-align: center;
+}
+.lg-ctx-menu__divider {
+    height: 1px;
+    background: rgba(0,0,0,0.06);
+    margin: 0.3rem 0.5rem;
+}

@@ -1,0 +1,209 @@
+/* ============================================
+   LG-Home 首页完整组件系统
+   基于 LG-NewUi Demo 全面仿写
+   ============================================ */
+
+/* ===== 全局基础 ===== */
+.lgnewui-mb-4 { margin-bottom: 1.5rem; }
+.lgnewui-text-right { text-align: right; }
+.lgnewui-mt-auto { margin-top: auto; }
+
+/* ===== 智能媒体卡片（时光碎片）===== */
+.lgnewui-smart-card {
+    position: relative;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    height: 100%;
+    min-height: 300px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+.lgnewui-smart-card__media {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+}
+.lgnewui-smart-card:hover .lgnewui-smart-card__media {
+    transform: scale(1.05);
+}
+.lgnewui-smart-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.2) 100%);
+}
+.lgnewui-smart-card__header {
+    position: absolute;
+    top: 1rem; left: 1rem; right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+.lgnewui-smart-card__capsule {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+}
+.lgnewui-smart-card__avatar {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.lgnewui-smart-card__user-info { display: flex; flex-direction: column; }
+.lgnewui-smart-card__name { font-size: 0.75rem; color: #fff; font-weight: 600; }
+.lgnewui-smart-card__time { font-size: 0.6rem; color: rgba(255,255,255,0.7); }
+.lgnewui-smart-card__album-link {
+    display: flex; align-items: center; gap: 0.3rem;
+    color: #fff; font-size: 0.75rem; text-decoration: none;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    transition: background 0.2s;
+}
+.lgnewui-smart-card__album-link:hover { background: rgba(255,255,255,0.25); }
+.lgnewui-smart-card__content {
+    position: absolute;
+    bottom: 1rem; left: 1rem; right: 1rem;
+    z-index: 2;
+}
+.lgnewui-smart-card__location-pill {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    color: rgba(255,255,255,0.8); font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+}
+.lgnewui-smart-card__title {
+    color: #fff; font-size: 1.3rem; font-weight: 700;
+    margin-bottom: 0.3rem;
+    font-family: 'Noto Serif SC', serif;
+}
+.lgnewui-smart-card__meta { display: flex; flex-direction: column; gap: 0.2rem; }
+.lgnewui-smart-card__date { font-size: 0.7rem; color: rgba(255,255,255,0.6); }
+.lgnewui-smart-card__desc { font-size: 0.8rem; color: rgba(255,255,255,0.8); line-height: 1.5; margin: 0; }
+.lgnewui-smart-card__switch-btn-container {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    z-index: 3;
+}
+.lgnewui-smart-card__switch-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    transition: all 0.2s;
+}
+.lgnewui-smart-card__switch-btn:hover { background: rgba(0,0,0,0.5); transform: rotate(90deg); }
+
+/* ===== 事件清单卡片 ===== */
+.lgnewui-events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+.lgnewui-event-card {
+    display: block;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+    min-height: 180px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+.lgnewui-event-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+.lgnewui-event-card--has-img {
+    background-size: cover;
+    background-position: center;
+}
+.lgnewui-event-card--has-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+}
+.lgnewui-event-card--locked {
+    background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+    color: #94a3b8;
+}
+.lgnewui-event-card__content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1rem;
+    z-index: 1;
+}
+.lgnewui-event-card__title {
+    font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem;
+}
+.lgnewui-event-card__desc {
+    font-size: 0.75rem; opacity: 0.8; line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .lgnewui-events-grid { grid-template-columns: 1fr; }
+    .lgnewui-smart-card { min-height: 250px; }
+}
+
+/* ===== 纪念日卡片 ===== */
+.lgnewui-loveday-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+.lgnewui-widget--loveday-vibrant {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+}
+.lgnewui-widget--loveday-future {
+    background: linear-gradient(135deg, #f87171, #fb923c);
+    color: #fff;
+}
+.lgnewui-loveday-sup-label {
+    font-size: 0.7rem; opacity: 0.7; margin-bottom: 0.3rem;
+}
+.lgnewui-loveday-bg-icon {
+    position: absolute;
+    bottom: -5px; right: -5px;
+    width: 5rem; height: 5rem;
+    opacity: 0.1;
+    pointer-events: none;
+}
+.lgnewui-loveday-content { position: relative; z-index: 1; }
+.lgnewui-loveday-title { font-size: 0.9rem; font-weight: 700; }
+.lgnewui-loveday-date { font-size: 0.7rem; opacity: 0.7; }
+.lgnewui-loveday-count { font-size: 2rem; font-weight: 900; font-family: 'Inter', monospace; }
+.lgnewui-loveday-unit { font-size: 0.8rem; opacity: 0.7; margin-left: 0.2rem; }
+.lgnewui-loveday-lunar-inline { font-size: 0.65rem; opacity: 0.6; margin-top: 0.2rem; }
+
+@media (max-width: 768px) {
+    .lgnewui-loveday-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+    .lgnewui-loveday-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== 背景点阵 ===== */
+body.bg-pdot-vignette {
+    background-image:
+        radial-gradient(circle at 50% 50%, transparent 0%, rgba(255,255,255,0.8) 100%),
+        radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 20px 20px;
+}
+
+/* ===== Section Header 变体 ===== */
+.lgnewui-section-header--rose .lgnewui-section-title { color: #e11d48; }
+.lgnewui-section-header--purple .lgnewui-section-title { color: #7c3aed; }
+
+/* ===== 图标颜色修正 ===== */
+.lgnewui-icon-sm-white { color: #fff; font-size: 14px; }
+.lgnewui-icon-md-white { color: #fff; font-size: 18px; }

@@ -1,0 +1,305 @@
+/* ============================================
+   LG-NewUi 灵动岛导航样式
+   基于 love-really.kikiw.cn 研究成果
+   ============================================ */
+
+/* 导航栏容器 */
+.lgnewui-nav-wrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 70px;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    perspective: 1000px;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.lgnewui-nav-wrapper.is-fixed {
+    position: fixed;
+    top: 14px;
+    left: 0;
+    right: 0;
+}
+
+.lgnewui-nav-placeholder {
+    display: none;
+}
+
+.lgnewui-nav-placeholder.is-active {
+    display: block;
+}
+
+/* 导航岛容器 - 灵动岛风格 */
+.lgnewui-nav-island-container {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    padding: 8px;
+    border-radius: 60px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.03), 0 2px 8px rgba(0, 0, 0, 0.02);
+    transform-origin: center center;
+    user-select: none;
+    -webkit-user-select: none;
+    transition:
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        padding 0.25s ease-out,
+        border-radius 0.25s ease-out,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+    will-change: transform;
+}
+
+/* 吸顶时的收缩效果 - 灵动岛风格 */
+.lgnewui-nav-island-container.lgnewui-is-stuck {
+    padding: 5px;
+    background: rgba(248, 248, 248, 0.65);
+    border-radius: 50px;
+    box-shadow: none;
+    transform: scale(0.88);
+}
+
+/* 吸顶Logo和工具图标 - 默认隐藏 */
+.lgnewui-nav-stuck-logo,
+.lgnewui-nav-stuck-actions {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-stuck-logo,
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-stuck-actions {
+    display: flex;
+    opacity: 1;
+}
+
+/* 吸顶Logo样式 */
+.lgnewui-nav-stuck-logo {
+    align-items: center;
+    margin-right: 8px;
+    padding-left: 8px;
+}
+
+.lgnewui-nav-stuck-logo img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 工具图标区域 */
+.lgnewui-nav-stuck-actions {
+    align-items: center;
+    gap: 4px;
+    margin-left: 8px;
+    padding-right: 4px;
+}
+
+.lgnewui-nav-stuck-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #666;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.lgnewui-nav-stuck-action-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #333;
+}
+
+.lgnewui-nav-stuck-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 0 4px;
+}
+
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item {
+    padding: 10px 18px;
+    font-size: 16px;
+    gap: 6px;
+}
+
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item i {
+    font-size: 13px;
+}
+
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item.nav-home {
+    padding: 8px 24px;
+}
+
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item.nav-home i {
+    font-size: 15px;
+}
+
+/* 导航项 - 灵动岛风格过渡 */
+.lgnewui-nav-island-item {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    text-decoration: none;
+    color: #6f6f6f;
+    border-radius: 32px;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 300;
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    transition:
+        padding 0.25s ease-out,
+        font-size 0.25s ease-out,
+        gap 0.25s ease-out,
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.lgnewui-nav-island-item i {
+    transition: font-size 0.25s ease-out;
+    font-size: 16px !important;
+}
+
+.lgnewui-nav-island-item .nav-icon {
+    font-size: 18px;
+    font-style: normal;
+    line-height: 1;
+}
+
+.lgnewui-nav-wrapper.is-fixed .lgnewui-nav-island-item {
+    color: #000000;
+}
+
+.lgnewui-nav-island-item:not(.active):hover {
+    background-color: rgb(248 114 113 / 9%);
+    color: #f87171;
+}
+
+.lgnewui-nav-wrapper.is-fixed .lgnewui-nav-island-item:not(.active):hover {
+    background-color: rgb(255 255 255);
+    color: #6f6f6f;
+}
+
+/* 首页 Tab */
+.lgnewui-nav-island-item.nav-home {
+    padding: 10px 32px;
+    margin: 0 4px;
+    color: #1d1d1f;
+    opacity: 0.8;
+}
+
+.lgnewui-nav-island-item.nav-home.active {
+    opacity: 1;
+    color: #fff;
+}
+
+.lgnewui-nav-island-item.nav-home i {
+    font-size: 18px;
+    transition: color 0.2s ease;
+}
+
+.lgnewui-nav-island-item.nav-home:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.lgnewui-nav-island-item.nav-home::before,
+.lgnewui-nav-island-item.nav-home::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 12px;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: opacity 0.2s;
+}
+
+.lgnewui-nav-island-item.nav-home::before {
+    left: 0;
+}
+
+.lgnewui-nav-island-item.nav-home::after {
+    right: 0;
+}
+
+.lgnewui-nav-island-item.nav-home:hover::before,
+.lgnewui-nav-island-item.nav-home:hover::after,
+.lgnewui-nav-island-item.nav-home.active::before,
+.lgnewui-nav-island-item.nav-home.active::after,
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item.nav-home::before,
+.lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item.nav-home::after {
+    opacity: 0;
+}
+
+.lgnewui-nav-wrapper.is-fixed .lgnewui-nav-island-item.active,
+.lgnewui-nav-wrapper .lgnewui-nav-island-item.active {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 指示器 */
+.lgnewui-nav-indicator {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    height: calc(100% - 16px);
+    background: #f87171;
+    border-radius: 100px;
+    z-index: 0;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.lgnewui-nav-indicator::before {
+    content: "";
+    display: block;
+    background: inherit;
+    filter: blur(0.5rem);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 2px;
+    left: 2px;
+    z-index: -1;
+    opacity: 0.5;
+    transform-origin: 0 0;
+    border-radius: inherit;
+    transform: scale(1, 1);
+}
+
+.lgnewui-nav-indicator.no-transition {
+    transition: none !important;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .lgnewui-nav-wrapper {
+        display: none !important;
+    }
+
+    .lgnewui-mobile-nav-root {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .lgnewui-mobile-nav-root {
+        display: none;
+    }
+}
