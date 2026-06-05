@@ -1166,6 +1166,343 @@
             font-family: 'Font Awesome 6 Free' !important;
             font-weight: 900 !important;
         }
+        
+        /* ============================================
+           地图卡片样式
+           ============================================ */
+        .lgnewui-map-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .lgnewui-map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .lgnewui-map-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .lgnewui-map-title i {
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        .lgnewui-map-distance {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .lgnewui-map-distance-value {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lgnewui-map-distance-unit {
+            font-size: 16px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .lgnewui-map-visual {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .lgnewui-map-bg {
+            position: relative;
+        }
+
+        .lgnewui-map-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .lgnewui-map-locations {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lgnewui-map-location {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 16px;
+        }
+
+        .lgnewui-map-location-boy {
+            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+        }
+
+        .lgnewui-map-location-girl {
+            background: linear-gradient(135deg, rgba(245,87,108,0.1), rgba(240,147,251,0.1));
+        }
+
+        .lgnewui-map-location-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .lgnewui-map-location-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .lgnewui-map-location-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .lgnewui-map-location-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .lgnewui-map-location-city {
+            font-size: 13px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .lgnewui-map-location-city i {
+            color: #667eea;
+        }
+
+        .lgnewui-map-connector {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #f5576c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        
+        /* ============================================
+           访客统计卡片样式
+           ============================================ */
+        .lgnewui-visitor-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .lgnewui-visitor-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lgnewui-visitor-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .lgnewui-visitor-card--accent {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .lgnewui-visitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .lgnewui-visitor-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .lgnewui-visitor-card--accent .lgnewui-visitor-title {
+            color: white;
+        }
+
+        .lgnewui-visitor-title i {
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .lgnewui-visitor-card--accent .lgnewui-visitor-title i {
+            color: white;
+        }
+
+        .lgnewui-visitor-live {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .lgnewui-visitor-live-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #27c93f;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .lgnewui-visitor-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .lgnewui-visitor-stat {
+            text-align: center;
+            padding: 12px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 12px;
+        }
+
+        .lgnewui-visitor-card--accent .lgnewui-visitor-stat {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .lgnewui-visitor-stat-value {
+            margin-bottom: 4px;
+        }
+
+        .lgnewui-visitor-number {
+            font-size: 24px;
+            font-weight: 900;
+            color: #667eea;
+            font-family: 'Inter', monospace;
+        }
+
+        .lgnewui-visitor-number--large {
+            font-size: 32px;
+        }
+
+        .lgnewui-visitor-card--accent .lgnewui-visitor-number {
+            color: white;
+        }
+
+        .lgnewui-visitor-stat-label {
+            font-size: 12px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .lgnewui-visitor-card--accent .lgnewui-visitor-stat-label {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* 地图和访客统计移动端适配 */
+        @media (max-width: 768px) {
+            .lgnewui-visitor-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .lgnewui-visitor-card {
+                padding: 16px;
+            }
+            
+            .lgnewui-visitor-number {
+                font-size: 20px;
+            }
+            
+            .lgnewui-visitor-number--large {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .lgnewui-map-card {
+                padding: 16px;
+                border-radius: 20px;
+            }
+            
+            .lgnewui-map-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .lgnewui-map-distance-value {
+                font-size: 28px;
+            }
+            
+            .lgnewui-map-locations {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .lgnewui-map-connector {
+                transform: rotate(90deg);
+            }
+            
+            .lgnewui-map-location {
+                width: 100%;
+            }
+            
+            .lgnewui-visitor-stats {
+                gap: 12px;
+            }
+            
+            .lgnewui-visitor-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .lgnewui-visitor-stats-grid {
+                gap: 8px;
+            }
+            
+            .lgnewui-visitor-stat {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1378,6 +1715,152 @@
             </div>
         </div>
         
+        <!-- ===== 地图显示卡片 ===== -->
+        <div class="test-section">
+            <h2><i class="fas fa-map-marked-alt"></i> 地图显示</h2>
+            <div class="lgnewui-map-card">
+                <div class="lgnewui-map-header">
+                    <div class="lgnewui-map-title">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>我们的距离</span>
+                    </div>
+                    <div class="lgnewui-map-distance">
+                        <span class="lgnewui-map-distance-value">1068.9</span>
+                        <span class="lgnewui-map-distance-unit">km</span>
+                    </div>
+                </div>
+                
+                <div class="lgnewui-map-visual">
+                    <div class="lgnewui-map-bg">
+                        <svg viewBox="0 0 400 200" class="lgnewui-map-svg">
+                            <path d="M100,50 Q150,30 200,50 Q250,40 300,60 L320,100 Q300,150 250,170 L200,180 Q150,170 100,150 L80,100 Z" 
+                                  fill="none" stroke="rgba(102, 126, 234, 0.2)" stroke-width="1"/>
+                            
+                            <g class="lgnewui-map-marker-boy">
+                                <circle cx="150" cy="80" r="8" fill="#667eea" opacity="0.3">
+                                    <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+                                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
+                                </circle>
+                                <circle cx="150" cy="80" r="4" fill="#667eea"/>
+                                <text x="150" y="65" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold">男主角</text>
+                            </g>
+                            
+                            <g class="lgnewui-map-marker-girl">
+                                <circle cx="250" cy="120" r="8" fill="#f5576c" opacity="0.3">
+                                    <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                                    <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                                </circle>
+                                <circle cx="250" cy="120" r="4" fill="#f5576c"/>
+                                <text x="250" y="140" text-anchor="middle" fill="#f5576c" font-size="12" font-weight="bold">女主角</text>
+                            </g>
+                            
+                            <line x1="150" y1="80" x2="250" y2="120" 
+                                  stroke="url(#distanceGradient)" stroke-width="2" stroke-dasharray="5,5">
+                                <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                            </line>
+                            
+                            <defs>
+                                <linearGradient id="distanceGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#667eea"/>
+                                    <stop offset="100%" style="stop-color:#f5576c"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="lgnewui-map-locations">
+                    <div class="lgnewui-map-location lgnewui-map-location-boy">
+                        <div class="lgnewui-map-location-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Boy&background=667eea&color=fff&size=128" alt="">
+                        </div>
+                        <div class="lgnewui-map-location-info">
+                            <div class="lgnewui-map-location-name">男主角</div>
+                            <div class="lgnewui-map-location-city">
+                                <i class="fas fa-map-marker-alt"></i>北京
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lgnewui-map-connector">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    
+                    <div class="lgnewui-map-location lgnewui-map-location-girl">
+                        <div class="lgnewui-map-location-avatar">
+                            <img src="https://ui-avatars.com/api/?name=Girl&background=f5576c&color=fff&size=128" alt="">
+                        </div>
+                        <div class="lgnewui-map-location-info">
+                            <div class="lgnewui-map-location-name">女主角</div>
+                            <div class="lgnewui-map-location-city">
+                                <i class="fas fa-map-marker-alt"></i>上海
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ===== 访客统计卡片 ===== -->
+        <div class="test-section">
+            <h2><i class="fas fa-chart-line"></i> 访客统计</h2>
+            <div class="lgnewui-visitor-stats">
+                <div class="lgnewui-visitor-card">
+                    <div class="lgnewui-visitor-header">
+                        <div class="lgnewui-visitor-title">
+                            <i class="fas fa-chart-line"></i>
+                            <span>今日访问</span>
+                        </div>
+                        <div class="lgnewui-visitor-live">
+                            <span class="lgnewui-visitor-live-dot"></span>
+                            <span>实时</span>
+                        </div>
+                    </div>
+                    
+                    <div class="lgnewui-visitor-stats-grid">
+                        <div class="lgnewui-visitor-stat">
+                            <div class="lgnewui-visitor-stat-value">
+                                <span class="lgnewui-visitor-number" data-target="156">156</span>
+                            </div>
+                            <div class="lgnewui-visitor-stat-label">访问次数</div>
+                        </div>
+                        
+                        <div class="lgnewui-visitor-stat">
+                            <div class="lgnewui-visitor-stat-value">
+                                <span class="lgnewui-visitor-number" data-target="48">48</span>
+                            </div>
+                            <div class="lgnewui-visitor-stat-label">今日访客</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lgnewui-visitor-card lgnewui-visitor-card--accent">
+                    <div class="lgnewui-visitor-header">
+                        <div class="lgnewui-visitor-title">
+                            <i class="fas fa-globe-americas"></i>
+                            <span>累计访问</span>
+                        </div>
+                    </div>
+                    
+                    <div class="lgnewui-visitor-stats-grid">
+                        <div class="lgnewui-visitor-stat">
+                            <div class="lgnewui-visitor-stat-value">
+                                <span class="lgnewui-visitor-number lgnewui-visitor-number--large" data-target="3847">3.8k+</span>
+                            </div>
+                            <div class="lgnewui-visitor-stat-label">总访客数</div>
+                        </div>
+                        
+                        <div class="lgnewui-visitor-stat">
+                            <div class="lgnewui-visitor-stat-value">
+                                <span class="lgnewui-visitor-number lgnewui-visitor-number--large" data-target="15234">15.2k+</span>
+                            </div>
+                            <div class="lgnewui-visitor-stat-label">总访问次</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!-- ===== 3. 功能入口 ===== -->
         <div class="test-section">
             <h2><i class="fas fa-th"></i> 3. 功能入口</h2>
@@ -1506,6 +1989,44 @@
             });
         }
         setInterval(updateTimer, 1000);
+        
+        // 访客统计数字动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const numbers = document.querySelectorAll('.lgnewui-visitor-number');
+            
+            numbers.forEach(num => {
+                const target = parseInt(num.dataset.target);
+                const duration = 1500;
+                const start = 0;
+                const startTime = performance.now();
+                
+                function updateNumber(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // 使用easeOutExpo缓动
+                    const easeOutExpo = 1 - Math.pow(2, -10 * progress);
+                    const current = Math.floor(start + (target - start) * easeOutExpo);
+                    
+                    num.textContent = current.toLocaleString();
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(updateNumber);
+                    }
+                }
+                
+                requestAnimationFrame(updateNumber);
+            });
+            
+            // 模拟实时更新
+            setInterval(() => {
+                const todayVisitsEl = document.querySelector('.lgnewui-visitor-number[data-target]');
+                if (todayVisitsEl) {
+                    const current = parseInt(todayVisitsEl.textContent.replace(/,/g, ''));
+                    todayVisitsEl.textContent = (current + 1).toLocaleString();
+                }
+            }, 10000); // 每10秒增加1次访问
+        });
     </script>
 </body>
 </html>
