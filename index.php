@@ -411,7 +411,10 @@ $runtimeDays = floor((time() - $startTs) / 86400);
             });
         }
         if (typeof initLGHomeApp === 'function') {
-            initLGHomeApp();
+            initLGHomeApp({
+                startTime: '<?php echo $text['startTime'] ?>',
+                weatherToken: 'b65cfa0c849145c283dfdf9cc6b87dd1'
+            });
         }
         // 初始化礼花效果
         if (typeof ConfettiEffect !== 'undefined') {

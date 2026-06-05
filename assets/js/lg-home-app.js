@@ -6,13 +6,13 @@
 (function() {
     'use strict';
     
-    window.initLGHomeApp = function() {
+    window.initLGHomeApp = function(options = {}) {
         console.log('%c LG-NewUi Home App Initializing... ', 'color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px; font-weight: bold;');
         
         // 初始化各个模块
         initSmartMediaCard();
         initWeatherCards();
-        initLoveDayCounter();
+        initLoveDayCounter(options);
         initLoveListModule();
         initQuickActions();
         initRandomQuote();
@@ -116,8 +116,8 @@
     }
     
     // 3. 恋爱天数计数器
-    function initLoveDayCounter(options) {
-        const startTime = options?.startTime || '2022-06-05T00:07';
+    function initLoveDayCounter(options = {}) {
+        const startTime = options.startTime || '2022-06-05T00:07';
         const startDate = new Date(startTime.replace('T', ' '));
         
         function updateCounter() {
