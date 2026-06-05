@@ -27,7 +27,8 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-color: #f5f7fa !important;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -1996,9 +1997,13 @@
             
             numbers.forEach(num => {
                 const target = parseInt(num.dataset.target);
+                if (isNaN(target)) return; // 跳过无效数据
+                
                 const duration = 1500;
-                const start = 0;
                 const startTime = performance.now();
+                
+                // 先设置初始值为0
+                num.textContent = '0';
                 
                 function updateNumber(currentTime) {
                     const elapsed = currentTime - startTime;
@@ -2006,24 +2011,29 @@
                     
                     // 使用easeOutExpo缓动
                     const easeOutExpo = 1 - Math.pow(2, -10 * progress);
-                    const current = Math.floor(start + (target - start) * easeOutExpo);
+                    const current = Math.floor(target * easeOutExpo);
                     
                     num.textContent = current.toLocaleString();
                     
                     if (progress < 1) {
                         requestAnimationFrame(updateNumber);
+                    } else {
+                        // 动画完成，确保最终值精确
+                        num.textContent = target.toLocaleString();
                     }
                 }
                 
                 requestAnimationFrame(updateNumber);
             });
             
-            // 模拟实时更新
+            // 模拟实时更新 - 只更新今日访问次数
             setInterval(() => {
-                const todayVisitsEl = document.querySelector('.lgnewui-visitor-number[data-target]');
-                if (todayVisitsEl) {
-                    const current = parseInt(todayVisitsEl.textContent.replace(/,/g, ''));
-                    todayVisitsEl.textContent = (current + 1).toLocaleString();
+                const todayVisitNum = document.querySelector('.lgnewui-visitor-number[data-target="156"]');
+                if (todayVisitNum) {
+                    const current = parseInt(todayVisitNum.textContent.replace(/,/g, ''));
+                    if (!isNaN(current)) {
+                        todayVisitNum.textContent = (current + 1).toLocaleString();
+                    }
                 }
             }, 10000); // 每10秒增加1次访问
         });
