@@ -30,8 +30,33 @@ $response = [
     'data' => null
 ];
 
-// 数据库连接
-include_once __DIR__ . '/../admin/connect.php';
+// 数据库连接 - 不使用connect.php的die逻辑
+$db_connected = false;
+$connect = null;
+
+if (file_exists(__DIR__ . '/../admin/Config_DB.php')) {
+    include_once __DIR__ . '/../admin/Config_DB.php';
+    $connect = mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
+    if ($connect) {
+        $connect->set_charset("utf8mb4");
+        $db_connected = true;
+    }
+}
+
+// 如果没有数据库连接，返回模拟数据
+if (!$db_connected) {
+    $response = [
+        'code' => 200,
+        'message' => 'Database not connected, using demo data',
+        'data' => [
+            'today' => ['visits' => 156, 'visitors' => 48],
+            'total' => ['visits' => 15234, 'visitors' => 3847]
+        ],
+        'timestamp' => time()
+    ];
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 switch ($action) {
     case 'track':

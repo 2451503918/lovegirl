@@ -7,13 +7,23 @@
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 
-// 连接数据库
-require_once '../admin/connect.php';
+// 连接数据库 - 不使用connect.php的die逻辑
+$db_connected = false;
+$connect = null;
+
+if (file_exists('../admin/Config_DB.php')) {
+    include_once '../admin/Config_DB.php';
+    $connect = mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
+    if ($connect) {
+        $connect->set_charset("utf8mb4");
+        $db_connected = true;
+    }
+}
 
 $moments = [];
 
 // 获取最新的点滴文章
-if ($connect) {
+if ($db_connected) {
     $result = mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 6");
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
