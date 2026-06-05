@@ -289,7 +289,7 @@
         document.addEventListener('click', function(e) {
             if (e.target.closest('.lg-music-player__list-item')) {
                 const item = e.target.closest('.lg-music-player__list-item');
-                const index = parseInt(item.getAttribute('data-index');
+                const index = parseInt(item.getAttribute('data-index'));
                 playMusic(index);
             }
         });
@@ -299,8 +299,8 @@
         const container = document.getElementById('playlist-items');
         if (!container) return;
         
-        container.innerHTML = playlist.map((song, index) => `
-            <div class="lg-music-player__list-item ${index === currentIndex ? 'active' : ''}" data-index="${index}">
+        container.innerHTML = playlist.map((song, index) =>
+            `<div class="lg-music-player__list-item ${index === currentIndex ? 'active' : ''}" data-index="${index}">
                 <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white;">
                     <i class="ph-fill ph-music-note-simple"></i>
                 </div>
@@ -308,8 +308,8 @@
                     <div style="font-size: 14px; font-weight: 500;">${song.title}</div>
                     <div style="font-size: 12px; color: #888;">${song.artist}</div>
                 </div>
-            </div>
-        `.join('');
+            </div>`
+        ).join('');
     }
     
     window.toggleMusicPlayer = function() {
