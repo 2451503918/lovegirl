@@ -1,16 +1,16 @@
 <?php
 /**
- * 测试UI页面 - 不依赖数据库
+ * 测试UI页面 - 完整移动端适配版
  */
 ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>❤️ LG-NewUi 测试页面</title>
     
-    <!-- Font Awesome (stable icon library) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- CSS -->
@@ -18,90 +18,86 @@
     <link rel="stylesheet" href="Style/css/lg-bento.css">
     <link rel="stylesheet" href="Style/css/lg-weather.css">
     <link rel="stylesheet" href="Style/css/lg-enhanced.css">
-    <link rel="stylesheet" href="Style/css/animate.min.css">
     
     <style>
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
+        
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             min-height: 100vh;
+            overflow-x: hidden;
         }
         
         /* ============================================
-           完整的 Bento Grid 布局修复
+           移动端优化的 Grid 布局
            ============================================ */
-        
-        /* 修复Grid容器 */
         .lgnewui-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 16px;
         }
         
-        /* 修复Grid主容器 */
         .lgnewui-grid {
             display: grid !important;
             grid-template-columns: repeat(4, 1fr) !important;
             gap: 20px !important;
-            margin-bottom: 20px !important;
             align-items: stretch !important;
         }
         
-        /* 修复列跨度 */
-        .lgnewui-col-2 { 
-            grid-column: span 2 !important; 
-        }
-        .lgnewui-col-4 { 
-            grid-column: span 4 !important; 
-        }
-        .lgnewui-col-md-1 { 
-            grid-column: span 2 !important; 
-        }
+        .lgnewui-col-2 { grid-column: span 2 !important; }
+        .lgnewui-col-4 { grid-column: span 4 !important; }
+        .lgnewui-col-md-1 { grid-column: span 2 !important; }
+        .lgnewui-row-2 { grid-row: span 2 !important; }
         
-        /* 修复行跨度 */
-        .lgnewui-row-2 { 
-            grid-row: span 2 !important; 
-        }
-        
-        /* 确保Grid项目高度一致 */
         .lgnewui-grid > * {
             min-height: 100%;
         }
         
         /* ============================================
-           响应式布局修复
+           响应式断点 - 平板和手机
            ============================================ */
+        
+        /* 大平板 (1024px以下) */
         @media (max-width: 1024px) {
             .lgnewui-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 16px !important;
             }
-            .lgnewui-col-2 {
-                grid-column: span 2 !important;
-            }
+            .lgnewui-col-2,
             .lgnewui-col-md-1 {
-                grid-column: span 1 !important;
+                grid-column: span 2 !important;
             }
             .lgnewui-row-2 {
                 grid-row: span 1 !important;
             }
         }
         
+        /* 小平板 (768px以下) */
         @media (max-width: 768px) {
             .lgnewui-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
                 gap: 12px !important;
             }
+            .lgnewui-col-2,
+            .lgnewui-col-4,
+            .lgnewui-col-md-1 {
+                grid-column: span 2 !important;
+            }
+            .lgnewui-row-2 {
+                grid-row: span 1 !important;
+            }
             .lgnewui-container {
-                padding: 0 16px;
+                padding: 12px;
             }
         }
         
+        /* 手机 (480px以下) */
         @media (max-width: 480px) {
             .lgnewui-grid {
                 grid-template-columns: 1fr !important;
@@ -115,13 +111,338 @@
             .lgnewui-row-2 {
                 grid-row: span 1 !important;
             }
+            .lgnewui-container {
+                padding: 10px;
+            }
+        }
+        
+        /* 超小手机 (360px以下) */
+        @media (max-width: 360px) {
+            .lgnewui-grid {
+                gap: 10px !important;
+            }
         }
         
         /* ============================================
-           卡片样式修复
+           移动端头部优化
            ============================================ */
+        .mobile-header {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 16px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
         
-        /* 智能媒体卡片 */
+        .mobile-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .mobile-logo {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .mobile-menu-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        /* 移动端导航菜单 */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 50px;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 999;
+            padding: 10px 0;
+            border-radius: 0 0 16px 16px;
+        }
+        
+        .mobile-nav.active {
+            display: block;
+        }
+        
+        .mobile-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+        
+        .mobile-nav-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+        
+        .mobile-nav-item i {
+            width: 24px;
+            text-align: center;
+            color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-header {
+                display: block;
+            }
+            .test-header {
+                margin-top: 60px !important;
+            }
+        }
+        
+        /* ============================================
+           测试头部优化
+           ============================================ */
+        .test-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+        
+        .test-header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+        
+        .test-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .test-status {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .status-pill {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* ============================================
+           天数计数器 - 移动端优化
+           ============================================ */
+        .lgnewui-day-fusion-card {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 24px;
+            padding: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+        }
+        
+        .lgnewui-day-ambient-light {
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(102,126,234,0.3) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .lgnewui-day-mac-dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .lgnewui-day-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .lgnewui-day-dot-red { background: #ff5f56; }
+        .lgnewui-day-dot-yellow { background: #ffbd2e; }
+        .lgnewui-day-dot-green { background: #27c93f; }
+        
+        .lgnewui-day-left-section {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .lgnewui-day-poetic-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            line-height: 1.3;
+        }
+        
+        .lgnewui-day-start-date-capsule {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 16px;
+            border-radius: 50px;
+        }
+        
+        .lgnewui-day-icon-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .lgnewui-day-date-label-small {
+            display: block;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+        
+        .lgnewui-day-date-value-clean {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .lgnewui-day-right-section {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .lgnewui-day-main-days-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .lgnewui-day-main-days-number {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+        
+        .lgnewui-day-days-divider {
+            width: 4px;
+            height: 80px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        .lgnewui-day-days-label {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .lgnewui-day-digital-timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .lgnewui-day-timer-block {
+            text-align: center;
+        }
+        
+        .lgnewui-day-timer-val {
+            font-size: 28px;
+            font-weight: 800;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 12px;
+            border-radius: 10px;
+            min-width: 60px;
+            display: block;
+        }
+        
+        .lgnewui-day-timer-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+            display: block;
+        }
+        
+        /* 移动端天数计数器 */
+        @media (max-width: 480px) {
+            .lgnewui-day-fusion-card {
+                padding: 20px;
+                min-height: auto;
+            }
+            .lgnewui-day-poetic-title {
+                font-size: 22px;
+            }
+            .lgnewui-day-main-days-number {
+                font-size: 56px;
+            }
+            .lgnewui-day-days-divider {
+                height: 60px;
+            }
+            .lgnewui-day-days-label {
+                font-size: 18px;
+            }
+            .lgnewui-day-timer-val {
+                font-size: 22px;
+                padding: 6px 10px;
+                min-width: 50px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .lgnewui-day-main-days-number {
+                font-size: 48px;
+            }
+            .lgnewui-day-timer-val {
+                font-size: 18px;
+                padding: 5px 8px;
+                min-width: 45px;
+            }
+        }
+        
+        /* ============================================
+           智能媒体卡片 - 移动端优化
+           ============================================ */
         .lgnewui-smart-card {
             height: 100%;
             min-height: 400px;
@@ -161,6 +482,8 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: auto;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .lgnewui-smart-card__capsule {
@@ -178,11 +501,6 @@
             height: 36px;
             border-radius: 50%;
             object-fit: cover;
-        }
-        
-        .lgnewui-smart-card__user-info {
-            display: flex;
-            flex-direction: column;
         }
         
         .lgnewui-smart-card__name {
@@ -261,7 +579,42 @@
             font-size: 18px;
         }
         
-        /* 天气卡片 */
+        /* 移动端智能卡片 */
+        @media (max-width: 768px) {
+            .lgnewui-smart-card {
+                min-height: 350px;
+                padding: 20px;
+            }
+            .lgnewui-smart-card__title {
+                font-size: 24px;
+            }
+            .lgnewui-smart-card__switch-btn-container {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .lgnewui-smart-card {
+                min-height: 300px;
+                padding: 16px;
+            }
+            .lgnewui-smart-card__title {
+                font-size: 20px;
+            }
+            .lgnewui-smart-card__desc {
+                font-size: 13px;
+            }
+            .lgnewui-smart-card__switch-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+        }
+        
+        /* ============================================
+           天气卡片 - 移动端优化
+           ============================================ */
         .lgnewui-home-weather-card {
             height: 100%;
             min-height: 200px;
@@ -380,7 +733,27 @@
             gap: 4px;
         }
         
-        /* 统计卡片 */
+        /* 移动端天气卡片 */
+        @media (max-width: 480px) {
+            .lgnewui-home-weather-card {
+                min-height: 180px;
+                padding: 16px;
+            }
+            .lgnewui-home-weather-text-temp {
+                font-size: 36px;
+            }
+            .lgnewui-home-weather-icon-main {
+                font-size: 40px;
+            }
+            .lgnewui-home-weather-stat-pill {
+                font-size: 10px;
+                padding: 5px 6px;
+            }
+        }
+        
+        /* ============================================
+           统计卡片 - 移动端优化
+           ============================================ */
         .lgnewui-widget {
             height: 100%;
             min-height: 140px;
@@ -406,35 +779,12 @@
             opacity: 0.15;
         }
         
-        .lgnewui-widget--stats-vibrant-1 {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .lgnewui-widget--stats-vibrant-2 {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-        }
-        
-        .lgnewui-widget--stats-vibrant-3 {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-        }
-        
-        .lgnewui-widget--stats-vibrant-4 {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            color: white;
-        }
-        
-        .lgnewui-widget--stats-vibrant-5 {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            color: white;
-        }
-        
-        .lgnewui-widget--stats-vibrant-6 {
-            background: linear-gradient(135deg, #0c3483 0%, #a2b6df 100%);
-            color: white;
-        }
+        .lgnewui-widget--stats-vibrant-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .lgnewui-widget--stats-vibrant-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; }
+        .lgnewui-widget--stats-vibrant-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
+        .lgnewui-widget--stats-vibrant-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; }
+        .lgnewui-widget--stats-vibrant-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; }
+        .lgnewui-widget--stats-vibrant-6 { background: linear-gradient(135deg, #0c3483 0%, #a2b6df 100%); color: white; }
         
         .lgnewui-flex-col-between-1 {
             display: flex;
@@ -475,33 +825,12 @@
             font-size: 16px;
         }
         
-        .lgnewui-mt-1rem {
-            margin-top: 1rem;
-        }
-        
-        .lgnewui-mt-auto {
-            margin-top: auto;
-        }
-        
-        .lgnewui-font-num {
-            font-weight: 900;
-        }
-        
-        .lgnewui-stats-num {
-            font-size: 42px;
-            line-height: 1;
-        }
-        
-        .lgnewui-runtime-num {
-            font-size: 36px;
-            line-height: 1;
-        }
-        
-        .lgnewui-stats-label {
-            font-size: 12px;
-            opacity: 0.8;
-            margin-top: 4px;
-        }
+        .lgnewui-mt-1rem { margin-top: 1rem; }
+        .lgnewui-mt-auto { margin-top: auto; }
+        .lgnewui-font-num { font-weight: 900; }
+        .lgnewui-stats-num { font-size: 42px; line-height: 1; }
+        .lgnewui-runtime-num { font-size: 36px; line-height: 1; }
+        .lgnewui-stats-label { font-size: 12px; opacity: 0.8; margin-top: 4px; }
         
         .lgnewui-runtime-values {
             display: flex;
@@ -519,16 +848,37 @@
             font-size: 14px;
         }
         
-        .lgnewui-runtime-divider {
-            display: none;
-        }
-        
         .lgnewui-runtime-text {
             font-size: 12px;
             opacity: 0.8;
         }
         
-        /* 留言卡片 */
+        /* 移动端统计卡片 */
+        @media (max-width: 480px) {
+            .lgnewui-widget {
+                min-height: 120px;
+                padding: 16px;
+            }
+            .lgnewui-stats-num {
+                font-size: 36px;
+            }
+            .lgnewui-runtime-num {
+                font-size: 30px;
+            }
+            .lgnewui-widget__bg-icon {
+                font-size: 80px;
+                top: -15px;
+                right: -15px;
+            }
+            .lgnewui-icon-circle-glass {
+                width: 32px;
+                height: 32px;
+            }
+        }
+        
+        /* ============================================
+           留言卡片 - 移动端优化
+           ============================================ */
         .lgnewui-home-message-card {
             height: 100%;
             min-height: 120px;
@@ -561,12 +911,6 @@
             object-fit: cover;
         }
         
-        .lgnewui-home-message-name-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
         .lgnewui-home-message-user-name {
             font-weight: 700;
             font-size: 14px;
@@ -584,7 +928,22 @@
             line-height: 1.6;
         }
         
-        /* 日记卡片 */
+        @media (max-width: 480px) {
+            .lgnewui-home-message-card {
+                padding: 16px;
+            }
+            .lgnewui-home-message-avatar {
+                width: 36px;
+                height: 36px;
+            }
+            .lgnewui-home-message-content {
+                font-size: 13px;
+            }
+        }
+        
+        /* ============================================
+           日记卡片 - 移动端优化
+           ============================================ */
         .lgnewui-journal-card {
             height: 100%;
             min-height: 200px;
@@ -611,13 +970,6 @@
             color: rgba(102, 126, 234, 0.08);
             transform: rotate(-15deg);
             pointer-events: none;
-        }
-        
-        .lgnewui-journal-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
         }
         
         .lgnewui-journal-avatar {
@@ -684,79 +1036,71 @@
             color: #667eea;
         }
         
-        /* Fix for icons */
-        [class^="ph-"], [class*=" ph-"] {
-            font-family: 'Font Awesome 6 Free' !important;
-            font-weight: 900 !important;
+        @media (max-width: 480px) {
+            .lgnewui-journal-card {
+                padding: 16px;
+            }
+            .lgnewui-journal-title {
+                font-size: 16px;
+            }
+            .lgnewui-journal-body {
+                font-size: 13px;
+            }
+            .lgnewui-watermark {
+                font-size: 60px;
+            }
         }
         
-        .test-header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 24px;
-            margin-bottom: 40px;
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-        }
-        
-        .test-header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.5rem;
-            font-weight: 800;
-        }
-        
-        .test-header p {
-            margin: 0;
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-        
-        .test-status {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .status-pill {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-        
+        /* ============================================
+           Section 标题优化
+           ============================================ */
         .test-section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             background: rgba(255,255,255,0.9);
             backdrop-filter: blur(10px);
-            padding: 30px;
+            padding: 24px;
             border-radius: 24px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
         
         .test-section h2 {
             color: #333;
-            margin: 0 0 25px 0;
+            margin: 0 0 20px 0;
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
         }
         
         .test-section h2 i {
             color: #667eea;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
         
+        @media (max-width: 480px) {
+            .test-section {
+                padding: 20px;
+                border-radius: 20px;
+            }
+            .test-section h2 {
+                font-size: 1.1rem;
+            }
+            .test-header h1 {
+                font-size: 2rem;
+            }
+            .test-header p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* ============================================
+           底部链接优化
+           ============================================ */
         .test-section-footer {
             text-align: center;
-            padding: 40px 20px;
-            margin-top: 40px;
+            padding: 30px 20px;
+            margin-top: 30px;
             border-top: 2px solid #eee;
             background: white;
             border-radius: 24px;
@@ -765,19 +1109,19 @@
         .test-section-footer h3 {
             color: #667eea;
             margin: 0 0 15px 0;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
         
         .test-section-footer p {
             color: #666;
             margin: 0;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         
         .test-links {
-            margin-top: 25px;
+            margin-top: 20px;
             display: flex;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -785,10 +1129,11 @@
         .test-link {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
         }
@@ -803,20 +1148,55 @@
             box-shadow: 0 5px 20px rgba(79, 172, 254, 0.3);
         }
         
-        .test-link.blue:hover {
-            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        @media (max-width: 480px) {
+            .test-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            .test-link {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+        
+        /* ============================================
+           Font Awesome 图标修复
+           ============================================ */
+        [class^="ph-"], [class*=" ph-"] {
+            font-family: 'Font Awesome 6 Free' !important;
+            font-weight: 900 !important;
         }
     </style>
 </head>
 <body>
     
+    <!-- 移动端头部 -->
+    <div class="mobile-header">
+        <div class="mobile-header-content">
+            <div class="mobile-logo">❤️ LG-NewUi</div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- 移动端导航 -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="little.php" class="mobile-nav-item"><i class="fas fa-file-alt"></i> 点滴</a>
+        <a href="leaving.php" class="mobile-nav-item"><i class="fas fa-comments"></i> 留言</a>
+        <a href="timeline.php" class="mobile-nav-item"><i class="fas fa-clock"></i> 轨迹</a>
+        <a href="loveImg.php" class="mobile-nav-item"><i class="fas fa-images"></i> 相册</a>
+        <a href="list.php" class="mobile-nav-item"><i class="fas fa-list"></i> 清单</a>
+        <a href="about.php" class="mobile-nav-item"><i class="fas fa-heart"></i> 关于</a>
+    </nav>
+    
     <div class="test-header">
         <h1>❤️ LG-NewUi 测试页面</h1>
-        <p>情侣小站界面预览 - 无需数据库即可查看UI效果</p>
+        <p>情侣小站界面预览 - 完整移动端适配</p>
         <div class="test-status">
             <span class="status-pill">✅ 服务器运行中</span>
             <span class="status-pill">📱 响应式设计</span>
-            <span class="status-pill">🎨 完整样式</span>
+            <span class="status-pill">🎨 移动端优化</span>
         </div>
     </div>
     
@@ -825,7 +1205,7 @@
         <!-- ===== 1. 天数计数器 ===== -->
         <div class="test-section">
             <h2><i class="fas fa-heart"></i> 1. 天数计数器</h2>
-            <div class="lgnewui-day-wrapper lgnewui-mb-4">
+            <div class="lgnewui-day-wrapper">
                 <div class="lgnewui-day-fusion-card">
                     <div class="lgnewui-day-ambient-light"></div>
                     <div class="lgnewui-day-mac-dots">
@@ -848,14 +1228,14 @@
                     </div>
                     <div class="lgnewui-day-right-section">
                         <div class="lgnewui-day-main-days-wrapper">
-                            <div class="lgnewui-day-main-days-number" id="test-days">1095</div>
+                            <div class="lgnewui-day-main-days-number">1095</div>
                             <div class="lgnewui-day-days-divider"></div>
                             <div class="lgnewui-day-days-label">DAYS</div>
                         </div>
                         <div class="lgnewui-day-digital-timer">
-                            <div class="lgnewui-day-timer-block"><div class="lgnewui-day-timer-val">12</div><div class="lgnewui-day-timer-label">Hours</div></div>
-                            <div class="lgnewui-day-timer-block"><div class="lgnewui-day-timer-val">34</div><div class="lgnewui-day-timer-label">Minutes</div></div>
-                            <div class="lgnewui-day-timer-block"><div class="lgnewui-day-timer-val">56</div><div class="lgnewui-day-timer-label">Seconds</div></div>
+                            <div class="lgnewui-day-timer-block"><div class="lgnewui-day-timer-val">12</div><span class="lgnewui-day-timer-label">Hours</span></div>
+                            <div class="lgnewui-day-timer-block"><div class="lgnewui-day-timer-val">34</div><span class="lgnewui-day-timer-label">Minutes</span></div>
+                            <div class="lgnewui-day-timer-block"><div class="lgnewui-day-timer-val">56</div><span class="lgnewui-day-timer-label">Seconds</span></div>
                         </div>
                     </div>
                 </div>
@@ -867,41 +1247,33 @@
             <h2><i class="fas fa-th-large"></i> 2. Bento Grid 布局</h2>
             <div class="lgnewui-grid">
                 
-                <!-- 智能媒体卡片 - 占2列2行 -->
+                <!-- 智能媒体卡片 -->
                 <div class="lgnewui-col-2 lgnewui-row-2">
-                    <div id="moment-card" class="lgnewui-smart-card">
+                    <div class="lgnewui-smart-card">
                         <div class="lgnewui-smart-card__media"></div>
                         <div class="lgnewui-smart-card__overlay"></div>
                         <div class="lgnewui-smart-card__header">
                             <div class="lgnewui-smart-card__capsule">
                                 <img class="lgnewui-smart-card__avatar" src="https://ui-avatars.com/api/?name=Love&background=667eea&color=fff&size=128" alt="">
-                                <div class="lgnewui-smart-card__user-info">
+                                <div>
                                     <span class="lgnewui-smart-card__name">男主角</span>
                                     <span class="lgnewui-smart-card__time">最新动态</span>
                                 </div>
                             </div>
-                            <a href="#" class="lgnewui-smart-card__album-link">
-                                <span>进入相册</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
+                            <a href="#" class="lgnewui-smart-card__album-link"><span>进入相册</span><i class="fas fa-arrow-right"></i></a>
                         </div>
                         <div class="lgnewui-smart-card__content">
-                            <div class="lgnewui-smart-card__location-pill">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span class="lgnewui-smart-card__location-text">我们的小窝</span>
-                            </div>
+                            <div class="lgnewui-smart-card__location-pill"><i class="fas fa-map-marker-alt"></i><span>我们的小窝</span></div>
                             <h2 class="lgnewui-smart-card__title">时光碎片</h2>
-                            <div class="lgnewui-smart-card__meta">
-                                <p class="lgnewui-smart-card__desc">记录每一个闪光的瞬间</p>
-                            </div>
+                            <p class="lgnewui-smart-card__desc">记录每一个闪光的瞬间</p>
                         </div>
                         <div class="lgnewui-smart-card__switch-btn-container">
-                            <button class="lgnewui-smart-card__switch-btn" type="button"><i class="fas fa-sync-alt"></i></button>
+                            <button class="lgnewui-smart-card__switch-btn"><i class="fas fa-sync-alt"></i></button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- 天气卡片1 -->
+                <!-- 天气卡片 -->
                 <div class="lgnewui-col-md-1">
                     <div class="lgnewui-home-weather-card blue">
                         <div class="lgnewui-home-weather-bg-decoration"></div>
@@ -918,9 +1290,7 @@
                         </div>
                         <div class="lgnewui-home-weather-row-location">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span class="lgnewui-home-weather-text-city">北京</span>
-                            <span class="lgnewui-home-weather-dot-divider">•</span>
-                            <span class="lgnewui-home-weather-text-status">晴朗</span>
+                            <span>北京</span><span class="lgnewui-home-weather-dot-divider">•</span><span>晴朗</span>
                         </div>
                         <div class="lgnewui-home-weather-grid-stats">
                             <div class="lgnewui-home-weather-stat-pill"><i class="fas fa-tint"></i><span>45%</span></div>
@@ -930,7 +1300,6 @@
                     </div>
                 </div>
                 
-                <!-- 天气卡片2 -->
                 <div class="lgnewui-col-md-1">
                     <div class="lgnewui-home-weather-card orange">
                         <div class="lgnewui-home-weather-bg-decoration"></div>
@@ -947,9 +1316,7 @@
                         </div>
                         <div class="lgnewui-home-weather-row-location">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span class="lgnewui-home-weather-text-city">上海</span>
-                            <span class="lgnewui-home-weather-dot-divider">•</span>
-                            <span class="lgnewui-home-weather-text-status">多云</span>
+                            <span>上海</span><span class="lgnewui-home-weather-dot-divider">•</span><span>多云</span>
                         </div>
                         <div class="lgnewui-home-weather-grid-stats">
                             <div class="lgnewui-home-weather-stat-pill"><i class="fas fa-tint"></i><span>60%</span></div>
@@ -959,72 +1326,47 @@
                     </div>
                 </div>
                 
-                <!-- 统计卡片1 -->
+                <!-- 统计卡片 -->
                 <div class="lgnewui-col-md-1">
                     <div class="lgnewui-widget lgnewui-widget--stats-vibrant-1">
                         <div class="lgnewui-widget__bg-icon"><i class="fas fa-file-alt"></i></div>
                         <div class="lgnewui-flex-col-between-1">
-                            <div class="lgnewui-stats-header-row">
-                                <div class="lgnewui-icon-circle-glass"><i class="fas fa-file-alt"></i></div>
-                                <div class="lgnewui-stats-title">点滴</div>
-                            </div>
-                            <div class="lgnewui-mt-1rem">
-                                <div class="lgnewui-font-num lgnewui-stats-num">42</div>
-                                <div class="lgnewui-stats-label">Memory Notes</div>
-                            </div>
+                            <div class="lgnewui-stats-header-row"><div class="lgnewui-icon-circle-glass"><i class="fas fa-file-alt"></i></div><div class="lgnewui-stats-title">点滴</div></div>
+                            <div class="lgnewui-mt-1rem"><div class="lgnewui-font-num lgnewui-stats-num">42</div><div class="lgnewui-stats-label">Memory Notes</div></div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- 统计卡片2 -->
                 <div class="lgnewui-col-md-1">
                     <div class="lgnewui-widget lgnewui-widget--stats-vibrant-2">
                         <div class="lgnewui-widget__bg-icon"><i class="fas fa-images"></i></div>
                         <div class="lgnewui-flex-col-between-1">
-                            <div class="lgnewui-stats-header-row">
-                                <div class="lgnewui-icon-circle-glass"><i class="fas fa-camera"></i></div>
-                                <div class="lgnewui-stats-title">相册</div>
-                            </div>
-                            <div class="lgnewui-mt-1rem">
-                                <div class="lgnewui-font-num lgnewui-stats-num">156</div>
-                                <div class="lgnewui-stats-label">Photo Keepsakes</div>
-                            </div>
+                            <div class="lgnewui-stats-header-row"><div class="lgnewui-icon-circle-glass"><i class="fas fa-camera"></i></div><div class="lgnewui-stats-title">相册</div></div>
+                            <div class="lgnewui-mt-1rem"><div class="lgnewui-font-num lgnewui-stats-num">156</div><div class="lgnewui-stats-label">Photo Keepsakes</div></div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- 统计卡片3 -->
                 <div class="lgnewui-col-md-1">
                     <div class="lgnewui-widget lgnewui-widget--stats-vibrant-3">
                         <div class="lgnewui-widget__bg-icon"><i class="fas fa-comments"></i></div>
                         <div class="lgnewui-flex-col-between-1">
-                            <div class="lgnewui-stats-header-row">
-                                <div class="lgnewui-icon-circle-glass"><i class="fas fa-comment-dots"></i></div>
-                                <div class="lgnewui-stats-title">留言</div>
-                            </div>
-                            <div class="lgnewui-mt-1rem">
-                                <div class="lgnewui-font-num lgnewui-stats-num">89</div>
-                                <div class="lgnewui-stats-label">Kind Messages</div>
-                            </div>
+                            <div class="lgnewui-stats-header-row"><div class="lgnewui-icon-circle-glass"><i class="fas fa-comment-dots"></i></div><div class="lgnewui-stats-title">留言</div></div>
+                            <div class="lgnewui-mt-1rem"><div class="lgnewui-font-num lgnewui-stats-num">89</div><div class="lgnewui-stats-label">Kind Messages</div></div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- 统计卡片4 -->
                 <div class="lgnewui-col-md-1">
                     <div class="lgnewui-widget lgnewui-widget--stats-vibrant-6">
                         <div class="lgnewui-widget__bg-icon"><i class="fas fa-globe"></i></div>
                         <div class="lgnewui-flex-col-runtime">
-                            <div class="lgnewui-stats-header-row">
-                                <div class="lgnewui-icon-circle-glass"><i class="fas fa-globe"></i></div>
-                                <div class="lgnewui-stats-title">我们的小世界</div>
-                            </div>
+                            <div class="lgnewui-stats-header-row"><div class="lgnewui-icon-circle-glass"><i class="fas fa-globe"></i></div><div class="lgnewui-stats-title">我们的小世界</div></div>
                             <div class="lgnewui-mt-auto">
                                 <div class="lgnewui-runtime-values">
                                     <div class="lgnewui-font-num lgnewui-runtime-num">1095</div>
                                     <div class="lgnewui-runtime-meta">
                                         <div class="lgnewui-runtime-days">DAYS</div>
-                                        <span class="lgnewui-runtime-divider"></span>
                                         <div class="lgnewui-runtime-text">已平稳运行</div>
                                     </div>
                                 </div>
@@ -1088,9 +1430,7 @@
                         <div class="lgnewui-home-message-header">
                             <img class="lgnewui-home-message-avatar" src="https://ui-avatars.com/api/?name=Visitor1&background=4facfe&color=fff&size=128">
                             <div>
-                                <div class="lgnewui-home-message-name-row">
-                                    <span class="lgnewui-home-message-user-name">访客1</span>
-                                </div>
+                                <span class="lgnewui-home-message-user-name">访客1</span>
                                 <span class="lgnewui-home-message-post-time">2024-06-05</span>
                             </div>
                         </div>
@@ -1102,9 +1442,7 @@
                         <div class="lgnewui-home-message-header">
                             <img class="lgnewui-home-message-avatar" src="https://ui-avatars.com/api/?name=Visitor2&background=00f2fe&color=fff&size=128">
                             <div>
-                                <div class="lgnewui-home-message-name-row">
-                                    <span class="lgnewui-home-message-user-name">访客2</span>
-                                </div>
+                                <span class="lgnewui-home-message-user-name">访客2</span>
                                 <span class="lgnewui-home-message-post-time">2024-06-04</span>
                             </div>
                         </div>
@@ -1112,15 +1450,13 @@
                     </a>
                 </div>
                 <div class="lgnewui-col-4">
-                    <div class="lgnewui-journal-card" style="display:block;">
+                    <div class="lgnewui-journal-card">
                         <div class="lgnewui-watermark">DAY 1095</div>
                         <div class="lgnewui-journal-header">
-                            <div class="lgnewui-journal-user">
-                                <img src="https://ui-avatars.com/api/?name=Love&background=667eea&color=fff&size=128" class="lgnewui-journal-avatar">
-                                <div>
-                                    <div class="lgnewui-font-sm-bold">男主角</div>
-                                    <div class="lgnewui-journal-meta">2024-06-05</div>
-                                </div>
+                            <img src="https://ui-avatars.com/api/?name=Love&background=667eea&color=fff&size=128" class="lgnewui-journal-avatar">
+                            <div>
+                                <div class="lgnewui-font-sm-bold">男主角</div>
+                                <div class="lgnewui-journal-meta">2024-06-05</div>
                             </div>
                         </div>
                         <h3 class="lgnewui-journal-title">三周年纪念日快乐</h3>
@@ -1137,42 +1473,38 @@
         
     </main>
     
-    <!-- 测试页脚信息 -->
     <div class="test-section-footer">
-        <h3>🎉 测试成功！</h3>
-        <p>LG-NewUi 界面测试完成，所有样式组件正常工作！</p>
+        <h3>🎉 移动端适配完成！</h3>
+        <p>所有组件已优化，可在手机、平板上完美展示！</p>
         <div class="test-links">
             <a href="debug.php" class="test-link">📊 查看调试页面</a>
             <a href="services/random_quote.php" class="test-link blue">🌐 测试API接口</a>
         </div>
     </div>
     
-    <!-- Simple timer for demo -->
     <script>
-        let seconds = 56;
-        let minutes = 34;
-        let hours = 12;
-        
-        function updateTimer() {
-            seconds++;
-            if (seconds >= 60) {
-                seconds = 0;
-                minutes++;
-                if (minutes >= 60) {
-                    minutes = 0;
-                    hours++;
-                    if (hours >= 24) hours = 0;
-                }
-            }
-            
-            const timerBlocks = document.querySelectorAll('.lgnewui-day-timer-val');
-            if (timerBlocks.length >= 3) {
-                timerBlocks[0].textContent = String(hours).padStart(2, '0');
-                timerBlocks[1].textContent = String(minutes).padStart(2, '0');
-                timerBlocks[2].textContent = String(seconds).padStart(2, '0');
-            }
+        // 移动端菜单切换
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mobileNav');
+            nav.classList.toggle('active');
         }
         
+        // 点击导航后关闭菜单
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('mobileNav').classList.remove('active');
+            });
+        });
+        
+        // 计时器
+        let seconds = 56, minutes = 34, hours = 12;
+        function updateTimer() {
+            seconds++;
+            if (seconds >= 60) { seconds = 0; minutes++; if (minutes >= 60) { minutes = 0; hours++; if (hours >= 24) hours = 0; } }
+            document.querySelectorAll('.lgnewui-day-timer-val').forEach((el, i) => {
+                el.textContent = String([hours, minutes, seconds][i]).padStart(2, '0');
+            });
+        }
         setInterval(updateTimer, 1000);
     </script>
 </body>
