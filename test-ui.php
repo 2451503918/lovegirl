@@ -96,13 +96,40 @@
             .lgnewui-container {
                 padding: 12px;
             }
+            .test-header {
+                padding: 24px 16px !important;
+                margin-bottom: 16px !important;
+                border-radius: 16px !important;
+            }
+            .test-header h1 {
+                font-size: 1.5rem !important;
+            }
+            .test-header p {
+                font-size: 0.9rem !important;
+            }
+            .test-status {
+                gap: 8px !important;
+            }
+            .status-pill {
+                padding: 6px 12px !important;
+                font-size: 0.8rem !important;
+            }
+            .test-section {
+                padding: 16px !important;
+                margin-bottom: 16px !important;
+                border-radius: 16px !important;
+            }
+            .test-section h2 {
+                font-size: 1rem !important;
+                margin-bottom: 12px !important;
+            }
         }
         
         /* 手机 (480px以下) */
         @media (max-width: 480px) {
             .lgnewui-grid {
                 grid-template-columns: 1fr !important;
-                gap: 12px !important;
+                gap: 10px !important;
             }
             .lgnewui-col-2, 
             .lgnewui-col-4,
@@ -113,7 +140,56 @@
                 grid-row: span 1 !important;
             }
             .lgnewui-container {
-                padding: 10px;
+                padding: 8px;
+            }
+            .test-header {
+                padding: 20px 12px !important;
+                margin-bottom: 12px !important;
+                border-radius: 12px !important;
+            }
+            .test-header h1 {
+                font-size: 1.3rem !important;
+                margin-bottom: 6px !important;
+            }
+            .test-header p {
+                font-size: 0.85rem !important;
+                margin-bottom: 10px !important;
+            }
+            .test-status {
+                gap: 6px !important;
+                flex-direction: column !important;
+                align-items: center !important;
+            }
+            .status-pill {
+                padding: 5px 10px !important;
+                font-size: 0.75rem !important;
+                width: 100% !important;
+                text-align: center !important;
+            }
+            .test-section {
+                padding: 14px !important;
+                margin-bottom: 12px !important;
+                border-radius: 12px !important;
+            }
+            .test-section h2 {
+                font-size: 0.95rem !important;
+                margin-bottom: 10px !important;
+                gap: 8px !important;
+            }
+            .test-section h2 i {
+                font-size: 1.1rem !important;
+            }
+            .test-section-footer {
+                padding: 20px 12px !important;
+                margin-top: 12px !important;
+                border-radius: 12px !important;
+            }
+            .test-section-footer h3 {
+                font-size: 1.2rem !important;
+                margin-bottom: 10px !important;
+            }
+            .test-section-footer p {
+                font-size: 0.85rem !important;
             }
         }
         
@@ -206,7 +282,7 @@
                 display: block;
             }
             .test-header {
-                margin-top: 60px !important;
+                margin-top: 56px !important;
             }
         }
         
@@ -1993,11 +2069,14 @@
         
         // 访客统计数字动画
         document.addEventListener('DOMContentLoaded', function() {
-            const numbers = document.querySelectorAll('.lgnewui-visitor-number');
+            const numbers = document.querySelectorAll('.lgnewui-visitor-number[data-target]');
             
             numbers.forEach(num => {
+                const rawText = num.textContent.trim();
                 const target = parseInt(num.dataset.target);
-                if (isNaN(target)) return; // 跳过无效数据
+                
+                // 如果是格式化显示（如 "3.8k+"），跳过动画
+                if (isNaN(target) || rawText.includes('k')) return;
                 
                 const duration = 1500;
                 const startTime = performance.now();
