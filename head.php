@@ -317,6 +317,12 @@ function loadPhotos() {
 <script src="/Style/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
+<!-- LG-NewUi 核心功能模块 -->
+<script src="/assets/js/lg-home-app.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-map.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-init.js?LikeGirl=<?php echo $version ?>"></script>
 
 <?php
 echo htmlspecialchars_decode($diy['headCon'], ENT_QUOTES);
