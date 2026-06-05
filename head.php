@@ -808,6 +808,49 @@ window.addEventListener('load', function() {
         }
     }
 
+    /* 小屏手机适配 (480px以下) */
+    @media (max-width: 480px) {
+        .lovers-panel {
+            flex-direction: column;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .lover-card {
+            flex-direction: column;
+            text-align: center;
+            flex: 1;
+        }
+
+        .lover-card .avatar-box {
+            width: 56px;
+            height: 56px;
+        }
+
+        .lover-name {
+            font-size: 1rem;
+        }
+
+        .lover-meta {
+            font-size: 0.75rem;
+        }
+
+        .love-distance-center {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .love-icon-wrapper {
+            width: 36px;
+            height: 36px;
+        }
+
+        .distance-val {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.7rem;
+        }
+    }
+
     .Blurkg {
         backdrop-filter: blur(0px) !important;
         -webkit-backdrop-filter: blur(0px) !important;
