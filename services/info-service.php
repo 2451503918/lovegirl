@@ -20,7 +20,7 @@ $response = [
 switch ($action) {
     case 'get_stats':
         // 获取统计数据
-        require_once 'admin/connect.php';
+        require_once '../admin/connect.php';
         $stats = [
             'articles' => 0,
             'photos' => 0,

@@ -8,7 +8,7 @@ header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 
 // 连接数据库
-require_once 'admin/connect.php';
+require_once '../admin/connect.php';
 
 $moments = [];
 
