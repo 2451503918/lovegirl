@@ -5,14 +5,17 @@ include_once 'head.php';
 $statsArticles = 0;
 $statsPhotos = 0;
 $statsMessages = 0;
-$r = mysqli_query($connect, "SELECT COUNT(*) as c FROM little");
-if ($r) { $row = mysqli_fetch_array($r); $statsArticles = $row['c']; }
-$r = mysqli_query($connect, "SELECT COUNT(*) as c FROM photo");
-if ($r) { $row = mysqli_fetch_array($r); $statsPhotos = $row['c']; }
-$r = mysqli_query($connect, "SELECT COUNT(*) as c FROM leaving");
-if ($r) { $row = mysqli_fetch_array($r); $statsMessages = $row['c']; }
 
-$startTs = strtotime(str_replace('T', ' ', $text['startTime']));
+if ($connect) {
+    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM little");
+    if ($r) { $row = mysqli_fetch_array($r); $statsArticles = $row['c']; }
+    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM photo");
+    if ($r) { $row = mysqli_fetch_array($r); $statsPhotos = $row['c']; }
+    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM leaving");
+    if ($r) { $row = mysqli_fetch_array($r); $statsMessages = $row['c']; }
+}
+
+$startTs = strtotime(str_replace('T', ' ', $text['startTime'] ?? '2022-06-05 00:07:00'));
 $runtimeDays = floor((time() - $startTs) / 86400);
 ?>
 
@@ -320,7 +323,10 @@ $runtimeDays = floor((time() - $startTs) / 86400);
 
         <!-- ===== 5. 最新点滴 ===== -->
         <?php
-        $recentArticles = mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 3");
+        $recentArticles = null;
+        if ($connect) {
+            $recentArticles = mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 3");
+        }
         if ($recentArticles && mysqli_num_rows($recentArticles) > 0):
         ?>
         <section class="lgnewui-section">
@@ -367,7 +373,10 @@ $runtimeDays = floor((time() - $startTs) / 86400);
 
         <!-- ===== 6. 最新留言 ===== -->
         <?php
-        $recentMsgs = mysqli_query($connect, "SELECT * FROM leaving ORDER BY id DESC LIMIT 3");
+        $recentMsgs = null;
+        if ($connect) {
+            $recentMsgs = mysqli_query($connect, "SELECT * FROM leaving ORDER BY id DESC LIMIT 3");
+        }
         if ($recentMsgs && mysqli_num_rows($recentMsgs) > 0):
         ?>
         <section class="lgnewui-section">

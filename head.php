@@ -13,11 +13,13 @@
 -->
 <?php
 error_reporting(0);
-include ("ipjc.php");
-include_once ("ip.php");
-include_once 'admin/connect.php';
-include_once 'admin/Function.php';
+include_once 'db_mock.php';
+// include ("ipjc.php");
+// include_once ("ip.php");
+// include_once 'admin/connect.php';
+// include_once 'admin/Function.php';
 
+/*
 $sql = "select * from text";
 $result = mysqli_query($connect, $sql);
 $text = mysqli_fetch_array($result);
@@ -31,9 +33,8 @@ if (mysqli_num_rows($result)) {
 $copy = $text['Copyright'];
 $icp = $text['icp'];
 $Animation = $text['Animation'];
+*/
 ?>
-
-
 
 <script>
 
