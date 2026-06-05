@@ -4,24 +4,31 @@
  * 显示双方位置标记和距离
  */
 
-// 获取双方位置信息（从数据库配置中获取）
-$boyCity = isset($text['boyCity']) ? $text['boyCity'] : '北京';
-$girlCity = isset($text['girlCity']) ? $text['girlCity'] : '上海';
+// 如果可用，从数据库获取位置信息
+$boyCity = '北京';
+$girlCity = '上海';
+$boyLat = 39.9042;
+$boyLng = 116.4074;
+$girlLat = 31.2304;
+$girlLng = 121.4737;
+$boyName = '男方';
+$girlName = '女方';
+$boyImg = '';
+$girlImg = '';
 
-// 模拟坐标（实际应该从数据库或API获取）
-$boyCoords = [
-    'lat' => isset($text['boyLat']) ? floatval($text['boyLat']) : 39.9042,
-    'lng' => isset($text['boyLng']) ? floatval($text['boyLng']) : 116.4074,
-    'name' => $text['boy'] ?? '男方',
-    'city' => $boyCity
-];
-
-$girlCoords = [
-    'lat' => isset($text['girlLat']) ? floatval($text['girlLat']) : 31.2304,
-    'lng' => isset($text['girlLng']) ? floatval($text['girlLng']) : 121.4737,
-    'name' => $text['girl'] ?? '女方',
-    'city' => $girlCity
-];
+// 尝试从全局$text变量获取（首页已加载）
+if (isset($text) && is_array($text)) {
+    $boyCity = $text['boyCity'] ?? $boyCity;
+    $girlCity = $text['girlCity'] ?? $girlCity;
+    $boyLat = floatval($text['boyLat'] ?? $boyLat);
+    $boyLng = floatval($text['boyLng'] ?? $boyLng);
+    $girlLat = floatval($text['girlLat'] ?? $girlLat);
+    $girlLng = floatval($text['girlLng'] ?? $girlLng);
+    $boyName = $text['boy'] ?? $boyName;
+    $girlName = $text['girl'] ?? $girlName;
+    $boyImg = $text['boyimg'] ?? '';
+    $girlImg = $text['girlimg'] ?? '';
+}
 
 // 计算两点之间的距离（使用Haversine公式）
 function calculateDistance($lat1, $lon1, $lat2, $lon2) {
@@ -39,10 +46,20 @@ function calculateDistance($lat1, $lon1, $lat2, $lon2) {
     return round($earthRadius * $c, 1);
 }
 
-$distance = calculateDistance(
-    $boyCoords['lat'], $boyCoords['lng'],
-    $girlCoords['lat'], $girlCoords['lng']
-);
+$distance = calculateDistance($boyLat, $boyLng, $girlLat, $girlLng);
+
+// 计算地图上标记的位置（按比例转换）
+$mapScaleX = 400;
+$mapScaleY = 200;
+// 将经纬度转换为地图上的大致位置
+$boyMapX = 100 + ($boyLng + 180) / 360 * $mapScaleX;
+$boyMapY = 100 - ($boyLat + 90) / 180 * $mapScaleY;
+$girlMapX = 100 + ($girlLng + 180) / 360 * $mapScaleX;
+$girlMapY = 100 - ($girlLat + 90) / 180 * $mapScaleY;
+
+// 头像URL
+$boyAvatar = $boyImg ? "https://q1.qlogo.cn/g?b=qq&nk={$boyImg}&s=640" : "https://ui-avatars.com/api/?name=" . urlencode($boyName) . "&background=667eea&color=fff&size=128";
+$girlAvatar = $girlImg ? "https://q1.qlogo.cn/g?b=qq&nk={$girlImg}&s=640" : "https://ui-avatars.com/api/?name=" . urlencode($girlName) . "&background=f5576c&color=fff&size=128";
 ?>
 
 <!-- 地图显示组件 -->
@@ -68,29 +85,29 @@ $distance = calculateDistance(
                 
                 <!-- 双方位置标记 -->
                 <g class="lgnewui-map-marker-boy">
-                    <circle cx="150" cy="80" r="8" fill="#667eea" opacity="0.3">
+                    <circle cx="<?php echo $boyMapX; ?>" cy="<?php echo $boyMapY; ?>" r="8" fill="#667eea" opacity="0.3">
                         <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
                         <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
                     </circle>
-                    <circle cx="150" cy="80" r="4" fill="#667eea"/>
-                    <text x="150" y="65" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold">
-                        <?php echo htmlspecialchars($boyCoords['name']); ?>
+                    <circle cx="<?php echo $boyMapX; ?>" cy="<?php echo $boyMapY; ?>" r="4" fill="#667eea"/>
+                    <text x="<?php echo $boyMapX; ?>" y="<?php echo $boyMapY - 15; ?>" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold">
+                        <?php echo htmlspecialchars($boyName); ?>
                     </text>
                 </g>
                 
                 <g class="lgnewui-map-marker-girl">
-                    <circle cx="250" cy="120" r="8" fill="#f5576c" opacity="0.3">
+                    <circle cx="<?php echo $girlMapX; ?>" cy="<?php echo $girlMapY; ?>" r="8" fill="#f5576c" opacity="0.3">
                         <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="0.5s"/>
                         <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite" begin="0.5s"/>
                     </circle>
-                    <circle cx="250" cy="120" r="4" fill="#f5576c"/>
-                    <text x="250" y="140" text-anchor="middle" fill="#f5576c" font-size="12" font-weight="bold">
-                        <?php echo htmlspecialchars($girlCoords['name']); ?>
+                    <circle cx="<?php echo $girlMapX; ?>" cy="<?php echo $girlMapY; ?>" r="4" fill="#f5576c"/>
+                    <text x="<?php echo $girlMapX; ?>" y="<?php echo $girlMapY + 25; ?>" text-anchor="middle" fill="#f5576c" font-size="12" font-weight="bold">
+                        <?php echo htmlspecialchars($girlName); ?>
                     </text>
                 </g>
                 
                 <!-- 连接线 -->
-                <line x1="150" y1="80" x2="250" y2="120" 
+                <line x1="<?php echo $boyMapX; ?>" y1="<?php echo $boyMapY; ?>" x2="<?php echo $girlMapX; ?>" y2="<?php echo $girlMapY; ?>" 
                       stroke="url(#distanceGradient)" stroke-width="2" stroke-dasharray="5,5">
                     <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
                 </line>
@@ -109,13 +126,13 @@ $distance = calculateDistance(
     <div class="lgnewui-map-locations">
         <div class="lgnewui-map-location lgnewui-map-location-boy">
             <div class="lgnewui-map-location-avatar">
-                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640" alt="">
+                <img src="<?php echo $boyAvatar; ?>" alt="">
             </div>
             <div class="lgnewui-map-location-info">
-                <div class="lgnewui-map-location-name"><?php echo htmlspecialchars($boyCoords['name']); ?></div>
+                <div class="lgnewui-map-location-name"><?php echo htmlspecialchars($boyName); ?></div>
                 <div class="lgnewui-map-location-city">
                     <i class="fas fa-map-marker-alt"></i>
-                    <?php echo htmlspecialchars($boyCoords['city']); ?>
+                    <?php echo htmlspecialchars($boyCity); ?>
                 </div>
             </div>
         </div>
@@ -126,13 +143,13 @@ $distance = calculateDistance(
         
         <div class="lgnewui-map-location lgnewui-map-location-girl">
             <div class="lgnewui-map-location-avatar">
-                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['girlimg'] ?>&s=640" alt="">
+                <img src="<?php echo $girlAvatar; ?>" alt="">
             </div>
             <div class="lgnewui-map-location-info">
-                <div class="lgnewui-map-location-name"><?php echo htmlspecialchars($girlCoords['name']); ?></div>
+                <div class="lgnewui-map-location-name"><?php echo htmlspecialchars($girlName); ?></div>
                 <div class="lgnewui-map-location-city">
                     <i class="fas fa-map-marker-alt"></i>
-                    <?php echo htmlspecialchars($girlCoords['city']); ?>
+                    <?php echo htmlspecialchars($girlCity); ?>
                 </div>
             </div>
         </div>

@@ -66,6 +66,49 @@ switch ($action) {
         ];
         break;
         
+    case 'get_location':
+        // 获取位置信息
+        require_once '../admin/connect.php';
+        $location = [
+            'boyCity' => '北京',
+            'girlCity' => '上海',
+            'boyLat' => 39.9042,
+            'boyLng' => 116.4074,
+            'girlLat' => 31.2304,
+            'girlLng' => 121.4737,
+            'distance' => 0
+        ];
+        
+        if ($connect) {
+            $result = mysqli_query($connect, "SELECT * FROM text LIMIT 1");
+            if ($result && mysqli_num_rows($result) > 0) {
+                $text = mysqli_fetch_assoc($result);
+                $location['boyCity'] = $text['boyCity'] ?? '北京';
+                $location['girlCity'] = $text['girlCity'] ?? '上海';
+                $location['boyLat'] = floatval($text['boyLat'] ?? 39.9042);
+                $location['boyLng'] = floatval($text['boyLng'] ?? 116.4074);
+                $location['girlLat'] = floatval($text['girlLat'] ?? 31.2304);
+                $location['girlLng'] = floatval($text['girlLng'] ?? 121.4737);
+                
+                // 计算距离
+                $earthRadius = 6371;
+                $latDelta = deg2rad($location['girlLat'] - $location['boyLat']);
+                $lonDelta = deg2rad($location['girlLng'] - $location['boyLng']);
+                $a = sin($latDelta / 2) * sin($latDelta / 2) +
+                     cos(deg2rad($location['boyLat'])) * cos(deg2rad($location['girlLat'])) *
+                     sin($lonDelta / 2) * sin($lonDelta / 2);
+                $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+                $location['distance'] = round($earthRadius * $c, 1);
+            }
+        }
+        
+        $response = [
+            'code' => 200,
+            'data' => $location,
+            'timestamp' => time()
+        ];
+        break;
+        
     case 'heartbeat':
         // 心跳检测
         $response = [

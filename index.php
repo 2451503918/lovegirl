@@ -229,6 +229,12 @@ $runtimeDays = floor((time() - $startTs) / 86400);
             </div>
         </section>
 
+        <!-- ===== 地图显示 ===== -->
+        <?php include_once 'components/lg-map-card.php'; ?>
+
+        <!-- ===== 访客统计 ===== -->
+        <?php include_once 'components/lg-visitor-stats.php'; ?>
+
         <!-- ===== 3. 清单事件 ===== -->
         <section class="lgnewui-section">
             <div class="lgnewui-section-header lgnewui-section-header--rose" data-aos="fade-up">

@@ -55,25 +55,25 @@ include_once 'Nav.php';
 
                 <form class="needs-validation" action="loveadminPost.php" method="post" novalidate>
                     <div class="form-group mb-3">
-                        <label for="validationCustom01">男主Nanme</label>
-                        <input type="text" class="form-control"  placeholder="请输入男主Name"
+                        <label for="validationCustom01">男方Name</label>
+                        <input type="text" class="form-control"  placeholder="请输入男方Name"
                                name="boy" value="<?php echo $text['boy'] ?>" required>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="validationCustom02">女主Name</label>
-                        <input type="text" class="form-control" placeholder="请输入女主Name"
+                        <label for="validationCustom02">女方Name</label>
+                        <input type="text" class="form-control" placeholder="请输入女方Name"
                                name="girl" value="<?php echo $text['girl'] ?>" required>
 
                     </div>
                     <div class="form-group mb-3">
-                        <label for="validationCustom03">男主QQ</label>
-                        <input type="text" class="form-control"  placeholder="请输入男主QQ（用于显示头像）"
+                        <label for="validationCustom03">男方QQ</label>
+                        <input type="text" class="form-control"  placeholder="请输入男方QQ（用于显示头像）"
                                name="boyimg" value="<?php echo $text['boyimg'] ?>" required>
 
                     </div>
                     <div class="form-group mb-3">
-                        <label for="validationCustom04">女主QQ</label>
-                        <input type="text" class="form-control"  placeholder="请输入女主QQ（用于显示头像）"
+                        <label for="validationCustom04">女方QQ</label>
+                        <input type="text" class="form-control"  placeholder="请输入女方QQ（用于显示头像）"
                                name="girlimg" value="<?php echo $text['girlimg'] ?>" required>
 
                     </div>
@@ -82,8 +82,52 @@ include_once 'Nav.php';
                         <input type="datetime-local" class="form-control"  placeholder="请输入起始时间"
                                name="startTime" value="<?php echo $text['startTime'] ?>" required>
                     </div>
-                    <div class="form-group mb-3 text_right">
-                        <button class="btn btn-primary" type="button" id="loveadminPost">提交修改</button>
+                </div> <!-- end card-body-->
+            </div> <!-- end card-->
+        </div> <!-- end col-->
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">位置配置</h4>
+
+                <form class="needs-validation" action="locationPost.php" method="post" novalidate>
+                    <div class="form-group mb-3">
+                        <label for="boyCity">男方城市</label>
+                        <input type="text" class="form-control" placeholder="如：北京"
+                               name="boyCity" value="<?php echo isset($text['boyCity']) ? $text['boyCity'] : '北京' ?>" required>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-6">
+                            <label for="boyLat">男方纬度</label>
+                            <input type="number" step="0.000001" class="form-control" placeholder="39.9042"
+                                   name="boyLat" value="<?php echo isset($text['boyLat']) ? $text['boyLat'] : '39.9042' ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="boyLng">男方经度</label>
+                            <input type="number" step="0.000001" class="form-control" placeholder="116.4074"
+                                   name="boyLng" value="<?php echo isset($text['boyLng']) ? $text['boyLng'] : '116.4074' ?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="girlCity">女方城市</label>
+                        <input type="text" class="form-control" placeholder="如：上海"
+                               name="girlCity" value="<?php echo isset($text['girlCity']) ? $text['girlCity'] : '上海' ?>" required>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-md-6">
+                            <label for="girlLat">女方纬度</label>
+                            <input type="number" step="0.000001" class="form-control" placeholder="31.2304"
+                                   name="girlLat" value="<?php echo isset($text['girlLat']) ? $text['girlLat'] : '31.2304' ?>" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="girlLng">女方经度</label>
+                            <input type="number" step="0.000001" class="form-control" placeholder="121.4737"
+                                   name="girlLng" value="<?php echo isset($text['girlLng']) ? $text['girlLng'] : '121.4737' ?>" required>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 text-right">
+                        <button class="btn btn-primary" type="button" id="locationPost">提交修改</button>
                     </div>
                 </form>
 
