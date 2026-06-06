@@ -67,12 +67,11 @@ elseif (preg_match('/Firefox\/([\d\.]+)/i', $userAgent, $m)) $browser = 'Firefox
 elseif (preg_match('/Safari\/([\d\.]+)/i', $userAgent, $m)) $browser = 'Safari ' . $m[1];
 
 try {
-    $stmt = mysqli_prepare(
-        $connect,
-        "INSERT INTO leaving (name, QQ, text, time, ip, city, device, browser, likes) VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, 0)"
-    );
+    // 插入留言（v5.2.1: leaving.time 是 varchar(200)，存储Unix时间戳）
+    $stmt = mysqli_prepare($connect, "INSERT INTO leaving (name, QQ, text, time, ip, city, device, browser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $now = time();
     $city = '未知';
-    mysqli_stmt_bind_param($stmt, 'sssssss', $name, $qq, $text, $ip, $city, $device, $browser);
+    mysqli_stmt_bind_param($stmt, 'ssssssss', $name, $qq, $text, $now, $ip, $city, $device, $browser);
     $ok = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     if ($ok) {

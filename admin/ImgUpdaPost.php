@@ -10,12 +10,13 @@ if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
 }
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
-    $id = trim($_POST['id']);
+    $id = intval($_POST['id']);
     $imgText = htmlspecialchars(trim($_POST['imgText']), ENT_QUOTES);
     $imgDatd = trim($_POST['imgDatd']);
     $imgUrl = htmlspecialchars(trim($_POST['imgUrl']), ENT_QUOTES);
     
-    $stmt = mysqli_prepare($connect, "update loveImg set imgText = ?, imgDatd = ?, imgUrl = ? where id = ?");
+    // v5.2.1: 更新 photo 表
+    $stmt = mysqli_prepare($connect, "UPDATE photo SET title = ?, `desc` = ?, img = ? WHERE id = ?");
     mysqli_stmt_bind_param($stmt, "sssi", $imgText, $imgDatd, $imgUrl, $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_affected_rows($stmt) >= 0;

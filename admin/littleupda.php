@@ -11,11 +11,12 @@ if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
 }
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
-    $id = $_POST['id'];
+    $id = intval($_POST['id']);
     $title = htmlspecialchars(trim($_POST['articletitle']), ENT_QUOTES);
     $text = trim($_POST['articletext']);
     
-    $stmt = mysqli_prepare($connect, "update article set articletitle = ?, articletext = ? where id = ?");
+    // v5.2.1: 更新 little 表
+    $stmt = mysqli_prepare($connect, "UPDATE little SET title = ?, text = ? WHERE id = ?");
     mysqli_stmt_bind_param($stmt, "ssi", $title, $text, $id);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_affected_rows($stmt) >= 0;

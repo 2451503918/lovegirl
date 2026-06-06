@@ -20,8 +20,12 @@ $file = $_SERVER['PHP_SELF'];
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
     if ($id > 0) {
-        $sql = "delete from article where id = $id";
-        $result = mysqli_query($connect, $sql);
+        // v5.2.1: 从 little 表删除（预处理语句防SQL注入）
+        $stmt = mysqli_prepare($connect, "DELETE FROM little WHERE id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_affected_rows($stmt) > 0;
+        mysqli_stmt_close($stmt);
         if ($result) {
             echo "<script>alert('删除文章成功');location.href = 'littleSet.php';</script>";
         } else {
