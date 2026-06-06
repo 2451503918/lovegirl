@@ -29,3 +29,6 @@ admin/uploads/*
 # OS
 .DS_Store
 Thumbs.db
+
+# Node modules
+node_modules/
