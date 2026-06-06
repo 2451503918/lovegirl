@@ -184,16 +184,16 @@ $girlName = $text['girl'] ?? 'Ta';
 </div>
 
 <!-- 随机一言确认弹窗 -->
-<div class="lgmsg-confirm-overlay" id="lgmsgConfirmOverlay">
+<div class="lgmsg-confirm-overlay" id="lgmsgConfirmOverlay" role="alertdialog" aria-modal="true" aria-labelledby="lgmsgConfirmTitle" aria-describedby="lgmsgConfirmDesc" aria-hidden="true">
     <div class="lgmsg-confirm-panel">
         <button class="lgmsg-confirm-close-btn" id="lgmsgConfirmClose" aria-label="关闭">
-            <i class="ph ph-x"></i>
+            <i class="ph ph-x" aria-hidden="true"></i>
         </button>
-        <div class="lgmsg-confirm-icon-wrapper">
+        <div class="lgmsg-confirm-icon-wrapper" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg>
         </div>
-        <h2 class="lgmsg-confirm-title">替换为随机一言？</h2>
-        <p class="lgmsg-confirm-desc">当前输入框已有内容，确认后将清空并替换为一条随机文案</p>
+        <h2 class="lgmsg-confirm-title" id="lgmsgConfirmTitle">替换为随机一言？</h2>
+        <p class="lgmsg-confirm-desc" id="lgmsgConfirmDesc">当前输入框已有内容，确认后将清空并替换为一条随机文案</p>
         <div class="lgmsg-confirm-actions">
             <button class="lgmsg-confirm-btn lgmsg-confirm-btn-secondary" id="lgmsgConfirmCancel">取消</button>
             <button class="lgmsg-confirm-btn lgmsg-confirm-btn-primary" id="lgmsgConfirmOk">确认替换</button>
