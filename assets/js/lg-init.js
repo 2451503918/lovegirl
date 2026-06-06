@@ -1,59 +1,68 @@
 /**
- * LG-NewUi 初始化脚本
- * 统一管理所有模块的初始化
+ * LG Init - 应用初始化脚本
+ * 在所有页面加载完成后执行
  */
 (function() {
     'use strict';
 
-    console.log('%c ❤️ LG-NewUi Initializing... ', 'background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: #fff; padding: 8px 16px; border-radius: 4px; font-weight: 700;');
+    window.LGApp = window.LGApp || {};
 
-    function initAll() {
-        // 1. 初始化首页应用
-        if (typeof window.initLGHomeApp === 'function') {
-            window.initLGHomeApp();
+    /**
+     * 应用初始化
+     */
+    LGApp.init = function(config) {
+        LGApp.setConfig(config || {});
+
+        // 初始化 Lucide 图标
+        if (typeof lucide !== 'undefined' && lucide.createIcons) {
+            try { lucide.createIcons(); } catch(e) {}
         }
 
-        // 2. 初始化交互动效
-        if (typeof window.initLGInteractions === 'function') {
-            window.initLGInteractions();
+        // 初始化 AOS 动画
+        if (typeof AOS !== 'undefined') {
+            var aosConfig = window.LG_AOS_CONFIG || {};
+            AOS.init({
+                duration: aosConfig.duration || 800,
+                easing: aosConfig.easing || 'ease-out-cubic',
+                offset: aosConfig.offset || 50,
+                once: aosConfig.once !== false,
+                mirror: aosConfig.mirror || false,
+                anchorPlacement: aosConfig.anchorPlacement || 'top-bottom',
+            });
         }
 
-        // 3. 初始化音乐播放器
-        if (typeof window.initLGMusicPlayer === 'function') {
-            window.initLGMusicPlayer();
+        // 初始化图片懒加载
+        if (typeof FunLazy === 'function') {
+            try {
+                FunLazy({
+                    placeholder: '/Style/img/Loading2.gif',
+                    effect: 'show',
+                    strictLazyMode: false,
+                    useErrorImagePlaceholder: '/Style/img/error.svg'
+                });
+            } catch(e) {}
         }
 
-        // 4. 地图功能已由页面内组件处理（lg-mini-map / page-timeline）
-
-        // 5. 初始化右键菜单
-        if (typeof window.initLGContextMenu === 'function') {
-            window.initLGContextMenu();
+        // 初始化 ViewImage 图片查看器
+        if (typeof ViewImage !== 'undefined' && ViewImage.init) {
+            try { ViewImage.init('[view-image] img:not([no-view])'); } catch(e) {}
         }
 
-        console.log('%c ✅ LG-NewUi Initialized Successfully! ', 'background: linear-gradient(135deg, #00b894, #00cec9); color: #fff; padding: 8px 16px; border-radius: 4px; font-weight: 700;');
-    }
+        // 页面加载完成标记
+        document.body.classList.add('loaded');
+    };
 
-    // 等待DOM加载完成后初始化
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initAll);
-    } else {
-        initAll();
-    }
+    /**
+     * 设置配置
+     */
+    LGApp.setConfig = function(config) {
+        LGApp.config = Object.assign(LGApp.config || {}, config);
+    };
 
-    // 如果使用Pjax，也需要在pjax完成后重新初始化
-    if (typeof $ !== 'undefined' && $(document).on) {
-        $(document).on('pjax:complete', function() {
-            // 清除之前创建的地图容器（防止从 timeline 页面切换后残留）
-            var oldMap = document.getElementById('lg-map-container');
-            if (oldMap) oldMap.remove();
-            var oldStyle = document.getElementById('lg-map-style');
-            if (oldStyle) oldStyle.remove();
-            // 延迟一点时间，确保Pjax内容完全加载
-            setTimeout(initAll, 100);
-        });
-    }
-
-    // 暴露初始化函数
-    window.initLGNewUi = initAll;
-
+    // DOM Ready 时自动初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.LG_CONFIG) {
+            LGApp.init(window.LG_CONFIG);
+        }
+    });
 })();
