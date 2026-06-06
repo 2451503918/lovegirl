@@ -71,8 +71,8 @@ if ($connect) {
                             <div class="lgnewui-message-drawer-subtitle" id="lgmsgDrawerSubtitle">0 条回复</div>
                         </div>
                     </div>
-                    <button class="lgnewui-message-close-btn" id="lgmsgDrawerClose">
-                        <i data-lucide="x" style="width:20px;height:20px;"></i>
+                    <button class="lgnewui-message-close-btn" id="lgmsgDrawerClose" aria-label="关闭留言详情">
+                        <i data-lucide="x" style="width:20px;height:20px;" aria-hidden="true"></i>
                     </button>
                 </div>
                 <div class="lgnewui-message-drawer-scroll" id="lgmsgDrawerScroll">
@@ -93,7 +93,7 @@ if ($connect) {
                                 <div class="lgnewui-message-drawer-expanded" id="lgmsgDrawerExpanded">
                                     <div class="lgnewui-message-drawer-identity" id="lgmsgDrawerIdentityBar">
                                         <div id="lgmsgDrawerIdentityClickArea" style="display:flex; align-items:center; gap:10px; flex:1; overflow:hidden;">
-                                            <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23c7c7cc%22%3E%3Ccircle cx=%2212%22 cy=%228%22 r=%224%22/%3E%3Cpath d=%22M20 21a8 8 0 1 0-16 0%22/%3E%3C/svg%3E" id="lgmsgDrawerIdentityAvatar">
+                                            <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23c7c7cc%22%3E%3Ccircle cx=%2212%22 cy=%228%22 r=%224%22/%3E%3Cpath d=%22M20 21a8 8 0 1 0-16 0%22/%3E%3C/svg%3E" id="lgmsgDrawerIdentityAvatar" alt="用户头像">
                                             <span id="lgmsgDrawerIdentityName">未认证，点击设置身份</span>
                                             <i data-lucide="square-pen" class="edit-icon"></i>
                                         </div>
@@ -118,7 +118,7 @@ if ($connect) {
                                                 </div>
                                             </div>
                                             <span class="lgnewui-message-char-counter" id="lgmsgDrawerCharCounter" style="margin-right: 12px; margin-left: auto;">0/500</span>
-                                            <button class="lgnewui-message-reply-btn" id="lgmsgReplySendBtn"><i data-lucide="send" style="width:16px;height:16px;"></i></button>
+                                            <button class="lgnewui-message-reply-btn" id="lgmsgReplySendBtn" aria-label="发送回复"><i data-lucide="send" style="width:16px;height:16px;" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@ if ($connect) {
                     </button>
                 </div>
                 <div class="lgnewui-message-modal-body" style="padding: 24px;">
-                    <div class="lgnewui-message-drawer-title" style="text-align: center; margin-bottom: 20px;">身份设置</div>
+                    <div class="lgnewui-message-drawer-title" id="lgmsgAuthTitle" style="text-align: center; margin-bottom: 20px;">身份设置</div>
                     <div class="lgnewui-message-ios-tabs-wrap" style="justify-content: center; margin-bottom: 24px;">
                         <div class="lgnewui-message-ios-tabs" id="lgmsgAuthTabContainer">
                             <div class="lgnewui-message-ios-tab-slider" id="lgmsgAuthTabSlider"></div>
@@ -233,8 +233,8 @@ if ($connect) {
         <div class="lgmsg-confirm-icon-wrapper">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.582a.5.5 0 0 1 0 .962L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg>
         </div>
-        <h2 class="lgmsg-confirm-title">替换为随机一言？</h2>
-        <p class="lgmsg-confirm-desc">当前输入框已有内容，确认后将清空并替换为一条随机文案</p>
+        <h2 class="lgmsg-confirm-title" id="lgmsgConfirmTitle">替换为随机一言？</h2>
+        <p class="lgmsg-confirm-desc" id="lgmsgConfirmDesc">当前输入框已有内容，确认后将清空并替换为一条随机文案</p>
         <div class="lgmsg-confirm-actions">
             <button class="lgmsg-confirm-btn lgmsg-confirm-btn-secondary" id="lgmsgConfirmCancel">取消</button>
             <button class="lgmsg-confirm-btn lgmsg-confirm-btn-primary" id="lgmsgConfirmOk">确认替换</button>

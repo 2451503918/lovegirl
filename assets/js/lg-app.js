@@ -584,8 +584,17 @@
 
     // ============================================
     // Toast 封装（基于 Toastify.js + showScenario）
+    // 同时更新 aria-live 区域以便屏幕阅读器播报
     // ============================================
     const Toast = {
+        _announce(message) {
+            const live = document.getElementById('lgAriaLive');
+            if (live) {
+                live.textContent = '';
+                setTimeout(() => { live.textContent = message; }, 50);
+            }
+        },
+
         init() {
             // Toastify 无需全局配置初始化
         },
@@ -594,24 +603,28 @@
             if (typeof Toastify !== 'undefined' && Toastify.showScenario) {
                 Toastify.showScenario('success', { text: message });
             }
+            this._announce(message);
         },
 
         error(message, title = '') {
             if (typeof Toastify !== 'undefined' && Toastify.showScenario) {
                 Toastify.showScenario('error', { text: message });
             }
+            this._announce(message);
         },
 
         warning(message, title = '') {
             if (typeof Toastify !== 'undefined' && Toastify.showScenario) {
                 Toastify.showScenario('warning', { text: message });
             }
+            this._announce(message);
         },
 
         info(message, title = '') {
             if (typeof Toastify !== 'undefined' && Toastify.showScenario) {
                 Toastify.showScenario('info', { text: message });
             }
+            this._announce(message);
         }
     };
 

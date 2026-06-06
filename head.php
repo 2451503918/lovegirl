@@ -262,7 +262,7 @@ function loadPhotos() {
     content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
 <meta name="description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
 <meta name="author" content="Ki">
-<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes,viewport-fit=cover">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph (Facebook/微信/QQ) -->
@@ -290,6 +290,7 @@ function loadPhotos() {
 <link rel="stylesheet" href="/Style/css/lg-variables.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-newui-nav.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-mobile-nav.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-accessibility.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/phosphor-icons.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/phosphor-fill.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/leaving.css?LikeGirl=<?php echo $version ?>">
@@ -452,6 +453,8 @@ if ($diy['Pjaxkg'] === "1"):
 <link href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>" rel="stylesheet" type="text/css">
 </head>
 <body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
+<a href="#pjax-container" class="lg-skip-link">跳到主要内容</a>
+<div class="lg-aria-live" id="lgAriaLive" aria-live="polite" aria-atomic="true"></div>
 
 <!-- 加载动画 -->
 <div id="loader-wrapper">

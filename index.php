@@ -1119,8 +1119,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
         <div class="lgnewui-message-modal__overlay" onclick="closeMessageModal()"></div>
         <div class="lgnewui-message-modal__content">
             <div class="lgnewui-message-modal__header">
-                <h3 class="lgnewui-message-modal__title">留下你的祝福</h3>
-                <button class="lgnewui-message-modal__close" onclick="closeMessageModal()"><i class="ph-bold ph-x"></i></button>
+                <h3 class="lgnewui-message-modal__title" id="lgnewuiMessageModalTitle">留下你的祝福</h3>
+                <button class="lgnewui-message-modal__close" onclick="closeMessageModal()" aria-label="关闭留言弹窗"><i class="ph-bold ph-x" aria-hidden="true"></i></button>
             </div>
             <div class="lgnewui-message-modal__tabs">
                 <button class="lgnewui-message-modal__tab active" data-tab="qq" onclick="switchMessageTab('qq', this)">QQ 登录</button>
@@ -1130,38 +1130,38 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <!-- QQ 登录表单 -->
                 <div class="lgnewui-message-modal__form" id="messageFormQQ">
                     <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label">QQ 号</label>
-                        <input type="text" class="lgnewui-message-modal__input" id="msgQQInput" placeholder="请输入QQ号获取头像和昵称" autocomplete="off">
+                        <label class="lgnewui-message-modal__label" for="msgQQInput">QQ 号</label>
+                        <input type="number" inputmode="numeric" class="lgnewui-message-modal__input" id="msgQQInput" name="qq" placeholder="请输入 QQ 号获取头像和昵称…" autocomplete="off" spellcheck="false" maxlength="12" aria-describedby="msgQQInputHint">
                     </div>
                     <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label">留言内容</label>
-                        <textarea class="lgnewui-message-modal__textarea" id="msgQQContent" placeholder="写下你想说的话..." rows="4"></textarea>
+                        <label class="lgnewui-message-modal__label" for="msgQQContent">留言内容</label>
+                        <textarea class="lgnewui-message-modal__textarea" id="msgQQContent" name="text" placeholder="写下你想说的话…" rows="4" maxlength="500"></textarea>
                     </div>
                     <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label">访客标签</label>
-                        <div class="lgnewui-message-modal__tags" id="msgQQTags">
-                            <span class="lgnewui-message-modal__tag" data-tag="祝福" onclick="toggleMsgTag(this)">祝福</span>
-                            <span class="lgnewui-message-modal__tag" data-tag="喜欢" onclick="toggleMsgTag(this)">喜欢</span>
-                            <span class="lgnewui-message-modal__tag" data-tag="路过" onclick="toggleMsgTag(this)">路过</span>
-                            <span class="lgnewui-message-modal__tag" data-tag="打卡" onclick="toggleMsgTag(this)">打卡</span>
+                        <label class="lgnewui-message-modal__label" id="msgQQTagsLabel">访客标签</label>
+                        <div class="lgnewui-message-modal__tags" id="msgQQTags" role="group" aria-labelledby="msgQQTagsLabel">
+                            <button type="button" class="lgnewui-message-modal__tag" data-tag="祝福" aria-pressed="false" onclick="toggleMsgTag(this)">祝福</button>
+                            <button type="button" class="lgnewui-message-modal__tag" data-tag="喜欢" aria-pressed="false" onclick="toggleMsgTag(this)">喜欢</button>
+                            <button type="button" class="lgnewui-message-modal__tag" data-tag="路过" aria-pressed="false" onclick="toggleMsgTag(this)">路过</button>
+                            <button type="button" class="lgnewui-message-modal__tag" data-tag="打卡" aria-pressed="false" onclick="toggleMsgTag(this)">打卡</button>
                         </div>
                     </div>
                 </div>
                 <!-- 匿名留言表单 -->
                 <div class="lgnewui-message-modal__form" id="messageFormAnonymous" style="display:none;">
                     <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label">昵称</label>
-                        <input type="text" class="lgnewui-message-modal__input" id="msgAnonName" placeholder="匿名访客" autocomplete="off">
+                        <label class="lgnewui-message-modal__label" for="msgAnonName">昵称</label>
+                        <input type="text" class="lgnewui-message-modal__input" id="msgAnonName" name="name" placeholder="匿名访客" autocomplete="nickname" maxlength="20">
                     </div>
                     <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label">留言内容</label>
-                        <textarea class="lgnewui-message-modal__textarea" id="msgAnonContent" placeholder="写下你想说的话..." rows="4"></textarea>
+                        <label class="lgnewui-message-modal__label" for="msgAnonContent">留言内容</label>
+                        <textarea class="lgnewui-message-modal__textarea" id="msgAnonContent" name="text" placeholder="写下你想说的话…" rows="4" maxlength="500"></textarea>
                     </div>
                 </div>
             </div>
             <div class="lgnewui-message-modal__footer">
-                <button class="lgnewui-message-modal__emoji-btn" onclick="toggleEmojiPanel()">
-                    <i class="ph-bold ph-smiley"></i>
+                <button class="lgnewui-message-modal__emoji-btn" onclick="toggleEmojiPanel()" aria-label="切换表情面板">
+                    <i class="ph-bold ph-smiley" aria-hidden="true"></i>
                 </button>
                 <button class="lgnewui-message-modal__submit" id="msgSubmitBtn" onclick="submitMessage()">发送留言</button>
             </div>
@@ -1532,7 +1532,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
         </div>
         <?php if (!empty($text['icp'])): ?>
         <div class="lgnewui-footer__icp">
-            <img src="/Style/img/icp.svg" alt="">
+            <img src="/Style/img/icp.svg" alt="" aria-hidden="true">
             <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener"><?php echo htmlspecialchars($text['icp'], ENT_QUOTES, 'UTF-8') ?></a>
         </div>
         <?php endif; ?>
