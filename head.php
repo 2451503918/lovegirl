@@ -20,6 +20,8 @@ ini_set('log_errors', 1);
 include_once 'admin/connect.php';
 include_once 'admin/Function.php';
 
+$version = '5.2.1';
+
 $sql = "select * from text";
 $result = mysqli_query($connect, $sql);
 if ($result) {
@@ -361,6 +363,16 @@ function loadPhotos() {
         'endpoints' => [
             'weatherNow' => '/services/weather.php',
             'interaction' => '/services/interaction.php',
+            'messageList' => '/services/message-list.php',
+            'messageSubmit' => '/services/message.php',
+            'infoService' => '/services/info-service.php',
+            'chatData' => '/services/chat-data.php',
+            'timelineData' => '/services/timeline.php',
+            'momentsData' => '/services/moments.php',
+            'randomQuote' => '/services/random_quote.php',
+            'visitorStats' => '/services/visitor-stats.php',
+            'musicPlayerData' => '/services/music-player-data.php',
+            'mapApi' => '/assets/map-api.php',
         ],
     ];
     ?>
