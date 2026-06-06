@@ -1,0 +1,128 @@
+# ============================================================
+# LikeGirl (LG_NewUI) Nginx 配置
+# 将此文件内容放入你的 nginx conf 中（server 块内）
+# 或 include 到 nginx.conf / sites-available/ 下
+# ============================================================
+
+server {
+    listen 80;
+    listen [::]:80;
+    # 如需 HTTPS，取消下面两行注释并配置证书
+    # listen 443 ssl http2;
+    # listen [::]:443 ssl http2;
+
+    server_name your-domain.com;
+    root /var/www/likegirl;  # 改为你的项目实际路径
+    index index.php index.html;
+
+    charset utf-8;
+
+    # ---------- 安全：禁止 uploads 目录执行 PHP ----------
+    # 等同于 admin/uploads/.htaccess 的 php_flag engine off
+    location ^~ /admin/uploads/ {
+        location ~ \.ph(p[2-7]?|t|tml)$ {
+            deny all;
+        }
+        # 允许静态资源访问
+    }
+
+    # ---------- 安全：禁止访问敏感文件 ----------
+    # 隐藏文件（.开头）
+    location ~ /\. {
+        deny all;
+        return 404;
+    }
+
+    # 数据库配置
+    location ~ /admin/Config_DB\.php$ {
+        deny all;
+        return 404;
+    }
+
+    # 调试文件
+    location ~ /debug\.php$ {
+        deny all;
+        return 404;
+    }
+
+    # IP 日志文件
+    location ~ /\.ip\.txt$ {
+        deny all;
+        return 404;
+    }
+
+    # user.ini
+    location ~ /\.user\.ini$ {
+        deny all;
+        return 404;
+    }
+
+    # SQL 文件
+    location ~ \.sql$ {
+        deny all;
+        return 404;
+    }
+
+    # ---------- PHP 处理 ----------
+    location ~ \.php$ {
+        # 根据你的 PHP-FPM 版本调整
+        fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+        # 如果用 TCP 方式：fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+
+        # PHP 安全设置（等同于 .htaccess 中的 php_flag）
+        fastcgi_param PHP_VALUE "
+            display_errors=Off
+            log_errors=On
+            error_reporting=E_ALL
+        ";
+    }
+
+    # ---------- 静态资源缓存 ----------
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot|otf|mp3|mp4|webm|ogg|wav)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+        access_log off;
+        try_files $uri =404;
+    }
+
+    # ---------- 默认路由 ----------
+    # 如果请求的文件不存在，尝试 index.php（用于 PJAX 等场景）
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    # ---------- 禁止访问的目录 ----------
+    # 管理后台如需 IP 限制，取消注释并修改
+    # location /admin/ {
+    #     allow 192.168.1.0/24;
+    #     deny all;
+    # }
+
+    # ---------- 日志 ----------
+    access_log /var/log/nginx/likegirl_access.log;
+    error_log  /var/log/nginx/likegirl_error.log;
+
+    # ---------- 上传大小限制 ----------
+    client_max_body_size 20M;
+
+    # ---------- Gzip 压缩 ----------
+    gzip on;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_types
+        text/plain
+        text/css
+        text/xml
+        text/javascript
+        application/json
+        application/javascript
+        application/xml
+        application/rss+xml
+        image/svg+xml
+        font/woff
+        font/woff2;
+}
