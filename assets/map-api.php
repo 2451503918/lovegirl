@@ -5,7 +5,7 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-$allowedOrigins = ['yourdomain.com', 'www.yourdomain.com']; // Replace with actual domain(s)
+$allowedOrigins = ['lovedemo.54oimx.top', 'love.54oimx.top'];
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
