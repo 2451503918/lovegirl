@@ -1,4 +1,4 @@
 <?php
-// Alias: lovelist.php -> list.php
-// 参考网站使用 lovelist.php 作为清单页面路径
+// lovelist.php 和 list.php 共享相同的内容
+// 重定向到 list.php 以保持一致性
 include_once 'list.php';
