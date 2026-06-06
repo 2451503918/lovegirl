@@ -75,9 +75,10 @@ switch ($action) {
         }
         
         // 更新累计统计
+        $escapedVisitorIP = mysqli_real_escape_string($connect, $visitorIP);
         mysqli_query($connect, "UPDATE visitor_total SET 
             total_visits = total_visits + 1,
-            last_visitor_ip = '$visitorIP',
+            last_visitor_ip = '$escapedVisitorIP',
             last_visit_time = NOW()
             WHERE id = 1");
         
