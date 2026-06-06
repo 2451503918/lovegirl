@@ -28,7 +28,7 @@ try {
         echo "<p class='success'>✅ 数据库连接成功</p>";
         
         // 检查必需的表
-        $requiredTables = ['text', 'little', 'loveImg', 'leaving', 'lovelist'];
+        $requiredTables = ['text', 'little', 'photo', 'leaving', 'lovelist'];
         echo "<p>检查数据表:</p><ul>";
         foreach ($requiredTables as $table) {
             $result = mysqli_query($connect, "SHOW TABLES LIKE '$table'");

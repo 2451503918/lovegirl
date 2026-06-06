@@ -18,8 +18,12 @@ if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] !== '') {
     $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
     if ($id > 0) {
-        $sql = "delete from loveImg where id = $id";
-        $result = mysqli_query($connect, $sql);
+        // v5.2.1: 从 photo 表删除（预处理语句防SQL注入）
+        $stmt = mysqli_prepare($connect, "DELETE FROM photo WHERE id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_affected_rows($stmt) > 0;
+        mysqli_stmt_close($stmt);
         if ($result) {
             echo "<script>alert('删除相册成功');location.href = 'loveImgSet.php';</script>";
         } else {

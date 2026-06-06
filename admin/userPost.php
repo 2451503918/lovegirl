@@ -30,7 +30,7 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $SCode = trim($_POST['SCode']);
     
     if ($LikeGirl_Code == $SCode) {
-        $stmt = mysqli_prepare($connect, "update text set userQQ = ?, userName = ?, animation = ?");
+        $stmt = mysqli_prepare($connect, "update text set userQQ = ?, userName = ?, Animation = ?");
         mysqli_stmt_bind_param($stmt, "sss", $user, $name, $Webanimation);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_affected_rows($stmt) >= 0;

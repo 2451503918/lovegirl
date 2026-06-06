@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS visitor_stats (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY idx_visit_date (visit_date)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='访客统计表'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='访客统计表'
 ";
 
 if (mysqli_query($connect, $createVisitorTable)) {
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS visitor_total (
     last_visit_time DATETIME DEFAULT NULL COMMENT '最后访问时间',
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='累计访客统计表'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='累计访客统计表'
 ";
 
 if (mysqli_query($connect, $createTotalTable)) {

@@ -2,7 +2,7 @@
 session_start();
 include_once 'Nav.php';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$article = "SELECT id, articletitle, articletext, articletime, articlename FROM article WHERE id=? limit 1";
+$article = "SELECT id, title, text, date, author FROM little WHERE id=? LIMIT 1";
 $stmt = mysqli_prepare($connect, $article);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -16,7 +16,7 @@ $mod = mysqli_fetch_array($result);
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title mb-3 size_18">修改文章—— <?php echo htmlspecialchars($mod['articletitle'] ?? '', ENT_QUOTES, 'UTF-8') ?></h4>
+                <h4 class="header-title mb-3 size_18">修改文章—— <?php echo htmlspecialchars($mod['title'] ?? '', ENT_QUOTES, 'UTF-8') ?></h4>
 
                 <form class="needs-validation" action="littleupda.php" method="post" onsubmit="return check()"
                       novalidate>
@@ -24,10 +24,10 @@ $mod = mysqli_fetch_array($result);
                     <div class="form-group mb-3">
                         <label for="validationCustom01">标题</label>
                         <input name="articletitle" type="text" class="form-control" id="validationCustom01"
-                               placeholder="请输入标题" value="<?php echo htmlspecialchars($mod['articletitle'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                               placeholder="请输入标题" value="<?php echo htmlspecialchars($mod['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
                     <div id="test-editor">
-                        <textarea name="articletext"><?php echo htmlspecialchars($mod['articletext'], ENT_QUOTES, 'UTF-8') ?></textarea>
+                        <textarea name="articletext"><?php echo htmlspecialchars($mod['text'], ENT_QUOTES, 'UTF-8') ?></textarea>
                     </div>
                     <div class="form-group mb-3 text_right">
                         <input name="id" value="<?php echo intval($id) ?>" type="hidden">
