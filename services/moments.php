@@ -29,7 +29,7 @@ $moments = [];
 
 // 获取最新的点滴文章
 if ($db_connected) {
-    $stmt = mysqli_prepare($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 6");
+    $stmt = mysqli_prepare($connect, "SELECT id, title, text, date FROM little ORDER BY id DESC LIMIT 6");
     if ($stmt) {
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
