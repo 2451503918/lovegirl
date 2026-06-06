@@ -2,93 +2,188 @@
 include_once 'admin/Database.php';
 $time = gmdate("Y-m-d", time() + 8 * 3600);
 @$id = $_GET['id'];
+
+$articleData = [
+    'id' => 0,
+    'title' => '',
+    'text' => '',
+    'author' => '',
+    'date' => '',
+    'location' => '',
+    'weather' => '',
+    'mood' => ''
+];
+
 if (is_numeric($id) && $id > 0) {
-    $article = "SELECT * FROM article WHERE id=? limit 1";
+    $article = "SELECT * FROM little WHERE id=? limit 1";
     $stmt = $conn->prepare($article);
-    $stmt->bind_param("i", $id);
-    $id = $_GET['id'];
-    $stmt->bind_result($id, $articletext, $articletime, $articletitle, $articlename);
-    $result = $stmt->execute();
-    if (!$result) {
-        error_log("page.php query error: " . $stmt->error);
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($row = $result->fetch_assoc()) {
+            $articleData = [
+                'id' => $row['id'],
+                'title' => $row['title'] ?? '',
+                'text' => $row['text'] ?? '',
+                'author' => $row['author'] ?? ($text['boy'] ?? '作者'),
+                'date' => $row['date'] ?? '',
+                'location' => $row['location'] ?? '未知',
+                'weather' => $row['weather'] ?? '晴',
+                'mood' => $row['mood'] ?? '开心'
+            ];
+        }
+        $stmt->close();
     }
-    $stmt->fetch();
 } else {
     echo ("<script>alert('参数错误或页面不存在！');history.back();</script>");
+    exit;
 }
+
 include_once 'head.php';
+
+// 计算天数
+$dayNum = 0;
+if ($articleData['date']) {
+    $dayNum = floor((time() - strtotime($articleData['date'])) / 86400);
+}
+
+// 获取上一篇和下一篇
+$prevArticle = null;
+$nextArticle = null;
+
+$prevQuery = "SELECT id, title, date FROM little WHERE id > ? ORDER BY id ASC LIMIT 1";
+$stmt = $conn->prepare($prevQuery);
+if ($stmt) {
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $nextArticle = $row;
+    }
+    $stmt->close();
+}
+
+$prevQuery = "SELECT id, title, date FROM little WHERE id < ? ORDER BY id DESC LIMIT 1";
+$stmt = $conn->prepare($prevQuery);
+if ($stmt) {
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $prevArticle = $row;
+    }
+    $stmt->close();
+}
 ?>
 
-<head>
-    <meta charset="utf-8" />
-    <title><?php echo $text['title'] ?> — <?php echo $text['card1'] ?></title>
-</head>
-
-<body>
-    <div id="pjax-container">
-        <div class="central">
-            <div class="title">
+<div id="pjax-container">
+    <!-- 页面标题栏 -->
+    <div class="lgnewui-page-header">
+        <div class="lgnewui-meta-container">
+            <div class="lgnewui-meta-line"></div>
+            <div class="lgnewui-meta-tag">
+                <i class="ph-bold ph-article lgnewui-meta-icon"></i>
+                Article
             </div>
-            <div class="row central central-800">
-                <div
-                    class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12 <?php if ($text['Animation'] === "1") { ?>animated fadeInUp delay-03s<?php } ?>">
-                    <div class="little_texts">
-                        <div class="top-title f2"><?php echo htmlspecialchars($articletitle ?? '', ENT_QUOTES, 'UTF-8') ?>
-                            <svg class="little_icon" aria-hidden="true">
-                                <use xlink:href="#icon-zhankai"></use>
-                            </svg>
-                        </div>
-                        <div class="info">
-                            <span>
-                                <svg class="little_icon" aria-hidden="true">
-                                    <use xlink:href="#icon-shoucang"></use>
-                                </svg>
-                                <?php echo htmlspecialchars($articlename ?? '', ENT_QUOTES, 'UTF-8') ?> <i>记录于</i> <?php echo htmlspecialchars($articletime ?? '', ENT_QUOTES, 'UTF-8') ?></span>
-                        </div>
-                        <div class="line-top"></div>
-                        <div id="md-view" class="file">
-                            <?php echo ($articletext) ?>
+            <div class="lgnewui-meta-line"></div>
+        </div>
+        <h2 class="lgnewui-hero-title"><?php echo htmlspecialchars($articleData['title']); ?></h2>
+    </div>
 
-                        </div>
+    <div class="lgnewui-container">
+        <!-- 文章内容卡片 -->
+        <div class="lgnewui-article-detail-card" data-aos="fade-up">
+            <!-- 文章头部 -->
+            <div class="lgnewui-article-detail-header">
+                <div class="lgnewui-article-detail-meta">
+                    <span class="lgnewui-article-detail-date">
+                        <i class="ph-fill ph-calendar"></i>
+                        <?php echo date('Y年m月d日 H:i', strtotime($articleData['date'])); ?>
+                    </span>
+                    <span class="lgnewui-article-detail-day">DAY <?php echo $dayNum; ?></span>
+                    <span class="lgnewui-article-detail-location">
+                        <i class="ph-fill ph-map-pin"></i>
+                        <?php echo htmlspecialchars($articleData['location']); ?>
+                    </span>
+                </div>
+                <div class="lgnewui-article-detail-tags">
+                    <span class="lgnewui-article-detail-tag">
+                        <i class="ph-fill ph-cloud-sun"></i>
+                        <?php echo htmlspecialchars($articleData['weather']); ?>
+                    </span>
+                    <span class="lgnewui-article-detail-tag">
+                        <i class="ph-fill ph-smiley"></i>
+                        <?php echo htmlspecialchars($articleData['mood']); ?>
+                    </span>
+                </div>
+            </div>
 
-                        <div class="line">
-                            <p><svg t="1718070705747" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg" p-id="3409" width="200" height="200">
-                                    <path
-                                        d="M512 85.3c235.3 0 426.7 191.4 426.7 426.7 0 235.3-191.4 426.7-426.7 426.7S85.3 747.3 85.3 512C85.3 276.7 276.7 85.3 512 85.3m0-64C241 21.3 21.3 241 21.3 512S241 1002.7 512 1002.7 1002.7 783 1002.7 512 783 21.3 512 21.3z"
-                                        p-id="3410" fill="#b5b5b5"></path>
-                                    <path d="M512 277.3m-64 0a64 64 0 1 0 128 0 64 64 0 1 0-128 0Z" p-id="3411"
-                                        fill="#b5b5b5"></path>
-                                    <path
-                                        d="M512 810.7c-35.3 0-64-28.7-64-64v-256c0-35.3 28.7-64 64-64s64 28.7 64 64v256c0 35.3-28.7 64-64 64z"
-                                        p-id="3412" fill="#b5b5b5"></path>
-                                </svg>
-                                The content ends here.</p>
-                        </div>
+            <!-- 文章内容 -->
+            <div class="lgnewui-article-detail-content">
+                <h1 class="lgnewui-article-detail-title"><?php echo htmlspecialchars($articleData['title']); ?></h1>
+                <div class="lgnewui-article-detail-body">
+                    <?php echo $articleData['text']; ?>
+                </div>
+            </div>
 
-
-                    </div>
+            <!-- 文章作者信息 -->
+            <div class="lgnewui-article-detail-author">
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg']; ?>&s=640" class="lgnewui-article-detail-avatar">
+                <div class="lgnewui-article-detail-author-info">
+                    <span class="lgnewui-article-detail-author-name"><?php echo htmlspecialchars($articleData['author']); ?></span>
+                    <span class="lgnewui-article-detail-author-label">作者</span>
                 </div>
             </div>
         </div>
+
+        <!-- 导航按钮 -->
+        <div class="lgnewui-article-nav" data-aos="fade-up">
+            <?php if ($prevArticle): ?>
+            <a href="page.php?id=<?php echo $prevArticle['id']; ?>" class="lgnewui-article-nav-btn lgnewui-article-nav-btn--prev">
+                <i class="ph-bold ph-arrow-left"></i>
+                <div class="lgnewui-article-nav-info">
+                    <span class="lgnewui-article-nav-label">上一篇</span>
+                    <span class="lgnewui-article-nav-title"><?php echo htmlspecialchars(mb_substr($prevArticle['title'], 0, 20, 'UTF-8')); ?></span>
+                </div>
+            </a>
+            <?php else: ?>
+            <a href="articles.php" class="lgnewui-article-nav-btn lgnewui-article-nav-btn--home">
+                <i class="ph-bold ph-house"></i>
+                <span>回到首页</span>
+            </a>
+            <?php endif; ?>
+
+            <?php if ($nextArticle): ?>
+            <a href="page.php?id=<?php echo $nextArticle['id']; ?>" class="lgnewui-article-nav-btn lgnewui-article-nav-btn--next">
+                <div class="lgnewui-article-nav-info">
+                    <span class="lgnewui-article-nav-label">下一篇</span>
+                    <span class="lgnewui-article-nav-title"><?php echo htmlspecialchars(mb_substr($nextArticle['title'], 0, 20, 'UTF-8')); ?></span>
+                </div>
+                <i class="ph-bold ph-arrow-right"></i>
+            </a>
+            <?php else: ?>
+            <span class="lgnewui-article-nav-btn lgnewui-article-nav-btn--disabled">
+                <i class="ph-bold ph-warning"></i>
+                <span>已是最早一篇</span>
+            </span>
+            <?php endif; ?>
+        </div>
     </div>
+</div>
 
+<script>
+$(document).ready(function() {
+    // 确保视频播放器初始化
+    $('video').each(function() {
+        var video = $(this);
+        if (!video.parent().hasClass('video-container')) {
+            setupVideoPlayer(video);
+        }
+    });
+});
+</script>
 
-    <?php
-    include_once 'footer.php';
-    ?>
-    <script>
-        // 确保视频播放器初始化
-        $(document).ready(function() {
-            $('video').each(function() {
-                var video = $(this);
-                if (!video.parent().hasClass('video-container')) {
-                    setupVideoPlayer(video);
-                }
-            });
-        });
-    </script>
-
-</body>
-
-</html>
+<?php
+include_once 'footer.php';
+?>

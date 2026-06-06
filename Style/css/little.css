@@ -307,3 +307,302 @@ video::-webkit-media-controls-panel {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
+/* ============================================================
+ * LG-NewUi 文章详情页样式
+ * ============================================================ */
+
+/* 文章详情卡片 */
+.lgnewui-article-detail-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+}
+
+/* 文章头部 */
+.lgnewui-article-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
+}
+
+.lgnewui-article-detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.lgnewui-article-detail-date,
+.lgnewui-article-detail-day,
+.lgnewui-article-detail-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #636366;
+}
+
+.lgnewui-article-detail-day {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.lgnewui-article-detail-tags {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.lgnewui-article-detail-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #636366;
+}
+
+/* 文章内容 */
+.lgnewui-article-detail-content {
+    margin-bottom: 2rem;
+}
+
+.lgnewui-article-detail-title {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Noto Serif SC', serif;
+    color: #1d1d1f;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.lgnewui-article-detail-body {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: #3d3d3f;
+    font-family: 'Noto Serif SC', serif;
+    letter-spacing: 0.02em;
+}
+
+.lgnewui-article-detail-body img {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.lgnewui-article-detail-body h1,
+.lgnewui-article-detail-body h2,
+.lgnewui-article-detail-body h3 {
+    position: relative;
+    padding: 0.5rem 1rem;
+    padding-left: 1.5rem;
+    border-radius: 0.35rem;
+    margin: 1.5rem 0;
+    font-weight: 700;
+}
+
+.lgnewui-article-detail-body h1 {
+    background: #e5edff;
+    color: #007bff;
+}
+
+.lgnewui-article-detail-body h2 {
+    background: #f3e7ff;
+    color: #7f00ff;
+}
+
+.lgnewui-article-detail-body h3 {
+    background: #ffe7ec;
+    color: #ff0035;
+}
+
+.lgnewui-article-detail-body h1::before,
+.lgnewui-article-detail-body h2::before,
+.lgnewui-article-detail-body h3::before {
+    content: "";
+    position: absolute;
+    background: #fff;
+    width: 4px;
+    height: 70%;
+    border-radius: 10rem;
+    top: 50%;
+    left: 0.95rem;
+    transform: translate(-50%, -50%);
+}
+
+.lgnewui-article-detail-body blockquote {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border-left: 4px solid #fd7e14;
+    border-radius: 0.35rem;
+    color: #fd7e14;
+    background-color: rgba(253, 126, 20, 0.1);
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 1rem 0;
+}
+
+.lgnewui-article-detail-body a {
+    color: #007aff;
+    text-decoration: none;
+}
+
+.lgnewui-article-detail-body a:hover {
+    text-decoration: underline;
+}
+
+/* 文章作者 */
+.lgnewui-article-detail-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.lgnewui-article-detail-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(0, 0, 0, 0.05);
+}
+
+.lgnewui-article-detail-author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.lgnewui-article-detail-author-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #1d1d1f;
+}
+
+.lgnewui-article-detail-author-label {
+    font-size: 0.8rem;
+    color: #98989d;
+}
+
+/* 文章导航 */
+.lgnewui-article-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.lgnewui-article-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    color: #1d1d1f;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+    max-width: 50%;
+}
+
+.lgnewui-article-nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.lgnewui-article-nav-btn--prev {
+    justify-content: flex-start;
+}
+
+.lgnewui-article-nav-btn--next {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.lgnewui-article-nav-btn--home,
+.lgnewui-article-nav-btn--disabled {
+    justify-content: center;
+    color: #98989d;
+    cursor: pointer;
+}
+
+.lgnewui-article-nav-btn--home:hover {
+    color: #667eea;
+}
+
+.lgnewui-article-nav-btn i {
+    font-size: 1.2rem;
+    color: #667eea;
+}
+
+.lgnewui-article-nav-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.lgnewui-article-nav-label {
+    font-size: 0.75rem;
+    color: #98989d;
+}
+
+.lgnewui-article-nav-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1d1d1f;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .lgnewui-article-detail-card {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .lgnewui-article-detail-title {
+        font-size: 1.5rem;
+    }
+
+    .lgnewui-article-detail-header {
+        flex-direction: column;
+    }
+
+    .lgnewui-article-nav {
+        flex-direction: column;
+    }
+
+    .lgnewui-article-nav-btn {
+        max-width: 100%;
+    }
+
+    .lgnewui-article-nav-btn--prev {
+        justify-content: flex-start;
+    }
+
+    .lgnewui-article-nav-btn--next {
+        justify-content: flex-end;
+    }
+}
+
