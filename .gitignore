@@ -1,0 +1,15 @@
+# 敏感配置文件
+admin/Config_DB.php
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# 缓存
+.cache/
+node_modules/
+
+# 日志
+*.log

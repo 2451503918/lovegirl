@@ -1,0 +1,650 @@
+/* ============================================
+   Bento Grid Layout System
+   基于 LG-NewUi Demo 研究成果
+   ============================================ */
+
+/* ---- 容器 ---- */
+.lgnewui-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.lgnewui-home {
+    padding-bottom: 4rem;
+}
+
+/* ---- Bento Grid ---- */
+.lgnewui-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.lgnewui-col-2 { grid-column: span 2; }
+.lgnewui-col-4 { grid-column: span 4; }
+.lgnewui-row-2 { grid-row: span 2; }
+
+@media (max-width: 768px) {
+    .lgnewui-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .lgnewui-col-md-1 { grid-column: span 1; }
+    .lgnewui-col-2 { grid-column: span 2; }
+    .lgnewui-container { padding: 0 1rem; }
+}
+
+@media (max-width: 480px) {
+    .lgnewui-grid { grid-template-columns: 1fr; }
+    .lgnewui-col-2, .lgnewui-col-4 { grid-column: span 1; }
+}
+
+/* ---- 天数计数器 ---- */
+.lgnewui-day-fusion-card {
+    position: relative;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(255,255,255,0.8);
+    border-radius: 1.5rem;
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+}
+
+.lgnewui-day-ambient-light {
+    position: absolute;
+    top: -30%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(248,113,113,0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.lgnewui-day-mac-dots {
+    position: absolute;
+    top: 1rem;
+    left: 1.2rem;
+    display: flex;
+    gap: 6px;
+}
+.lgnewui-day-dot { width: 10px; height: 10px; border-radius: 50%; }
+.lgnewui-day-dot-red { background: #ff5f57; }
+.lgnewui-day-dot-yellow { background: #febc2e; }
+.lgnewui-day-dot-green { background: #28c840; }
+
+.lgnewui-day-left-section { flex: 1; z-index: 1; }
+
+.lgnewui-day-poetic-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 700;
+    color: #1a1a2e;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+}
+
+.lgnewui-day-start-date-capsule {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(248,113,113,0.08);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+}
+.lgnewui-day-icon-circle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f87171, #fb923c);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 12px;
+}
+.lgnewui-day-date-label-small {
+    font-size: 0.7rem; color: #999; display: block;
+}
+.lgnewui-day-date-value-clean {
+    font-size: 0.85rem; color: #333; font-weight: 600;
+}
+
+.lgnewui-day-right-section { text-align: center; z-index: 1; }
+
+.lgnewui-day-main-days-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+.lgnewui-day-main-days-number {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #f87171, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+.lgnewui-day-days-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.15em;
+}
+
+.lgnewui-day-digital-timer {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+.lgnewui-day-timer-block {
+    background: rgba(0,0,0,0.04);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.6rem;
+    text-align: center;
+    min-width: 50px;
+}
+.lgnewui-day-timer-val {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #1a1a2e;
+    font-family: 'Inter', monospace;
+}
+.lgnewui-day-timer-label {
+    font-size: 0.6rem;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+    .lgnewui-day-fusion-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+    }
+    .lgnewui-day-mac-dots { left: 50%; transform: translateX(-50%); }
+    .lgnewui-day-start-date-capsule { justify-content: center; }
+}
+
+/* ---- Widget 卡片基类 ---- */
+.lgnewui-widget {
+    position: relative;
+    border-radius: 1.2rem;
+    padding: 1.5rem;
+    overflow: hidden;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lgnewui-widget:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+}
+
+.lgnewui-widget__bg-icon {
+    position: absolute;
+    bottom: -10px; right: -10px;
+    font-size: 5rem;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* 统计卡片配色 */
+.lgnewui-widget--stats-vibrant-1 { background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; }
+.lgnewui-widget--stats-vibrant-2 { background: linear-gradient(135deg, #f093fb, #f5576c); color: #fff; }
+.lgnewui-widget--stats-vibrant-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); color: #fff; }
+.lgnewui-widget--stats-vibrant-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); color: #fff; }
+.lgnewui-widget--stats-vibrant-5 { background: linear-gradient(135deg, #fa709a, #fee140); color: #fff; }
+.lgnewui-widget--stats-vibrant-6 { background: linear-gradient(135deg, #a18cd1, #fbc2eb); color: #fff; }
+.lgnewui-widget--stats-vibrant-7 { background: linear-gradient(135deg, #fccb90, #d57eeb); color: #fff; }
+.lgnewui-widget--lovelist { background: linear-gradient(135deg, #0f172a, #334155); color: #fff; }
+
+/* 统计卡片内部 */
+.lgnewui-icon-circle-glass {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+}
+.lgnewui-icon-box-glass {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+}
+
+.lgnewui-stats-header-row {
+    display: flex; align-items: center; gap: 0.6rem;
+}
+.lgnewui-stats-title {
+    font-size: 0.9rem; font-weight: 600; opacity: 0.9;
+}
+.lgnewui-stats-num {
+    font-size: 2.5rem; font-weight: 900; line-height: 1;
+}
+.lgnewui-stats-label {
+    font-size: 0.75rem; opacity: 0.7; margin-top: 0.3rem;
+}
+.lgnewui-font-num { font-family: 'Inter', monospace; }
+
+.lgnewui-flex-col-between-1 {
+    display: flex; flex-direction: column; justify-content: space-between; height: 100%;
+}
+.lgnewui-mt-1rem { margin-top: auto; }
+
+/* ---- 清单进度 ---- */
+.lgnewui-lovelist-bottom { margin-top: auto; }
+.lgnewui-lovelist-stats { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.lgnewui-lovelist-fraction { font-size: 1rem; opacity: 0.7; }
+.lgnewui-num-huge { font-size: 2.5rem; font-weight: 900; line-height: 1; }
+.lgnewui-num-suffix { font-size: 1rem; opacity: 0.7; }
+.lgnewui-progress { height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden; }
+.lgnewui-progress__bar { height: 100%; background: #fff; border-radius: 3px; transition: width 1s ease; }
+
+/* ---- 运行天数 ---- */
+.lgnewui-runtime-values { display: flex; align-items: baseline; gap: 0.5rem; }
+.lgnewui-runtime-num { font-size: 2.5rem; font-weight: 900; line-height: 1; }
+.lgnewui-runtime-meta { display: flex; align-items: center; gap: 0.5rem; }
+.lgnewui-runtime-days { font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; opacity: 0.8; }
+.lgnewui-runtime-divider { width: 1px; height: 14px; background: rgba(255,255,255,0.3); }
+.lgnewui-runtime-text { font-size: 0.8rem; opacity: 0.7; }
+.lgnewui-flex-col-runtime { display: flex; flex-direction: column; justify-content: space-between; height: 100%; }
+
+/* ---- 访问统计 ---- */
+.lgnewui-traffic-card { display: flex; flex-direction: column; height: 100%; }
+.lgnewui-traffic-metrics { display: flex; align-items: center; gap: 1rem; margin-top: auto; }
+.lgnewui-traffic-value { font-size: 1.8rem; font-weight: 900; line-height: 1; }
+.lgnewui-traffic-label { font-size: 0.7rem; opacity: 0.7; }
+.lgnewui-traffic-divider { width: 1px; height: 30px; background: rgba(255,255,255,0.2); }
+
+/* ---- Section Headers ---- */
+.lgnewui-section { margin-bottom: 2rem; }
+.lgnewui-section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1rem; padding: 0 0.25rem;
+}
+.lgnewui-section-title { display: flex; align-items: center; gap: 0.6rem; font-size: 1.1rem; font-weight: 700; }
+.lgnewui-section-icon-box {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+}
+.lgnewui-section-icon-box--rose { background: linear-gradient(135deg, #f87171, #fb923c); }
+.lgnewui-badge-new {
+    font-size: 0.6rem; padding: 2px 6px; border-radius: 4px;
+    background: #f87171; color: #fff; font-weight: 700;
+}
+.lgnewui-link-more {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.04);
+    display: flex; align-items: center; justify-content: center;
+    color: #666; text-decoration: none;
+    transition: all 0.2s;
+}
+.lgnewui-link-more:hover { background: rgba(0,0,0,0.08); color: #333; }
+
+/* ---- 文章预览卡片 ---- */
+.lgnewui-journal-card {
+    display: block;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.lgnewui-journal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+.lgnewui-watermark {
+    position: absolute;
+    top: 0.5rem; right: 1rem;
+    font-size: 3rem;
+    font-weight: 900;
+    color: rgba(0,0,0,0.03);
+    font-family: 'Inter', monospace;
+    pointer-events: none;
+}
+.lgnewui-journal-header { display: flex; align-items: center; margin-bottom: 0.8rem; }
+.lgnewui-journal-user { display: flex; align-items: center; gap: 0.6rem; }
+.lgnewui-journal-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.lgnewui-journal-meta { font-size: 0.7rem; color: #999; }
+.lgnewui-font-sm-bold { font-size: 0.85rem; font-weight: 600; }
+.lgnewui-journal-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; color: #1a1a2e; }
+.lgnewui-journal-body { font-size: 0.85rem; color: #666; line-height: 1.6; }
+.lgnewui-journal-body-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.lgnewui-journal-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; }
+
+/* ---- 留言预览卡片 ---- */
+.lgnewui-home-message-card {
+    display: block;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.2rem;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+}
+.lgnewui-home-message-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.lgnewui-home-message-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem; }
+.lgnewui-home-message-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+.lgnewui-home-message-name-row { display: flex; align-items: center; gap: 0.4rem; }
+.lgnewui-home-message-user-name { font-size: 0.85rem; font-weight: 600; }
+.lgnewui-home-message-badge { font-size: 0.65rem; padding: 1px 6px; border-radius: 4px; }
+.lgnewui-home-message-badge--admin { background: #f0fdf4; color: #16a34a; }
+.lgnewui-home-message-post-time { font-size: 0.7rem; color: #999; }
+.lgnewui-home-message-content { font-size: 0.9rem; color: #333; line-height: 1.6; margin-bottom: 0.6rem; }
+.lgnewui-home-message-divider { height: 1px; background: rgba(0,0,0,0.04); margin: 0.6rem 0; }
+.lgnewui-home-message-footer { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+/* ---- 芯片标签 ---- */
+.lgnewui-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+.lgnewui-chip--glass {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    color: #fff;
+}
+.lgnewui-chip--light {
+    background: rgba(0,0,0,0.04);
+    color: #666;
+}
+.lgnewui-flex-gap-sm { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.lgnewui-flex-between-center { display: flex; justify-content: space-between; align-items: center; }
+
+/* ---- 倾斜背景图标 ---- */
+.lgnewui-widget__bg-icon--tilted {
+    transform: rotate(-15deg);
+}
+
+/* ---- 朦胧光斑增强 ---- */
+.lgnewui-day-fusion-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ---- DAYS分隔线 ---- */
+.lgnewui-day-days-divider {
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.15), transparent);
+    margin: 0 0.3rem;
+}
+
+@media (max-width: 768px) {
+    .lgnewui-journal-card { padding: 1rem; }
+    .lgnewui-journal-title { font-size: 1rem; }
+    .lgnewui-home-message-card { padding: 1rem; }
+}
+
+/* ===== Logo升级 ===== */
+.alogo {
+    font-family: 'Niconne', cursive !important;
+    font-size: 2rem;
+    color: #181818 !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s, text-shadow 0.3s, opacity 0.3s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    will-change: transform, opacity;
+    text-decoration: none;
+}
+.alogo-home-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0.4);
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: #111;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px;
+    opacity: 0; pointer-events: none;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+    transition: opacity 0.25s, transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.alogo.alogo--home-show { color: transparent !important; text-shadow: none !important; }
+.alogo.alogo--home-show .alogo-home-icon { opacity: 1; transform: translate(-50%,-50%) scale(1); pointer-events: auto; }
+
+/* ===== 头像遮罩层 ===== */
+.avatarArea {
+    position: relative;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.aiv_touxiang {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.avatarFrame {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none;
+}
+.lgnewui-head-avatar-mask {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+    border-radius: 50%;
+}
+.avatarArea:hover .lgnewui-head-avatar-mask { opacity: 1; }
+.lgnewui-head-avatar-anim-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 0.7rem;
+}
+.lgnewui-head-avatar-gender-icon { font-size: 14px; }
+.lgnewui-head-avatar-status-text {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 0.65rem; color: #fff;
+}
+.lgnewui-head-avatar-status-online em { color: #4ade80; }
+.lgnewui-head-avatar-status-offline em { color: #94a3b8; }
+.lgnewui-head-avatar-status-away em { color: #fbbf24; }
+.lgnewui-head-avatar-divider {
+    width: 16px; height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 2px 0;
+}
+.lgnewui-head-avatar-location {
+    display: flex; align-items: center; gap: 3px;
+    font-size: 0.6rem; color: rgba(255,255,255,0.8);
+}
+
+/* ===== 距离气泡 ===== */
+.distance-bubble {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.distance-bubble:hover { background: rgba(255,255,255,0.3); }
+.distance-icon-box {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+}
+.distance-text { display: flex; align-items: baseline; gap: 2px; }
+.distance-text-sm { font-size: 0.7rem; opacity: 0.8; }
+.km-value { font-size: 1.1rem; font-weight: 700; font-family: 'Inter', monospace; }
+
+/* ===== 页面标题栏 ===== */
+.lgnewui-page-header {
+    text-align: center;
+    padding: 1.5rem 0;
+}
+.lgnewui-meta-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+.lgnewui-meta-tag {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.75rem;
+    color: #999;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.lgnewui-meta-icon { font-size: 0.6rem; color: #ccc; }
+.lgnewui-meta-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
+}
+.lgnewui-hero-title {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 700;
+    color: #1a1a2e;
+    font-family: 'Noto Serif SC', serif;
+}
+
+/* ===== 侧边栏 ===== */
+.lg-sidebar {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 2rem;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.lg-sidebar-item {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: all 0.2s;
+    list-style: none;
+}
+.lg-sidebar-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.lg-sidebar-icon {
+    width: 18px; height: 18px;
+    fill: #666;
+}
+
+/* ===== 加载动画 ===== */
+#loader-wrapper {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10000;
+    overflow: hidden;
+    transition: opacity 0.5s ease;
+}
+#loader-wrapper.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+.loader-section {
+    position: fixed;
+    inset: 0;
+    background: #ffffffd6;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+#loader {
+    display: block;
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 80px; height: 80px;
+    margin: -40px 0 0 -40px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #16a085;
+    animation: spin 1.7s linear infinite;
+}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+    animation: spin-reverse 0.6s linear infinite;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px; left: 15px; right: 15px; bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin-reverse { to { transform: rotate(-360deg); } }
+
+@media (max-width: 768px) {
+    .lg-sidebar { right: 0.8rem; bottom: 5rem; }
+    .lg-sidebar-item { width: 36px; height: 36px; }
+    .avatarArea { width: 80px; height: 80px; }
+    .lgnewui-page-header { padding: 1rem 0; }
+}

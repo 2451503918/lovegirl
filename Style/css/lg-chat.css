@@ -1,0 +1,491 @@
+/* ==========================================================================
+   lg-chat.css — WeChat-style chat replay for the about page
+   ========================================================================== */
+
+/* ---- wrapper ---- */
+.lgnewui-chat-wrapper {
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    padding: 0 12px;
+}
+
+/* ---- phone device frame ---- */
+.lgnewui-chat-device {
+    background: #f5f5f5;
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.12), 0 0 0 1px rgba(0,0,0,.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    max-height: 80vh;
+    min-height: 480px;
+}
+
+/* ---- header ---- */
+.lgnewui-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.lgnewui-chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lgnewui-chat-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e0e0e0;
+}
+
+.lgnewui-chat-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.lgnewui-chat-user-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.3;
+}
+
+.lgnewui-chat-user-status {
+    font-size: 12px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.lgnewui-chat-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4caf50;
+    display: inline-block;
+}
+
+.lgnewui-chat-header-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background .2s;
+}
+.lgnewui-chat-header-icon:hover {
+    background: rgba(0,0,0,.05);
+}
+.lgnewui-chat-header-icon i {
+    font-size: 20px;
+    color: #555;
+}
+
+/* ---- dropdown menu ---- */
+.lgnewui-chat-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 62px;
+    right: 12px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    padding: 6px 0;
+    z-index: 20;
+    min-width: 180px;
+}
+.lgnewui-chat-dropdown-menu.show {
+    display: block;
+}
+
+.lgnewui-chat-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: background .15s;
+}
+.lgnewui-chat-menu-item:hover {
+    background: #f5f5f5;
+}
+.lgnewui-chat-menu-item i {
+    font-size: 16px;
+    color: #888;
+}
+
+.lgnewui-chat-menu-divider {
+    height: 1px;
+    background: #eee;
+    margin: 4px 0;
+}
+
+/* ---- chat container (scroll area) ---- */
+.lgnewui-chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 14px;
+    background: #ededed;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* loading inside chat */
+.lgnewui-chat-container .loading-container {
+    min-height: 300px;
+}
+
+/* ---- message bubbles ---- */
+.lgnewui-chat-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: chatFadeIn .35s ease forwards;
+}
+
+.lgnewui-chat-row.self {
+    flex-direction: row-reverse;
+}
+
+@keyframes chatFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.lgnewui-chat-msg-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #ddd;
+}
+
+.lgnewui-chat-bubble-wrap {
+    max-width: 72%;
+    display: flex;
+    flex-direction: column;
+}
+
+.lgnewui-chat-msg-name {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 3px;
+    padding: 0 4px;
+}
+.self .lgnewui-chat-msg-name {
+    text-align: right;
+}
+
+.lgnewui-chat-bubble {
+    background: #fff;
+    padding: 10px 14px;
+    border-radius: 4px 16px 16px 16px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #333;
+    word-break: break-word;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    position: relative;
+}
+
+.self .lgnewui-chat-bubble {
+    background: #95ec69;
+    border-radius: 16px 4px 16px 16px;
+}
+
+/* system message */
+.lgnewui-chat-system-row {
+    text-align: center;
+    margin: 16px 0;
+    opacity: 0;
+    animation: chatFadeIn .35s ease forwards;
+}
+.lgnewui-chat-system-text {
+    display: inline-block;
+    font-size: 12px;
+    color: #b0b0b0;
+    background: rgba(0,0,0,.04);
+    padding: 4px 12px;
+    border-radius: 10px;
+}
+
+/* button row */
+.lgnewui-chat-btn-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 14px 0;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: chatFadeIn .35s ease forwards;
+}
+.lgnewui-chat-btn-row button {
+    padding: 8px 24px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all .2s;
+    background: #fff;
+    color: #07c160;
+    border: 1px solid #07c160;
+}
+.lgnewui-chat-btn-row button:hover {
+    background: #07c160;
+    color: #fff;
+}
+.lgnewui-chat-btn-row button.selected {
+    background: #07c160;
+    color: #fff;
+    pointer-events: none;
+}
+
+/* ---- controls bar ---- */
+.lgnewui-chat-controls-wrapper {
+    padding: 10px 14px 14px;
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(0,0,0,.06);
+}
+
+.lgnewui-chat-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.lgnewui-chat-ctrl-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .2s;
+    background: #f0f0f0;
+    border: none;
+    color: #555;
+    font-size: 16px;
+}
+.lgnewui-chat-ctrl-btn:hover {
+    background: #e0e0e0;
+}
+
+.lgnewui-chat-play-btn {
+    width: 48px;
+    height: 48px;
+    background: #07c160;
+    color: #fff;
+    font-size: 20px;
+}
+.lgnewui-chat-play-btn:hover {
+    background: #06ad56;
+}
+
+.lgnewui-chat-speed-btn-text {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ---- export overlay ---- */
+.lgnewui-chat-overlay-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lgnewui-chat-export-panel {
+    background: #fff;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 420px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 24px;
+}
+
+.lgnewui-chat-export-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #666;
+}
+
+.lgnewui-chat-panel-content {
+    text-align: center;
+}
+
+.lgnewui-chat-gen-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.lgnewui-chat-gen-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.lgnewui-chat-gen-subtitle {
+    font-size: 13px;
+    color: #999;
+    margin-top: 6px;
+}
+
+@keyframes exportSpin {
+    to { transform: rotate(360deg); }
+}
+.lgnewui-chat-icon-spin {
+    animation: exportSpin 0.8s linear infinite;
+}
+
+/* skeleton */
+.lgnewui-chat-skeleton-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px 0;
+}
+
+.lgnewui-chat-sk-row {
+    display: flex;
+}
+.lgnewui-chat-sk-row.sk-self {
+    justify-content: flex-end;
+}
+
+.lgnewui-chat-sk-bubble {
+    height: 32px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+.lgnewui-chat-sk-media {
+    height: 80px;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* preview state */
+.lgnewui-chat-hidden-state {
+    display: none !important;
+}
+
+.lgnewui-chat-preview-header h2 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.lgnewui-chat-preview-header p {
+    font-size: 13px;
+    color: #999;
+}
+
+.lgnewui-chat-preview-thumbnail-wrapper {
+    margin: 16px 0;
+    position: relative;
+}
+
+.lgnewui-chat-scroll-window {
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.lgnewui-chat-scrolling-img {
+    width: 100%;
+    display: block;
+}
+
+.lgnewui-chat-preview-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+    justify-content: center;
+}
+
+.lgnewui-chat-actions-group {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.lgnewui-chat-export-btn {
+    padding: 10px 28px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .2s;
+}
+.lgnewui-chat-export-btn-primary {
+    background: #07c160;
+    color: #fff;
+}
+.lgnewui-chat-export-btn-primary:hover {
+    background: #06ad56;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 520px) {
+    .lgnewui-chat-wrapper {
+        padding: 0 4px;
+    }
+    .lgnewui-chat-device {
+        border-radius: 16px;
+    }
+    .lgnewui-chat-bubble-wrap {
+        max-width: 80%;
+    }
+}
