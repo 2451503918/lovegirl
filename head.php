@@ -1,17 +1,17 @@
-<!--
+<?php
+/*
  * @Version：Like Girl 5.2.1-Stable
  * @Author: Ki.
  * @Date: 2025-09-03 00:00:00
  * @LastEditTime: 2025-09-03
  * @Description: 愿得一心人 白头不相离
  * @Document：https://blog.kikiw.cn/index.php/archives/52/
- * @Copyright (c) 2023 - 2025 by Ki All Rights Reserved. 
+ * @Copyright (c) 2023 - 2025 by Ki All Rights Reserved.
  * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
  * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
  * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
  * @Message：开发不易 版权信息请保留 (删除/修改作者版权的Dog请勿使用 感谢配合)
--->
-<?php
+ */
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
@@ -22,16 +22,20 @@ include_once 'admin/Function.php';
 
 $version = '5.2.1';
 
-$sql = "select * from text";
-$result = mysqli_query($connect, $sql);
-if ($result) {
-    $text = mysqli_fetch_array($result);
-}
+$text = [];
+$diy = [];
+if ($connect) {
+    $sql = "select * from text";
+    $result = mysqli_query($connect, $sql);
+    if ($result) {
+        $text = mysqli_fetch_array($result) ?: [];
+    }
 
-$sql = "select * from diySet";
-$result = mysqli_query($connect, $sql);
-if ($result && mysqli_num_rows($result)) {
-    $diy = mysqli_fetch_array($result);
+    $sql = "select * from diySet";
+    $result = mysqli_query($connect, $sql);
+    if ($result && mysqli_num_rows($result)) {
+        $diy = mysqli_fetch_array($result) ?: [];
+    }
 }
 
 $copy = $text['Copyright'] ?? '';
@@ -250,6 +254,7 @@ function loadPhotos() {
 }
 
 </script>
+<html lang="zh-CN">
 <head>
 <link rel="shortcut icon" href="/favicon.ico" />
 <title><?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?> - <?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></title>
