@@ -5,7 +5,7 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
+$allowedOrigins = ['yourdomain.com', 'www.yourdomain.com']; // Replace with actual domain(s)
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
@@ -15,6 +15,18 @@ header('Access-Control-Allow-Credentials: true');
 // 获取请求方式
 $method = $_SERVER['REQUEST_METHOD'];
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
+
+// Validate action parameter against whitelist
+$validActions = ['get_stats', 'get_location', 'heartbeat'];
+if ($action !== '' && !in_array($action, $validActions)) {
+    http_response_code(400);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Invalid action parameter',
+        'timestamp' => time()
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 $response = [
     'code' => 400,
@@ -35,36 +47,57 @@ switch ($action) {
         
         if ($connect) {
             // 文章数
-            $result = mysqli_query($connect, "SELECT COUNT(*) as c FROM little");
-            if ($result) {
-                $row = mysqli_fetch_assoc($result);
-                $stats['articles'] = intval($row['c']);
+            $stmt = mysqli_prepare($connect, "SELECT COUNT(*) as c FROM little");
+            if ($stmt) {
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                if ($result) {
+                    $row = mysqli_fetch_assoc($result);
+                    $stats['articles'] = intval($row['c']);
+                }
+                mysqli_stmt_close($stmt);
             }
             
             // 照片数
-            $result = mysqli_query($connect, "SELECT COUNT(*) as c FROM photo");
-            if ($result) {
-                $row = mysqli_fetch_assoc($result);
-                $stats['photos'] = intval($row['c']);
+            $stmt = mysqli_prepare($connect, "SELECT COUNT(*) as c FROM photo");
+            if ($stmt) {
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                if ($result) {
+                    $row = mysqli_fetch_assoc($result);
+                    $stats['photos'] = intval($row['c']);
+                }
+                mysqli_stmt_close($stmt);
             }
             
             // 留言数
-            $result = mysqli_query($connect, "SELECT COUNT(*) as c FROM leaving");
-            if ($result) {
-                $row = mysqli_fetch_assoc($result);
-                $stats['messages'] = intval($row['c']);
+            $stmt = mysqli_prepare($connect, "SELECT COUNT(*) as c FROM leaving");
+            if ($stmt) {
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                if ($result) {
+                    $row = mysqli_fetch_assoc($result);
+                    $stats['messages'] = intval($row['c']);
+                }
+                mysqli_stmt_close($stmt);
             }
             
             // 恋爱天数
-            $result = mysqli_query($connect, "SELECT * FROM text LIMIT 1");
-            if ($result && mysqli_num_rows($result) > 0) {
-                $text = mysqli_fetch_assoc($result);
-                $startTime = strtotime(str_replace('T', ' ', $text['startTime']));
-                $stats['days'] = floor((time() - $startTime) / 86400);
+            $stmt = mysqli_prepare($connect, "SELECT * FROM text LIMIT 1");
+            if ($stmt) {
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $text = mysqli_fetch_assoc($result);
+                    $startTime = strtotime(str_replace('T', ' ', $text['startTime']));
+                    $stats['days'] = floor((time() - $startTime) / 86400);
+                }
+                mysqli_stmt_close($stmt);
             }
         }
         
         $response = [
+            'success' => true,
             'code' => 200,
             'data' => $stats,
             'timestamp' => time()
@@ -85,29 +118,35 @@ switch ($action) {
         ];
         
         if ($connect) {
-            $result = mysqli_query($connect, "SELECT * FROM text LIMIT 1");
-            if ($result && mysqli_num_rows($result) > 0) {
-                $text = mysqli_fetch_assoc($result);
-                $location['boyCity'] = $text['boyCity'] ?? '北京';
-                $location['girlCity'] = $text['girlCity'] ?? '上海';
-                $location['boyLat'] = floatval($text['boyLat'] ?? 39.9042);
-                $location['boyLng'] = floatval($text['boyLng'] ?? 116.4074);
-                $location['girlLat'] = floatval($text['girlLat'] ?? 31.2304);
-                $location['girlLng'] = floatval($text['girlLng'] ?? 121.4737);
-                
-                // 计算距离
-                $earthRadius = 6371;
-                $latDelta = deg2rad($location['girlLat'] - $location['boyLat']);
-                $lonDelta = deg2rad($location['girlLng'] - $location['boyLng']);
-                $a = sin($latDelta / 2) * sin($latDelta / 2) +
-                     cos(deg2rad($location['boyLat'])) * cos(deg2rad($location['girlLat'])) *
-                     sin($lonDelta / 2) * sin($lonDelta / 2);
-                $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-                $location['distance'] = round($earthRadius * $c, 1);
+            $stmt = mysqli_prepare($connect, "SELECT * FROM text LIMIT 1");
+            if ($stmt) {
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $text = mysqli_fetch_assoc($result);
+                    $location['boyCity'] = $text['boyCity'] ?? '北京';
+                    $location['girlCity'] = $text['girlCity'] ?? '上海';
+                    $location['boyLat'] = floatval($text['boyLat'] ?? 39.9042);
+                    $location['boyLng'] = floatval($text['boyLng'] ?? 116.4074);
+                    $location['girlLat'] = floatval($text['girlLat'] ?? 31.2304);
+                    $location['girlLng'] = floatval($text['girlLng'] ?? 121.4737);
+                    
+                    // 计算距离
+                    $earthRadius = 6371;
+                    $latDelta = deg2rad($location['girlLat'] - $location['boyLat']);
+                    $lonDelta = deg2rad($location['girlLng'] - $location['boyLng']);
+                    $a = sin($latDelta / 2) * sin($latDelta / 2) +
+                         cos(deg2rad($location['boyLat'])) * cos(deg2rad($location['girlLat'])) *
+                         sin($lonDelta / 2) * sin($lonDelta / 2);
+                    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+                    $location['distance'] = round($earthRadius * $c, 1);
+                }
+                mysqli_stmt_close($stmt);
             }
         }
         
         $response = [
+            'success' => true,
             'code' => 200,
             'data' => $location,
             'timestamp' => time()
@@ -117,6 +156,7 @@ switch ($action) {
     case 'heartbeat':
         // 心跳检测
         $response = [
+            'success' => true,
             'code' => 200,
             'message' => 'pong',
             'timestamp' => time()
@@ -125,6 +165,7 @@ switch ($action) {
         
     default:
         $response = [
+            'success' => true,
             'code' => 200,
             'message' => 'LG-NewUi Service is running',
             'timestamp' => time()

@@ -29,32 +29,39 @@ $totalVisits = 0;
 $totalVisitors = 0;
 
 if ($connect) {
-    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM little");
-    if ($r) { $row = mysqli_fetch_array($r); $statsArticles = $row['c']; }
-    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM photo");
-    if ($r) { $row = mysqli_fetch_array($r); $statsPhotos = $row['c']; }
-    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM leaving");
-    if ($r) { $row = mysqli_fetch_array($r); $statsMessages = $row['c']; }
-    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM timeline");
-    if ($r) { $row = mysqli_fetch_array($r); $statsTimeline = $row['c']; }
-    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist");
-    if ($r) { $row = mysqli_fetch_array($r); $listTotal = $row['c']; }
-    $r = mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist WHERE is_done = 1");
-    if ($r) { $row = mysqli_fetch_array($r); $listCompleted = $row['c']; }
+    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM little");
+    if ($r) { $row = mysqli_fetch_array($r); $statsArticles = intval($row['c']); }
+    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM photo");
+    if ($r) { $row = mysqli_fetch_array($r); $statsPhotos = intval($row['c']); }
+    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM leaving");
+    if ($r) { $row = mysqli_fetch_array($r); $statsMessages = intval($row['c']); }
+    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM timeline");
+    if ($r) { $row = mysqli_fetch_array($r); $statsTimeline = intval($row['c']); }
+    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist");
+    if ($r) { $row = mysqli_fetch_array($r); $listTotal = intval($row['c']); }
+    // Try is_done column first (exists after migration), fall back to icon
+    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist WHERE is_done = 1");
+    if ($r) {
+        $row = mysqli_fetch_array($r);
+        $listCompleted = intval($row['c']);
+    } else {
+        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist WHERE icon = 1");
+        if ($r) { $row = mysqli_fetch_array($r); $listCompleted = intval($row['c']); }
+    }
 
     // 获取访问统计数据
     $today = date('Y-m-d');
-    $r = mysqli_query($connect, "SELECT * FROM visitor_stats WHERE visit_date = '$today'");
+    $r = @mysqli_query($connect, "SELECT * FROM visitor_stats WHERE visit_date = '$today'");
     if ($r && mysqli_num_rows($r) > 0) {
         $row = mysqli_fetch_assoc($r);
-        $todayVisits = intval($row['visit_count']);
-        $todayVisitors = intval($row['visitor_count']);
+        $todayVisits = intval($row['visit_count'] ?? $row['count'] ?? 0);
+        $todayVisitors = intval($row['visitor_count'] ?? 0);
     }
-    $r = mysqli_query($connect, "SELECT * FROM visitor_total WHERE id = 1");
+    $r = @mysqli_query($connect, "SELECT * FROM visitor_total WHERE id = 1");
     if ($r && mysqli_num_rows($r) > 0) {
         $row = mysqli_fetch_assoc($r);
-        $totalVisits = intval($row['total_visits']);
-        $totalVisitors = intval($row['total_visitors']);
+        $totalVisits = intval($row['total_visits'] ?? $row['count'] ?? 0);
+        $totalVisitors = intval($row['total_visitors'] ?? 0);
     }
 }
 
@@ -607,12 +614,12 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <?php
                 $recentEvents = null;
                 if ($connect) {
-                    $recentEvents = mysqli_query($connect, "SELECT * FROM lovelist ORDER BY id DESC LIMIT 4");
+                    $recentEvents = @mysqli_query($connect, "SELECT * FROM lovelist ORDER BY id DESC LIMIT 4");
                 }
                 if ($recentEvents && mysqli_num_rows($recentEvents) > 0):
                     $eidx = 0; while ($evt = mysqli_fetch_array($recentEvents)):
                         $hasImg = !empty($evt['imgurl']) && $evt['imgurl'] !== '0';
-                        $isDone = intval($evt['is_done']) === 1;
+                        $isDone = (isset($evt['is_done']) && intval($evt['is_done']) === 1) || (!isset($evt['is_done']) && intval($evt['icon'] ?? 0) === 1);
                         $evtNote = $evt['note'] ?? $evt['content'] ?? '';
                         $evtLocation = $evt['location'] ?? '';
                         $evtDate = $evt['date'] ?? '';
@@ -707,7 +714,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <?php
                 $lovedays = [];
                 if ($connect) {
-                    $ldResult = mysqli_query($connect, "SELECT * FROM timeline ORDER BY date ASC");
+                    $ldResult = @mysqli_query($connect, "SELECT * FROM timeline ORDER BY date ASC");
                     if ($ldResult) {
                         while ($ld = mysqli_fetch_array($ldResult)) {
                             $ldDate = $ld['date'];
@@ -794,7 +801,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <?php
                 $recentArticles = null;
                 if ($connect) {
-                    $recentArticles = mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 6");
+                    $recentArticles = @mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 6");
                 }
                 if ($recentArticles && mysqli_num_rows($recentArticles) > 0):
                     $idx = 0; while ($art = mysqli_fetch_array($recentArticles)):
@@ -870,7 +877,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 $recentAlbums = null;
                 if ($connect) {
                     // 尝试从 photo 表获取相册数据
-                    $recentAlbums = mysqli_query($connect, "SELECT * FROM photo ORDER BY id DESC LIMIT 6");
+                    $recentAlbums = @mysqli_query($connect, "SELECT * FROM photo ORDER BY id DESC LIMIT 6");
                 }
                 if ($recentAlbums && mysqli_num_rows($recentAlbums) > 0):
                     $idx = 0; while ($album = mysqli_fetch_array($recentAlbums)):
@@ -933,7 +940,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <?php
                     $recentMsgs = null;
                     if ($connect) {
-                        $recentMsgs = mysqli_query($connect, "SELECT * FROM leaving ORDER BY id DESC LIMIT 8");
+                        $recentMsgs = @mysqli_query($connect, "SELECT * FROM leaving ORDER BY id DESC LIMIT 8");
                     }
                     if ($recentMsgs && mysqli_num_rows($recentMsgs) > 0):
                         while ($msg = mysqli_fetch_array($recentMsgs)):
