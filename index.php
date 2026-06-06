@@ -1591,6 +1591,3 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     </script>
 
     <?php include_once 'footer.php'; ?>
-
-</body>
-</html>

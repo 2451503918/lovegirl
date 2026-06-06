@@ -5,8 +5,8 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
-$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+$allowedOrigins = [$_SERVER['HTTP_HOST'] ?? 'localhost'];
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
 }
@@ -39,10 +39,15 @@ $connect = null;
 
 if (file_exists(__DIR__ . '/../admin/Config_DB.php')) {
     include_once __DIR__ . '/../admin/Config_DB.php';
-    $connect = mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
-    if ($connect) {
-        $connect->set_charset("utf8mb4");
-        $db_connected = true;
+    try {
+        $connect = @mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
+        if ($connect) {
+            $connect->set_charset("utf8mb4");
+            $db_connected = true;
+        }
+    } catch (Throwable $e) {
+        $connect = null;
+        $db_connected = false;
     }
 }
 

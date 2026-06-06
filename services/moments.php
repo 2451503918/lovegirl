@@ -18,10 +18,15 @@ $connect = null;
 
 if (file_exists('../admin/Config_DB.php')) {
     include_once '../admin/Config_DB.php';
-    $connect = mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
-    if ($connect) {
-        $connect->set_charset("utf8mb4");
-        $db_connected = true;
+    try {
+        $connect = @mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
+        if ($connect) {
+            $connect->set_charset("utf8mb4");
+            $db_connected = true;
+        }
+    } catch (Throwable $e) {
+        $connect = null;
+        $db_connected = false;
     }
 }
 
@@ -46,13 +51,7 @@ if ($db_connected) {
         }
         mysqli_stmt_close($stmt);
     } else {
-        http_response_code(500);
-        echo json_encode([
-            'success' => false,
-            'error' => 'Database query preparation failed',
-            'timestamp' => time()
-        ], JSON_UNESCAPED_UNICODE);
-        exit;
+        // Query preparation failed, return empty data gracefully
     }
 }
 
