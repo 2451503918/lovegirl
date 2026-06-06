@@ -11,7 +11,7 @@ server {
     # listen 443 ssl http2;
     # listen [::]:443 ssl http2;
 
-    server_name your-domain.com;
+    server_name lovedemo.54oimx.top love.54oimx.top;
     root /var/www/likegirl;  # 改为你的项目实际路径
     index index.php index.html;
 
