@@ -477,3 +477,167 @@ body.bg-pdot-vignette {
     .lgnewui-visitor-stats-grid { gap: 8px; }
     .lgnewui-visitor-stat { padding: 10px; }
 }
+
+/* ===== 文章卡片 (点滴/Memory Notes) ===== */
+.lgnewui-masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+}
+.lgnewui-masonry-item {
+    break-inside: avoid;
+}
+.lgnewui-article-card {
+    background: #fff;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+.lgnewui-article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+}
+.lgnewui-article-card__image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+.lgnewui-article-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.lgnewui-article-card:hover .lgnewui-article-card__image img {
+    transform: scale(1.05);
+}
+.lgnewui-article-card__body {
+    padding: 1.2rem;
+}
+.lgnewui-article-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+.lgnewui-article-card__date {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+}
+.lgnewui-article-card__date small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #94a3b8;
+}
+.lgnewui-article-card__day {
+    font-size: 0.7rem;
+    color: #fff;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.3rem;
+    font-weight: 600;
+    font-family: 'Inter', monospace;
+}
+.lgnewui-article-card__time {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin-left: auto;
+}
+.lgnewui-article-card__tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+}
+.lgnewui-article-card__tag {
+    font-size: 0.7rem;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+.lgnewui-article-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    font-family: 'Noto Serif SC', serif;
+    line-height: 1.4;
+}
+.lgnewui-article-card__text {
+    font-size: 0.85rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+.lgnewui-article-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.8rem;
+    border-top: 1px solid #f1f5f9;
+}
+.lgnewui-article-card__author {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #333;
+    font-weight: 600;
+}
+.lgnewui-article-card__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.lgnewui-article-card__location {
+    font-size: 0.7rem;
+    color: #94a3b8;
+    font-weight: 400;
+}
+.lgnewui-article-card__stats {
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+.lgnewui-article-card__stats span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+/* 空状态 */
+.lgnewui-empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #94a3b8;
+}
+.lgnewui-empty-state__icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+.lgnewui-empty-state h3 {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+}
+.lgnewui-empty-state p {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .lgnewui-masonry-grid {
+        grid-template-columns: 1fr;
+    }
+}

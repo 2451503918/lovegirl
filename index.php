@@ -248,12 +248,11 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     </h2>
                 </div>
                 <div class="lgnewui-section-header__right">
-                    <a href="list.php" class="lgnewui-link-more"><i class="ph-bold ph-arrow-right"></i></a>
-                </div>
+                    <a href="lovelist.php" class="lgnewui-link-more"><i class="ph-bold ph-arrow-right"></i></a>
             </div>
             <div class="lgnewui-grid">
                 <div class="lgnewui-col-4" data-aos="fade-up">
-                    <a href="list.php" class="lgnewui-widget" style="background:linear-gradient(135deg,#0f172a,#334155);color:#fff;text-decoration:none;">
+                    <a href="lovelist.php" class="lgnewui-widget" style="background:linear-gradient(135deg,#0f172a,#334155);color:#fff;text-decoration:none;">
                         <div class="lgnewui-widget__bg-icon"><i class="ph-fill ph-shooting-star"></i></div>
                         <div class="lgnewui-flex-between-center lgnewui-mb-4">
                             <div class="lgnewui-flex-center-gap" style="display:flex;align-items:center;gap:0.6rem;">
@@ -283,7 +282,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
             </div>
             <div class="lgnewui-grid">
                 <div class="lgnewui-col-2" data-aos="fade-up" data-aos-delay="0">
-                    <a href="little.php" class="lgnewui-widget lgnewui-widget--stats-vibrant-1" style="text-decoration:none;color:#fff;">
+                    <a href="articles.php" class="lgnewui-widget lgnewui-widget--stats-vibrant-1" style="text-decoration:none;color:#fff;">
                         <div class="lgnewui-widget__bg-icon"><i class="ph-fill ph-notebook"></i></div>
                         <div class="lgnewui-flex-col-between-1">
                             <div class="lgnewui-stats-header-row"><div class="lgnewui-icon-circle-glass"><i class="ph-bold ph-notebook"></i></div><div class="lgnewui-stats-title">点滴</div></div>
@@ -292,7 +291,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     </a>
                 </div>
                 <div class="lgnewui-col-2" data-aos="fade-up" data-aos-delay="50">
-                    <a href="leaving.php" class="lgnewui-widget lgnewui-widget--stats-vibrant-3" style="text-decoration:none;color:#fff;">
+                    <a href="messages.php" class="lgnewui-widget lgnewui-widget--stats-vibrant-3" style="text-decoration:none;color:#fff;">
                         <div class="lgnewui-widget__bg-icon"><i class="ph-fill ph-chat-teardrop-dots"></i></div>
                         <div class="lgnewui-flex-col-between-1">
                             <div class="lgnewui-stats-header-row"><div class="lgnewui-icon-circle-glass"><i class="ph-bold ph-chat-teardrop-dots"></i></div><div class="lgnewui-stats-title">留言</div></div>
@@ -338,7 +337,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     </h2>
                 </div>
                 <div class="lgnewui-section-header__right">
-                    <a href="little.php" class="lgnewui-link-more"><i class="ph-bold ph-arrow-right"></i></a>
+                    <a href="articles.php" class="lgnewui-link-more"><i class="ph-bold ph-arrow-right"></i></a>
                 </div>
             </div>
             <div class="lgnewui-grid">
@@ -346,7 +345,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     $dayNum = floor((time() - strtotime($art['date'])) / 86400);
                 ?>
                 <div class="lgnewui-col-2" data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
-                    <a href="little.php" class="lgnewui-journal-card">
+                    <a href="articles.php" class="lgnewui-journal-card">
                         <div class="lgnewui-watermark">DAY <?php echo $dayNum ?></div>
                         <div class="lgnewui-journal-header">
                             <div class="lgnewui-journal-user">
@@ -388,13 +387,12 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     </h2>
                 </div>
                 <div class="lgnewui-section-header__right">
-                    <a href="leaving.php" class="lgnewui-link-more"><i class="ph-bold ph-arrow-right"></i></a>
-                </div>
+                    <a href="messages.php" class="lgnewui-link-more"><i class="ph-bold ph-arrow-right"></i></a>
             </div>
             <div class="lgnewui-grid">
                 <?php $idx = 0; while ($msg = mysqli_fetch_array($recentMsgs)): ?>
                 <div class="lgnewui-col-2" data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
-                    <a href="leaving.php" class="lgnewui-home-message-card">
+                    <a href="messages.php" class="lgnewui-home-message-card">
                         <div class="lgnewui-home-message-header">
                             <img class="lgnewui-home-message-avatar" src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $msg['qqimg'] ?>&s=640">
                             <div>
@@ -411,6 +409,83 @@ $runtimeDays = floor((time() - $startTs) / 86400);
             </div>
         </section>
         <?php endif; ?>
+
+        <!-- ===== 恋爱纪念日 ===== -->
+        <section class="lgnewui-section" id="loveday-list">
+            <div class="lgnewui-section-header lgnewui-section-header--purple" data-aos="fade-up">
+                <div class="lgnewui-section-header__left">
+                    <h2 class="lgnewui-section-title">
+                        <div class="lgnewui-section-icon-box lgnewui-section-icon-box--purple"><i class="ph-fill ph-calendar-heart"></i></div>
+                        <span>纪念日</span>
+                    </h2>
+                </div>
+            </div>
+            <div class="lgnewui-grid">
+                <div class="lgnewui-col-2" data-aos="fade-up">
+                    <div class="lgnewui-widget lgnewui-widget--loveday-vibrant" style="background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;padding:1.5rem;">
+                        <div class="lgnewui-widget__bg-icon"><i class="ph-fill ph-heart"></i></div>
+                        <div style="font-size:0.85rem;opacity:0.8;">在一起</div>
+                        <div style="font-size:2rem;font-weight:900;font-family:'Inter',monospace;"><?php echo $runtimeDays; ?> 天</div>
+                        <div style="font-size:0.8rem;opacity:0.7;margin-top:0.3rem;"><?php echo date('Y年m月d日', $startTs); ?></div>
+                    </div>
+                </div>
+                <div class="lgnewui-col-2" data-aos="fade-up">
+                    <div class="lgnewui-widget lgnewui-widget--loveday-vibrant" style="background:linear-gradient(135deg,#818cf8,#6366f1);color:#fff;padding:1.5rem;">
+                        <div class="lgnewui-widget__bg-icon"><i class="ph-fill ph-gift"></i></div>
+                        <div style="font-size:0.85rem;opacity:0.8;">下一个纪念日</div>
+                        <div style="font-size:1.2rem;font-weight:700;">恋爱纪念日</div>
+                        <div style="font-size:0.8rem;opacity:0.7;margin-top:0.3rem;">每年 <?php echo date('m月d日', $startTs); ?></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 最新留言 ===== -->
+        <section class="lgnewui-section" id="messages">
+            <div class="lgnewui-section-header lgnewui-section-header--blue" data-aos="fade-up">
+                <div class="lgnewui-section-header__left">
+                    <h2 class="lgnewui-section-title">
+                        <div class="lgnewui-section-icon-box lgnewui-section-icon-box--blue"><i class="ph-fill ph-chat-teardrop-dots"></i></div>
+                        <span>留言</span>
+                    </h2>
+                </div>
+                <div class="lgnewui-section-header__right">
+                    <a href="messages.php" class="lgnewui-link-more"><i class="ph-bold ph-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="lgnewui-grid">
+                <div class="lgnewui-col-4" data-aos="fade-up">
+                    <a href="messages.php" class="lgnewui-widget" style="text-align:center;padding:2rem;text-decoration:none;color:inherit;">
+                        <div style="font-size:2rem;margin-bottom:0.5rem;">💌</div>
+                        <p style="color:#667eea;font-weight:600;">查看全部留言</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 结尾区 ===== -->
+        <section class="lgnewui-epilogue" data-aos="fade-up">
+            <div class="lgnewui-epilogue__holes">
+                <div class="lgnewui-epilogue__hole"></div>
+                <div class="lgnewui-epilogue__hole"></div>
+                <div class="lgnewui-epilogue__hole"></div>
+            </div>
+            <div class="lgnewui-epilogue__content">
+                <p class="lgnewui-epilogue__text">朝暮与年岁并往，与你行至天光。</p>
+                <p class="lgnewui-epilogue__subtext">我们的故事，未完待续...</p>
+            </div>
+            <div class="lgnewui-epilogue__actions">
+                <a href="messages.php" class="lgnewui-epilogue__btn">
+                    <i class="ph-fill ph-chat-circle-dots"></i> 留下祝福
+                </a>
+                <a href="loveImg.php" class="lgnewui-epilogue__btn">
+                    <i class="ph-fill ph-images"></i> 随机光影
+                </a>
+                <a href="articles.php" class="lgnewui-epilogue__btn">
+                    <i class="ph-fill ph-notebook"></i> 随机碎片
+                </a>
+            </div>
+        </section>
 
     </main>
 

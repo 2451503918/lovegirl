@@ -249,6 +249,7 @@ function loadPhotos() {
 </script>
 <head>
 <link rel="shortcut icon" href="/favicon.ico" />
+<title><?php echo htmlspecialchars($text['title']) ?> - <?php echo htmlspecialchars($text['writing']) ?></title>
 <meta name="keywords"
     content="<?php echo $text['title'] ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
 <meta name="description" content="<?php echo htmlspecialchars($text['writing']) ?> - Like Girl 5.2.1-Stable">
@@ -269,13 +270,14 @@ function loadPhotos() {
 <meta name="twitter:title" content="<?php echo htmlspecialchars($text['title']) ?>">
 <meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing']) ?>">
 <meta name="twitter:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640">
+<meta name="x-lg-license-instance" content="858ee1d099b9">
 
-<link href="https://fonts.googleapis.com/css?family=Concert+One|Pacifico" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@400;600&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/Style/css/lgnewui-home-style.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lgnewui-detail.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-message.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-header.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-interaction.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-variables.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-newui-nav.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-mobile-nav.css?LikeGirl=<?php echo $version ?>">
@@ -319,6 +321,9 @@ function loadPhotos() {
 <script src="/Style/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
 <!-- LG-NewUi 核心功能模块 -->
+<script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-app.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-components.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-home-app.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
@@ -379,7 +384,7 @@ if ($diy['Pjaxkg'] === "1"):
 <script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
 <link href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
 
 <!-- 加载动画 -->
 <div id="loader-wrapper">
@@ -401,21 +406,21 @@ window.addEventListener('load', function() {
     <nav class="lgnewui-nav-island-container" id="lgnewuiNavIsland">
         <div class="lgnewui-nav-indicator" id="lgnewuiNavIndicator"></div>
 
-        <a href="little.php"
+        <a href="articles.php"
            class="lgnewui-nav-island-item"
            draggable="false"
            data-desc="记录在一起的点滴时光"
            data-meta="Memory Notes"
-           data-page="little">
+           data-page="articles">
             <i class="ph-fill ph-notebook"></i>
             <span>点滴</span>
         </a>
-        <a href="leaving.php"
+        <a href="messages.php"
            class="lgnewui-nav-island-item"
            draggable="false"
            data-desc="留下想说的话与温柔回应"
            data-meta="Kind Messages"
-           data-page="leaving">
+           data-page="messages">
             <i class="ph-fill ph-chat-teardrop-dots"></i>
             <span>留言</span>
         </a>
@@ -445,12 +450,12 @@ window.addEventListener('load', function() {
             <i class="ph-fill ph-camera"></i>
             <span>相册</span>
         </a>
-        <a href="list.php"
+        <a href="lovelist.php"
            class="lgnewui-nav-island-item"
            draggable="false"
            data-desc="记下想一起完成的心愿"
            data-meta="Plans Together"
-           data-page="list">
+           data-page="lovelist">
             <i class="ph-fill ph-list-checks"></i>
             <span>清单</span>
         </a>
@@ -471,11 +476,11 @@ window.addEventListener('load', function() {
     <!-- 极简包裹点阵 (v5) -->
     <div class="lgnewui-tab-template-v5-container lgnewui-glass-panel" id="lgnewui-mobile-nav-v5">
         <div class="lgnewui-tab-template-v5-indicator"></div>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="little.php" data-page="little">
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="articles.php" data-page="articles">
             <i class="ph-fill ph-notebook"></i>
             <span>点滴</span>
         </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="leaving.php" data-page="leaving">
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="messages.php" data-page="messages">
             <i class="ph-fill ph-chat-teardrop-dots"></i>
             <span>留言</span>
         </a>
@@ -491,7 +496,7 @@ window.addEventListener('load', function() {
             <i class="ph-fill ph-camera"></i>
             <span>相册</span>
         </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="list.php" data-page="list">
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="lovelist.php" data-page="lovelist">
             <i class="ph-fill ph-list-checks"></i>
             <span>清单</span>
         </a>
@@ -896,9 +901,9 @@ window.addEventListener('load', function() {
     // 配置
     var PAGE_MAPPING = {
         'index.php': 'index.php',
-        'little.php': 'little.php',
-        'leaving.php': 'leaving.php',
-        'list.php': 'list.php',
+        'articles.php': 'articles.php',
+        'messages.php': 'messages.php',
+        'lovelist.php': 'lovelist.php',
         'loveImg.php': 'loveImg.php',
         'about.php': 'about.php',
         'timeline.php': 'timeline.php'

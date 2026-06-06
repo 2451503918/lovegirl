@@ -1,0 +1,24 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "情侣小站 v5.2.1-Stable 发布说明",
+  "main": "check_frontend.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2451503918/lovegirl.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/2451503918/lovegirl/issues"
+  },
+  "homepage": "https://github.com/2451503918/lovegirl#readme",
+  "dependencies": {
+    "playwright": "^1.60.0"
+  }
+}

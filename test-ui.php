@@ -1596,11 +1596,11 @@
     
     <!-- 移动端导航 -->
     <nav class="mobile-nav" id="mobileNav">
-        <a href="little.php" class="mobile-nav-item"><i class="fas fa-file-alt"></i> 点滴</a>
-        <a href="leaving.php" class="mobile-nav-item"><i class="fas fa-comments"></i> 留言</a>
+        <a href="articles.php" class="mobile-nav-item"><i class="fas fa-file-alt"></i> 点滴</a>
+        <a href="messages.php" class="mobile-nav-item"><i class="fas fa-comments"></i> 留言</a>
         <a href="timeline.php" class="mobile-nav-item"><i class="fas fa-clock"></i> 轨迹</a>
         <a href="loveImg.php" class="mobile-nav-item"><i class="fas fa-images"></i> 相册</a>
-        <a href="list.php" class="mobile-nav-item"><i class="fas fa-list"></i> 清单</a>
+        <a href="lovelist.php" class="mobile-nav-item"><i class="fas fa-list"></i> 清单</a>
         <a href="about.php" class="mobile-nav-item"><i class="fas fa-heart"></i> 关于</a>
     </nav>
     

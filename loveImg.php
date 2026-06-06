@@ -1,8 +1,11 @@
 <?php
 include_once 'head.php';
 
-$loveImg = "select * from loveImg order by id desc";
-$resImg = mysqli_query($connect, $loveImg);
+$resImg = null;
+if ($connect) {
+    $loveImg = "select * from loveImg order by id desc";
+    $resImg = mysqli_query($connect, $loveImg);
+}
 ?>
 
 

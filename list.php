@@ -1,21 +1,22 @@
 <?php
 include_once 'head.php';
 $time = gmdate("Y-m-d", time() + 8 * 3600);
-$lovelist = "select * from lovelist order by id desc";
-$reslist = mysqli_query($connect, $lovelist);
 
 // 计算统计
 $totalItems = 0;
 $completedItems = 0;
 $itemsArray = [];
-while ($list = mysqli_fetch_array($reslist)) {
-    $totalItems++;
-    if ($list['icon']) $completedItems++;
-    $itemsArray[] = $list;
+$reslist = null;
+if ($connect) {
+    $reslist = mysqli_query($connect, "select * from lovelist order by id desc");
+    if ($reslist) {
+        while ($list = mysqli_fetch_array($reslist)) {
+            $totalItems++;
+            if ($list['icon']) $completedItems++;
+            $itemsArray[] = $list;
+        }
+    }
 }
-// 重置指针
-$lovelist = "select * from lovelist order by id desc";
-$reslist = mysqli_query($connect, $lovelist);
 $progressPercent = $totalItems > 0 ? round(($completedItems / $totalItems) * 100) : 0;
 ?>
 

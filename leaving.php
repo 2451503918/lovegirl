@@ -2,22 +2,40 @@
 include_once 'admin/connect.php';
 include_once 'admin/Database.php';
 
-$nub = "select count(id) as shu from leaving";
-$res = mysqli_query($connect, $nub);
-$leav = mysqli_fetch_array($res);
-$shu = $leav['shu'];
-$leavSet = "select * from leavSet order by id desc";
-$Set = mysqli_query($connect, $leavSet);
-$Setinfo = mysqli_fetch_array($Set);
-$jiequ = $Setinfo['jiequ'];
+$shu = 0;
+$jiequ = 10;
 
-$liuyan = "SELECT * FROM leaving order by id desc limit ?";
-$stmt = $conn->prepare($liuyan);
-$stmt->bind_param("i", $jiequ);
-$jiequ = $Setinfo['jiequ'];
-$stmt->bind_result($id, $name, $qq, $text, $time, $ip, $city);
-$result = $stmt->execute();
-if (!$result) {
+if ($connect) {
+    $nub = "select count(id) as shu from leaving";
+    $res = mysqli_query($connect, $nub);
+    if ($res) {
+        $leav = mysqli_fetch_array($res);
+        $shu = $leav['shu'] ?? 0;
+    }
+    $leavSet = "select * from leavSet order by id desc";
+    $Set = mysqli_query($connect, $leavSet);
+    if ($Set) {
+        $Setinfo = mysqli_fetch_array($Set);
+        $jiequ = $Setinfo['jiequ'] ?? 10;
+    }
+}
+
+if ($conn) {
+    $liuyan = "SELECT * FROM leaving order by id desc limit ?";
+    $stmt = $conn->prepare($liuyan);
+    if ($stmt) {
+        $stmt->bind_param("i", $jiequ);
+        $stmt->execute();
+        $stmt->bind_result($id, $name, $qq, $text, $time, $ip, $city);
+        $result = $stmt->get_result();
+    } else {
+        $result = false;
+    }
+} else {
+    $result = false;
+}
+
+if (!$result && isset($stmt) && $stmt) {
     error_log("leaving.php query error: " . $stmt->error);
 }
 

@@ -7,8 +7,19 @@ $startStr = $text['startTime'];
 $startTs = strtotime(str_replace('T', ' ', $startStr));
 $nowTs = time();
 $days = floor(($nowTs - $startTs) / 86400);
-?>
 
+// 获取时间轴事件
+$timelineEvents = [];
+if ($connect) {
+    $tlQuery = "SELECT * FROM timeline ORDER BY date DESC";
+    $tlResult = mysqli_query($connect, $tlQuery);
+    if ($tlResult) {
+        while ($row = mysqli_fetch_array($tlResult)) {
+            $timelineEvents[] = $row;
+        }
+    }
+}
+?>
 <title><?php echo $text['title'] ?> — 恋爱轨迹</title>
 <style>
         .timeline-container {
@@ -208,151 +219,18 @@ $days = floor(($nowTs - $startTs) / 86400);
     </style>
 
     <div id="pjax-container">
-    <style>
-        .timeline-container {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, #667eea, #764ba2);
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            display: flex;
-            justify-content: flex-end;
-            padding-right: calc(50% + 30px);
-        }
-
-        .timeline-item:nth-child(even) {
-            justify-content: flex-start;
-            padding-right: 0;
-            padding-left: calc(50% + 30px);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #fff;
-            border: 4px solid #667eea;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-
-        .timeline-dot.start {
-            background: #ff6b6b;
-            border-color: #ff6b6b;
-            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.3);
-        }
-
-        .timeline-dot.current {
-            background: #667eea;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        .timeline-dot.festival {
-            background: #ffd93d;
-            border-color: #ffd93d;
-            box-shadow: 0 0 0 4px rgba(255, 217, 61, 0.3);
-        }
-
-        .timeline-dot.stats {
-            background: #6bcb77;
-            border-color: #6bcb77;
-            box-shadow: 0 0 0 4px rgba(107, 203, 119, 0.3);
-        }
-
-        .timeline-dot.future {
-            background: #ff6b6b;
-            border-color: #ff6b6b;
-            box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.3);
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3); }
-            50% { box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.1); }
-            100% { box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3); }
-        }
-
-        .timeline-content {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1.5rem 2rem;
-            border-radius: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .timeline-date {
-            font-size: 0.9rem;
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #333;
-            margin-bottom: 0.5rem;
-            font-family: 'Noto Serif SC', serif;
-        }
-
-        .timeline-text {
-            font-size: 1rem;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .highlight {
-            color: #ff6b6b;
-            font-weight: 700;
-            font-size: 1.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .timeline-container { padding: 1rem 0; }
-            .timeline-container::before { left: 20px; }
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-                padding-left: 50px;
-                padding-right: 0;
-                justify-content: flex-start;
-                margin-bottom: 1.5rem;
-            }
-            .timeline-dot { left: 20px; width: 16px; height: 16px; }
-            .timeline-content { padding: 1rem 1.2rem; border-radius: 0.8rem; }
-            .timeline-title { font-size: 1.1rem; }
-            .timeline-text { font-size: 0.9rem; }
-            .highlight { font-size: 1.2rem; }
-            .card { padding: 1rem; background: transparent; box-shadow: none; border: none !important; }
-            .central .title h1 { font-size: 1.4em; }
-        }
-    </style>
-        <div class="central">
-            <div class="title">
-                <h1><?php echo $text['title'] ?> — 恋爱轨迹</h1>
+        <div class="lgnewui-page-header">
+            <div class="lgnewui-meta-container">
+                <div class="lgnewui-meta-line"></div>
+                <div class="lgnewui-meta-tag">
+                    <i class="ph-bold ph-clock-countdown lgnewui-meta-icon"></i>
+                    Steps of Us
+                </div>
+                <div class="lgnewui-meta-line"></div>
             </div>
+            <h2 class="lgnewui-hero-title">回看我们一路走来的轨迹</h2>
+        </div>
+        <div class="central">
             <div class="row central central-800">
                 <div class="card col-lg-12 col-md-12 col-sm-12 col-sm-x-12 <?php if ($text['Animation'] === "1") { ?>animated fadeInUp delay-03s<?php } ?>">
                     <div class="timeline-container">
@@ -366,6 +244,18 @@ $days = floor(($nowTs - $startTs) / 86400);
                             </div>
                         </div>
 
+                        <?php if (!empty($timelineEvents)): ?>
+                            <?php foreach ($timelineEvents as $event): ?>
+                            <div class="timeline-item animated fadeInUp">
+                                <div class="timeline-dot stats"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-date"><?php echo htmlspecialchars($event['date'] ?? ''); ?></div>
+                                    <div class="timeline-title"><?php echo htmlspecialchars($event['title'] ?? ''); ?></div>
+                                    <div class="timeline-text"><?php echo htmlspecialchars($event['text'] ?? ''); ?></div>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
                         <!-- 在一起天数 -->
                         <div class="timeline-item animated fadeInUp delay-03s">
                             <div class="timeline-dot current"></div>
@@ -384,7 +274,6 @@ $days = floor(($nowTs - $startTs) / 86400);
                                 <div class="timeline-title">节日提醒 🎉</div>
                                 <div class="timeline-text">
                                     <?php
-                                    // 计算下一个纪念日
                                     $nextAnniversary = date('Y', $nowTs) . '-' . date('m-d', $startTs);
                                     $nextTs = strtotime($nextAnniversary);
                                     if ($nextTs < $nowTs) {
@@ -408,6 +297,7 @@ $days = floor(($nowTs - $startTs) / 86400);
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
 
                         <!-- 时间线终点 -->
                         <div class="timeline-item animated fadeInUp delay-12s">
