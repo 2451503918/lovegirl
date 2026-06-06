@@ -9,7 +9,7 @@ $leav = mysqli_fetch_array($res);
 $shu = $leav['shu'];
 
 include_once 'Database.php';
-$liuyan = "SELECT * FROM leaving order by id desc";
+$liuyan = "SELECT id, name, QQ, text, time, ip, city FROM leaving order by id desc";
 $stmt = $conn->prepare($liuyan);
 $stmt->bind_result($id, $name, $qq, $text, $time, $ip, $city);
 $result = $stmt->execute();

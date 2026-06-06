@@ -11,7 +11,7 @@ $startTs = strtotime(str_replace('T', ' ', $text['startTime'] ?? '2022-06-05 00:
 
 $articles = [];
 if ($connect) {
-    $res = mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC");
+    $res = mysqli_query($connect, "SELECT id, title, text, author, date, weather, mood, location, views, likes, encrypted, password FROM little ORDER BY id DESC");
     if ($res) { while ($r = mysqli_fetch_array($res)) { $articles[] = $r; } }
 }
 

@@ -30,7 +30,7 @@ if (!$connect) {
 
 // Load text table for boy/girl names and avatars
 $text = [];
-$stmt = mysqli_prepare($connect, "SELECT * FROM text");
+$stmt = mysqli_prepare($connect, "SELECT boy, girl, boyimg, girlimg FROM text");
 if ($stmt) {
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
@@ -42,7 +42,7 @@ if ($stmt) {
 
 // Load about table
 $about = [];
-$stmt = mysqli_prepare($connect, "SELECT * FROM about");
+$stmt = mysqli_prepare($connect, "SELECT id, title, aboutimg, info1, info2, info3, btn1, btn2, infox1, infox2, infox3, infox4, infox5, infox6, btnx2, infof1, infof2, infof3, infof4, btnf3, infod1, infod2, infod3, infod4, infod5 FROM about");
 if ($stmt) {
     mysqli_stmt_execute($stmt);
     $resab = mysqli_stmt_get_result($stmt);

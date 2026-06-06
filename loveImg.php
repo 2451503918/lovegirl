@@ -23,7 +23,7 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 $albums = [];
 if ($connect) {
     // 查询相册列表（按创建时间倒序）
-    $res = mysqli_query($connect, "SELECT * FROM photo ORDER BY id DESC");
+    $res = mysqli_query($connect, "SELECT id, code, title, img, `desc`, author, location, lng, lat, views, likes, password, private, date FROM photo ORDER BY id DESC");
     if ($res) {
         while ($row = mysqli_fetch_assoc($res)) {
             $albums[] = $row;

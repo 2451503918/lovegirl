@@ -122,7 +122,7 @@ switch ($action) {
         ];
         
         // 获取今日统计
-        $stmt = mysqli_prepare($connect, "SELECT * FROM visitor_stats WHERE visit_date = ?");
+        $stmt = mysqli_prepare($connect, "SELECT visit_count, visitor_count FROM visitor_stats WHERE visit_date = ?");
         mysqli_stmt_bind_param($stmt, "s", $today);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
@@ -134,7 +134,7 @@ switch ($action) {
         mysqli_stmt_close($stmt);
         
         // 获取累计统计
-        $stmt = mysqli_prepare($connect, "SELECT * FROM visitor_total WHERE id = 1");
+        $stmt = mysqli_prepare($connect, "SELECT total_visits, total_visitors FROM visitor_total WHERE id = 1");
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         if ($result && mysqli_num_rows($result) > 0) {

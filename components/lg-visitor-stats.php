@@ -15,7 +15,7 @@ if (isset($connect) && $connect) {
     $today = date('Y-m-d');
     
     // 获取今日统计
-    $result = mysqli_query($connect, "SELECT * FROM visitor_stats WHERE visit_date = '$today'");
+    $result = mysqli_query($connect, "SELECT visit_count, visitor_count FROM visitor_stats WHERE visit_date = '$today'");
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $todayVisits = intval($row['visit_count']);
@@ -27,7 +27,7 @@ if (isset($connect) && $connect) {
     }
     
     // 获取累计统计
-    $result = mysqli_query($connect, "SELECT * FROM visitor_total WHERE id = 1");
+    $result = mysqli_query($connect, "SELECT total_visits, total_visitors FROM visitor_total WHERE id = 1");
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $totalVisits = intval($row['total_visits']);

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'Nav.php';
-$absql = "SELECT * FROM about";
+$absql = "SELECT id, title, aboutimg, info1, info2, info3, btn1, btn2, infox1, infox2, infox3, infox4, infox5, infox6, btnx2, infof1, infof2, infof3, infof4, btnf3, infod1, infod2, infod3, infod4, infod5 FROM about";
 $resab = mysqli_query($connect, $absql);
 $about = mysqli_fetch_array($resab);
 ?>

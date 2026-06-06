@@ -754,12 +754,16 @@
         _renderText(desc) {
             if (!desc || !this._heroTitle) return;
 
-            this._heroTitle.innerHTML = desc.split('').map((char, i) => {
-                return `<span class="char" style="transition-delay: ${i * 30}ms">${char === ' ' ? '&nbsp;' : char}</span>`;
-            }).join('');
+            // 使用 textContent 代替逐字创建 span，避免大量 DOM 节点
+            this._heroTitle.textContent = desc;
 
+            // 单次 CSS 动画处理整体标题
+            this._heroTitle.style.opacity = '0';
+            this._heroTitle.style.transform = 'translateY(8px)';
+            this._heroTitle.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             TimerManager.setTimeout('heroText', () => {
-                this._heroTitle.querySelectorAll('.char').forEach(span => span.classList.add('in'));
+                this._heroTitle.style.opacity = '1';
+                this._heroTitle.style.transform = 'translateY(0)';
             }, 50);
         },
 

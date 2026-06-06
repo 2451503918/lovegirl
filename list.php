@@ -17,7 +17,7 @@ $completedItems = 0;
 $pendingItems = 0;
 $itemsArray = [];
 if ($connect) {
-    $reslist = mysqli_query($connect, "SELECT * FROM lovelist ORDER BY id DESC");
+    $reslist = mysqli_query($connect, "SELECT id, is_done, eventname, imgurl, location, lng, lat, note, donedate, date FROM lovelist ORDER BY id DESC");
     if ($reslist) {
         while ($list = mysqli_fetch_array($reslist)) {
             $totalItems++;

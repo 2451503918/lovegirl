@@ -146,7 +146,7 @@
     function bindEvents() {
         document.addEventListener('contextmenu', handleContextMenu);
         document.addEventListener('click', hideMenu);
-        document.addEventListener('scroll', hideMenu);
+        document.addEventListener('scroll', hideMenu, { passive: true });
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') hideMenu();
         });

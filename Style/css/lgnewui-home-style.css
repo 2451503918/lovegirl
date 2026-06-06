@@ -147,6 +147,8 @@ body {
 
 .lgnewui-home .lgnewui-section {
     margin-bottom: 5rem;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
 }
 
 .lgnewui-home .lgnewui-section:last-child,
