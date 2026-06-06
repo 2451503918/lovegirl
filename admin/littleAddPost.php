@@ -15,10 +15,13 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $name = trim($_POST['articlename']);
     $time = gmdate("Y-m-d", time() + 8 * 3600);
     
-    $charu = "insert into article (articletitle,articletext,articletime,articlename) values (?,?,?,?)";
+    // 插入 little 表（v5.2.1 新表结构）
+    $charu = "INSERT INTO little (title, text, author, date) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($charu);
-    $stmt->bind_param("ssss", $title, $text, $time, $name);
+    $datetime = $time . ' ' . date('H:i:s');
+    $stmt->bind_param("ssss", $title, $text, $name, $datetime);
     $result = $stmt->execute();
+    $stmt->close();
     
     if ($result) {
         echo "1";

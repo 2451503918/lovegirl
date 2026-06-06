@@ -18,7 +18,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
-header("Content-Type:text/html; charset=utf8");
 include_once __DIR__.'/Config_DB.php';
 try {
     $conn = new mysqli($db_address,$db_username,$db_password,$db_name);
@@ -30,3 +29,5 @@ try {
 } catch (Exception $e) {
     $conn = null;
 }
+// 兼容：同时设置 $connect 供使用过程式 mysqli 的文件引用
+$connect = $conn;

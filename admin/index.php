@@ -2,7 +2,7 @@
 session_start();
 
 include_once 'Nav.php';
-$liuyan = "select * from leaving order by id desc limit 0,6";
+$liuyan = "SELECT id, name, QQ, text, time, ip FROM leaving ORDER BY id DESC LIMIT 0,6";
 $resliuyan = mysqli_query($connect, $liuyan);
 
 // 注释以下内容即可去除所有提示内容

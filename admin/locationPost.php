@@ -42,17 +42,18 @@ if ($boyLng < -180 || $boyLng > 180 || $girlLng < -180 || $girlLng > 180) {
     exit;
 }
 
-// 更新数据库
-$sql = "UPDATE text SET 
-    boyCity = '" . mysqli_real_escape_string($connect, $boyCity) . "',
-    girlCity = '" . mysqli_real_escape_string($connect, $girlCity) . "',
-    boyLat = $boyLat,
-    boyLng = $boyLng,
-    girlLat = $girlLat,
-    girlLng = $girlLng
-    WHERE id = 1";
-
-$result = mysqli_query($connect, $sql);
+// 更新数据库（预处理语句防SQL注入）
+$stmt = mysqli_prepare($connect, "UPDATE text SET 
+    boyCity = ?,
+    girlCity = ?,
+    boyLat = ?,
+    boyLng = ?,
+    girlLat = ?,
+    girlLng = ?
+    WHERE id = 1");
+mysqli_stmt_bind_param($stmt, "ssdddd", $boyCity, $girlCity, $boyLat, $boyLng, $girlLat, $girlLng);
+$result = mysqli_stmt_execute($stmt);
+mysqli_stmt_close($stmt);
 
 if ($result) {
     echo '<script>alert("位置配置更新成功");location.href="Set.php";</script>';

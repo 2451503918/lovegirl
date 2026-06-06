@@ -2,7 +2,7 @@
 session_start();
 
 include_once 'Nav.php';
-$leavSet = "select * from leavSet order by id desc";
+$leavSet = "SELECT id, jiequ, lanjiezf, lanjie FROM leavSet ORDER BY id DESC";
 $Set = mysqli_query($connect, $leavSet);
 $Setinfo = mysqli_fetch_array($Set);
 

@@ -2,7 +2,7 @@
 session_start();
 include_once 'Nav.php';
 
-$ipchaxun = "select * from IPerror";
+$ipchaxun = "SELECT id, ipAdd, text, State, Time FROM IPerror";
 $ipres = mysqli_query($connect, $ipchaxun);
 $IPinfo = mysqli_fetch_array($ipres);
 ?>

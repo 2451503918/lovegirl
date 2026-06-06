@@ -17,7 +17,7 @@
 <?php
 include_once 'admin/connect.php';
 $ip = $_SERVER['REMOTE_ADDR'];
-$stmt = mysqli_prepare($connect, "select * from IPerror where State=? limit 1");
+$stmt = mysqli_prepare($connect, "SELECT id, State, Time, text FROM IPerror WHERE State=? LIMIT 1");
 mysqli_stmt_bind_param($stmt, "s", $ip);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);

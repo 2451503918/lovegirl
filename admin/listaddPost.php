@@ -24,10 +24,12 @@ if ($_POST['icon'] == 1) {
 include_once 'Database.php';
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
-    $charu = "insert into lovelist (eventname,icon,imgurl) values (?,?,?)";
+    // 插入 lovelist 表（v5.2.1 新表结构，含 is_done, note, location 等字段）
+    $charu = "INSERT INTO lovelist (eventname, icon, imgurl, is_done, note, location, date) VALUES (?, ?, ?, 0, '', '', NOW())";
     $stmt = $conn->prepare($charu);
     $stmt->bind_param("sss", $name, $icon, $img);
     $result = $stmt->execute();
+    $stmt->close();
     
     if ($result) {
         echo "1";
