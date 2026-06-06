@@ -21,9 +21,9 @@ if (isset($connect) && $connect) {
         $todayVisits = intval($row['visit_count']);
         $todayVisitors = intval($row['visitor_count']);
     } else {
-        // 如果今天没有记录，随机生成一个初始值用于演示
-        $todayVisits = rand(50, 200);
-        $todayVisitors = rand(20, 80);
+        // 如果今天没有记录，显示暂无数据
+        $todayVisits = 0;
+        $todayVisitors = 0;
     }
     
     // 获取累计统计
@@ -33,16 +33,16 @@ if (isset($connect) && $connect) {
         $totalVisits = intval($row['total_visits']);
         $totalVisitors = intval($row['total_visitors']);
     } else {
-        // 如果没有累计记录，随机生成
-        $totalVisits = rand(10000, 20000);
-        $totalVisitors = rand(2000, 5000);
+        // 如果没有累计记录，显示暂无数据
+        $totalVisits = 0;
+        $totalVisitors = 0;
     }
 } else {
-    // 没有数据库连接时使用模拟数据
-    $todayVisits = rand(50, 200);
-    $todayVisitors = rand(20, 80);
-    $totalVisits = rand(10000, 20000);
-    $totalVisitors = rand(2000, 5000);
+    // 没有数据库连接时显示暂无数据
+    $todayVisits = 0;
+    $todayVisitors = 0;
+    $totalVisits = 0;
+    $totalVisitors = 0;
 }
 
 // 格式化数字显示

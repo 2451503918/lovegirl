@@ -49,10 +49,10 @@ $ipki = mysqli_query($connect, $ipkiki);
                             </td>
                             <td>
                                 <h5>
-                                    <span class="badge badge-danger-lighten"><?php if ($IPinfo['ip']) { ?><?php echo $IPinfo['ip'] ?><?php } else { ?>127.0.0.1<?php } ?></span>
+                                    <span class="badge badge-danger-lighten"><?php if ($IPinfo['ip']) { ?><?php echo htmlspecialchars($IPinfo['ip'], ENT_QUOTES, 'UTF-8') ?><?php } else { ?>127.0.0.1<?php } ?></span>
                                 </h5>
                             </td>
-                            <td><?php echo $IPinfo['gsd'] ?></td>
+                            <td><?php echo htmlspecialchars($IPinfo['gsd'], ENT_QUOTES, 'UTF-8') ?></td>
                         </tr>
                         <?php
                     }

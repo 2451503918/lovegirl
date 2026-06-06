@@ -16,6 +16,7 @@ $imgurl = isset($_GET['imgurl']) ? htmlspecialchars($_GET['imgurl'], ENT_QUOTES,
                 <h4 class="header-title mb-3 size_18">修改事件—— <?php echo $name ?></h4>
 
                 <form class="needs-validation" action="listupda.php" method="post" onsubmit="return check()" novalidate>
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="form-group mb-3">
                         <label for="validationCustom01">事件标题</label>
                         <input type="text" name="eventname" class="form-control" id="validationCustom01"

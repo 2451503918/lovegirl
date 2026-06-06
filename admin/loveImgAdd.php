@@ -13,6 +13,7 @@ $inv_date = date("Y-m-d");
 
                 <form class="needs-validation" action="ImgAddPost.php" method="post" id="imgForm" onsubmit="return check()"
                       novalidate>
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="form-group mb-3">
                         <label for="validationCustom01">日期</label>
                         <input class="form-control col-sm-4" id="example-date" type="date" name="imgDatd" class="form-control" placeholder="日期" value="<?php echo $inv_date ?>" required>
@@ -204,7 +205,8 @@ $inv_date = date("Y-m-d");
         var formData = {
             imgDatd: $('input[name="imgDatd"]').val(),
             imgText: $('input[name="imgText"]').val(),
-            imgUrl: $('input[name="imgUrl"]').val()
+            imgUrl: $('input[name="imgUrl"]').val(),
+            csrf_token: $('input[name="csrf_token"]').val()
         };
 
         $(this).prop('disabled', true).html('<i class="mdi mdi-loading mdi-spin"></i> 提交中...');

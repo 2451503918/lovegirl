@@ -17,7 +17,7 @@ if (!isset($text) || !is_array($text)) {
 }
 
 $time = gmdate("Y-m-d", time() + 8 * 3600);
-@$id = $_GET['id'];
+$id = isset($_GET['id']) ? $_GET['id'] : '';
 
 $articleData = [
     'id' => 0,
@@ -104,7 +104,7 @@ if ($connect) {
             </div>
             <div class="lgnewui-meta-line"></div>
         </div>
-        <h2 class="lgnewui-hero-title"><?php echo htmlspecialchars($articleData['title']); ?></h2>
+        <h2 class="lgnewui-hero-title"><?php echo htmlspecialchars($articleData['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
     </div>
 
     <div class="lgnewui-container">
@@ -120,34 +120,34 @@ if ($connect) {
                     <span class="lgnewui-article-detail-day">DAY <?php echo $dayNum; ?></span>
                     <span class="lgnewui-article-detail-location">
                         <i class="ph-fill ph-map-pin"></i>
-                        <?php echo htmlspecialchars($articleData['location']); ?>
+                        <?php echo htmlspecialchars($articleData['location'], ENT_QUOTES, 'UTF-8'); ?>
                     </span>
                 </div>
                 <div class="lgnewui-article-detail-tags">
                     <span class="lgnewui-article-detail-tag">
                         <i class="ph-fill ph-cloud-sun"></i>
-                        <?php echo htmlspecialchars($articleData['weather']); ?>
+                        <?php echo htmlspecialchars($articleData['weather'], ENT_QUOTES, 'UTF-8'); ?>
                     </span>
                     <span class="lgnewui-article-detail-tag">
                         <i class="ph-fill ph-smiley"></i>
-                        <?php echo htmlspecialchars($articleData['mood']); ?>
+                        <?php echo htmlspecialchars($articleData['mood'], ENT_QUOTES, 'UTF-8'); ?>
                     </span>
                 </div>
             </div>
 
             <!-- 文章内容 -->
             <div class="lgnewui-article-detail-content">
-                <h1 class="lgnewui-article-detail-title"><?php echo htmlspecialchars($articleData['title']); ?></h1>
+                <h1 class="lgnewui-article-detail-title"><?php echo htmlspecialchars($articleData['title'], ENT_QUOTES, 'UTF-8'); ?></h1>
                 <div class="lgnewui-article-detail-body">
-                    <?php echo $articleData['text']; ?>
+                    <?php echo htmlspecialchars($articleData['text'], ENT_QUOTES, 'UTF-8'); ?>
                 </div>
             </div>
 
             <!-- 文章作者信息 -->
             <div class="lgnewui-article-detail-author">
-                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg']; ?>&s=640" class="lgnewui-article-detail-avatar">
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8'); ?>&s=640" class="lgnewui-article-detail-avatar">
                 <div class="lgnewui-article-detail-author-info">
-                    <span class="lgnewui-article-detail-author-name"><?php echo htmlspecialchars($articleData['author']); ?></span>
+                    <span class="lgnewui-article-detail-author-name"><?php echo htmlspecialchars($articleData['author'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <span class="lgnewui-article-detail-author-label">作者</span>
                 </div>
             </div>
@@ -160,7 +160,7 @@ if ($connect) {
                 <i class="ph-bold ph-arrow-left"></i>
                 <div class="lgnewui-article-nav-info">
                     <span class="lgnewui-article-nav-label">上一篇</span>
-                    <span class="lgnewui-article-nav-title"><?php echo htmlspecialchars(mb_substr($prevArticle['title'], 0, 20, 'UTF-8')); ?></span>
+                    <span class="lgnewui-article-nav-title"><?php echo htmlspecialchars(mb_substr($prevArticle['title'], 0, 20, 'UTF-8'), ENT_QUOTES, 'UTF-8'); ?></span>
                 </div>
             </a>
             <?php else: ?>
@@ -174,7 +174,7 @@ if ($connect) {
             <a href="page.php?id=<?php echo $nextArticle['id']; ?>" class="lgnewui-article-nav-btn lgnewui-article-nav-btn--next">
                 <div class="lgnewui-article-nav-info">
                     <span class="lgnewui-article-nav-label">下一篇</span>
-                    <span class="lgnewui-article-nav-title"><?php echo htmlspecialchars(mb_substr($nextArticle['title'], 0, 20, 'UTF-8')); ?></span>
+                    <span class="lgnewui-article-nav-title"><?php echo htmlspecialchars(mb_substr($nextArticle['title'], 0, 20, 'UTF-8'), ENT_QUOTES, 'UTF-8'); ?></span>
                 </div>
                 <i class="ph-bold ph-arrow-right"></i>
             </a>

@@ -4,7 +4,12 @@
  * 返回 JSON 格式的时间轴事件数据
  */
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Credentials: true');
 
 error_reporting(0);
 

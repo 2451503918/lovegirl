@@ -15,6 +15,7 @@ $IPinfo = mysqli_fetch_array($ipres);
                 <h4 class="header-title mb-3">IP封禁拉黑添加</h4>
 
                 <form class="needs-validation" action="ipAddPost.php" method="post" novalidate>
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="form-group mb-3">
                         <label for="validationCustom05">IP地址</label>
                         <input type="text" class="form-control" id="validationCustom05" placeholder="请输入需封禁的IP"

@@ -3,6 +3,11 @@
 include_once 'Database.php';
 include_once 'Function.php';
 
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
+
 $name = trim($_POST['name'] ?? '');
 $qq = trim($_POST['qq'] ?? '');
 $text = trim($_POST['text'] ?? '');
@@ -12,7 +17,7 @@ $time = time();
 $Filter_Name = replaceSpecialChar($name);
 $Filter_QQ = replaceSpecialChar($qq);
 $Filter_Text = replaceSpecialChar($text);
-$Filter_Time = replaceSpecialChar($time);
+$Filter_Time = $time;
 $result = false;
 $User_City = '未知';
 
@@ -36,12 +41,12 @@ if (!isset($_COOKIE["KiCookie"]) || $isWhitelist) {
                     $Filter_Name = replaceSpecialChar($name);
                     $Filter_QQ = replaceSpecialChar($qq);
                     $Filter_Text = replaceSpecialChar($text);
-                    $Filter_Time = replaceSpecialChar($time);
+                    $Filter_Time = $time;
                     $User_City = get_ip_city_New($Filter_IP);
 
                     $charu = "insert into leaving (name,QQ,text,time,ip,city) values (?,?,?,?,?,?)";
                     $stmt = $conn->prepare($charu);
-                    $stmt->bind_param("sissss", $Filter_Name, $Filter_QQ, $Filter_Text, $Filter_Time, $Filter_IP, $User_City);
+                    $stmt->bind_param("sssiss", $Filter_Name, $Filter_QQ, $Filter_Text, $Filter_Time, $Filter_IP, $User_City);
                     $result = $stmt->execute();
                     if (!$result) {
                         error_log("leavingPost.php query error: " . $stmt->error);

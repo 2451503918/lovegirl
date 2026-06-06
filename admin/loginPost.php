@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare($sql);
     $USER = trim($user);
     $stmt->bind_param("s", $USER);
-    $PW = md5($pw);
     $stmt->bind_result($id, $Login_user, $Login_pw);
     $result = $stmt->execute();
     if (!$result) {
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $stmt->fetch();
     
-    if ($USER === $Login_user && $PW === $Login_pw) {
+    if ($USER === $Login_user && password_verify($pw, $Login_pw)) {
         $login_success = true;
     }
 }

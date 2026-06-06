@@ -3,6 +3,12 @@ session_start();
 
 $file = $_SERVER['PHP_SELF'];
 include_once 'connect.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $card1 = htmlspecialchars(trim($_POST['card1']), ENT_QUOTES);
@@ -15,8 +21,11 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $Copyright = htmlspecialchars(trim($_POST['Copyright']), ENT_QUOTES);
     $bgimg = htmlspecialchars(trim($_POST['bgimg']), ENT_QUOTES);
 
-    $sql = "update text set icp = '$icp', Copyright = '$Copyright', card1 = '$card1',card2 = '$card2',card3 = '$card3',deci1 = '$deci1',deci2 = '$deci2',deci3 = '$deci3',bgimg = '$bgimg' ";
-    $result = mysqli_query($connect, $sql);
+    $stmt = mysqli_prepare($connect, "update text set icp = ?, Copyright = ?, card1 = ?, card2 = ?, card3 = ?, deci1 = ?, deci2 = ?, deci3 = ?, bgimg = ?");
+    mysqli_stmt_bind_param($stmt, "sssssssss", $icp, $Copyright, $card1, $card2, $card3, $deci1, $deci2, $deci3, $bgimg);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_affected_rows($stmt) >= 0;
+    mysqli_stmt_close($stmt);
     if ($result) {
         echo "1";
     } else {

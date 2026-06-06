@@ -619,8 +619,6 @@
             const slot = cardEl.getAttribute('data-weather-slot') || '1';
             u.searchParams.set('mode', 'couple');
             u.searchParams.set('slot', slot);
-            const wt = (window.LG_CONFIG && window.LG_CONFIG.weatherToken) || '';
-            if (wt) u.searchParams.set('_wt', wt);
             return u.toString();
         },
 

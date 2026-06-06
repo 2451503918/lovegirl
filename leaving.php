@@ -49,14 +49,14 @@ if ($connect) {
                 <?php if (!empty($messages)): ?>
                     <?php foreach ($messages as $i => $msg):
                         $msgId = $msg['id'];
-                        $name = htmlspecialchars($msg['name']);
-                        $qq = htmlspecialchars($msg['QQ']);
-                        $text = htmlspecialchars($msg['text']);
+                        $name = htmlspecialchars($msg['name'], ENT_QUOTES, 'UTF-8');
+                        $qq = htmlspecialchars($msg['QQ'], ENT_QUOTES, 'UTF-8');
+                        $msgText = htmlspecialchars($msg['text'], ENT_QUOTES, 'UTF-8');
                         $timestamp = intval($msg['time']);
-                        $city = !empty($msg['city']) ? htmlspecialchars($msg['city']) : '中国';
+                        $city = !empty($msg['city']) ? htmlspecialchars($msg['city'], ENT_QUOTES, 'UTF-8') : '中国';
 
                         // 头像
-                        $avatarUrl = 'https://q1.qlogo.cn/g?b=qq&nk=' . $qq . '&s=100';
+                        $avatarUrl = 'https://q1.qlogo.cn/g?b=qq&nk=' . urlencode($msg['QQ']) . '&s=100';
 
                         // 时间显示
                         $timeStr = date('Y-m-d H:i', $timestamp);
@@ -80,14 +80,14 @@ if ($connect) {
                         // AOS 动画延迟
                         $aosDelay = min($i * 50, 300);
                     ?>
-                    <div class="MessageCard col-lg-6 col-md-6 col-sm-12 col-sm-x-12" data-msg-id="<?php echo $msgId; ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
+                    <div class="MessageCard col-lg-6 col-md-6 col-sm-12 col-sm-x-12" data-msg-id="<?php echo intval($msgId); ?>" data-aos="fade-up" data-aos-delay="<?php echo $aosDelay; ?>">
                         <div class="MsgTime"><span><?php echo $timeStr; ?></span></div>
                         <div class="UserAvatar">
-                            <img src="<?php echo $avatarUrl; ?>" alt="<?php echo $name; ?>" draggable="false" onerror="this.src='https://q1.qlogo.cn/g?b=qq&nk=10000&s=100'">
+                            <img src="<?php echo $avatarUrl; ?>" alt="<?php echo $name; ?>" draggable="false" onerror="this.src='/assets/img/default-avatar.png'">
                         </div>
                         <div class="UserName"><h1><span class="lgmsg-card-name"><?php echo $name; ?></span></h1></div>
                         <div class="HeightCalc">
-                            <div class="MsgContent"><p><?php echo $text; ?></p></div>
+                            <div class="MsgContent"><p><?php echo $msgText; ?></p></div>
                             <div class="MsgFooter">
                                 <div class="UserInfo">
                                     <span class="InfoItem" data-lg-tip="<?php echo $city; ?>"><i class="ph-fill ph-map-pin lgmsg-ico"></i><span class="lgmsg-info-text"><?php echo $city; ?></span></span>

@@ -135,16 +135,16 @@ include_once "LG_Info.php";
                                     <td>
                                         <h5><span class="badge badge-success-lighten"><i
                                                     class="mdi mdi-account-circle mr-1 rihjt-0"></i>
-                                                <?php echo $info['name'] ?></span>
+                                                <?php echo htmlspecialchars($info['name'], ENT_QUOTES, 'UTF-8') ?></span>
                                         </h5>
                                     </td>
                                     <td>
-                                        <?php echo $info['QQ'] ?>
+                                        <?php echo htmlspecialchars($info['QQ'], ENT_QUOTES, 'UTF-8') ?>
                                     </td>
                                     <td>
                                         <h5>
                                             <span
-                                                class="badge badge-danger-lighten"><?php if ($info['ip']) { ?><?php echo $info['ip'] ?><?php } else { ?>127.0.0.1<?php } ?></span>
+                                                class="badge badge-danger-lighten"><?php if ($info['ip']) { ?><?php echo htmlspecialchars($info['ip'], ENT_QUOTES, 'UTF-8') ?><?php } else { ?>127.0.0.1<?php } ?></span>
                                         </h5>
                                     </td>
                                 </tr>

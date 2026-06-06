@@ -46,10 +46,14 @@ $monthMap = ['01'=>'一月','02'=>'二月','03'=>'三月','04'=>'四月','05'=>'
                     $year = date('Y', $artTs);
                     $time = date('H:i', $artTs);
                     $monthCn = $monthMap[$monthNum] ?? $monthNum . '月';
-                    $artTitle = htmlspecialchars($info['title'] ?? '');
-                    $artText = htmlspecialchars(strip_tags(mb_substr($info['text'] ?? '', 0, 120, 'UTF-8')));
+                    $artTitle = htmlspecialchars($info['title'] ?? '', ENT_QUOTES, 'UTF-8');
+                    $artText = htmlspecialchars(strip_tags(mb_substr($info['text'] ?? '', 0, 120, 'UTF-8')), ENT_QUOTES, 'UTF-8');
                     $artQQ = $info['qqimg'] ?? $text['boyimg'];
                     $artAuthor = $info['author'] ?? $text['boy'];
+                    // Validate QQ number is numeric for safe use in CSS url()
+                    if ($artQQ && !preg_match('/^https?:\/\//', $artQQ) && !ctype_digit($artQQ)) {
+                        $artQQ = '';
+                    }
                 ?>
                 <div class="lgnewui-article-masonry-item" data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
                     <div data-href="page.php?id=<?php echo $info['id'] ?>"
@@ -88,7 +92,7 @@ $monthMap = ['01'=>'一月','02'=>'二月','03'=>'三月','04'=>'四月','05'=>'
                                     <div class="lg-author__avatar" style="background-image: url(https://q1.qlogo.cn/g?b=qq&nk=<?php echo $artQQ ?>&s=640)"></div>
                                 </div>
                                 <div class="lg-author__text">
-                                    <span class="lg-author__name"><?php echo htmlspecialchars($artAuthor) ?></span>
+                                    <span class="lg-author__name"><?php echo htmlspecialchars($artAuthor, ENT_QUOTES, 'UTF-8') ?></span>
                                 </div>
                             </div>
                         </footer>

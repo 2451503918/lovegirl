@@ -143,11 +143,6 @@
             alert("用户名只支持数字 英文大小写字母")
             return false;
         }
-        
-        if (character.test(pw)) {
-            alert("密码含有特殊字符 请重新输入")
-            return false;
-        }
     }
 
 </script>

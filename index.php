@@ -72,7 +72,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div class="img-male">
                     <div class="avatarArea lgewui-head-avatar-boy">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
-                        <img draggable="false" class="aiv_touxiang" src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640">
+                        <img draggable="false" class="aiv_touxiang" src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
                         <div class="lgnewui-head-avatar-mask">
                             <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
                                 <div class="lgnewui-head-avatar-gender-icon" data-gender="male"><i class="ph-fill ph-gender-male"></i></div>
@@ -86,7 +86,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             </div>
                         </div>
                     </div>
-                    <span class="shadow-blur"><?php echo $text['boy'] ?></span>
+                    <span class="shadow-blur"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
                 <div class="love-icon">
                     <div class="love-info-wrapper"></div>
@@ -95,7 +95,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div class="img-female">
                     <div class="avatarArea lgewui-head-avatar-girl">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
-                        <img draggable="false" class="aiv_touxiang" src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['girlimg'] ?>&s=640">
+                        <img draggable="false" class="aiv_touxiang" src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
                         <div class="lgnewui-head-avatar-mask">
                             <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
                                 <div class="lgnewui-head-avatar-gender-icon" data-gender="female"><i class="ph-fill ph-gender-female"></i></div>
@@ -109,7 +109,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             </div>
                         </div>
                     </div>
-                    <span class="shadow-blur"><?php echo $text['girl'] ?></span>
+                    <span class="shadow-blur"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
             </div>
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -140,14 +140,14 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 </div>
                 <div class="lgnewui-day-left-section">
                     <h2 class="lgnewui-day-poetic-title">
-                        <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', $text['logo']) ?><br>
+                        <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'], ENT_QUOTES, 'UTF-8')) ?><br>
                         <span style="font-size:0.7em;opacity:0.7;">与你行至天光</span>
                     </h2>
                     <div class="lgnewui-day-start-date-capsule">
                         <div class="lgnewui-day-icon-circle"><i class="ph-fill ph-heart"></i></div>
                         <div>
                             <span class="lgnewui-day-date-label-small">Together Since</span>
-                            <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo str_replace('T', ' ', $text['startTime']) ?></span>
+                            <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo htmlspecialchars(str_replace('T', ' ', $text['startTime']), ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
                     </div>
                 </div>
@@ -213,8 +213,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-home-weather-bg-decoration"></div>
                         <div class="lgnewui-home-weather-row-top">
                             <div class="lgnewui-home-weather-user-pill">
-                                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640" class="lgnewui-home-weather-avatar" alt="<?php echo $text['boy'] ?>">
-                                <span class="lgnewui-home-weather-username"><?php echo $text['boy'] ?></span>
+                                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="lgnewui-home-weather-avatar" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
+                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <div class="lgnewui-home-weather-time-tag">--</div>
                         </div>
@@ -251,8 +251,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-home-weather-bg-decoration"></div>
                         <div class="lgnewui-home-weather-row-top">
                             <div class="lgnewui-home-weather-user-pill">
-                                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['girlimg'] ?>&s=640" class="lgnewui-home-weather-avatar" alt="<?php echo $text['girl'] ?>">
-                                <span class="lgnewui-home-weather-username"><?php echo $text['girl'] ?></span>
+                                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="lgnewui-home-weather-avatar" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
+                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <div class="lgnewui-home-weather-time-tag">--</div>
                         </div>
@@ -300,10 +300,10 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             <div class="lgnewui-presence-card">
                                 <div class="lgnewui-presence-people">
                                     <div class="lgnewui-presence-person">
-                                        <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640" class="lgnewui-presence-avatar" alt="<?php echo $text['boy'] ?>">
+                                        <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="lgnewui-presence-avatar" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
                                         <div class="lgnewui-presence-person__body">
                                             <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo $text['boy'] ?></span>
+                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
                                                 <span class="lgnewui-presence-gender is-male">♂</span>
                                             </div>
                                             <div class="lgnewui-presence-state">
@@ -313,10 +313,10 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                                         </div>
                                     </div>
                                     <div class="lgnewui-presence-person">
-                                        <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['girlimg'] ?>&s=640" class="lgnewui-presence-avatar" alt="<?php echo $text['girl'] ?>">
+                                        <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="lgnewui-presence-avatar" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
                                         <div class="lgnewui-presence-person__body">
                                             <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo $text['girl'] ?></span>
+                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
                                                 <span class="lgnewui-presence-gender is-female">♀</span>
                                             </div>
                                             <div class="lgnewui-presence-state">
@@ -728,9 +728,9 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-watermark">DAY <?php echo $dayNum ?></div>
                         <div class="lgnewui-journal-header">
                             <div class="lgnewui-journal-user">
-                                <img data-src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640" class="lgnewui-journal-avatar lazy">
+                                <img data-src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="lgnewui-journal-avatar lazy">
                                 <div>
-                                    <div class="lgnewui-font-sm-bold"><?php echo $text['boy'] ?></div>
+                                    <div class="lgnewui-font-sm-bold"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></div>
                                     <div class="lgnewui-journal-meta"><?php echo $art['date'] ?></div>
                                 </div>
                             </div>
@@ -829,7 +829,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div class="lgnewui-col-2" data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
                     <a href="messages.php#comment-<?php echo $msg['id'] ?>" class="lgnewui-home-message-card">
                         <div class="lgnewui-home-message-header">
-                            <img class="lgnewui-home-message-avatar" src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $msg['qqimg'] ?>&s=640">
+                            <img class="lgnewui-home-message-avatar" src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($msg['qqimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
                             <div>
                                 <div class="lgnewui-home-message-name-row">
                                     <span class="lgnewui-home-message-user-name"><?php echo htmlspecialchars($msg['name']) ?></span>
@@ -877,14 +877,12 @@ $runtimeDays = floor((time() - $startTs) / 86400);
         }
         if (typeof initLGHome === 'function') {
             initLGHome({
-                startTime: '<?php echo $text['startTime'] ?>',
-                weatherToken: 'b65cfa0c849145c283dfdf9cc6b87dd1'
+                startTime: <?php echo json_encode($text['startTime']); ?>
             });
         }
         if (typeof initLGHomeApp === 'function') {
             initLGHomeApp({
-                startTime: '<?php echo $text['startTime'] ?>',
-                weatherToken: 'b65cfa0c849145c283dfdf9cc6b87dd1'
+                startTime: <?php echo json_encode($text['startTime']); ?>
             });
         }
         // 初始化礼花效果

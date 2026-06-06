@@ -15,22 +15,23 @@
 
 <?php
 include ($_SERVER['DOCUMENT_ROOT'] . '/ipjc.php');
-error_reporting(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 include_once 'connect.php';
 include_once 'Function.php';
-$sql = "select * from login where user = '" . $_SESSION['loginadmin'] . " ' ";
-$loginresult = mysqli_query($connect, $sql);
+$stmt = mysqli_prepare($connect, "select * from login where user = ?");
+mysqli_stmt_bind_param($stmt, "s", $_SESSION['loginadmin']);
+mysqli_stmt_execute($stmt);
+$loginresult = mysqli_stmt_get_result($stmt);
 if (mysqli_num_rows($loginresult)) {
     $login = mysqli_fetch_array($loginresult);
 } else {
+    mysqli_stmt_close($stmt);
     header("Location:login.php");
     die("<script>alert('参数错误')</script>");
 }
-$sql = "select * from login";
-$result = mysqli_query($connect, $sql);
-if (mysqli_num_rows($result)) {
-    $login = mysqli_fetch_array($result);
-}
+mysqli_stmt_close($stmt);
 
 $sql = "select * from text";
 $result = mysqli_query($connect, $sql);
@@ -50,7 +51,7 @@ if (mysqli_num_rows($result)) {
 
 <head>
     <meta charset="utf-8" />
-    <title>后台管理 — <?php echo $text['title'] ?></title>
+    <title>后台管理 — <?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -64,6 +65,8 @@ if (mysqli_num_rows($result)) {
 </head>
 
 <body>
+
+    <input type="hidden" id="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
 
     <div id="Loadanimation" style="z-index:999999;">
         <div id="Loadanimation-center">
@@ -103,8 +106,6 @@ if (mysqli_num_rows($result)) {
     $resimg = mysqli_query($connect, $img);
     $loveImg = mysqli_fetch_array($resimg);
     $imgnub = $loveImg['img'];
-    $adminuser = "admin";
-    $adminpw = "love";
     ?>
 
     <!--顶部栏 Start-->
@@ -115,10 +116,10 @@ if (mysqli_num_rows($result)) {
             <!-- LOGO -->
             <a href="/admin/index.php" class="topnav-logo">
                 <span class="topnav-logo-lg">
-                    <?php echo $text['title'] ?>
+                    <?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>
                 </span>
                 <span class="topnav-logo-sm">
-                    <?php echo $text['title'] ?>
+                    <?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>
                 </span>
             </a>
 
@@ -135,11 +136,11 @@ if (mysqli_num_rows($result)) {
                     <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
                         id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="account-user-avatar">
-                            <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['userQQ'] ?>&s=640"
+                            <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['userQQ'], ENT_QUOTES, 'UTF-8') ?>&s=640"
                                 alt="user-image" class="rounded-circle">
                         </span>
                         <span>
-                            <span class="account-user-name"><?php echo $text['userName'] ?></span>
+                            <span class="account-user-name"><?php echo htmlspecialchars($text['userName'], ENT_QUOTES, 'UTF-8') ?></span>
                             <span class="account-position">操作</span>
                         </span>
                     </a>
@@ -186,9 +187,9 @@ if (mysqli_num_rows($result)) {
             <div class="left-side-menu">
                 <div class="leftbar-user">
                     <a href="#">
-                        <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['userQQ'] ?>&s=640" alt="user-image"
+                        <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['userQQ'], ENT_QUOTES, 'UTF-8') ?>&s=640" alt="user-image"
                             height="42" class="rounded-circle shadow-sm">
-                        <span class="leftbar-user-name"><?php echo $text['title'] ?></span>
+                        <span class="leftbar-user-name"><?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?></span>
                     </a>
                 </div>
 

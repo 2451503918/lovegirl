@@ -4,13 +4,26 @@ session_start();
 $file = $_SERVER['PHP_SELF'];
 
 include_once 'connect.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $jiequ = trim($_POST['jiequ']);
+    if (!is_numeric($jiequ)) {
+        echo "0";
+        exit;
+    }
     $lanjiezf = htmlspecialchars(trim($_POST['lanjiezf']), ENT_QUOTES);
     
-    $sql = "update leavSet set jiequ = '$jiequ',lanjiezf ='$lanjiezf'  ";
-    $result = mysqli_query($connect, $sql);
+    $stmt = mysqli_prepare($connect, "update leavSet set jiequ = ?, lanjiezf = ?");
+    mysqli_stmt_bind_param($stmt, "ss", $jiequ, $lanjiezf);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_affected_rows($stmt) >= 0;
+    mysqli_stmt_close($stmt);
     if ($result) {
         echo "1";
     } else {

@@ -21,6 +21,7 @@ $Imglist = mysqli_fetch_array($result);
 
                 <form class="needs-validation" action="ImgUpdaPost.php" method="post" onsubmit="return check()"
                       novalidate>
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="form-group mb-3">
                         <label for="validationCustom01">日期</label>
                         <input class="form-control col-sm-4" id="example-date" type="date" name="imgDatd" class="form-control" placeholder="日期" value="<?php echo htmlspecialchars($Imglist['imgDatd'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
@@ -33,7 +34,7 @@ $Imglist = mysqli_fetch_array($result);
 
                     <div class="form-group mb-3" id="img_url">
                         <label for="validationCustom01">图片URL</label>
-                        <input type="text" name="imgUrl" class="form-control" placeholder="请输入图片URL地址" value="<?php echo $Imglist['imgUrl'] ?>" required>
+                        <input type="text" name="imgUrl" class="form-control" placeholder="请输入图片URL地址" value="<?php echo htmlspecialchars($Imglist['imgUrl'], ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
                     <div class="form-group mb-3 text_right">
                         <input name="id" value="<?php echo $id ?>" type="hidden">

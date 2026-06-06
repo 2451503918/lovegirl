@@ -3,8 +3,14 @@
  * LG-NewUi 项目调试工具
  */
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+session_start();
+if(!isset($_SESSION['loginadmin'])){
+    header("Location: admin/login.php");
+    exit;
+}
+
+error_reporting(0);
+ini_set('display_errors', 0);
 
 echo "<h1>❤️ LG-NewUi 调试信息</h1>";
 echo "<style>body{font-family:Arial,sans-serif;padding:20px;}h2{color:#667eea;border-bottom:2px solid #eee;padding-bottom:10px;}.success{color:green;}.error{color:red;}.info{color:#667eea;}</style>";
@@ -110,5 +116,4 @@ echo "<li><a href='services/info-service.php' target='_blank'>测试信息服务
 echo "</ul>";
 
 echo "<hr><p class='info'>💡 提示：如果还没有安装数据库，请先导入 love_db.sql 文件！</p>";
-echo "<p class='info'>💡 提示：默认后台账号 admin / likegirl_2025</p>";
 ?>

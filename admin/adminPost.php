@@ -2,6 +2,12 @@
 session_start();
 $file = $_SERVER['PHP_SELF'];
 include_once 'connect.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $title = htmlspecialchars(trim($_POST['title']), ENT_QUOTES);
@@ -10,18 +16,22 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $WebPjax = trim($_POST['WebPjax']);
     $WebBlur = trim($_POST['WebBlur']);
 
-    $sql = "update text set title = '$title', logo = '$logo' , writing = '$writing' where id = '1'";
-
-    $result = mysqli_query($connect, $sql);
+    $stmt = mysqli_prepare($connect, "update text set title = ?, logo = ?, writing = ? where id = '1'");
+    mysqli_stmt_bind_param($stmt, "sss", $title, $logo, $writing);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_affected_rows($stmt) >= 0;
+    mysqli_stmt_close($stmt);
     if ($result) {
         echo "1";
     } else {
         echo "0";
     }
 
-
-    $diy = "update diySet set Pjaxkg = '$WebPjax' , Blurkg = '$WebBlur' where id = '1'";
-    $diyresult = mysqli_query($connect, $diy);
+    $stmt = mysqli_prepare($connect, "update diySet set Pjaxkg = ?, Blurkg = ? where id = '1'");
+    mysqli_stmt_bind_param($stmt, "ss", $WebPjax, $WebBlur);
+    mysqli_stmt_execute($stmt);
+    $diyresult = mysqli_stmt_affected_rows($stmt) >= 0;
+    mysqli_stmt_close($stmt);
     if ($diyresult) {
         echo "3";
     } else {

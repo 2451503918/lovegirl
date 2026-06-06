@@ -4,14 +4,23 @@ $file = $_SERVER['PHP_SELF'];
 
 
 include_once 'connect.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $imgText = htmlspecialchars(trim($_POST['imgText']), ENT_QUOTES);
     $imgDatd = trim($_POST['imgDatd']);
     $imgUrl = htmlspecialchars(trim($_POST['imgUrl']), ENT_QUOTES);
     
-    $charu = "insert into loveImg (imgDatd,imgText,imgUrl) values ('$imgDatd','$imgText','$imgUrl')";
-    $result = mysqli_query($connect, $charu);
+    $stmt = mysqli_prepare($connect, "insert into loveImg (imgDatd, imgText, imgUrl) values (?, ?, ?)");
+    mysqli_stmt_bind_param($stmt, "sss", $imgDatd, $imgText, $imgUrl);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_affected_rows($stmt) > 0;
+    mysqli_stmt_close($stmt);
     if ($result) {
         echo "1";
     } else {

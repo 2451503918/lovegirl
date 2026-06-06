@@ -4,6 +4,12 @@
  * 添加情侣位置配置和访客统计功能
  */
 
+session_start();
+if(!isset($_SESSION['loginadmin'])){
+    header("Location: login.php");
+    exit;
+}
+
 error_reporting(0);
 header("Content-Type:text/html; charset=utf8");
 include_once __DIR__.'/Config_DB.php';

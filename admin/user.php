@@ -10,6 +10,7 @@ include_once 'Nav.php';
                 <h4 class="header-title mb-3">信息配置</h4>
 
                 <form class="needs-validation" action="userPost.php" method="post" novalidate>
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="form-group">
                         <label for="validationCustom01">是否开启前端加载动画</label>
                         <select class="form-control" id="example-select" name="Webanimation">
@@ -31,12 +32,12 @@ include_once 'Nav.php';
                         <label for="validationCustom04">管理员登录账号</label>
                         <?php if ($login['user'] === $adminuser)  {?><span class="badge badge-danger-lighten"style="font-size: 0.8rem;">您的账号为默认账号 请尽快修改</span><?php }else{ ?> <span class="badge badge-success-lighten"style="font-size: 0.8rem;">账号由大小写字母与数字组成</span> <?php } ?>
                         <input type="text" class="form-control"  placeholder="请输入需修改的管理员账号"
-                               name="adminName" value="<?php echo $login['user'] ?>" required>
+                               name="adminName" value="<?php echo htmlspecialchars($login['user'], ENT_QUOTES, 'UTF-8') ?>" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">管理员登录密码</label>
-                        <?php if ($login['pw'] == md5($adminpw))  {?><span class="badge badge-danger-lighten"style="font-size: 0.8rem;">您的密码为默认密码 请尽快修改</span><?php }else{ ?> <span class="badge badge-success-lighten"style="font-size: 0.8rem;">密码由大小写字母与数字组成</span> <?php } ?>
+                        <?php if (password_verify($adminpw, $login['pw']))  {?><span class="badge badge-danger-lighten"style="font-size: 0.8rem;">您的密码为默认密码 请尽快修改</span><?php }else{ ?> <span class="badge badge-success-lighten"style="font-size: 0.8rem;">密码支持字母、数字及特殊字符</span> <?php } ?>
                         <input class="form-control"  name="pw" type="password" value="" placeholder="不修改请留空">
                     </div>
 
@@ -50,13 +51,13 @@ include_once 'Nav.php';
                         <label for="validationCustom05">自定义头部标签
                             <span class="badge badge-primary-lighten">可填写HTML标签 CSS外链</span></label>
                         <textarea name="headCon"  class="form-control"  rows="5"
-                                  placeholder=""><?php echo $diy['headCon'] ?></textarea>
+                                  placeholder=""><?php echo htmlspecialchars($diy['headCon'], ENT_QUOTES, 'UTF-8') ?></textarea>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">自定义底部标签
                             <span class="badge badge-primary-lighten">可填写HTML标签 js外链</span></label>
                         <textarea name="footerCon"  class="form-control"  rows="5"
-                                  placeholder=""><?php echo $diy['footerCon'] ?></textarea>
+                                  placeholder=""><?php echo htmlspecialchars($diy['footerCon'], ENT_QUOTES, 'UTF-8') ?></textarea>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">安全码</label>
@@ -97,10 +98,6 @@ include_once 'Nav.php';
         if (pw.length >= 1 ){
             if (pw.length <= 6) {
                 alert("密码长度需大于六位数")
-                return false;
-            }
-            if (character.test(pw)) {
-                alert("密码含有特殊字符为了过滤SQL注入已拦截\n请输入大小写字母与数字组成的密码")
                 return false;
             }
         }

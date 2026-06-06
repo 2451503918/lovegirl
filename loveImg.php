@@ -68,8 +68,14 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
     var limit = 6;
     var total = 0;
 
+    function escapeHtml(str) {
+        if (typeof str !== 'string') return '';
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
     function createPhotoCard(photo) {
-        var isBoy = Math.random() > 0.5;
+        var author = photo.author || '';
+        var isBoy = author === 'boy' || (author === '' && Math.random() > 0.5);
         var avatar = isBoy ? boyAvatar : girlAvatar;
         var name = isBoy ? boyName : girlName;
         var badgeClass = isBoy ? 'male' : 'female';
@@ -86,17 +92,17 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
                             '</div>' +
                         '</div>' +
                         '<div class="lg-author__text">' +
-                            '<span class="lg-author__name">' + name + '</span>' +
-                            '<span class="lg-author__meta">' + photo.date + '</span>' +
+                            '<span class="lg-author__name">' + escapeHtml(name) + '</span>' +
+                            '<span class="lg-author__meta">' + escapeHtml(photo.date) + '</span>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
                 '<div class="lg-content">' +
-                    '<h3 class="lg-title">' + photo.text + '</h3>' +
+                    '<h3 class="lg-title">' + escapeHtml(photo.text) + '</h3>' +
                 '</div>' +
                 '<div class="lg-media grid-1" view-image>' +
                     '<div class="lg-photo-box">' +
-                        '<img class="lg-photo lazy" data-src="' + photo.img + '" src="' + photo.img + '" alt="' + photo.text + '">' +
+                        '<img class="lg-photo lazy" data-src="' + escapeHtml(photo.img) + '" src="' + escapeHtml(photo.img) + '" alt="' + escapeHtml(photo.text) + '">' +
                     '</div>' +
                 '</div>' +
             '</div>' +

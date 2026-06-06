@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once 'Function.php';
 include_once 'Nav.php';
 $loveImg = "select * from loveImg order by id desc";
 $resImg = mysqli_query($connect, $loveImg);
@@ -43,7 +44,7 @@ $resImg = mysqli_query($connect, $loveImg);
                                     <?php echo $SerialNumber ?>
                                 </div>
                             </td>
-                            <td><?php echo $list['imgText'] ?></td>
+                            <td><?php echo htmlspecialchars($list['imgText'], ENT_QUOTES, 'UTF-8') ?></td>
                             <td><?php echo $list['imgDatd'] ?></td>
                             <td>
                                 <a href="modImg.php?id=<?php echo $list['id'] ?>">
@@ -51,11 +52,13 @@ $resImg = mysqli_query($connect, $loveImg);
                                         <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                     </button>
                                 </a>
-                                <a href="javascript:del(<?php echo $list['id']; ?>,'<?php echo $list['imgText']; ?>');">
-                                    <button type="button" class="btn btn-danger btn-rounded">
+                                <form method="POST" action="delImg.php" style="display:inline" onsubmit="return confirm('您确认要删除描述为 <?php echo htmlspecialchars($list['imgText'], ENT_QUOTES, 'UTF-8') ?> 的相册图片吗')">
+                                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($list['id'], ENT_QUOTES, 'UTF-8') ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8') ?>">
+                                    <button type="submit" class="btn btn-danger btn-rounded">
                                         <i class=" mdi mdi-delete-empty mr-1"></i>删除
                                     </button>
-                                </a></td>
+                                </form></td>
                         </tr>
                     <?php
                     }
@@ -89,13 +92,7 @@ include_once 'Footer.php';
 <script src="assets/js/pages/demo.datatable-init.js"></script>
 <!-- end demo js-->
 
-<script>
-function del(id, imgText) {
-    if (confirm('您确认要删除描述为 ' + imgText + ' 的相册图片吗')) {
-        location.href = 'delImg.php?id=' + id + '&imgText=' + imgText;
-    }
-}
-</script>
+
 
 </body>
 </html>

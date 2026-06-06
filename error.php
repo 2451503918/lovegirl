@@ -15,15 +15,21 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <?php
-include_once 'admin/Database.php';
-$sql = "select * from IPerror where State=? limit 1";
-$stmt=$conn->prepare($sql);
-$stmt->bind_param("s",$ip);
+include_once 'admin/connect.php';
 $ip = $_SERVER['REMOTE_ADDR'];
-$stmt->bind_result($id,$ipAdd,$Time,$ipkiki,$text);
-$result = $stmt->execute();
-if(!$result) { error_log("error.php query error: " . $stmt->error); }
-$stmt->fetch();
+$stmt = mysqli_prepare($connect, "select * from IPerror where State=? limit 1");
+mysqli_stmt_bind_param($stmt, "s", $ip);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
+    $Time = $row['Time'];
+    $text = $row['text'];
+} else {
+    $Time = null;
+    $text = null;
+}
+mysqli_stmt_close($stmt);
 
 ?>
 <head>
@@ -109,10 +115,10 @@ $stmt->fetch();
                             <p class="text-muted">善语结善缘 恶语伤人心</p>
                             <p class="text-muted mb-4">
                                 <span class="badge badge-success-lighten">封禁时间：
-                                <?php if ($Time) { ?><?php echo $Time; ?><?php } else { ?>无 <?php } ?>
+                                <?php if ($Time) { ?><?php echo htmlspecialchars($Time, ENT_QUOTES, 'UTF-8'); ?><?php } else { ?>无 <?php } ?>
                                 </span>
                                 <span class="badge badge-danger-lighten">封禁原因：
-                                <?php if ($text) { ?><?php echo $text; ?><?php } else { ?>您的IP未被封禁 <?php } ?>
+                                <?php if ($text) { ?><?php echo htmlspecialchars($text, ENT_QUOTES, 'UTF-8'); ?><?php } else { ?>您的IP未被封禁 <?php } ?>
                                 </span>
 
                             </p>

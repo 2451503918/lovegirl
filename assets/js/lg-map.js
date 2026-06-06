@@ -5,7 +5,12 @@
 
 (function() {
     'use strict';
-    
+
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
     let mapInitialized = false;
     let footprints = [];
     
@@ -163,12 +168,12 @@
                     <i class="ph-fill ph-map-pin"></i>
                 </div>
                 <div>
-                    <div style="font-weight: 700; font-size: 16px; color: #333;">${footprint.name}</div>
-                    <div style="font-size: 13px; color: #888;">${footprint.city} · ${footprint.date}</div>
+                    <div style="font-weight: 700; font-size: 16px; color: #333;">${escapeHtml(footprint.name)}</div>
+                    <div style="font-size: 13px; color: #888;">${escapeHtml(footprint.city)} · ${escapeHtml(footprint.date)}</div>
                 </div>
             </div>
             <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee; font-size: 14px; color: #666;">
-                ${footprint.description}
+                ${escapeHtml(footprint.description)}
             </div>
         `;
         

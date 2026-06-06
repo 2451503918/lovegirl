@@ -12,6 +12,12 @@ function checkQQ($qq)
 }
 
 include_once 'Database.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $boy = htmlspecialchars(trim($_POST['boy']));

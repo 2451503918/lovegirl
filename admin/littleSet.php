@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include_once 'Function.php';
 include_once 'Nav.php';
 $article = "select * from article order by id desc";
 $resarticle = mysqli_query($connect, $article);
@@ -35,6 +36,7 @@ $resarticle = mysqli_query($connect, $article);
                     </thead>
 
                     <form class="needs-validation" action="littleupda.php" method="post">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                         <tbody>
                         <?php
                         $SerialNumber = 0;
@@ -47,20 +49,22 @@ $resarticle = mysqli_query($connect, $article);
                                         <?php echo $SerialNumber ?>
                                     </div>
                                 </td>
-                                <td><?php echo $info['articletitle'] ?></td>
+                                <td><?php echo htmlspecialchars($info['articletitle'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td><?php echo $info['articletime'] ?></td>
-                                <td><?php echo $info['articlename'] ?></td>
+                                <td><?php echo htmlspecialchars($info['articlename'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td>
                                     <a href="modlitt.php?id=<?php echo $info['id'] ?>">
                                         <button type="button" class="btn btn-secondary btn-rounded">
                                             <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                         </button>
                                     </a>
-                                    <a href="javascript:del(<?php echo $info['id']; ?>,'<?php echo $info['articletitle']; ?>');">
-                                        <button type="button" class="btn btn-danger btn-rounded">
+                                    <form method="POST" action="dellitt.php" style="display:inline" onsubmit="return confirm('您确认要删除标题为 <?php echo htmlspecialchars($info['articletitle'], ENT_QUOTES, 'UTF-8') ?> 的文章吗')">
+                                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($info['id'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8') ?>">
+                                        <button type="submit" class="btn btn-danger btn-rounded">
                                             <i class=" mdi mdi-delete-empty mr-1"></i>删除
                                         </button>
-                                    </a>
+                                    </form>
                                     <input name="id" value="<?php echo $info['id']; ?>" type="hidden">
 
                                 </td>
@@ -70,7 +74,6 @@ $resarticle = mysqli_query($connect, $article);
                         ?>
                         </tbody>
                 </table>
-                </form>
 
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -98,13 +101,7 @@ include_once 'Footer.php';
 <script src="/admin/assets/js/pages/demo.datatable-init.js"></script>
 <!-- end demo js-->
 
-<script>
-function del(id, articletitle) {
-    if (confirm('您确认要删除标题为 ' + articletitle + ' 的文章吗')) {
-        location.href = 'dellitt.php?id=' + id + '&title=' + articletitle;
-    }
-}
-</script>
+
 
 </body>
 </html>
