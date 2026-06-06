@@ -1,481 +1,409 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- 主机： localhost
--- 生成日期： 2025-09-03 01:31:28
--- 服务器版本： 5.7.44-log
--- PHP 版本： 7.4.33
+-- ============================================================================
+-- Like Girl v5.2.1 数据库
+-- 完整表结构 + 索引 + 演示数据
+-- 兼容原 v5.2.0 表结构（保留 article/loveImg/old_*），并补充新模块所需表
+-- 数据库名：lovey
+-- ============================================================================
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+08:00";
 START TRANSACTION;
-SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+SET NAMES utf8mb4;
 
---
--- 数据库： `lovey`
---
+-- ============================================================================
+-- 1. text - 站点基础信息
+-- ============================================================================
+DROP TABLE IF EXISTS `text`;
+CREATE TABLE `text` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `boy` varchar(10) NOT NULL COMMENT '男主昵称',
+  `girl` varchar(10) NOT NULL COMMENT '女主昵称',
+  `title` varchar(30) NOT NULL COMMENT '网站标题',
+  `logo` varchar(20) NOT NULL COMMENT '网站logo',
+  `writing` varchar(200) NOT NULL COMMENT '首页文案',
+  `boyimg` varchar(30) NOT NULL COMMENT '男主QQ(头像)',
+  `girlimg` varchar(30) NOT NULL COMMENT '女主QQ(头像)',
+  `startTime` varchar(100) NOT NULL COMMENT '在一起时间',
+  `icp` varchar(50) NOT NULL COMMENT '备案号',
+  `Copyright` varchar(100) NOT NULL COMMENT '版权',
+  `card1` varchar(100) NOT NULL,
+  `card2` varchar(100) NOT NULL,
+  `card3` varchar(100) NOT NULL,
+  `deci1` varchar(100) NOT NULL,
+  `deci2` varchar(100) NOT NULL,
+  `deci3` varchar(100) NOT NULL,
+  `bgimg` varchar(200) NOT NULL COMMENT '首页背景图',
+  `userQQ` varchar(30) NOT NULL COMMENT '站长QQ',
+  `userName` varchar(30) NOT NULL COMMENT '站长昵称',
+  `Animation` int(1) NOT NULL DEFAULT 1 COMMENT '动画开关',
+  `boyCity` varchar(50) NOT NULL DEFAULT '' COMMENT '男主城市',
+  `girlCity` varchar(50) NOT NULL DEFAULT '' COMMENT '女主城市',
+  `boyLat` decimal(10,6) NOT NULL DEFAULT 0 COMMENT '男主纬度',
+  `boyLng` decimal(10,6) NOT NULL DEFAULT 0 COMMENT '男主经度',
+  `girlLat` decimal(10,6) NOT NULL DEFAULT 0 COMMENT '女主纬度',
+  `girlLng` decimal(10,6) NOT NULL DEFAULT 0 COMMENT '女主经度',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='站点基础信息';
 
--- --------------------------------------------------------
+INSERT INTO `text` (`id`, `boy`, `girl`, `title`, `logo`, `writing`, `boyimg`, `girlimg`, `startTime`, `icp`, `Copyright`, `card1`, `card2`, `card3`, `deci1`, `deci2`, `deci3`, `bgimg`, `userQQ`, `userName`, `Animation`, `boyCity`, `girlCity`, `boyLat`, `boyLng`, `girlLat`, `girlLng`) VALUES
+(1, 'Ki', 'Li', 'Like_Girl v5.2.1', 'Like_Girl {v5.2.1}', '爱晨雾漫过青瓦，爱暮色染透篱笆，更爱与君并肩立，看遍这人间烟火里的朝暮与年华。', '647159607', '917640289', '2022-06-05T00:07', '粤ICP备2021037776号', 'Copyright © 2022 - 2025 Like_Girl All Rights Reserved.', '点点滴滴', '留言板', '关于我们', '有人愿意听你碎碎念念也很浪漫', '在这里写下我们的留言祝福', '我们之间认识的经历回忆', 'Style/img/bgCover.png', '3439780232', 'Ki', 1, '广州', '深圳', 23.129110, 113.264385, 22.543099, 114.057868);
 
---
--- 表的结构 `about`
---
-
-CREATE TABLE `about` (
-  `id` int(11) NOT NULL,
-  `title` varchar(30) NOT NULL COMMENT '标题',
-  `aboutimg` varchar(100) NOT NULL COMMENT '背景图片',
-  `info1` varchar(50) NOT NULL COMMENT '对话1',
-  `info2` varchar(50) NOT NULL COMMENT '对话2',
-  `info3` varchar(50) NOT NULL COMMENT '对话3',
-  `btn1` varchar(30) NOT NULL COMMENT '按钮确定',
-  `btn2` varchar(30) NOT NULL COMMENT '按钮取消',
-  `infox1` varchar(30) NOT NULL COMMENT 'x2',
-  `infox2` varchar(30) NOT NULL COMMENT 'x2',
-  `infox3` varchar(30) NOT NULL COMMENT 'x2',
-  `infox4` varchar(30) NOT NULL COMMENT 'x2',
-  `infox5` varchar(30) NOT NULL COMMENT 'x2',
-  `infox6` varchar(30) NOT NULL COMMENT 'x2',
-  `btnx2` varchar(30) NOT NULL COMMENT 'btnx2',
-  `infof1` varchar(30) NOT NULL COMMENT 'f3',
-  `infof2` varchar(30) NOT NULL COMMENT 'f3',
-  `infof3` varchar(30) NOT NULL COMMENT 'f3',
-  `infof4` varchar(30) NOT NULL COMMENT 'f3',
-  `btnf3` varchar(30) NOT NULL COMMENT 'btnf3',
-  `infod1` varchar(30) NOT NULL COMMENT 'd4',
-  `infod2` varchar(30) NOT NULL COMMENT 'd4',
-  `infod3` varchar(30) NOT NULL COMMENT 'd4',
-  `infod4` varchar(30) NOT NULL COMMENT 'd4',
-  `infod5` varchar(30) NOT NULL COMMENT 'd4'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 转存表中的数据 `about`
---
-
-INSERT INTO `about` (`id`, `title`, `aboutimg`, `info1`, `info2`, `info3`, `btn1`, `btn2`, `infox1`, `infox2`, `infox3`, `infox4`, `infox5`, `infox6`, `btnx2`, `infof1`, `infof2`, `infof3`, `infof4`, `btnf3`, `infod1`, `infod2`, `infod3`, `infod4`, `infod5`) VALUES
-(1, 'Ki_About', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', 'Hi, 欢迎你的来访', '愿得一人心 白首不相离', '记录日常生活 留住感动', '听我介绍', '结束介绍', '情侣小站Like Girl是 Ki 的原创项目', '在2022年暑假的假期最后几天里发布了1.0版本', '最新版本为 v5.2.0 亦是最终版本 目前已开源到码云', 'PHP确实是 “世界上最好的语言”  我非常喜欢（痛苦', '在开发过程中遇到了许多奇葩问题 也是只能自己探索解决...', '喜欢探索编程领域 热爱学习新知识 热爱开源文化', '为什么叫 Ki？', '不知道你有没有看过《比悲伤更悲伤的故事》', '嗨，我是k，如果有下辈子的话，', '“我想当戒指，眼镜，床和笔记本，这样的话，我就可以...”', '当然跟这个没有关系哈哈', '本站前端所有页面', '首页 index', '点点滴滴 little', '留言板 leaving', '关于 about', '欢迎您的来访 IP已记录 请尽情浏览本站～');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `article`
---
-
-CREATE TABLE `article` (
-  `id` int(11) NOT NULL,
-  `articletext` varchar(2000) COLLATE utf8_unicode_ci NOT NULL,
-  `articletime` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `articletitle` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `articlename` varchar(20) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `article`
---
-
-INSERT INTO `article` (`id`, `articletext`, `articletime`, `articletitle`, `articlename`) VALUES
-(1, '<quote>引用内容样式</quote>\n\n<hr>\n\n\n<h1>H1文字大小演示</h1>\n\n<hr>\n\n\n<h2>H2文字大小演示</h2>\n\n<hr>\n\n\n<h3>H3文字大小演示</h3>\n\n<hr>\n\n\n<h4>H4文字大小演示</h4>\n\n<hr>\n\n\n<h5>H5文字大小演示</h5>\n\n<hr>\n\n\n<h6>H6文字大小演示</h6>\n\n<hr>\n\n\n<b>加粗字体</b>\n<s>删除线字体</s>\n<i>斜体</i>\n<code>强调内容</code>\n\n<center>文本居中</center>\n\n\n<!--分割线-->\n<hr>\n<quote>插入图片</quote>\n<img alt=\"\" src=\"https://lovey.kikiw.cn/Style/img/Cover.webp\">\n<!--分割线-->\n<hr>\n<quote>插入视频</quote>\n\n<video src=\"https://classpic.kikiw.cn/video/fengjing.mp4\" controls></video>\n\n<!--分割线-->\n<hr>', '2022-11-20', 'Like_Girl 默认文章语法', 'Ki.');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `diySet`
---
-
+-- ============================================================================
+-- 2. diySet - DIY 设置
+-- ============================================================================
+DROP TABLE IF EXISTS `diySet`;
 CREATE TABLE `diySet` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `headCon` text NOT NULL,
   `footerCon` text NOT NULL,
   `cssCon` text NOT NULL,
-  `Pjaxkg` varchar(1) NOT NULL COMMENT 'pjax开关',
-  `Blurkg` varchar(1) NOT NULL COMMENT '高斯模糊开关'
+  `Pjaxkg` varchar(1) NOT NULL DEFAULT '1' COMMENT 'PJAX开关',
+  `Blurkg` varchar(1) NOT NULL DEFAULT '1' COMMENT '高斯模糊开关',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- 转存表中的数据 `diySet`
---
 
 INSERT INTO `diySet` (`id`, `headCon`, `footerCon`, `cssCon`, `Pjaxkg`, `Blurkg`) VALUES
-(1, '', '&lt;!--&lt;script src=&quot;https://img-love.kikiw.cn/jsxg/yh/yinghua.js&quot;&gt;&lt;/script&gt;--&gt;', '', '1', '1');
+(1, '', '', '', '1', '1');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `IPerror`
---
-
-CREATE TABLE `IPerror` (
-  `id` int(11) NOT NULL,
-  `ipAdd` varchar(100) NOT NULL COMMENT 'ip归属地',
-  `Time` varchar(200) NOT NULL COMMENT '时间',
-  `State` text NOT NULL COMMENT '拉黑ip',
-  `text` varchar(100) NOT NULL COMMENT '备注'
+-- ============================================================================
+-- 3. about - 关于页文案
+-- ============================================================================
+DROP TABLE IF EXISTS `about`;
+CREATE TABLE `about` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `aboutimg` varchar(500) NOT NULL,
+  `info1` varchar(50) NOT NULL,
+  `info2` varchar(50) NOT NULL,
+  `info3` varchar(50) NOT NULL,
+  `btn1` varchar(30) NOT NULL,
+  `btn2` varchar(30) NOT NULL,
+  `infox1` varchar(30) NOT NULL,
+  `infox2` varchar(30) NOT NULL,
+  `infox3` varchar(30) NOT NULL,
+  `infox4` varchar(30) NOT NULL,
+  `infox5` varchar(30) NOT NULL,
+  `infox6` varchar(30) NOT NULL,
+  `btnx2` varchar(30) NOT NULL,
+  `infof1` varchar(30) NOT NULL,
+  `infof2` varchar(30) NOT NULL,
+  `infof3` varchar(30) NOT NULL,
+  `infof4` varchar(30) NOT NULL,
+  `btnf3` varchar(30) NOT NULL,
+  `infod1` varchar(30) NOT NULL,
+  `infod2` varchar(30) NOT NULL,
+  `infod3` varchar(30) NOT NULL,
+  `infod4` varchar(30) NOT NULL,
+  `infod5` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
+INSERT INTO `about` (`id`, `title`, `aboutimg`, `info1`, `info2`, `info3`, `btn1`, `btn2`, `infox1`, `infox2`, `infox3`, `infox4`, `infox5`, `infox6`, `btnx2`, `infof1`, `infof2`, `infof3`, `infof4`, `btnf3`, `infod1`, `infod2`, `infod3`, `infod4`, `infod5`) VALUES
+(1, 'Ki_About', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', 'Hi, 欢迎你的来访', '愿得一人心 白首不相离', '记录日常生活 留住感动', '听我介绍', '结束介绍', '情侣小站Like Girl是 Ki 的原创项目', '在2022年暑假的假期最后几天里发布了1.0版本', '最新版本为 v5.2.1 亦是最终版本 目前已开源', 'PHP 确实是 "世界上最好的语言" 我非常喜欢', '在开发过程中遇到了许多奇葩问题 也是只能自己探索解决', '喜欢探索编程领域 热爱学习新知识 热爱开源文化', '为什么叫 Ki？', '不知道你有没有看过《比悲伤更悲伤的故事》', '嗨，我是k，如果有下辈子的话，', '"我想当戒指，眼镜，床和笔记本..."', '当然跟这个没有关系哈哈', '本站前端所有页面', '首页 index', '点点滴滴 little', '留言板 leaving', '关于 about', '欢迎您的来访 IP已记录 请尽情浏览本站～');
 
---
--- 表的结构 `leaving`
---
+-- ============================================================================
+-- 4. little - 文章/点滴
+-- ============================================================================
+DROP TABLE IF EXISTS `little`;
+CREATE TABLE `little` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL COMMENT '标题',
+  `text` mediumtext NOT NULL COMMENT '内容',
+  `author` varchar(20) NOT NULL DEFAULT 'Ki' COMMENT '作者',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
+  `weather` varchar(20) NOT NULL DEFAULT '' COMMENT '天气',
+  `mood` varchar(20) NOT NULL DEFAULT '' COMMENT '心情',
+  `location` varchar(100) NOT NULL DEFAULT '' COMMENT '地点',
+  `views` int(11) NOT NULL DEFAULT 0 COMMENT '浏览数',
+  `likes` int(11) NOT NULL DEFAULT 0 COMMENT '点赞数',
+  `encrypted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否加密',
+  `password` varchar(100) NOT NULL DEFAULT '' COMMENT '加密密码',
+  `cover` varchar(500) NOT NULL DEFAULT '' COMMENT '封面图',
+  `tags` varchar(200) NOT NULL DEFAULT '' COMMENT '标签',
+  PRIMARY KEY (`id`),
+  KEY `idx_little_date` (`date`),
+  KEY `idx_little_views` (`views`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `little` (`id`, `title`, `text`, `author`, `date`, `weather`, `mood`, `location`, `views`, `likes`, `encrypted`, `password`, `cover`, `tags`) VALUES
+(1, '我们在一起的第一天', '<p>今天是个特别的日子，我们在咖啡馆第一次相遇，窗外的阳光洒在你的侧脸上，一切都是那么美好。</p><p>从今天开始，我们的故事正式开启。</p>', 'Ki', '2022-06-05 14:30:00', '晴', '开心', '广州·天河城', 1280, 96, 0, '', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '纪念日,初识'),
+(2, '一起看过的日落', '<p>傍晚时分，我们坐在海边的礁石上，看着太阳一点一点沉入海平线。橘红色的晚霞映在你的眼眸里，比风景更美。</p>', 'Li', '2023-08-15 18:45:00', '晴转多云', '浪漫', '深圳·大梅沙', 856, 64, 0, '', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '旅行,日落'),
+(3, '深夜的厨房小确幸', '<p>凌晨一点，你突然想吃泡面，于是我们一起钻进厨房，煮了两碗热气腾腾的泡面加蛋。那一刻，简单却温暖。</p>', 'Ki', '2024-03-20 01:20:00', '雨', '温暖', '家', 642, 48, 0, '', '', '日常,深夜');
+
+-- ============================================================================
+-- 5. photo - 相册
+-- ============================================================================
+DROP TABLE IF EXISTS `photo`;
+CREATE TABLE `photo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(20) NOT NULL COMMENT '相册编码',
+  `title` varchar(100) NOT NULL COMMENT '相册标题',
+  `img` varchar(500) NOT NULL COMMENT '封面图',
+  `desc` text NOT NULL COMMENT '描述',
+  `author` varchar(20) NOT NULL DEFAULT 'Ki',
+  `location` varchar(100) NOT NULL DEFAULT '',
+  `lng` decimal(10,6) NOT NULL DEFAULT 0,
+  `lat` decimal(10,6) NOT NULL DEFAULT 0,
+  `views` int(11) NOT NULL DEFAULT 0,
+  `likes` int(11) NOT NULL DEFAULT 0,
+  `password` varchar(100) NOT NULL DEFAULT '',
+  `private` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否私密',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_photo_code` (`code`),
+  KEY `idx_photo_date` (`date`),
+  KEY `idx_photo_private` (`private`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `photo` (`id`, `code`, `title`, `img`, `desc`, `author`, `location`, `lng`, `lat`, `views`, `likes`, `password`, `private`, `date`) VALUES
+(1, 'P20240101', '初春的西湖', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '春天里我们一起走过断桥，春风拂面，柳絮飞舞。', 'Ki', '杭州·西湖', 120.149317, 30.246780, 326, 28, '', 0, '2024-03-15 10:00:00'),
+(2, 'P20240820', '海边的夏天', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '光着脚丫在沙滩上追逐浪花，海水打湿了裤脚也毫不在意。', 'Li', '厦门·鼓浪屿', 118.067013, 24.448018, 512, 45, '', 0, '2024-08-20 16:30:00'),
+(3, 'P20241225', '圣诞夜的小屋', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '壁炉的火光、圣诞树的彩灯、还有你递过来的热红酒。', 'Ki', '家', 0, 0, 198, 16, '', 0, '2024-12-25 21:00:00');
+
+-- ============================================================================
+-- 6. timeline - 时间线
+-- ============================================================================
+DROP TABLE IF EXISTS `timeline`;
+CREATE TABLE `timeline` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL DEFAULT 'event' COMMENT '类型: event/travel/food',
+  `title` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  `date` date NOT NULL,
+  `location` varchar(100) NOT NULL DEFAULT '',
+  `icon` varchar(50) NOT NULL DEFAULT 'heart' COMMENT '图标',
+  `images` text NOT NULL COMMENT 'JSON图片数组',
+  PRIMARY KEY (`id`),
+  KEY `idx_timeline_date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `timeline` (`id`, `type`, `title`, `content`, `date`, `location`, `icon`, `images`) VALUES
+(1, 'event', '初识', '在咖啡馆第一次相遇，点了同一款拿铁。', '2022-06-05', '广州·天河城', 'heart', ''),
+(2, 'event', '第一次约会', '看了人生中第一场一起的电影。', '2022-06-19', '广州·正佳广场', 'film', ''),
+(3, 'travel', '第一次旅行', '三天两夜的厦门之旅，鼓浪屿的海风。', '2022-08-15', '厦门', 'plane', ''),
+(4, 'event', '在一起的纪念日', '我们正式确定了关系。', '2022-09-09', '广州·珠江边', 'star', ''),
+(5, 'travel', '跨年旅行', '在哈尔滨看冰雪大世界。', '2023-12-31', '哈尔滨', 'snowflake', '');
+
+-- ============================================================================
+-- 7. lovelist - 恋爱清单
+-- ============================================================================
+DROP TABLE IF EXISTS `lovelist`;
+CREATE TABLE `lovelist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `icon` int(1) NOT NULL DEFAULT 0 COMMENT '是否完成(旧字段)',
+  `is_done` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否完成(新)',
+  `eventname` varchar(200) NOT NULL,
+  `imgurl` varchar(300) NOT NULL DEFAULT '0',
+  `note` text NOT NULL,
+  `location` varchar(100) NOT NULL DEFAULT '',
+  `lng` decimal(10,6) NOT NULL DEFAULT 0,
+  `lat` decimal(10,6) NOT NULL DEFAULT 0,
+  `donedate` date DEFAULT NULL COMMENT '完成日期',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建日期',
+  PRIMARY KEY (`id`),
+  KEY `idx_lovelist_is_done` (`is_done`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `lovelist` (`id`, `icon`, `is_done`, `eventname`, `imgurl`, `note`, `location`, `lng`, `lat`, `donedate`, `date`) VALUES
+(1, 1, 1, '一起去看一次海，去沙滩🏖', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '在大梅沙，海风很舒服。', '深圳·大梅沙', 114.307958, 22.595325, '2023-08-15', '2022-09-01 10:00:00'),
+(2, 1, 1, '一起吃火锅🍲', '0', '海底捞的小料台我们吃了三轮。', '广州·北京路', 113.270793, 23.128998, '2023-02-14', '2022-09-01 10:01:00'),
+(3, 0, 0, '一起去看雪，堆雪人⛄', '0', '', '', 0, 0, NULL, '2022-09-01 10:02:00'),
+(4, 0, 0, '一起挑选戒指💍', '0', '', '', 0, 0, NULL, '2022-09-01 10:03:00'),
+(5, 0, 0, '一起挑选婚纱👗', '0', '', '', 0, 0, NULL, '2022-09-01 10:04:00'),
+(6, 0, 0, '一起去看樱花🌸', '0', '', '', 0, 0, NULL, '2022-09-01 10:05:00'),
+(7, 0, 0, '一起去听一次演唱会🎤', '0', '', '', 0, 0, NULL, '2022-09-01 10:06:00'),
+(8, 0, 0, '一起入住一次五星级酒店🏨', '0', '', '', 0, 0, NULL, '2022-09-01 10:07:00');
+
+-- ============================================================================
+-- 8. leaving - 留言板
+-- ============================================================================
+DROP TABLE IF EXISTS `leaving`;
 CREATE TABLE `leaving` (
-  `id` int(11) NOT NULL,
-  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户名字',
-  `QQ` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT 'QQ号码',
-  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '留言内容',
-  `time` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `ip` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'ip记录',
-  `city` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '省/城市'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `leaving`
---
-
-INSERT INTO `leaving` (`id`, `name`, `QQ`, `text`, `time`, `ip`, `city`) VALUES
-(1, 'Ki.', '3439780232', 'Like Girl 5.2.1-Stable 默认留言', '1756830249', '223.104.79.236', '广东');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `leavSet`
---
-
-CREATE TABLE `leavSet` (
-  `id` int(11) NOT NULL,
-  `jiequ` varchar(10) NOT NULL COMMENT '截取长度',
-  `lanjie` varchar(500) NOT NULL COMMENT '违禁符号',
-  `lanjiezf` varchar(500) NOT NULL COMMENT '违禁词'
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL DEFAULT '匿名',
+  `QQ` varchar(20) NOT NULL DEFAULT '',
+  `text` text NOT NULL,
+  `time` varchar(200) NOT NULL,
+  `ip` varchar(45) NOT NULL DEFAULT '',
+  `city` varchar(100) NOT NULL DEFAULT '',
+  `device` varchar(50) NOT NULL DEFAULT '',
+  `browser` varchar(50) NOT NULL DEFAULT '',
+  `likes` int(11) NOT NULL DEFAULT 0,
+  `parent_id` int(11) NOT NULL DEFAULT 0 COMMENT '父留言id（回复）',
+  PRIMARY KEY (`id`),
+  KEY `idx_leaving_time` (`time`),
+  KEY `idx_leaving_parent` (`parent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- 转存表中的数据 `leavSet`
---
+INSERT INTO `leaving` (`id`, `name`, `QQ`, `text`, `time`, `ip`, `city`, `device`, `browser`, `likes`, `parent_id`) VALUES
+(1, 'Ki.', '3439780232', 'Like Girl 5.2.1-Stable 默认留言～ 欢迎各位来访 ❤️', '1756830249', '127.0.0.1', '广东', 'PC', 'Chrome 120', 12, 0),
+(2, '小太阳', '1234567', '祝你们幸福美满，白头偕老！🌻', '1756830250', '127.0.0.1', '北京', 'Mobile', 'Safari 17', 8, 0);
+
+-- ============================================================================
+-- 9. leavSet - 留言设置
+-- ============================================================================
+DROP TABLE IF EXISTS `leavSet`;
+CREATE TABLE `leavSet` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `jiequ` varchar(10) NOT NULL DEFAULT '100' COMMENT '截取长度',
+  `lanjie` varchar(500) NOT NULL DEFAULT '' COMMENT '违禁符号',
+  `lanjiezf` varchar(500) NOT NULL DEFAULT '' COMMENT '违禁词',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `leavSet` (`id`, `jiequ`, `lanjie`, `lanjiezf`) VALUES
-(1, '100', '`~!@#$^&*()=|{}\':;\',\\\\[\\\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“\'。，、？', '操垃圾傻逼妈');
+(1, '100', '`~!@#$^&*()=|{}\':;\',\\\\[\\\\].<>/?~！@#￥……&*（）——|{}【】‘；：""\'。，、？', '');
 
--- --------------------------------------------------------
-
---
--- 表的结构 `login`
---
-
+-- ============================================================================
+-- 10. login - 管理员账号（密码：password_hash('admin123', PASSWORD_BCRYPT)）
+-- ============================================================================
+DROP TABLE IF EXISTS `login`;
 CREATE TABLE `login` (
-  `id` int(11) NOT NULL,
-  `user` varchar(100) NOT NULL COMMENT '登录用户名',
-  `pw` char(32) NOT NULL COMMENT '登录密码'
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(100) NOT NULL,
+  `pw` varchar(255) NOT NULL COMMENT 'password_hash 加密后的密码',
+  `last_login` datetime DEFAULT NULL,
+  `last_ip` varchar(45) DEFAULT '',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- 转存表中的数据 `login`
---
+-- 默认账号 admin / 密码 admin123
+-- 已用 PHP password_hash('admin123', PASSWORD_BCRYPT) 加密
+-- 登录脚本需使用 password_verify 验证
+INSERT INTO `login` (`id`, `user`, `pw`, `last_login`, `last_ip`) VALUES
+(1, 'admin', '$2y$12$ZiW4ZWDRnFSDilwzNoVO4.rXHwiIF6.6zxPz/DzPx8lRtXXk84fhu', NULL, '');
 
-INSERT INTO `login` (`id`, `user`, `pw`) VALUES
-(1, 'admin', '8c3ee407c836e339d9ec61a43d1dcaeb');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `loveImg`
---
-
-CREATE TABLE `loveImg` (
-  `id` int(11) NOT NULL,
-  `imgDatd` varchar(100) NOT NULL COMMENT '日期',
-  `imgText` varchar(200) NOT NULL COMMENT '描述',
-  `imgUrl` varchar(500) NOT NULL COMMENT '外链'
+-- ============================================================================
+-- 11. IPerror - IP 黑名单
+-- ============================================================================
+DROP TABLE IF EXISTS `IPerror`;
+CREATE TABLE `IPerror` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ipAdd` varchar(100) NOT NULL,
+  `Time` varchar(200) NOT NULL,
+  `State` text NOT NULL,
+  `text` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
---
--- 表的结构 `lovelist`
---
-
-CREATE TABLE `lovelist` (
-  `id` int(11) NOT NULL,
-  `icon` int(1) NOT NULL COMMENT '是否完成',
-  `eventname` varchar(200) CHARACTER SET utf8mb4 NOT NULL COMMENT '事件内容',
-  `imgurl` varchar(300) COLLATE utf8_unicode_ci NOT NULL COMMENT '图片地址'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `lovelist`
---
-
-INSERT INTO `lovelist` (`id`, `icon`, `eventname`, `imgurl`) VALUES
-(1, 0, '一起去电影院看一场电影🎬', '0'),
-(2, 0, '一起穿情侣装逛街🧡', '0'),
-(3, 0, '一起去一趟迪士尼游乐园🎡', '0'),
-(4, 0, '一起去游泳🏊', '0'),
-(5, 0, '一起唱次歌并且录下来🎤', '0'),
-(6, 0, '一起在厨房做次饭🍳', '0'),
-(7, 0, '一起过次烛光晚餐🍷', '0'),
-(8, 0, '一起过生日🎂', '0'),
-(9, 0, '一起打扫卫生🧹', '0'),
-(10, 0, '一起给对方写信，然后读给对方听💌', '0'),
-(11, 0, '一起去一次鬼屋👻', '0'),
-(12, 0, '一起去蹦极🪂', '0'),
-(13, 0, '一起养一只宠物🐶', '0'),
-(14, 0, '一起研究口红色号💄', '0'),
-(15, 0, '一起给对方化妆💅', '0'),
-(16, 0, '一起为对方抹指甲油💅', '0'),
-(17, 0, '一起去做次陶艺🏺', '0'),
-(18, 0, '一起去吃一次全家桶🍗', '0'),
-(19, 0, '一起熬夜通宵跨年🎇', '0'),
-(20, 0, '一起去旅游✈️', '0'),
-(21, 0, '一起去爬山⛰', '0'),
-(22, 0, '一起坐一次摩天轮🎡', '0'),
-(23, 0, '一起拍视频记录生活📹', '0'),
-(24, 0, '一起为对方刷牙，然后亲亲😘', '0'),
-(25, 0, '一起去看一次海，去沙滩🏖', '0'),
-(26, 0, '互穿对方的衣服，拍照留念📸', '0'),
-(27, 0, '一起逛超市买好吃的🛒', '0'),
-(28, 0, '一起坐一次热气球🎈', '0'),
-(29, 0, '一起看书，分享自己喜欢的书籍📖', '0'),
-(30, 0, '一起在下雨天追剧📺', '0'),
-(31, 0, '一起做一次蛋糕甜点🍰', '0'),
-(32, 0, '一起看日出看日落🌅', '0'),
-(33, 0, '一起上下班，坐地铁🚇', '0'),
-(34, 0, '一起坐一次飞机✈️', '0'),
-(35, 0, '一起种花草🌱', '0'),
-(36, 0, '一起用情侣手机壳📱', '0'),
-(37, 0, '一起去一次海底世界🐠', '0'),
-(38, 0, '一起喝醉一次🍻', '0'),
-(39, 0, '一起打扑克牌🃏', '0'),
-(40, 0, '一起修理电器🔧', '0'),
-(41, 0, '一起看烟花🎆', '0'),
-(42, 0, '一起吃火锅🍲', '0'),
-(43, 0, '一起庆祝恋爱纪念日💖', '0'),
-(44, 0, '一起看雪，堆雪人⛄', '0'),
-(45, 0, '一起和朋友们去吃饭🍽', '0'),
-(46, 0, '一起跳舞💃', '0'),
-(47, 0, '一起听音乐，听同一首歌🎵', '0'),
-(48, 0, '一起坐一次船⛵', '0'),
-(49, 0, '一起露营，住一次帐篷🏕', '0'),
-(50, 0, '一起DIY手工🎨', '0'),
-(51, 0, '给对方准备礼物🎁', '0'),
-(52, 0, '一起去我们上过的小学，中学，大学🏫', '0'),
-(53, 0, '一起在沙发上躺着🛋', '0'),
-(54, 0, '一起睡个懒觉，赖个床🛏', '0'),
-(55, 0, '偷偷为对方买喜欢又舍不得的东西🎁', '0'),
-(56, 0, '一起坐一次巴士，在没去过的地方下车🚌', '0'),
-(57, 0, '一起为布置小家出主意🏠', '0'),
-(58, 0, '一起在午夜看一次恐怖片🎃', '0'),
-(59, 0, '一起去挑选一束花💐', '0'),
-(60, 0, '一起去跳一次广场舞🕺', '0'),
-(61, 0, '一起为对方按摩一次💆', '0'),
-(62, 0, '一起放一次风筝🪁', '0'),
-(63, 0, '一起吐槽一次对方的缺点😆', '0'),
-(64, 0, '接对方下班一次🚗', '0'),
-(65, 0, '当陌生人一天，不许交流🤫', '0'),
-(66, 0, '为对方做便当🍱', '0'),
-(67, 0, '一起存钱💰', '0'),
-(68, 0, '一起去看樱花🌸', '0'),
-(69, 0, '一起敷面膜🧖', '0'),
-(70, 0, '一起去一次动物园🐼', '0'),
-(71, 0, '一起骑行车🚴', '0'),
-(72, 0, '一起拍照洗照片贴房间🖼', '0'),
-(73, 0, '一起听一次演唱会🎤', '0'),
-(74, 0, '一起去一次酒吧🍹', '0'),
-(75, 0, '一起去听一次相声😂', '0'),
-(76, 0, '一起玩一次真心话大冒险🎭', '0'),
-(77, 0, '一起去许愿池许个愿🙏', '0'),
-(78, 0, '一起入住一次五星级酒店，看夜景🏨', '0'),
-(79, 0, '一起去见父母👨‍👩‍👧‍👦', '0'),
-(80, 0, '一起挑选戒指💍', '0'),
-(81, 0, '一起挑选婚纱👗', '0'),
-(82, 0, '一起为我们的小家添置东西🏠', '0'),
-(83, 0, '一起期待未来甜蜜小生活💑', '0');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `text`
---
-
-CREATE TABLE `text` (
-  `id` int(11) NOT NULL,
-  `boy` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT '男name',
-  `girl` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT '女name',
-  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT '网站标题',
-  `logo` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '网站logo',
-  `writing` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '网站文案',
-  `boyimg` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT '男QQ',
-  `girlimg` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT '女QQ',
-  `startTime` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '开始时间',
-  `icp` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '网站备案号',
-  `Copyright` varchar(100) COLLATE utf8_unicode_ci NOT NULL COMMENT '网站版权',
-  `card1` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `card2` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `card3` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `deci1` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `deci2` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `deci3` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `bgimg` varchar(200) COLLATE utf8_unicode_ci NOT NULL COMMENT '首页背景图片地址',
-  `userQQ` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT '站长QQ',
-  `userName` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'userName',
-  `Animation` int(1) NOT NULL COMMENT '动画开关'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- 转存表中的数据 `text`
---
-
-INSERT INTO `text` (`id`, `boy`, `girl`, `title`, `logo`, `writing`, `boyimg`, `girlimg`, `startTime`, `icp`, `Copyright`, `card1`, `card2`, `card3`, `deci1`, `deci2`, `deci3`, `bgimg`, `userQQ`, `userName`, `Animation`) VALUES
-(1, 'Ki', 'Li', 'Like_Girl v5.2.0', 'Like_Girl {v5.2.0}', '爱晨雾漫过青瓦，爱暮色染透篱笆，更爱与君并肩立，看遍这人间烟火里的朝暮与年华。', '647159607', '917640289', '2022-06-05T00:07', '粤ICP备2021037776号', 'Copyright © 2022 - 2025 Like_Girl All Rights Reserved.', '点点滴滴', '留言板', '关于我们', '有人愿意听你碎碎念念也很浪漫', '在这里写下我们的留言祝福', '我们之间认识的经历回忆', 'Style/img/bgCover.png', '3439780232', 'Ki', 1);
-
--- --------------------------------------------------------
-
---
--- 表的结构 `warning`
---
-
+-- ============================================================================
+-- 12. warning - 警告日志
+-- ============================================================================
+DROP TABLE IF EXISTS `warning`;
 CREATE TABLE `warning` (
-  `id` int(11) NOT NULL,
-  `ip` varchar(50) NOT NULL COMMENT 'ip地址',
-  `gsd` varchar(50) NOT NULL COMMENT '归属地',
-  `time` varchar(80) NOT NULL COMMENT '时间',
-  `file` varchar(100) NOT NULL COMMENT '路径'
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(50) NOT NULL,
+  `gsd` varchar(50) NOT NULL,
+  `time` varchar(80) NOT NULL,
+  `file` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- 转储表的索引
---
+-- ============================================================================
+-- 13. visitor_stats - 每日访客统计（v5.2.1）
+-- ============================================================================
+DROP TABLE IF EXISTS `visitor_stats`;
+CREATE TABLE `visitor_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `visit_date` date NOT NULL,
+  `visit_count` int(11) NOT NULL DEFAULT 0 COMMENT 'PV',
+  `visitor_count` int(11) NOT NULL DEFAULT 0 COMMENT 'UV',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_visit_date` (`visit_date`),
+  KEY `idx_visitor_stats_date` (`visit_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='每日PV/UV';
 
---
--- 表的索引 `about`
---
-ALTER TABLE `about`
-  ADD PRIMARY KEY (`id`);
+INSERT INTO `visitor_stats` (`id`, `visit_date`, `visit_count`, `visitor_count`) VALUES
+(1, CURDATE(), 0, 0);
 
---
--- 表的索引 `article`
---
-ALTER TABLE `article`
-  ADD PRIMARY KEY (`id`);
+-- ============================================================================
+-- 14. visitor_total - 总访客统计
+-- ============================================================================
+DROP TABLE IF EXISTS `visitor_total`;
+CREATE TABLE `visitor_total` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `total_visits` bigint(20) NOT NULL DEFAULT 0 COMMENT '总PV',
+  `total_visitors` bigint(20) NOT NULL DEFAULT 0 COMMENT '总UV',
+  `last_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- 表的索引 `diySet`
---
-ALTER TABLE `diySet`
-  ADD PRIMARY KEY (`id`);
+INSERT INTO `visitor_total` (`id`, `total_visits`, `total_visitors`) VALUES
+(1, 0, 0);
 
---
--- 表的索引 `IPerror`
---
-ALTER TABLE `IPerror`
-  ADD PRIMARY KEY (`id`);
+-- ============================================================================
+-- 15. visitor_ips - IP 去重表（v5.2.1）
+-- ============================================================================
+DROP TABLE IF EXISTS `visitor_ips`;
+CREATE TABLE `visitor_ips` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `visit_date` date NOT NULL,
+  `ip` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_visit_date_ip` (`visit_date`, `ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='IP去重';
 
---
--- 表的索引 `leaving`
---
-ALTER TABLE `leaving`
-  ADD PRIMARY KEY (`id`);
+-- ============================================================================
+-- 兼容：保留原 v5.2.0 的旧表结构（不再使用，但为兼容外部脚本保留）
+-- ============================================================================
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `articletext` varchar(2000) NOT NULL,
+  `articletime` varchar(100) NOT NULL,
+  `articletitle` varchar(100) NOT NULL,
+  `articlename` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
---
--- 表的索引 `leavSet`
---
-ALTER TABLE `leavSet`
-  ADD PRIMARY KEY (`id`);
+DROP TABLE IF EXISTS `loveImg`;
+CREATE TABLE `loveImg` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `imgDatd` varchar(100) NOT NULL,
+  `imgText` varchar(200) NOT NULL,
+  `imgUrl` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- 表的索引 `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`);
+-- ============================================================================
+-- AUTO_INCREMENT 设置（PRIMARY KEY 已在 CREATE TABLE 中定义）
+-- ============================================================================
+ALTER TABLE `text` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `about` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `diySet` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `leavSet` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `IPerror` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `warning` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `login` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `little` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `photo` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `timeline` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `lovelist` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `leaving` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `visitor_stats` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `visitor_total` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `visitor_ips` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `article` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `loveImg` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
---
--- 表的索引 `loveImg`
---
-ALTER TABLE `loveImg`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `lovelist`
---
-ALTER TABLE `lovelist`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `text`
---
-ALTER TABLE `text`
-  ADD PRIMARY KEY (`id`);
-
---
--- 表的索引 `warning`
---
-ALTER TABLE `warning`
-  ADD PRIMARY KEY (`id`);
-
---
--- 在导出的表使用AUTO_INCREMENT
---
-
---
--- 使用表AUTO_INCREMENT `about`
---
-ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `article`
---
-ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `diySet`
---
-ALTER TABLE `diySet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `IPerror`
---
-ALTER TABLE `IPerror`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `leaving`
---
-ALTER TABLE `leaving`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `leavSet`
---
-ALTER TABLE `leavSet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `login`
---
-ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- 使用表AUTO_INCREMENT `loveImg`
---
-ALTER TABLE `loveImg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- 使用表AUTO_INCREMENT `lovelist`
---
-ALTER TABLE `lovelist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- ============================================================================
+-- 部署说明
+-- ============================================================================
+-- 1. 创建数据库：CREATE DATABASE lovey DEFAULT CHARSET utf8mb4;
+-- 2. 导入本文件：mysql -u root -p lovey < love_db.sql
+-- 3. 修改 admin/Config_DB.php 中的连接信息
+-- 4. 默认账号：admin / admin123（首次登录后请修改密码）
+-- 5. 如需重置密码：在 PHP 中执行
+--      echo password_hash('新密码', PASSWORD_BCRYPT);
+--    然后更新 login 表的 pw 字段
+-- ============================================================================
