@@ -5,10 +5,23 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Credentials: true');
 
-// 配置参数
-$weatherKey = 'b65cfa0c849145c283dfdf9cc6b87dd1'; // 和风天气API密钥（演示用）
+// 配置参数 - 从环境变量或配置文件加载API密钥
+$weatherKey = getenv('QWEATHER_API_KEY');
+if (empty($weatherKey)) {
+    // Try loading from config file
+    $configFile = dirname(__DIR__) . '/admin/Config_DB.php';
+    if (file_exists($configFile)) {
+        include $configFile;
+        $weatherKey = defined('QWEATHER_API_KEY') ? QWEATHER_API_KEY : '';
+    }
+}
 $mode = isset($_GET['mode']) ? $_GET['mode'] : 'ip';
 $location = isset($_GET['location']) ? $_GET['location'] : '';
 $slot = isset($_GET['slot']) ? intval($_GET['slot']) : 1;

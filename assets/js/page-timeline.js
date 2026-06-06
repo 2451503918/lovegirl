@@ -116,6 +116,14 @@
     };
 
     // ============================================
+    // HTML转义工具函数（防XSS）
+    // ============================================
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    // ============================================
     // WaveSurfer 加载器
     // ============================================
     const WaveSurferLoader = {
@@ -332,18 +340,18 @@
             const timeAgo = Utils.getTimeAgo(item.year, item.month, item.day, item.time);
 
             const metaItems = [];
-            if (item.time) metaItems.push(`<div class="lgnewui-time-line-meta-item"><i class="ph-fill ph-clock"></i><span>${item.time}</span></div>`);
+            if (item.time) metaItems.push(`<div class="lgnewui-time-line-meta-item"><i class="ph-fill ph-clock"></i><span>${escapeHtml(item.time)}</span></div>`);
             if (item.location) {
                 const hasValidCoords = item.map_lat && item.map_lng && isFinite(item.map_lat) && isFinite(item.map_lng) && !(item.map_lat === 0 && item.map_lng === 0);
                 if (hasValidCoords) {
-                    metaItems.push(`<div class="lgnewui-time-line-meta-item lgnewui-tl-meta-location-link" onclick="event.stopPropagation(); if(typeof LGMiniMap!=='undefined') LGMiniMap.openFullscreen(${item.map_lat}, ${item.map_lng})" data-tooltip="${item.location}"><i class="ph-fill ph-map-pin"></i><span>${item.location}</span></div>`);
+                    metaItems.push(`<div class="lgnewui-time-line-meta-item lgnewui-tl-meta-location-link" onclick="event.stopPropagation(); if(typeof LGMiniMap!=='undefined') LGMiniMap.openFullscreen(${item.map_lat}, ${item.map_lng})" data-tooltip="${escapeHtml(item.location)}"><i class="ph-fill ph-map-pin"></i><span>${escapeHtml(item.location)}</span></div>`);
                 } else {
-                    metaItems.push(`<div class="lgnewui-time-line-meta-item" data-tooltip="${item.location}"><i class="ph-fill ph-map-pin"></i><span>${item.location}</span></div>`);
+                    metaItems.push(`<div class="lgnewui-time-line-meta-item" data-tooltip="${escapeHtml(item.location)}"><i class="ph-fill ph-map-pin"></i><span>${escapeHtml(item.location)}</span></div>`);
                 }
             }
             if (item.weather) {
                 const wIcon = item.weatherIcon || 'ph-cloud-sun';
-                metaItems.push(`<div class="lgnewui-time-line-meta-item"><i class="ph-fill ${wIcon}"></i><span>${item.weather}</span></div>`);
+                metaItems.push(`<div class="lgnewui-time-line-meta-item"><i class="ph-fill ${wIcon}"></i><span>${escapeHtml(item.weather)}</span></div>`);
             }
             if (item.moodLabel) {
                 const mIconHtml = item.moodIconHtml || '<i class="ph-fill ph-smiley"></i>';
@@ -355,11 +363,11 @@
                     <div class="lgnewui-time-line-card-header-top">
                         <div class="lg-author${hasGender ? ' show-gender' : ''}">
                             <div class="lg-author__ring">
-                                <img src="${author.avatar || ''}" class="lg-author__avatar">
+                                <img src="${escapeHtml(author.avatar || '')}" class="lg-author__avatar">
                                 ${hasGender ? `<div class="lg-author__badge ${genderClass}"><i class="ph-bold ${genderIcon}"></i></div>` : ''}
                             </div>
                             <div class="lg-author__text">
-                                <span class="lg-author__name">${author.name || ''}</span>
+                                <span class="lg-author__name">${escapeHtml(author.name || '')}</span>
                                 <div class="lgnewui-timeline-capsule style-contrast">
                                     <div class="lgnewui-timeline-capsule-icon-box"><i class="ph-bold ${eventType.icon}"></i></div>
                                     <span class="lgnewui-timeline-capsule-label">${eventType.name}</span>
@@ -393,8 +401,8 @@
             // 统一提取标题和描述，放在所有卡片内容的顶部
             const isTicket = item.type === 'ticket';
             const titleAndDesc = `
-                ${item.title ? `<h3 class="lgnewui-time-line-card-title">${item.title}</h3>` : ''}
-                ${item.desc ? `<p class="lgnewui-time-line-card-desc">${item.desc}</p>` : ''}
+                ${item.title ? `<h3 class="lgnewui-time-line-card-title">${escapeHtml(item.title)}</h3>` : ''}
+                ${item.desc ? `<p class="lgnewui-time-line-card-desc">${escapeHtml(item.desc)}</p>` : ''}
                 ${(item.title || item.desc) && isTicket ? `<div style="height:1px; background:linear-gradient(to right, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%); margin:12px 0 16px;"></div>` : ''}
             `;
 
@@ -412,11 +420,11 @@
                 const displayPath = item.linkPath.length > 50 ? item.linkPath.substring(0, 50) + '...' : item.linkPath;
                 const arrowIcon = item.linkType === 'external' ? 'ph-arrow-square-out' : 'ph-caret-right';
                 linkHtml = `
-                <a class="lgnewui-tl-link-card${isTicket ? ' lgnewui-tl-link-card-ticket' : ''}" href="${item.linkPath}"${linkTarget}>
+                <a class="lgnewui-tl-link-card${isTicket ? ' lgnewui-tl-link-card-ticket' : ''}" href="${escapeHtml(item.linkPath)}"${linkTarget}>
                     <div class="lgnewui-tl-link-card-icon ${lc.colorClass}"><i class="ph-fill ${lc.icon}"></i></div>
                     <div class="lgnewui-tl-link-card-body">
-                        <div class="lgnewui-tl-link-card-title ${lc.hoverClass}">${linkTitle}</div>
-                        <div class="lgnewui-tl-link-card-path">${displayPath}</div>
+                        <div class="lgnewui-tl-link-card-title ${lc.hoverClass}">${escapeHtml(linkTitle)}</div>
+                        <div class="lgnewui-tl-link-card-path">${escapeHtml(displayPath)}</div>
                     </div>
                     <i class="ph-bold ${arrowIcon} lgnewui-tl-link-card-${item.linkType === 'external' ? 'external' : 'arrow'}"></i>
                 </a>`;
@@ -435,7 +443,7 @@
                                 ${titleAndDesc}
                                 <div class="lgnewui-time-line-card-footer">
                                     <div class="lgnewui-time-line-quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                                    <div class="lgnewui-time-line-signature">${item.signature ? ('— ' + item.signature) : ('By ' + (author.name || ''))}</div>
+                                    <div class="lgnewui-time-line-signature">${item.signature ? ('— ' + escapeHtml(item.signature)) : ('By ' + escapeHtml(author.name || ''))}</div>
                                 </div>
                                 ${linkHtml}
                                 ${likeHtml}
@@ -458,7 +466,7 @@
                             <div class="lgnewui-time-line-card-content">
                                 ${titleAndDesc}
                                 <div class="lgnewui-time-line-media-container" style="position:relative; overflow:hidden;">
-                                    <img src="${item.mediaUrl}" loading="lazy" class="view-image-media" style="width:100%; height:100%; object-fit:cover; cursor:pointer;">
+                                    <img src="${escapeHtml(item.mediaUrl)}" loading="lazy" class="view-image-media" style="width:100%; height:100%; object-fit:cover; cursor:pointer;">
                                     ${imgMetaTags ? `<div class="lgnewui-tl-media-meta">${imgMetaTags}</div>` : ''}
                                 </div>
                                 ${linkHtml}
@@ -485,8 +493,8 @@
                             ${header}
                             <div class="lgnewui-time-line-card-content">
                                 ${titleAndDesc}
-                                <div class="lgnewui-time-line-media-container video-player" data-url="${item.mediaUrl}" onclick="if(window.VideoModal){window.VideoModal.open('${item.mediaUrl}', '${videoCoverUrl}');}else{console.warn('VideoModal not loaded');}" style="cursor:pointer; position:relative; overflow:hidden; border-radius:12px; height:256px;">
-                                    ${videoCoverUrl ? `<img src="${videoCoverUrl}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">` : `<video src="${item.mediaUrl}" preload="metadata" muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>`}
+                                <div class="lgnewui-time-line-media-container video-player" data-url="${escapeHtml(item.mediaUrl)}" onclick="if(window.VideoModal){window.VideoModal.open('${escapeHtml(item.mediaUrl)}', '${escapeHtml(videoCoverUrl)}');}else{console.warn('VideoModal not loaded');}" style="cursor:pointer; position:relative; overflow:hidden; border-radius:12px; height:256px;">
+                                    ${videoCoverUrl ? `<img src="${escapeHtml(videoCoverUrl)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">` : `<video src="${escapeHtml(item.mediaUrl)}" preload="metadata" muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>`}
                                     <div class="lgnewui-tl-video-play-icon"><i class="ph-fill ph-play"></i></div>
                                     ${vidMetaTags ? `<div class="lgnewui-tl-media-meta">${vidMetaTags}</div>` : ''}
                                 </div>
@@ -505,7 +513,7 @@
                             ${header}
                             <div class="lgnewui-time-line-card-content">
                                 ${titleAndDesc}
-                                <div class="lgnewui-timeline-audio-wrapper lgnewui-timeline-audio-loading" id="audio-player-${audioId}" data-audio-url="${item.mediaUrl}">
+                                <div class="lgnewui-timeline-audio-wrapper lgnewui-timeline-audio-loading" id="audio-player-${audioId}" data-audio-url="${escapeHtml(item.mediaUrl)}">
                                     <div class="lgnewui-timeline-audio-container">
                                         <div class="lgnewui-timeline-audio-play-btn" onclick="window.toggleTimelineAudio('${audioId}')"><i class="ph-fill ph-play"></i></div>
                                         <div class="lgnewui-timeline-audio-wave-area"><div class="lgnewui-timeline-audio-wave" id="audio-wave-${audioId}"></div></div>
@@ -529,14 +537,14 @@
                             <div class="lgnewui-time-line-ticket-content">
                                 ${titleAndDesc}
                                 <div class="lgnewui-time-line-ticket-route">
-                                    <div><div class="lgnewui-time-line-ticket-city-code">${item.fromCode}</div><div class="lgnewui-time-line-ticket-city-name">${item.from}</div></div>
+                                    <div><div class="lgnewui-time-line-ticket-city-code">${escapeHtml(item.fromCode)}</div><div class="lgnewui-time-line-ticket-city-name">${escapeHtml(item.from)}</div></div>
                                     <div class="lgnewui-time-line-ticket-plane"><i class="ph-fill ph-airplane"></i></div>
-                                    <div style="text-align: right;"><div class="lgnewui-time-line-ticket-city-code">${item.toCode}</div><div class="lgnewui-time-line-ticket-city-name">${item.to}</div></div>
+                                    <div style="text-align: right;"><div class="lgnewui-time-line-ticket-city-code">${escapeHtml(item.toCode)}</div><div class="lgnewui-time-line-ticket-city-name">${escapeHtml(item.to)}</div></div>
                                 </div>
                                 <div class="lgnewui-time-line-ticket-divider"></div>
                                 <div class="lgnewui-time-line-ticket-details">
-                                    <div class="lgnewui-time-line-ticket-detail-item"><span class="lgnewui-time-line-ticket-detail-label">Flight</span><span class="lgnewui-time-line-ticket-detail-value">${item.flightNo}</span></div>
-                                    <div class="lgnewui-time-line-ticket-detail-item"><span class="lgnewui-time-line-ticket-detail-label">Seat</span><span class="lgnewui-time-line-ticket-detail-value lgnewui-time-line-ticket-seat">${item.seat}</span></div>
+                                    <div class="lgnewui-time-line-ticket-detail-item"><span class="lgnewui-time-line-ticket-detail-label">Flight</span><span class="lgnewui-time-line-ticket-detail-value">${escapeHtml(item.flightNo)}</span></div>
+                                    <div class="lgnewui-time-line-ticket-detail-item"><span class="lgnewui-time-line-ticket-detail-label">Seat</span><span class="lgnewui-time-line-ticket-detail-value lgnewui-time-line-ticket-seat">${escapeHtml(item.seat)}</span></div>
                                     <div class="lgnewui-time-line-ticket-qr"><i class="ph-fill ph-qr-code"></i></div>
                                 </div>
                                 ${linkHtml}
@@ -557,7 +565,7 @@
                                     ${(item.items || []).map(todo => `
                                         <div class="lgnewui-time-line-list-item">
                                             <div class="lgnewui-time-line-list-checkbox ${todo.done ? 'checked' : ''}">${todo.done ? '<i class="ph-bold ph-check"></i>' : ''}</div>
-                                            <span class="lgnewui-time-line-list-text ${todo.done ? 'checked' : ''}">${todo.text}</span>
+                                            <span class="lgnewui-time-line-list-text ${todo.done ? 'checked' : ''}">${escapeHtml(todo.text)}</span>
                                         </div>
                                     `).join('')}
                                 </div>
@@ -576,7 +584,7 @@
                         }
                         return {};
                     })();
-                    const giftDir = giftPartner.name ? `赠予 ${giftPartner.name}` : '';
+                    const giftDir = giftPartner.name ? `赠予 ${escapeHtml(giftPartner.name)}` : '';
 
                     return `
                     <div class="lgnewui-time-line-card ${extraClass}">
@@ -589,12 +597,12 @@
                                 ${giftHasImage ? `
                                 <div class="lgnewui-tl-gift-img-wrap">
                                     <div class="lgnewui-tl-gift-img-inner">
-                                        <img src="${item.giftThumbUrl || item.giftImage}" referrerpolicy="no-referrer" loading="lazy" class="view-image-media" style="cursor:pointer;">
+                                        <img src="${escapeHtml(item.giftThumbUrl || item.giftImage)}" referrerpolicy="no-referrer" loading="lazy" class="view-image-media" style="cursor:pointer;">
                                     </div>
                                     <div class="lgnewui-tl-gift-img-footer">
                                         <div class="lgnewui-tl-gift-img-left">
                                             <i class="ph-fill ph-gift"></i>
-                                            <span class="lgnewui-tl-gift-img-name">${item.giftName || '神秘礼物'}</span>
+                                            <span class="lgnewui-tl-gift-img-name">${escapeHtml(item.giftName || '神秘礼物')}</span>
                                         </div>
                                         ${item.giftPrice ? `<div class="lgnewui-tl-gift-img-price"><i class="lgnewui-tl-gift-sym"></i>${parseFloat(item.giftPrice).toFixed(2)}</div>` : ''}
                                     </div>
@@ -605,7 +613,7 @@
                                         <i class="ph-fill ph-gift"></i>
                                     </div>
                                     <div class="lgnewui-tl-gift-info">
-                                        <div class="lgnewui-tl-gift-name">${item.giftName || '一份特别的礼物'}</div>
+                                        <div class="lgnewui-tl-gift-name">${escapeHtml(item.giftName || '一份特别的礼物')}</div>
                                         ${item.giftPrice ? `<div class="lgnewui-tl-gift-price"><i class="lgnewui-tl-gift-sym"></i>${parseFloat(item.giftPrice).toFixed(2)}</div>` : ''}
                                     </div>
                                 </div>
@@ -639,13 +647,13 @@
                                     <span class="lgnewui-tl-ms-corner-br"></span>
                                     ${msVal ? `
                                         <div class="lgnewui-tl-ms-figure">
-                                            <span class="lgnewui-tl-ms-value">${msVal}</span>
-                                            ${msUnit ? `<span class="lgnewui-tl-ms-unit">${msUnit}</span>` : ''}
+                                            <span class="lgnewui-tl-ms-value">${escapeHtml(msVal)}</span>
+                                            ${msUnit ? `<span class="lgnewui-tl-ms-unit">${escapeHtml(msUnit)}</span>` : ''}
                                         </div>` : ''}
                                     ${msCat ? `
                                         <div class="lgnewui-tl-ms-divider"></div>
                                         <div class="lgnewui-tl-ms-category">
-                                            <i class="ph-fill ph-flag-pennant"></i><span>${msCat}</span>
+                                            <i class="ph-fill ph-flag-pennant"></i><span>${escapeHtml(msCat)}</span>
                                         </div>` : ''}
                                 </div>
                                 ${linkHtml}

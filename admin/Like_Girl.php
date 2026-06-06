@@ -2,12 +2,36 @@
 session_start();
 include_once 'Nav.php';
 
+// URL白名单验证，防止SSRF
+$allowedUrls = [
+    'https://www.kikiw.cn/Love/likev5.php',
+    'https://www.kikiw.cn/Love/userLikeGirl.php'
+];
+
 $url = 'https://www.kikiw.cn/Love/likev5.php';
-$lines_array = file($url);
-$lines_string = implode('', $lines_array);
 $userurl = 'https://www.kikiw.cn/Love/userLikeGirl.php';
-$userarray = file($userurl);
-$userstring = implode('', $userarray);
+
+// 验证URL是否在白名单中
+if (!in_array($url, $allowedUrls) || !in_array($userurl, $allowedUrls)) {
+    die("<script>alert('非法URL请求');history.back();</script>");
+}
+
+$lines_string = '';
+$userstring = '';
+
+if (in_array($url, $allowedUrls)) {
+    $lines_array = @file($url);
+    if ($lines_array !== false) {
+        $lines_string = htmlspecialchars(implode('', $lines_array), ENT_QUOTES, 'UTF-8');
+    }
+}
+
+if (in_array($userurl, $allowedUrls)) {
+    $userarray = @file($userurl);
+    if ($userarray !== false) {
+        $userstring = htmlspecialchars(implode('', $userarray), ENT_QUOTES, 'UTF-8');
+    }
+}
 
 ?>
 

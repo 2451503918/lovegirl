@@ -13,3 +13,11 @@ node_modules/
 
 # 日志
 *.log
+
+# 敏感文件
+.user.ini
+.htaccess
+debug.php
+ip.txt
+.ip.txt
+*.zip

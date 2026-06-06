@@ -3,14 +3,23 @@ session_start();
 
 $file = $_SERVER['PHP_SELF'];
 include_once 'connect.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $adminName = trim($_POST['adminName']);
     $icp = trim($_POST['icp']);
     $Copyright = trim($_POST['Copyright']);
 
-    $sql = "update text set icp = '$icp', Copyright = '$Copyright' ";
-    $result = mysqli_query($connect, $sql);
+    $stmt = mysqli_prepare($connect, "update text set icp = ?, Copyright = ?");
+    mysqli_stmt_bind_param($stmt, "ss", $icp, $Copyright);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_affected_rows($stmt) >= 0;
+    mysqli_stmt_close($stmt);
     if ($result) {
         echo "<script>alert('更新成功');location.href = 'index.php';</script>";
     } else {

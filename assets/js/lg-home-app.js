@@ -6,6 +6,9 @@
 (function() {
     'use strict';
     
+    // 定时器ID存储，用于清理
+    var _intervals = [];
+    
     window.initLGHomeApp = function(options = {}) {
         console.log('%c LG-NewUi Home App Initializing... ', 'color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px; font-weight: bold;');
         
@@ -21,6 +24,17 @@
         
         console.log('%c LG-NewUi Home App Initialized! ', 'color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px; font-weight: bold;');
     };
+    
+    // 清理所有定时器
+    window.destroyLGHomeApp = function() {
+        _intervals.forEach(function(id) { clearInterval(id); });
+        _intervals = [];
+    };
+    
+    // PJAX导航前清理
+    $(document).on('pjax:beforeReplace', function() {
+        window.destroyLGHomeApp();
+    });
     
     // 1. 智能媒体卡片（时光碎片）
     function initSmartMediaCard() {
@@ -63,12 +77,13 @@
         });
         
         // 定时刷新天气（5分钟）
-        setInterval(() => {
+        var weatherIntervalId = setInterval(() => {
             weatherCards.forEach(card => {
                 const slot = card.getAttribute('data-weather-slot');
                 loadWeatherData(slot, card);
             });
         }, 5 * 60 * 1000);
+        _intervals.push(weatherIntervalId);
     }
     
     function loadWeatherData(slot, card) {
@@ -146,7 +161,8 @@
         }
         
         updateCounter();
-        setInterval(updateCounter, 1000);
+        var counterIntervalId = setInterval(updateCounter, 1000);
+        _intervals.push(counterIntervalId);
     }
     
     function animateNumber(element, targetNumber) {

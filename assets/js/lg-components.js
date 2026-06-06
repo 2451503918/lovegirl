@@ -1048,9 +1048,9 @@
 
             try {
                 this._setLoading(true);
-                const _wtParam = (window.LG_CONFIG && window.LG_CONFIG.weatherToken) ? '&_wt=' + encodeURIComponent(window.LG_CONFIG.weatherToken) : '';
+                const _wtParam = '';
                 var _siteBase = (window.LG_CONFIG && window.LG_CONFIG.siteBase) || '';
-                this._pendingRequest = fetch(_siteBase + 'services/weather.php?mode=ip' + _wtParam, {
+                this._pendingRequest = fetch(_siteBase + 'services/weather.php?mode=ip', {
                     method: 'GET',
                     credentials: 'same-origin',
                     cache: 'default'

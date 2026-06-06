@@ -5,19 +5,22 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Credentials: true');
 
 // 获取客户端IP
 function getClientIP() {
-    $ip = '127.0.0.1';
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])[0];
-    } elseif (!empty($_SERVER['REMOTE_ADDR'])) {
-        $ip = $_SERVER['REMOTE_ADDR'];
+    // Only trust REMOTE_ADDR for security
+    $ip = $_SERVER['REMOTE_ADDR'];
+    // Validate it's a real IP
+    if (filter_var($ip, FILTER_VALIDATE_IP)) {
+        return $ip;
     }
-    return filter_var($ip, FILTER_VALIDATE_IP) ? $ip : '127.0.0.1';
+    return '0.0.0.0';
 }
 
 // 获取请求方式
@@ -62,33 +65,47 @@ switch ($action) {
     case 'track':
         // 记录访问
         $today = date('Y-m-d');
-        $currentHour = date('H');
         $visitorIP = getClientIP();
         
-        // 获取或创建今日统计记录
-        $result = mysqli_query($connect, "SELECT * FROM visitor_stats WHERE visit_date = '$today'");
-        if ($result && mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
-            mysqli_query($connect, "UPDATE visitor_stats SET visit_count = visit_count + 1 WHERE visit_date = '$today'");
-        } else {
-            mysqli_query($connect, "INSERT INTO visitor_stats (visit_date, visit_count, visitor_count) VALUES ('$today', 1, 1)");
-        }
+        // 使用 upsert 避免竞态条件
+        $stmt = mysqli_prepare($connect, "INSERT INTO visitor_stats (visit_date, visit_count, visitor_count) VALUES (?, 1, 0) ON DUPLICATE KEY UPDATE visit_count = visit_count + 1");
+        mysqli_stmt_bind_param($stmt, "s", $today);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
         
         // 更新累计统计
-        $escapedVisitorIP = mysqli_real_escape_string($connect, $visitorIP);
-        mysqli_query($connect, "UPDATE visitor_total SET 
+        $stmt = mysqli_prepare($connect, "UPDATE visitor_total SET 
             total_visits = total_visits + 1,
-            last_visitor_ip = '$escapedVisitorIP',
+            last_visitor_ip = ?,
             last_visit_time = NOW()
             WHERE id = 1");
+        mysqli_stmt_bind_param($stmt, "s", $visitorIP);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
         
-        // 检查是否是新的访客（基于IP，简单判断）
+        // 基于IP去重判断是否是新访客
         $isNewVisitor = false;
-        $checkVisitor = mysqli_query($connect, "SELECT * FROM visitor_stats WHERE visit_date = '$today' AND visitor_count > 0");
-        // 简单的新访客判断：每小时最多一次新访客记录
-        if ($currentHour >= 0 && $currentHour < 1) {
-            mysqli_query($connect, "UPDATE visitor_stats SET visitor_count = visitor_count + 1 WHERE visit_date = '$today'");
-            mysqli_query($connect, "UPDATE visitor_total SET total_visitors = total_visitors + 1 WHERE id = 1");
+        $stmt = mysqli_prepare($connect, "SELECT id FROM visitor_ips WHERE visit_date = ? AND ip = ?");
+        mysqli_stmt_bind_param($stmt, "ss", $today, $visitorIP);
+        mysqli_stmt_execute($stmt);
+        $ipResult = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_close($stmt);
+        
+        if (!$ipResult || mysqli_num_rows($ipResult) === 0) {
+            // 该IP今日首次访问，记录为新访客
+            $stmt = mysqli_prepare($connect, "INSERT INTO visitor_ips (visit_date, ip) VALUES (?, ?)");
+            mysqli_stmt_bind_param($stmt, "ss", $today, $visitorIP);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            
+            $stmt = mysqli_prepare($connect, "UPDATE visitor_stats SET visitor_count = visitor_count + 1 WHERE visit_date = ?");
+            mysqli_stmt_bind_param($stmt, "s", $today);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            
+            $stmt = mysqli_prepare($connect, "UPDATE visitor_total SET total_visitors = total_visitors + 1 WHERE id = 1");
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
             $isNewVisitor = true;
         }
         
@@ -96,7 +113,7 @@ switch ($action) {
             'code' => 200,
             'message' => 'Tracked',
             'data' => [
-                'ip' => $visitorIP,
+                'newVisitor' => $isNewVisitor,
                 'timestamp' => time()
             ]
         ];
@@ -111,20 +128,27 @@ switch ($action) {
         ];
         
         // 获取今日统计
-        $result = mysqli_query($connect, "SELECT * FROM visitor_stats WHERE visit_date = '$today'");
+        $stmt = mysqli_prepare($connect, "SELECT * FROM visitor_stats WHERE visit_date = ?");
+        mysqli_stmt_bind_param($stmt, "s", $today);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             $stats['today']['visits'] = intval($row['visit_count']);
             $stats['today']['visitors'] = intval($row['visitor_count']);
         }
+        mysqli_stmt_close($stmt);
         
         // 获取累计统计
-        $result = mysqli_query($connect, "SELECT * FROM visitor_total WHERE id = 1");
+        $stmt = mysqli_prepare($connect, "SELECT * FROM visitor_total WHERE id = 1");
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             $stats['total']['visits'] = intval($row['total_visits']);
             $stats['total']['visitors'] = intval($row['total_visitors']);
         }
+        mysqli_stmt_close($stmt);
         
         $response = [
             'code' => 200,
@@ -137,7 +161,6 @@ switch ($action) {
         $response = [
             'code' => 200,
             'message' => 'Visitor Stats Service is running',
-            'version' => '1.0',
             'timestamp' => time()
         ];
 }

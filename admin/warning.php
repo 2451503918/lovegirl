@@ -84,7 +84,6 @@ if ($file){
     }
 
     .info {
-        margin: ;
         margin-bottom: 20px;
         font-size: 1.2rem;
     }

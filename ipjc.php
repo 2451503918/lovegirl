@@ -3,6 +3,9 @@
 include_once 'admin/connect.php';
 
 $ip = $_SERVER["REMOTE_ADDR"];
+if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+    return;
+}
 $ipcheck = "SELECT 1 FROM IPerror WHERE State = ? LIMIT 1";
 $ipstmt = mysqli_prepare($connect, $ipcheck);
 if ($ipstmt) {

@@ -5,7 +5,12 @@
 
 (function() {
     'use strict';
-    
+
+    function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
     let audioPlayer = null;
     let playlist = [];
     let currentIndex = 0;
@@ -305,8 +310,8 @@
                     <i class="ph-fill ph-music-note-simple"></i>
                 </div>
                 <div>
-                    <div style="font-size: 14px; font-weight: 500;">${song.title}</div>
-                    <div style="font-size: 12px; color: #888;">${song.artist}</div>
+                    <div style="font-size: 14px; font-weight: 500;">${escapeHtml(song.title)}</div>
+                    <div style="font-size: 12px; color: #888;">${escapeHtml(song.artist)}</div>
                 </div>
             </div>`
         ).join('');

@@ -5,7 +5,12 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Credentials: true');
 
 // 获取请求方式
 $method = $_SERVER['REQUEST_METHOD'];
@@ -122,7 +127,6 @@ switch ($action) {
         $response = [
             'code' => 200,
             'message' => 'LG-NewUi Service is running',
-            'version' => '5.2.1-Stable',
             'timestamp' => time()
         ];
 }

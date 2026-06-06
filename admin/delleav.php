@@ -1,20 +1,31 @@
 <?php
 session_start();
+include_once 'Function.php';
 include_once 'connect.php';
+
+// Only accept POST requests
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo '<script>alert("非法请求");history.back();</script>';
+    exit;
+}
+
+// Verify CSRF token
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败");history.back();</script>';
+    exit;
+}
 
 $file = $_SERVER['PHP_SELF'];
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
-    $id = $_GET['id'];
-    $text = $_GET['text'];
-    $QQ = $_GET['QQ'];
-    if (is_numeric($id)) {
+    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    if ($id > 0) {
         $sql = "delete from leaving where id = $id";
         $result = mysqli_query($connect, $sql);
         if ($result) {
             echo "<script>alert('删除内容成功');location.href = 'leavSet.php';</script>";
         } else {
-            echo "<script>alert('删除内容失败)';history.back();</script>";
+            echo "<script>alert('删除内容失败');history.back();</script>";
         }
     } else {
         echo "<script>alert('参数错误');history.back();</script>";

@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once 'Function.php';
 include_once 'Nav.php';
 
 $nub = "select count(id) as shu from leaving";
@@ -59,6 +60,7 @@ if (!$result) {
                     </thead>
 
                     <form class="needs-validation" action="littleupda.php" method="post">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                         <tbody>
                             <?php
                             $SerialNumber = 0;
@@ -99,12 +101,14 @@ if (!$result) {
                                         <i><?php echo $city ? $city : '未知'; ?></i>
                                     </td>
                                     <td>
-                                        <a class="delete-btn" data-id="<?php echo $id ?>" data-content="<?= escapeXSS($text) ?>">
-                                            <button style="white-space: nowrap;" type="button"
+                                        <form method="POST" action="delleav.php" style="display:inline" onsubmit="return confirm('您确认要删除 <?php echo escapeXSS($text) ?> 内容吗')">
+                                            <input type="hidden" name="id" value="<?php echo htmlspecialchars($id, ENT_QUOTES, 'UTF-8') ?>">
+                                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8') ?>">
+                                            <button style="white-space: nowrap;" type="submit"
                                                 class="btn btn-danger btn-rounded">
                                                 <i class=" mdi mdi-delete-empty mr-1"></i>删除
                                             </button>
-                                        </a>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php
@@ -112,7 +116,6 @@ if (!$result) {
                             ?>
                         </tbody>
                 </table>
-                </form>
 
             </div> <!-- end card body-->
         </div> <!-- end card -->
@@ -146,18 +149,7 @@ include_once 'Footer.php';
 <script src="/admin/assets/js/pages/demo.datatable-init.js"></script>
 <!-- end demo js-->
 
-<script>
-// 使用jQuery事件委托，确保DataTables重新渲染后仍然有效
-$(document).on('click', '.delete-btn', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var id = $(this).data('id');
-    var content = $(this).data('content');
-    if (confirm('您确认要删除 ' + content + ' 内容吗')) {
-        window.location.href = 'delleav.php?id=' + id + '&text=' + encodeURIComponent(content);
-    }
-});
-</script>
+
 </body>
 
 </html>

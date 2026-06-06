@@ -1,5 +1,6 @@
 <?php
 session_start();
+include_once 'Function.php';
 include_once 'Nav.php';
 $lovelist = "select * from lovelist order by id desc";
 $reslist = mysqli_query($connect, $lovelist);
@@ -44,20 +45,22 @@ $reslist = mysqli_query($connect, $lovelist);
                                     <?php echo $SerialNumber ?>
                                 </div>
                             </td>
-                            <td><?php echo $list['eventname'] ?></td>
+                            <td><?php echo htmlspecialchars($list['eventname'], ENT_QUOTES, 'UTF-8') ?></td>
                             <td><?php if ($list['icon']) { ?> <span class="badge badge-success-lighten">已完成 </span><?php } ?><?php if (!$list['icon']) { ?> <span class="badge badge-danger-lighten">未完成</span> <?php } ?></td>
                             <td><?php if ($list['imgurl']) { ?> <svg t="1718074057742" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6336" width="40" height="40"><path d="M512 512m-512 0a512 512 0 1 0 1024 0 512 512 0 1 0-1024 0Z" fill="#FDEBED" p-id="6337"></path><path d="M642.56 513.28l-140.8 111.36-75.52-60.16L281.6 599.04V371.2c0-28.16 23.04-51.2 51.2-51.2h358.4c28.16 0 51.2 23.04 51.2 51.2v226.56l-99.84-84.48zM371.2 371.2c-21.76 0-38.4 16.64-38.4 38.4s16.64 38.4 38.4 38.4 38.4-16.64 38.4-38.4-16.64-38.4-38.4-38.4z m49.92 220.16l79.36 62.72 142.08-112.64 99.84 88.32V652.8c0 28.16-23.04 51.2-51.2 51.2H332.8c-28.16 0-51.2-23.04-51.2-51.2v-28.16l139.52-33.28z" fill="#EC3A4E" p-id="6338"></path></svg>  <?php } else { ?>暂无图片 <?php } ?></td>
                             <td>
-                                <a href="modlist.php?id=<?php echo $list['id'] ?>&icon=<?php echo $list['icon'] ?>&name=<?php echo $list['eventname'] ?>&imgurl=<?php echo $list['imgurl']; ?> ">
+                                <a href="modlist.php?id=<?php echo $list['id'] ?>&icon=<?php echo $list['icon'] ?>&name=<?php echo htmlspecialchars($list['eventname'], ENT_QUOTES, 'UTF-8') ?>&imgurl=<?php echo htmlspecialchars($list['imgurl'], ENT_QUOTES, 'UTF-8'); ?> ">
                                     <button type="button" class="btn btn-secondary btn-rounded">
                                         <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                     </button>
                                 </a>
-                                <a href="javascript:del(<?php echo $list['id']; ?>,'<?php echo $list['eventname']; ?>');">
-                                    <button type="button" class="btn btn-danger btn-rounded">
+                                <form method="POST" action="dellist.php" style="display:inline" onsubmit="return confirm('您确认要删除内容为 <?php echo htmlspecialchars($list['eventname'], ENT_QUOTES, 'UTF-8') ?> 的事件吗')">
+                                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($list['id'], ENT_QUOTES, 'UTF-8') ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8') ?>">
+                                    <button type="submit" class="btn btn-danger btn-rounded">
                                         <i class=" mdi mdi-delete-empty mr-1"></i>删除
                                     </button>
-                                </a></td>
+                                </form></td>
                         </tr>
                         <?php
                     }
@@ -102,13 +105,7 @@ include_once 'Footer.php';
 <script src="assets/js/pages/demo.datatable-init.js"></script>
 <!-- end demo js-->
 
-<script>
-function del(id, eventname) {
-    if (confirm('您确认要删除内容为 ' + eventname + ' 的事件吗')) {
-        location.href = 'dellist.php?id=' + id + '&title=' + eventname;
-    }
-}
-</script>
+
 
 </body>
 </html>

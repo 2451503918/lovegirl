@@ -2,6 +2,12 @@
 session_start();
 $file = $_SERVER['PHP_SELF'];
 include_once 'connect.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $id = trim($_POST['id']);
@@ -9,8 +15,11 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $imgDatd = trim($_POST['imgDatd']);
     $imgUrl = htmlspecialchars(trim($_POST['imgUrl']), ENT_QUOTES);
     
-    $sql = "update loveImg set imgText = '$imgText', imgDatd = '$imgDatd',imgUrl ='$imgUrl' where id = '$id'";
-    $result = mysqli_query($connect, $sql);
+    $stmt = mysqli_prepare($connect, "update loveImg set imgText = ?, imgDatd = ?, imgUrl = ? where id = ?");
+    mysqli_stmt_bind_param($stmt, "sssi", $imgText, $imgDatd, $imgUrl, $id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_affected_rows($stmt) >= 0;
+    mysqli_stmt_close($stmt);
     if ($result) {
         echo "1";
     } else {

@@ -12,12 +12,39 @@ if ($type === 'proxy') {
     $sig = isset($_GET['sig']) ? $_GET['sig'] : '';
     
     if ($targetUrl) {
-        // 代理模式 - 实际项目中可以在这里添加安全检查
+        // 验证目标URL，仅允许同域或白名单域名
+        $allowedHosts = ['music.163.com', 'interface.music.163.com', 'interface3.music.163.com'];
+        $parsedUrl = parse_url($targetUrl);
+        $targetHost = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
+        $isAllowed = false;
+        
+        // 允许同域重定向
+        if (isset($parsedUrl['host']) && $parsedUrl['host'] === $_SERVER['HTTP_HOST']) {
+            $isAllowed = true;
+        }
+        
+        // 允许白名单域名
+        foreach ($allowedHosts as $allowedHost) {
+            if ($targetHost === $allowedHost || (substr($targetHost, -strlen('.' . $allowedHost)) === '.' . $allowedHost)) {
+                $isAllowed = true;
+                break;
+            }
+        }
+        
+        if (!$isAllowed) {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode([
+                'code' => 403,
+                'message' => 'Redirect to this domain is not allowed',
+                'timestamp' => time()
+            ], JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+        
+        // 代理模式
         header('Content-Type: audio/mpeg');
         header('Content-Disposition: inline');
         
-        // 这里简单返回一个示例，实际项目应处理真实音乐文件
-        // 为了演示，我们返回404或重定向
         header('HTTP/1.1 302 Found');
         header('Location: ' . $targetUrl);
         exit;

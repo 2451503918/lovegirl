@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include_once 'Function.php';
 include_once 'Nav.php';
 $ipkiki = "select * from IPerror order by id desc";
 $ipki = mysqli_query($connect, $ipkiki);
@@ -48,25 +49,27 @@ $ipki = mysqli_query($connect, $ipkiki);
                                     <?php echo $SerialNumber ?>
                                 </div>
                             </td>
-                            <td><?php echo $IPinfo['ipAdd'] ?></td>
+                            <td><?php echo htmlspecialchars($IPinfo['ipAdd'], ENT_QUOTES, 'UTF-8') ?></td>
                             <td>
                                 <small class="text-muted"><?php echo $IPinfo['Time'] ?></small>
                             </td>
                             <td>
-                                <h5><span class="badge badge-success-lighten"> <?php echo $IPinfo['text'] ?></span></h5>
+                                <h5><span class="badge badge-success-lighten"> <?php echo htmlspecialchars($IPinfo['text'], ENT_QUOTES, 'UTF-8') ?></span></h5>
                             </td>
                             <td>
                                 <h5>
-                                    <span class="badge badge-danger-lighten"><?php if ($IPinfo['State']) { ?><?php echo $IPinfo['State'] ?><?php } else { ?>127.0.0.1<?php } ?></span>
+                                    <span class="badge badge-danger-lighten"><?php if ($IPinfo['State']) { ?><?php echo htmlspecialchars($IPinfo['State'], ENT_QUOTES, 'UTF-8') ?><?php } else { ?>127.0.0.1<?php } ?></span>
                                 </h5>
                             </td>
                             <td>
-                                <a href="javascript:del(<?php echo $IPinfo['id']; ?>,'<?php echo $IPinfo['State']; ?>');">
-                                    <button style="white-space: nowrap;" type="button"
+                                <form method="POST" action="delip.php" style="display:inline" onsubmit="return confirm('您确认要删除IP为 <?php echo htmlspecialchars($IPinfo['State'] ? $IPinfo['State'] : '127.0.0.1', ENT_QUOTES, 'UTF-8') ?> 吗')">
+                                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($IPinfo['id'], ENT_QUOTES, 'UTF-8') ?>">
+                                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8') ?>">
+                                    <button style="white-space: nowrap;" type="submit"
                                             class="btn btn-danger btn-rounded">
                                         <i class=" mdi mdi-delete-empty mr-1"></i>删除
                                     </button>
-                                </a>
+                                </form>
                             </td>
                         </tr>
                         <?php
@@ -103,13 +106,7 @@ include_once 'Footer.php';
 <script src="/admin/assets/js/pages/demo.datatable-init.js"></script>
 <!-- end demo js-->
 
-<script>
-function del(id, State) {
-    if (confirm('您确认要删除IP为 ' + State + ' 吗')) {
-        location.href = 'delip.php?id=' + id + '&State=' + State;
-    }
-}
-</script>
+
 
 </body>
 </html>

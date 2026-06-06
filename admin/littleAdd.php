@@ -13,6 +13,7 @@ include_once 'Nav.php';
 
                 <form class="needs-validation" m action="littleAddPost.php" method="post" onsubmit="return check()"
                       novalidate>
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="form-group col-sm-4">
                         <label for="validationCustom01">发布者Name</label>
                             <select class="form-control" id="example-select" name="articlename">

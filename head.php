@@ -12,7 +12,9 @@
  * @Message：开发不易 版权信息请保留 (删除/修改作者版权的Dog请勿使用 感谢配合)
 -->
 <?php
-error_reporting(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 // include ("ipjc.php");
 // include_once ("ip.php");
 include_once 'admin/connect.php';
@@ -37,7 +39,7 @@ $Animation = $text['Animation'] ?? '';
 
 <script>
 
-    console.log("%c Q & V | 3439780232", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
+    console.log("%c Q & V | [已隐藏]", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
     console.log("%c Like Girl 5.2.1-Stable | Powered by Ki", "color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px");
     
 
@@ -92,7 +94,7 @@ $Animation = $text['Animation'] ?? '';
 
     function show_date_time() {
         setTimeout(show_date_time, 1000);
-        var BirthDay = new Date("<?php echo $text['startTime'] ?>");
+        var BirthDay = new Date(<?php echo json_encode($text['startTime']); ?>);
         var today = new Date();
         var timeold = (today.getTime() - BirthDay.getTime());
         var msPerDay = 24 * 60 * 60 * 1000;
@@ -248,27 +250,27 @@ function loadPhotos() {
 </script>
 <head>
 <link rel="shortcut icon" href="/favicon.ico" />
-<title><?php echo htmlspecialchars($text['title']) ?> - <?php echo htmlspecialchars($text['writing']) ?></title>
+<title><?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?> - <?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></title>
 <meta name="keywords"
-    content="<?php echo $text['title'] ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
-<meta name="description" content="<?php echo htmlspecialchars($text['writing']) ?> - Like Girl 5.2.1-Stable">
+    content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
+<meta name="description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
 <meta name="author" content="Ki">
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph (Facebook/微信/QQ) -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="<?php echo htmlspecialchars($text['title']) ?>">
-<meta property="og:title" content="<?php echo htmlspecialchars($text['title']) ?>">
-<meta property="og:description" content="<?php echo htmlspecialchars($text['writing']) ?>">
+<meta property="og:site_name" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="https://love.54oimx.top/">
-<meta property="og:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640">
+<meta property="og:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="<?php echo htmlspecialchars($text['title']) ?>">
-<meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing']) ?>">
-<meta name="twitter:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640">
+<meta name="twitter:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
 <meta name="x-lg-license-instance" content="858ee1d099b9">
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@400;600&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
@@ -573,27 +575,27 @@ window.addEventListener('load', function() {
     <div class="header">
         <div class="lgnewui-header-left-avatar">
             <div class="stuck-logo stuck-logo--en-v7">
-                <span class="stuck-logo__name"><?php echo $text['boy'] ?></span>
+                <span class="stuck-logo__name"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
                 <span class="stuck-logo__redline-l"></span>
                 <span class="stuck-logo__heart"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z" /></svg></span>
                 <span class="stuck-logo__redline-r"></span>
-                <span class="stuck-logo__name"><?php echo $text['girl'] ?></span>
+                <span class="stuck-logo__name"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
             </div>
         </div>
         <div class="logo">
-            <h1><a class="alogo" href="index.php"><?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', $text['logo']) ?></a></h1>
+            <h1><a class="alogo" href="index.php"><?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'], ENT_QUOTES, 'UTF-8')) ?></a></h1>
         </div>
         <div class="lgnewui-header-actions" id="lgnewuiHeaderActions">
             <div class="lgnewui-couple-avatars-right">
                 <div class="lgnewui-avatar-group">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['girlimg'] ?>&s=640" class="avatar-male" alt="<?php echo $text['girl'] ?>">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo $text['boyimg'] ?>&s=640" class="avatar-female" alt="<?php echo $text['boy'] ?>">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-female" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <span class="lgnewui-right-heart"></span>
             </div>
         </div>
-        <div class="word" data-tip="<?php echo $text['writing'] ?>" data-tip-position="bottom">
-            <span class="wenan"><?php echo $text['writing'] ?></span>
+        <div class="word" data-tip="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>" data-tip-position="bottom">
+            <span class="wenan"><?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></span>
         </div>
     </div>
 </div>
@@ -620,7 +622,7 @@ window.addEventListener('load', function() {
     }
 </style>
 <style>
-    <?php echo $diy['cssCon'] ?>
+    <?php echo preg_replace('/<\/style/i', '<\\/style', $diy['cssCon']) ?>
 </style>
 
 <script>

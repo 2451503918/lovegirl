@@ -33,6 +33,14 @@ if (!in_array($mimeType, $allowedTypes)) {
     exit;
 }
 
+// 检查文件扩展名白名单
+$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+$fileExt = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+if (!in_array($fileExt, $allowedExtensions)) {
+    echo json_encode(['code' => 0, 'msg' => '不允许的文件类型']);
+    exit;
+}
+
 // 生成唯一文件名
 $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
 $filename = date('YmdHis') . '_' . uniqid() . '.' . $ext;

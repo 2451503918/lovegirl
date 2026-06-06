@@ -5,6 +5,12 @@
 
 session_start();
 include_once 'Nav.php';
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
 
 // 检查是否是POST请求
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -51,6 +57,6 @@ $result = mysqli_query($connect, $sql);
 if ($result) {
     echo '<script>alert("位置配置更新成功");location.href="Set.php";</script>';
 } else {
-    echo '<script>alert("位置配置更新失败: ' . mysqli_error($connect) . '");history.back();</script>';
+    echo '<script>alert("位置配置更新失败，请重试");history.back();</script>';
 }
 ?>

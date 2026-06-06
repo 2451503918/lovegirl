@@ -1,9 +1,16 @@
 <?php
 session_start();
 
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
+
 $name = htmlspecialchars(trim($_POST['eventname']),ENT_QUOTES);
 $file = $_SERVER['PHP_SELF'];
-if ($_POST['img'] === 0) {
+if ($_POST['img'] === '0') {
     $img = 0;
 } else {
     $img = htmlspecialchars($_POST['img'],ENT_QUOTES);
@@ -19,7 +26,7 @@ include_once 'Database.php';
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $charu = "insert into lovelist (eventname,icon,imgurl) values (?,?,?)";
     $stmt = $conn->prepare($charu);
-    $stmt->bind_param("sis", $name, $icon, $img);
+    $stmt->bind_param("sss", $name, $icon, $img);
     $result = $stmt->execute();
     
     if ($result) {

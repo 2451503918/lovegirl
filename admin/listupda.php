@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+include_once 'Function.php';
+
+if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
+    echo '<script>alert("CSRF验证失败，请重试");history.back();</script>';
+    exit;
+}
+
 $name = htmlspecialchars(trim($_POST['eventname']),ENT_QUOTES);
 $icon = $_POST['icon'];
 $id = $_POST['id'];
@@ -19,8 +26,11 @@ if (!$icon) {
 }
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
-    $sql = "update lovelist set eventname = '$name',icon ='$icon',imgurl ='$img' where id ='$id' ";
-    $reslove = mysqli_query($connect, $sql);
+    $stmt = mysqli_prepare($connect, "update lovelist set eventname = ?, icon = ?, imgurl = ? where id = ?");
+    mysqli_stmt_bind_param($stmt, "sssi", $name, $icon, $img, $id);
+    mysqli_stmt_execute($stmt);
+    $reslove = mysqli_stmt_affected_rows($stmt) >= 0;
+    mysqli_stmt_close($stmt);
     if ($reslove) {
         echo "1";
     } else {

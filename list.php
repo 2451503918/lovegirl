@@ -98,7 +98,7 @@ if ($connect) {
                             <div class="card-header">
                                 <div class="header-left">
                                     <span class="status-dot <?php echo $list['is_done'] ? 'com' : 'air'; ?>"></span>
-                                    <span class="event-name"><?php echo htmlspecialchars($list['eventname']); ?></span>
+                                    <span class="event-name"><?php echo htmlspecialchars($list['eventname'], ENT_QUOTES, 'UTF-8'); ?></span>
                                     <?php if ($list['imgurl']) { ?>
                                         <span class="event-tags">
                                             <span class="etag"><i class="ph-fill ph-image" title="有照片"></i></span>
@@ -126,12 +126,12 @@ if ($connect) {
 
                                     <?php if ($list['imgurl']) { ?>
                                         <div class="body-gallery">
-                                            <img data-funlazy="<?php echo $list['imgurl']; ?>" alt="<?php echo htmlspecialchars($list['eventname']); ?>" class="lovelist-gallery-img" onerror="this.src='Style/img/default-avatar.svg'">
+                                            <img data-funlazy="<?php echo htmlspecialchars($list['imgurl'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($list['eventname']); ?>" class="lovelist-gallery-img" onerror="this.src='Style/img/default-avatar.svg'">
                                         </div>
                                     <?php } ?>
 
                                     <div class="body-info">
-                                        <div class="body-full-title"><?php echo htmlspecialchars($list['eventname']); ?></div>
+                                        <div class="body-full-title"><?php echo htmlspecialchars($list['eventname'], ENT_QUOTES, 'UTF-8'); ?></div>
                                         <div class="info-item">
                                             <span class="info-label">完成状态 / STATUS</span>
                                             <span class="info-value"><?php echo $list['is_done'] ? '已完成' : '未完成'; ?></span>

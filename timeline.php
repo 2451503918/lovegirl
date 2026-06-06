@@ -28,7 +28,7 @@ if ($girlimg && !preg_match('/^https?:\/\//', $girlimg)) {
     $girlimg = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg . '&s=640';
 }
 ?>
-<title><?php echo $text['title'] ?> — 恋爱轨迹</title>
+<title><?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?> — 恋爱轨迹</title>
 
 <div id="pjax-container">
     <!-- 时间轴专用样式 -->
