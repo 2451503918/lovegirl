@@ -109,7 +109,7 @@ if ($connect) {
 }
 
 $listPercent = $listTotal > 0 ? round(($listCompleted / $listTotal) * 100) : 0;
-$startTs = strtotime(str_replace('T', ' ', $text['startTime'] ?? '2022-06-05 00:07:00'));
+$startTs = @strtotime(str_replace('T', ' ', $text['startTime'] ?? '2022-06-05 00:07:00'));
 $runtimeDays = floor((time() - $startTs) / 86400);
 ?>
 
