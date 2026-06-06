@@ -2,7 +2,7 @@
 session_start();
 include_once 'Function.php';
 include_once 'Nav.php';
-$lovelist = "select * from lovelist order by id desc";
+$lovelist = "SELECT id, eventname, icon, imgurl, is_done FROM lovelist ORDER BY id DESC";
 $reslist = mysqli_query($connect, $lovelist);
 ?>
 

@@ -19,7 +19,7 @@ session_start();
  * @Message：开发不易 版权信息请保留 （删除/更改版权的无耻之人请勿使用 查到一个挂一个）
  */
  
-$Filter_IP = $_SERVER['REMOTE_ADDR'];
+$Filter_IP = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1';
 
 function checkQQ($qq)
 {

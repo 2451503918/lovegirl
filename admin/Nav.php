@@ -1,4 +1,5 @@
-<!--
+<?php
+/*
  * @Version：Like Girl 5.2.1-Stable
  * @Author: Ki.
  * @Date: 2025-09-03 00:00:00
@@ -7,20 +8,17 @@
  * @Document：https://blog.kikiw.cn/index.php/archives/52/
  * @Copyright (c) 2023 - 2025 by Ki All Rights Reserved. 
  * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
- * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
- * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
  * @Message：开发不易 版权信息请保留 (更改版权可耻 请勿使用本程序)
--->
+ */
 
 
-<?php
 include ($_SERVER['DOCUMENT_ROOT'] . '/ipjc.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 include_once 'connect.php';
 include_once 'Function.php';
-$stmt = mysqli_prepare($connect, "select * from login where user = ?");
+$stmt = mysqli_prepare($connect, "SELECT id, user, pw FROM login WHERE user = ?");
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['loginadmin']);
 mysqli_stmt_execute($stmt);
 $loginresult = mysqli_stmt_get_result($stmt);
@@ -33,15 +31,17 @@ if (mysqli_num_rows($loginresult)) {
 }
 mysqli_stmt_close($stmt);
 
-$sql = "select * from text";
+$sql = "SELECT boy, girl, title, logo, writing, boyimg, girlimg, startTime, icp, Copyright, userQQ, userName, Animation, boyCity, girlCity, boyLat, boyLng, girlLat, girlLng FROM text";
 $result = mysqli_query($connect, $sql);
-if (mysqli_num_rows($result)) {
+if ($result && mysqli_num_rows($result)) {
     $text = mysqli_fetch_array($result);
+    mysqli_free_result($result);
 }
-$sql = "select * from diySet";
+$sql = "SELECT id, headCon, footerCon, cssCon, Pjaxkg, Blurkg FROM diySet";
 $result = mysqli_query($connect, $sql);
-if (mysqli_num_rows($result)) {
+if ($result && mysqli_num_rows($result)) {
     $diy = mysqli_fetch_array($result);
+    mysqli_free_result($result);
 }
 ?>
 
@@ -85,27 +85,27 @@ if (mysqli_num_rows($result)) {
         });
     </script>
     <?php
-    //查询数据
-    //留言
-    $nub = "select count(id) as shu from leaving";
-    $res = mysqli_query($connect, $nub);
-    $leav = mysqli_fetch_array($res);
-    $shu = $leav['shu'];
-    //点点滴滴
-    $dian = "select count(id) as dian from article";
-    $resdian = mysqli_query($connect, $dian);
-    $didi = mysqli_fetch_array($resdian);
-    $diannub = $didi['dian'];
-    //恋爱清单
-    $list = "select count(id) as list from lovelist";
-    $reslsit = mysqli_query($connect, $list);
-    $listlove = mysqli_fetch_array($reslsit);
-    $listnub = $listlove['list'];
-    //恋爱相册
-    $img = "select count(id) as img from loveImg";
-    $resimg = mysqli_query($connect, $img);
-    $loveImg = mysqli_fetch_array($resimg);
-    $imgnub = $loveImg['img'];
+    // 合并4个COUNT查询为1个，减少数据库往返
+    $counts = ['leaving' => 0, 'little' => 0, 'lovelist' => 0, 'photo' => 0];
+    if ($connect) {
+        $countSql = "SELECT
+            (SELECT COUNT(id) FROM leaving) AS leaving_cnt,
+            (SELECT COUNT(id) FROM little) AS little_cnt,
+            (SELECT COUNT(id) FROM lovelist) AS lovelist_cnt,
+            (SELECT COUNT(id) FROM photo) AS photo_cnt";
+        $countRes = mysqli_query($connect, $countSql);
+        if ($countRes && $countRow = mysqli_fetch_assoc($countRes)) {
+            $counts['leaving'] = intval($countRow['leaving_cnt']);
+            $counts['little'] = intval($countRow['little_cnt']);
+            $counts['lovelist'] = intval($countRow['lovelist_cnt']);
+            $counts['photo'] = intval($countRow['photo_cnt']);
+        }
+        if ($countRes) mysqli_free_result($countRes);
+    }
+    $shu = $counts['leaving'];
+    $diannub = $counts['little'];
+    $listnub = $counts['lovelist'];
+    $imgnub = $counts['photo'];
     ?>
 
     <!--顶部栏 Start-->

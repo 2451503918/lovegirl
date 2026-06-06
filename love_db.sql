@@ -126,7 +126,8 @@ CREATE TABLE `little` (
   `tags` varchar(200) NOT NULL DEFAULT '' COMMENT '标签',
   PRIMARY KEY (`id`),
   KEY `idx_little_date` (`date`),
-  KEY `idx_little_views` (`views`)
+  KEY `idx_little_views` (`views`),
+  KEY `idx_little_encrypted` (`encrypted`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `little` (`id`, `title`, `text`, `author`, `date`, `weather`, `mood`, `location`, `views`, `likes`, `encrypted`, `password`, `cover`, `tags`) VALUES
@@ -268,7 +269,8 @@ CREATE TABLE `login` (
   `pw` varchar(255) NOT NULL COMMENT 'password_hash 加密后的密码',
   `last_login` datetime DEFAULT NULL,
   `last_ip` varchar(45) DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_login_user` (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 默认账号 admin / 密码 admin123
@@ -287,7 +289,8 @@ CREATE TABLE `IPerror` (
   `Time` varchar(200) NOT NULL,
   `State` text NOT NULL,
   `text` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_iperror_state` (`State`(45))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ============================================================================
@@ -313,8 +316,7 @@ CREATE TABLE `visitor_stats` (
   `visit_count` int(11) NOT NULL DEFAULT 0 COMMENT 'PV',
   `visitor_count` int(11) NOT NULL DEFAULT 0 COMMENT 'UV',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_visit_date` (`visit_date`),
-  KEY `idx_visitor_stats_date` (`visit_date`)
+  UNIQUE KEY `uk_visit_date` (`visit_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='每日PV/UV';
 
 INSERT INTO `visitor_stats` (`id`, `visit_date`, `visit_count`, `visitor_count`) VALUES
@@ -358,7 +360,7 @@ CREATE TABLE `article` (
   `articletitle` varchar(100) NOT NULL,
   `articlename` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `loveImg`;
 CREATE TABLE `loveImg` (

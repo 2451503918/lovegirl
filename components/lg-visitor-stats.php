@@ -14,17 +14,17 @@ $totalVisitors = 0;
 if (isset($connect) && $connect) {
     $today = date('Y-m-d');
     
-    // 获取今日统计
-    $result = mysqli_query($connect, "SELECT visit_count, visitor_count FROM visitor_stats WHERE visit_date = '$today'");
+    // 获取今日统计（预处理语句防SQL注入）
+    $stmt = mysqli_prepare($connect, "SELECT visit_count, visitor_count FROM visitor_stats WHERE visit_date = ?");
+    mysqli_stmt_bind_param($stmt, "s", $today);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $todayVisits = intval($row['visit_count']);
         $todayVisitors = intval($row['visitor_count']);
-    } else {
-        // 如果今天没有记录，显示暂无数据
-        $todayVisits = 0;
-        $todayVisitors = 0;
     }
+    mysqli_stmt_close($stmt);
     
     // 获取累计统计
     $result = mysqli_query($connect, "SELECT total_visits, total_visitors FROM visitor_total WHERE id = 1");
@@ -32,11 +32,8 @@ if (isset($connect) && $connect) {
         $row = mysqli_fetch_assoc($result);
         $totalVisits = intval($row['total_visits']);
         $totalVisitors = intval($row['total_visitors']);
-    } else {
-        // 如果没有累计记录，显示暂无数据
-        $totalVisits = 0;
-        $totalVisitors = 0;
     }
+    if ($result) mysqli_free_result($result);
 } else {
     // 没有数据库连接时显示暂无数据
     $todayVisits = 0;

@@ -22,4 +22,6 @@ if (!$connect) {
 }
 if ($connect) {
     $connect->set_charset("utf8mb4");
-}  
+}
+// 兼容：同时设置 $conn 供使用 OOP mysqli 的文件引用
+$conn = $connect;

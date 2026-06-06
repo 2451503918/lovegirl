@@ -3,7 +3,7 @@ session_start();
 
 include_once 'Function.php';
 include_once 'Nav.php';
-$ipkiki = "select * from IPerror order by id desc";
+$ipkiki = "SELECT id, ipAdd, text, State, Time FROM IPerror ORDER BY id DESC";
 $ipki = mysqli_query($connect, $ipkiki);
 
 ?>

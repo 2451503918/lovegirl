@@ -3,7 +3,7 @@ session_start();
 
 include_once 'Function.php';
 include_once 'Nav.php';
-$article = "select * from article order by id desc";
+$article = "SELECT id, title, date, author FROM little ORDER BY id DESC";
 $resarticle = mysqli_query($connect, $article);
 ?>
 
@@ -49,16 +49,16 @@ $resarticle = mysqli_query($connect, $article);
                                         <?php echo $SerialNumber ?>
                                     </div>
                                 </td>
-                                <td><?php echo htmlspecialchars($info['articletitle'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?php echo $info['articletime'] ?></td>
-                                <td><?php echo htmlspecialchars($info['articlename'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?php echo htmlspecialchars($info['title'], ENT_QUOTES, 'UTF-8') ?></td>
+                                <td><?php echo $info['date'] ?></td>
+                                <td><?php echo htmlspecialchars($info['author'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td>
                                     <a href="modlitt.php?id=<?php echo $info['id'] ?>">
                                         <button type="button" class="btn btn-secondary btn-rounded">
                                             <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                         </button>
                                     </a>
-                                    <form method="POST" action="dellitt.php" style="display:inline" onsubmit="return confirm('您确认要删除标题为 <?php echo htmlspecialchars($info['articletitle'], ENT_QUOTES, 'UTF-8') ?> 的文章吗')">
+                                    <form method="POST" action="dellitt.php" style="display:inline" onsubmit="return confirm('您确认要删除标题为 <?php echo htmlspecialchars($info['title'], ENT_QUOTES, 'UTF-8') ?> 的文章吗')">
                                         <input type="hidden" name="id" value="<?php echo htmlspecialchars($info['id'], ENT_QUOTES, 'UTF-8') ?>">
                                         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8') ?>">
                                         <button type="submit" class="btn btn-danger btn-rounded">

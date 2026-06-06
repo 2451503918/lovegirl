@@ -25,16 +25,18 @@ $version = '5.2.1';
 $text = [];
 $diy = [];
 if ($connect) {
-    $sql = "select * from text";
+    $sql = "SELECT boy, girl, title, logo, writing, boyimg, girlimg, startTime, icp, Copyright, card1, card2, card3, deci1, deci2, deci3, bgimg, userQQ, userName, Animation, boyCity, girlCity, boyLat, boyLng, girlLat, girlLng FROM text";
     $result = mysqli_query($connect, $sql);
     if ($result) {
         $text = mysqli_fetch_array($result) ?: [];
+        mysqli_free_result($result);
     }
 
-    $sql = "select * from diySet";
+    $sql = "SELECT id, headCon, footerCon, cssCon, Pjaxkg, Blurkg FROM diySet";
     $result = mysqli_query($connect, $sql);
     if ($result && mysqli_num_rows($result)) {
         $diy = mysqli_fetch_array($result) ?: [];
+        mysqli_free_result($result);
     }
 }
 

@@ -7,7 +7,7 @@ include_once "Database.php";
 $login_success = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $sql = "select * from login where user =?";
+    $sql = "SELECT id, user, pw FROM login WHERE user = ?";
     $stmt = $conn->prepare($sql);
     $USER = trim($user);
     $stmt->bind_param("s", $USER);

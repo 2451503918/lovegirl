@@ -4,7 +4,7 @@ include_once 'Nav.php';
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 include_once 'connect.php';
-$loveImg = "select * from loveImg WHERE id=? limit 1";
+$loveImg = "SELECT id, title, img, `desc`, date FROM photo WHERE id=? LIMIT 1";
 $stmt = mysqli_prepare($connect, $loveImg);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
@@ -24,17 +24,17 @@ $Imglist = mysqli_fetch_array($result);
                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8'); ?>">
                     <div class="form-group mb-3">
                         <label for="validationCustom01">日期</label>
-                        <input class="form-control col-sm-4" id="example-date" type="date" name="imgDatd" class="form-control" placeholder="日期" value="<?php echo htmlspecialchars($Imglist['imgDatd'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                        <input class="form-control col-sm-4" id="example-date" type="date" name="imgDatd" class="form-control" placeholder="日期" value="<?php echo htmlspecialchars($Imglist['date'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
                     
                     <div class="form-group mb-3">
                         <label for="validationCustom01">图片描述</label>
-                        <input name="imgText" type="text" class="form-control" placeholder="请输入图片描述" value="<?php echo htmlspecialchars($Imglist['imgText'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                        <input name="imgText" type="text" class="form-control" placeholder="请输入图片描述" value="<?php echo htmlspecialchars($Imglist['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
 
                     <div class="form-group mb-3" id="img_url">
                         <label for="validationCustom01">图片URL</label>
-                        <input type="text" name="imgUrl" class="form-control" placeholder="请输入图片URL地址" value="<?php echo htmlspecialchars($Imglist['imgUrl'], ENT_QUOTES, 'UTF-8') ?>" required>
+                        <input type="text" name="imgUrl" class="form-control" placeholder="请输入图片URL地址" value="<?php echo htmlspecialchars($Imglist['img'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
                     <div class="form-group mb-3 text_right">
                         <input name="id" value="<?php echo $id ?>" type="hidden">

@@ -2,7 +2,7 @@
 session_start();
 include_once 'Function.php';
 include_once 'Nav.php';
-$loveImg = "select * from loveImg order by id desc";
+$loveImg = "SELECT id, title, img, `desc`, date FROM photo ORDER BY id DESC";
 $resImg = mysqli_query($connect, $loveImg);
 ?>
 
@@ -44,15 +44,15 @@ $resImg = mysqli_query($connect, $loveImg);
                                     <?php echo $SerialNumber ?>
                                 </div>
                             </td>
-                            <td><?php echo htmlspecialchars($list['imgText'], ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?php echo $list['imgDatd'] ?></td>
+                            <td><?php echo htmlspecialchars($list['title'], ENT_QUOTES, 'UTF-8') ?></td>
+                            <td><?php echo $list['date'] ?></td>
                             <td>
                                 <a href="modImg.php?id=<?php echo $list['id'] ?>">
                                     <button type="button" class="btn btn-secondary btn-rounded">
                                         <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                     </button>
                                 </a>
-                                <form method="POST" action="delImg.php" style="display:inline" onsubmit="return confirm('您确认要删除描述为 <?php echo htmlspecialchars($list['imgText'], ENT_QUOTES, 'UTF-8') ?> 的相册图片吗')">
+                                <form method="POST" action="delImg.php" style="display:inline" onsubmit="return confirm('您确认要删除描述为 <?php echo htmlspecialchars($list['title'], ENT_QUOTES, 'UTF-8') ?> 的相册图片吗')">
                                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($list['id'], ENT_QUOTES, 'UTF-8') ?>">
                                     <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(generateCSRFToken(), ENT_QUOTES, 'UTF-8') ?>">
                                     <button type="submit" class="btn btn-danger btn-rounded">

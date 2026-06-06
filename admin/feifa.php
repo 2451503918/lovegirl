@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once 'Nav.php';
-$ipkiki = "select * from warning order by id desc";
+$ipkiki = "SELECT id, time, file, ip, gsd FROM warning ORDER BY id DESC";
 $ipki = mysqli_query($connect, $ipkiki);
 ?>
 
