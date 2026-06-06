@@ -5,7 +5,7 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
+$allowedOrigins = ['yourdomain.com', 'www.yourdomain.com']; // Replace with actual domain(s)
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
@@ -13,6 +13,16 @@ if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
 header('Access-Control-Allow-Credentials: true');
 
 $module = isset($_GET['module']) ? $_GET['module'] : 'all';
+$validModules = ['lovers', 'moments', 'messages', 'albums', 'events', 'all'];
+if (!in_array($module, $validModules)) {
+    http_response_code(400);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Invalid module parameter',
+        'timestamp' => time()
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 // 示例足迹数据
 $footprints = [
@@ -46,6 +56,7 @@ $footprints = [
 ];
 
 $response = [
+    'success' => true,
     'code' => 200,
     'data' => [
         'footprints' => $footprints,

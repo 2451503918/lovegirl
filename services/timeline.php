@@ -4,7 +4,7 @@
  * 返回 JSON 格式的时间轴事件数据
  */
 header('Content-Type: application/json; charset=utf-8');
-$allowedOrigins = [$_SERVER['HTTP_HOST']]; // Add your actual domain(s) here
+$allowedOrigins = ['yourdomain.com', 'www.yourdomain.com']; // Replace with actual domain(s)
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
@@ -15,16 +15,32 @@ error_reporting(0);
 
 include_once __DIR__ . '/../admin/connect.php';
 
-$response = ['code' => 200, 'data' => []];
+$response = ['success' => true, 'code' => 200, 'data' => []];
 
 if (!$connect) {
-    echo json_encode($response);
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Database connection failed',
+        'timestamp' => time()
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 // 获取 timeline 表数据
-$sql = "SELECT * FROM timeline ORDER BY date DESC";
-$result = mysqli_query($connect, $sql);
+$stmt = mysqli_prepare($connect, "SELECT * FROM timeline ORDER BY date DESC");
+if (!$stmt) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Database query preparation failed',
+        'timestamp' => time()
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if ($result) {
     $typeMap = [
@@ -103,6 +119,7 @@ if ($result) {
 
         $response['data'][] = $event;
     }
+    mysqli_stmt_close($stmt);
 }
 
 echo json_encode($response, JSON_UNESCAPED_UNICODE);

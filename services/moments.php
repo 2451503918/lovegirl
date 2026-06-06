@@ -29,17 +29,30 @@ $moments = [];
 
 // 获取最新的点滴文章
 if ($db_connected) {
-    $result = mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 6");
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $moments[] = [
-                'id' => $row['id'],
-                'title' => $row['title'],
-                'content' => mb_substr(strip_tags($row['text']), 0, 100, 'UTF-8'),
-                'date' => $row['date'],
-                'type' => 'article'
-            ];
+    $stmt = mysqli_prepare($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 6");
+    if ($stmt) {
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $moments[] = [
+                    'id' => $row['id'],
+                    'title' => $row['title'],
+                    'content' => mb_substr(strip_tags($row['text']), 0, 100, 'UTF-8'),
+                    'date' => $row['date'],
+                    'type' => 'article'
+                ];
+            }
         }
+        mysqli_stmt_close($stmt);
+    } else {
+        http_response_code(500);
+        echo json_encode([
+            'success' => false,
+            'error' => 'Database query preparation failed',
+            'timestamp' => time()
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
     }
 }
 
@@ -64,6 +77,7 @@ if (empty($moments)) {
 }
 
 echo json_encode([
+    'success' => true,
     'code' => 200,
     'data' => $moments,
     'total' => count($moments),

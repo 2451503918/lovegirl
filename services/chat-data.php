@@ -6,27 +6,50 @@
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-cache');
 
+$allowedOrigins = ['yourdomain.com', 'www.yourdomain.com']; // Replace with actual domain(s)
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Credentials: true');
+
 error_reporting(0);
 
 include_once dirname(__DIR__) . '/admin/connect.php';
 include_once dirname(__DIR__) . '/admin/Function.php';
 
+if (!$connect) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Database connection failed',
+        'timestamp' => time()
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 // Load text table for boy/girl names and avatars
-$sql = "SELECT * FROM text";
 $text = [];
-$result = mysqli_query($connect, $sql);
-if ($result) {
-    $text = mysqli_fetch_array($result);
+$stmt = mysqli_prepare($connect, "SELECT * FROM text");
+if ($stmt) {
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    if ($result) {
+        $text = mysqli_fetch_array($result);
+    }
+    mysqli_stmt_close($stmt);
 }
 
 // Load about table
-$sql = "SELECT * FROM about";
 $about = [];
-if ($connect) {
-    $resab = mysqli_query($connect, $sql);
+$stmt = mysqli_prepare($connect, "SELECT * FROM about");
+if ($stmt) {
+    mysqli_stmt_execute($stmt);
+    $resab = mysqli_stmt_get_result($stmt);
     if ($resab) {
         $about = mysqli_fetch_array($resab);
     }
+    mysqli_stmt_close($stmt);
 }
 
 // Resolve avatar URLs
@@ -157,6 +180,7 @@ $messages[] = [
 $bgImage = !empty($about['aboutimg']) ? $about['aboutimg'] : '';
 
 echo json_encode([
+    'success' => true,
     'code' => 0,
     'data' => [
         'boyName'   => $boyName,

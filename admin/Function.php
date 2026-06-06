@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /*
  * @Page：自定义函数方法
  * @Version：Like Girl 5.2.1-Stable
@@ -77,23 +79,6 @@ function time_tran($time)
         $text = floor($t / 31536000) . '年前';
     }
     return $text;
-}
-
-
-
-
-function generateCSRFToken() {
-    if (empty($_SESSION['csrf_token'])) {
-        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-    }
-    return $_SESSION['csrf_token'];
-}
-
-function verifyCSRFToken($token) {
-    if (empty($_SESSION['csrf_token']) || empty($token)) {
-        return false;
-    }
-    return hash_equals($_SESSION['csrf_token'], $token);
 }
 
 function get_ip_city_New($ip)
