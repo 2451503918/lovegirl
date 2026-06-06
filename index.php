@@ -29,39 +29,82 @@ $totalVisits = 0;
 $totalVisitors = 0;
 
 if ($connect) {
-    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM little");
-    if ($r) { $row = mysqli_fetch_array($r); $statsArticles = intval($row['c']); }
-    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM photo");
-    if ($r) { $row = mysqli_fetch_array($r); $statsPhotos = intval($row['c']); }
-    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM leaving");
-    if ($r) { $row = mysqli_fetch_array($r); $statsMessages = intval($row['c']); }
-    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM timeline");
-    if ($r) { $row = mysqli_fetch_array($r); $statsTimeline = intval($row['c']); }
-    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist");
-    if ($r) { $row = mysqli_fetch_array($r); $listTotal = intval($row['c']); }
-    // Try is_done column first (exists after migration), fall back to icon
-    $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist WHERE is_done = 1");
-    if ($r) {
-        $row = mysqli_fetch_array($r);
-        $listCompleted = intval($row['c']);
-    } else {
-        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist WHERE icon = 1");
-        if ($r) { $row = mysqli_fetch_array($r); $listCompleted = intval($row['c']); }
+    // Combined query: 6 COUNT subqueries + visitor stats in one round-trip
+    $today = date('Y-m-d');
+    $combinedSql = "SELECT "
+        . "(SELECT COUNT(*) FROM little) AS articles, "
+        . "(SELECT COUNT(*) FROM photo) AS photos, "
+        . "(SELECT COUNT(*) FROM leaving) AS messages, "
+        . "(SELECT COUNT(*) FROM timeline) AS timeline_count, "
+        . "(SELECT COUNT(*) FROM lovelist) AS list_total, "
+        . "(SELECT COUNT(*) FROM lovelist WHERE is_done = 1) AS list_completed, "
+        . "(SELECT visit_count FROM visitor_stats WHERE visit_date = ? LIMIT 1) AS today_visits, "
+        . "(SELECT visitor_count FROM visitor_stats WHERE visit_date = ? LIMIT 1) AS today_visitors, "
+        . "(SELECT total_visits FROM visitor_total WHERE id = 1 LIMIT 1) AS total_visits, "
+        . "(SELECT total_visitors FROM visitor_total WHERE id = 1 LIMIT 1) AS total_visitors";
+
+    $stmt = mysqli_prepare($connect, $combinedSql);
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, 'ss', $today, $today);
+        mysqli_stmt_execute($stmt);
+        $r = mysqli_stmt_get_result($stmt);
+        if ($r) {
+            $row = mysqli_fetch_assoc($r);
+            $statsArticles = intval($row['articles'] ?? 0);
+            $statsPhotos = intval($row['photos'] ?? 0);
+            $statsMessages = intval($row['messages'] ?? 0);
+            $statsTimeline = intval($row['timeline_count'] ?? 0);
+            $listTotal = intval($row['list_total'] ?? 0);
+            $listCompleted = intval($row['list_completed'] ?? 0);
+            $todayVisits = intval($row['today_visits'] ?? 0);
+            $todayVisitors = intval($row['today_visitors'] ?? 0);
+            $totalVisits = intval($row['total_visits'] ?? 0);
+            $totalVisitors = intval($row['total_visitors'] ?? 0);
+        }
+        mysqli_stmt_close($stmt);
     }
 
-    // 获取访问统计数据
-    $today = date('Y-m-d');
-    $r = @mysqli_query($connect, "SELECT * FROM visitor_stats WHERE visit_date = '$today'");
-    if ($r && mysqli_num_rows($r) > 0) {
-        $row = mysqli_fetch_assoc($r);
-        $todayVisits = intval($row['visit_count'] ?? $row['count'] ?? 0);
-        $todayVisitors = intval($row['visitor_count'] ?? 0);
-    }
-    $r = @mysqli_query($connect, "SELECT * FROM visitor_total WHERE id = 1");
-    if ($r && mysqli_num_rows($r) > 0) {
-        $row = mysqli_fetch_assoc($r);
-        $totalVisits = intval($row['total_visits'] ?? $row['count'] ?? 0);
-        $totalVisitors = intval($row['total_visitors'] ?? 0);
+    // Fallback: if combined query failed, run individual queries
+    if ($statsArticles === 0 && $statsPhotos === 0 && $statsMessages === 0 && $statsTimeline === 0) {
+        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM little");
+        if ($r) { $row = mysqli_fetch_array($r); $statsArticles = intval($row['c']); }
+        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM photo");
+        if ($r) { $row = mysqli_fetch_array($r); $statsPhotos = intval($row['c']); }
+        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM leaving");
+        if ($r) { $row = mysqli_fetch_array($r); $statsMessages = intval($row['c']); }
+        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM timeline");
+        if ($r) { $row = mysqli_fetch_array($r); $statsTimeline = intval($row['c']); }
+        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist");
+        if ($r) { $row = mysqli_fetch_array($r); $listTotal = intval($row['c']); }
+        // Try is_done column first (exists after migration), fall back to icon
+        $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist WHERE is_done = 1");
+        if ($r) {
+            $row = mysqli_fetch_array($r);
+            $listCompleted = intval($row['c']);
+        } else {
+            $r = @mysqli_query($connect, "SELECT COUNT(*) as c FROM lovelist WHERE icon = 1");
+            if ($r) { $row = mysqli_fetch_array($r); $listCompleted = intval($row['c']); }
+        }
+
+        // Fallback visitor stats with prepared statement
+        $stmt2 = mysqli_prepare($connect, "SELECT visit_count, visitor_count FROM visitor_stats WHERE visit_date = ?");
+        if ($stmt2) {
+            mysqli_stmt_bind_param($stmt2, 's', $today);
+            mysqli_stmt_execute($stmt2);
+            $vr = mysqli_stmt_get_result($stmt2);
+            if ($vr && mysqli_num_rows($vr) > 0) {
+                $vrow = mysqli_fetch_assoc($vr);
+                $todayVisits = intval($vrow['visit_count'] ?? 0);
+                $todayVisitors = intval($vrow['visitor_count'] ?? 0);
+            }
+            mysqli_stmt_close($stmt2);
+        }
+        $r = @mysqli_query($connect, "SELECT * FROM visitor_total WHERE id = 1");
+        if ($r && mysqli_num_rows($r) > 0) {
+            $row = mysqli_fetch_assoc($r);
+            $totalVisits = intval($row['total_visits'] ?? $row['count'] ?? 0);
+            $totalVisitors = intval($row['total_visitors'] ?? 0);
+        }
     }
 }
 

@@ -26,6 +26,16 @@ $mode = isset($_GET['mode']) ? $_GET['mode'] : 'ip';
 $location = isset($_GET['location']) ? $_GET['location'] : '';
 $slot = isset($_GET['slot']) ? intval($_GET['slot']) : 1;
 
+// File-based cache
+$cacheFile = sys_get_temp_dir() . '/lg_weather_' . md5($mode . $slot . $location) . '.json';
+$cacheTime = 600; // 10 minutes
+
+if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) < $cacheTime) {
+    header('X-Cache: HIT');
+    readfile($cacheFile);
+    exit;
+}
+
 // 模拟天气数据（因为演示站使用了模拟数据）
 $mockWeatherData = [
     '1' => [
@@ -68,10 +78,16 @@ $key = $mode === 'couple' ? (string)$slot : 'ip';
 $data = isset($mockWeatherData[$key]) ? $mockWeatherData[$key] : $mockWeatherData['ip'];
 
 // 返回JSON响应
-echo json_encode([
+$response = json_encode([
     'code' => 200,
     'data' => $data,
     'mode' => $mode,
     'slot' => $slot,
     'timestamp' => time()
 ], JSON_UNESCAPED_UNICODE);
+
+// Save to cache
+file_put_contents($cacheFile, $response);
+header('X-Cache: MISS');
+
+echo $response;

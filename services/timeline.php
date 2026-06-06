@@ -28,7 +28,7 @@ if (!$connect) {
 }
 
 // 获取 timeline 表数据
-$stmt = mysqli_prepare($connect, "SELECT * FROM timeline ORDER BY date DESC");
+$stmt = mysqli_prepare($connect, "SELECT id, type, title, content, date, location FROM timeline ORDER BY date DESC");
 if (!$stmt) {
     http_response_code(500);
     echo json_encode([

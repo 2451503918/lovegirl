@@ -67,13 +67,13 @@ switch ($action) {
         $today = date('Y-m-d');
         $visitorIP = getClientIP();
         
-        // 使用 upsert 避免竞态条件
+        // 使用 upsert 避免竞态条件 (Query 1)
         $stmt = mysqli_prepare($connect, "INSERT INTO visitor_stats (visit_date, visit_count, visitor_count) VALUES (?, 1, 0) ON DUPLICATE KEY UPDATE visit_count = visit_count + 1");
         mysqli_stmt_bind_param($stmt, "s", $today);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         
-        // 更新累计统计
+        // 更新累计访问次数 (Query 2)
         $stmt = mysqli_prepare($connect, "UPDATE visitor_total SET 
             total_visits = total_visits + 1,
             last_visit_time = NOW()
@@ -81,21 +81,16 @@ switch ($action) {
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         
-        // 基于IP去重判断是否是新访客
+        // 使用 INSERT IGNORE 基于 IP 去重判断是否是新访客，避免 SELECT+INSERT 两次查询 (Query 3)
         $isNewVisitor = false;
-        $stmt = mysqli_prepare($connect, "SELECT id FROM visitor_ips WHERE visit_date = ? AND ip = ?");
+        $stmt = mysqli_prepare($connect, "INSERT IGNORE INTO visitor_ips (visit_date, ip) VALUES (?, ?)");
         mysqli_stmt_bind_param($stmt, "ss", $today, $visitorIP);
         mysqli_stmt_execute($stmt);
-        $ipResult = mysqli_stmt_get_result($stmt);
+        $isNewVisitor = mysqli_stmt_affected_rows($stmt) > 0;
         mysqli_stmt_close($stmt);
         
-        if (!$ipResult || mysqli_num_rows($ipResult) === 0) {
-            // 该IP今日首次访问，记录为新访客
-            $stmt = mysqli_prepare($connect, "INSERT INTO visitor_ips (visit_date, ip) VALUES (?, ?)");
-            mysqli_stmt_bind_param($stmt, "ss", $today, $visitorIP);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-            
+        // 仅在新访客时更新访客计数 (Query 4-5, 仅新访客时执行)
+        if ($isNewVisitor) {
             $stmt = mysqli_prepare($connect, "UPDATE visitor_stats SET visitor_count = visitor_count + 1 WHERE visit_date = ?");
             mysqli_stmt_bind_param($stmt, "s", $today);
             mysqli_stmt_execute($stmt);
@@ -104,7 +99,6 @@ switch ($action) {
             $stmt = mysqli_prepare($connect, "UPDATE visitor_total SET total_visitors = total_visitors + 1 WHERE id = 1");
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
-            $isNewVisitor = true;
         }
         
         $response = [

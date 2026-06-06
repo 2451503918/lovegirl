@@ -10,8 +10,14 @@
     var _intervals = [];
     
     window.initLGHomeApp = function(options = {}) {
+        // Skip if page-index.js (LGIndexModule) is already active
+        if (window.LGIndexModule && window.LGIndexModule._initialized) {
+            console.log('LGHomeApp: skipped, LGIndexModule is active');
+            return;
+        }
+
         console.log('%c LG-NewUi Home App Initializing... ', 'color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px; font-weight: bold;');
-        
+
         // 初始化各个模块
         initSmartMediaCard();
         initWeatherCards();
@@ -33,6 +39,11 @@
     
     // PJAX导航前清理
     $(document).on('pjax:beforeReplace', function() {
+        window.destroyLGHomeApp();
+    });
+
+    // beforeunload cleanup to prevent interval leaks
+    window.addEventListener('beforeunload', function() {
         window.destroyLGHomeApp();
     });
     
