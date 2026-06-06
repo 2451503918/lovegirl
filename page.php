@@ -31,7 +31,7 @@ $articleData = [
 ];
 
 if (is_numeric($id) && $id > 0 && $connect) {
-    $article = "SELECT * FROM little WHERE id=? limit 1";
+    $article = "SELECT id, title, text, author, date, location, weather, mood FROM little WHERE id=? limit 1";
     $stmt = mysqli_prepare($connect, $article);
     if ($stmt) {
         mysqli_stmt_bind_param($stmt, "i", $id);

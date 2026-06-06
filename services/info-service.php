@@ -83,7 +83,7 @@ switch ($action) {
             }
             
             // 恋爱天数
-            $stmt = mysqli_prepare($connect, "SELECT * FROM text LIMIT 1");
+            $stmt = mysqli_prepare($connect, "SELECT startTime FROM text LIMIT 1");
             if ($stmt) {
                 mysqli_stmt_execute($stmt);
                 $result = mysqli_stmt_get_result($stmt);
@@ -118,7 +118,7 @@ switch ($action) {
         ];
         
         if ($connect) {
-            $stmt = mysqli_prepare($connect, "SELECT * FROM text LIMIT 1");
+            $stmt = mysqli_prepare($connect, "SELECT boyCity, girlCity, boyLat, boyLng, girlLat, girlLng FROM text LIMIT 1");
             if ($stmt) {
                 mysqli_stmt_execute($stmt);
                 $result = mysqli_stmt_get_result($stmt);

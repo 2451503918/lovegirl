@@ -99,7 +99,7 @@ if ($connect) {
             }
             mysqli_stmt_close($stmt2);
         }
-        $r = @mysqli_query($connect, "SELECT * FROM visitor_total WHERE id = 1");
+        $r = @mysqli_query($connect, "SELECT total_visits, total_visitors FROM visitor_total WHERE id = 1");
         if ($r && mysqli_num_rows($r) > 0) {
             $row = mysqli_fetch_assoc($r);
             $totalVisits = intval($row['total_visits'] ?? $row['count'] ?? 0);
@@ -120,14 +120,14 @@ $runtimeDays = floor((time() - $startTs) / 86400);
         <div class="bg-img">
             <div class="wrap">
                 <div class="list">
-                    <div class="item active"><img class="CarouselImage" src="/Style/img/banner/1.jpg" alt=""></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/2.jpg" alt=""></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/3.jpg" alt=""></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/4.jpg" alt=""></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/5.jpg" alt=""></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/6.jpg" alt=""></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/7.jpg" alt=""></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/8.jpg" alt=""></div>
+                    <div class="item active"><img class="CarouselImage" src="/Style/img/banner/1.jpg" alt="" fetchpriority="high" decoding="sync"></div>
+                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/2.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/3.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/4.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/5.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/6.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/7.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/8.jpg" alt="" loading="lazy" decoding="async"></div>
                 </div>
             </div>
             <div class="middle Blurkg">
@@ -657,7 +657,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <?php
                 $recentEvents = null;
                 if ($connect) {
-                    $recentEvents = @mysqli_query($connect, "SELECT * FROM lovelist ORDER BY id DESC LIMIT 4");
+                    $recentEvents = @mysqli_query($connect, "SELECT id, eventname, imgurl, is_done, icon, note, location, date FROM lovelist ORDER BY id DESC LIMIT 4");
                 }
                 if ($recentEvents && mysqli_num_rows($recentEvents) > 0):
                     $eidx = 0; while ($evt = mysqli_fetch_array($recentEvents)):
@@ -757,7 +757,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <?php
                 $lovedays = [];
                 if ($connect) {
-                    $ldResult = @mysqli_query($connect, "SELECT * FROM timeline ORDER BY date ASC");
+                    $ldResult = @mysqli_query($connect, "SELECT id, type, title, content, date, location FROM timeline ORDER BY date ASC");
                     if ($ldResult) {
                         while ($ld = mysqli_fetch_array($ldResult)) {
                             $ldDate = $ld['date'];
@@ -844,7 +844,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <?php
                 $recentArticles = null;
                 if ($connect) {
-                    $recentArticles = @mysqli_query($connect, "SELECT * FROM little ORDER BY id DESC LIMIT 6");
+                    $recentArticles = @mysqli_query($connect, "SELECT id, title, text, author, date, weather, mood, location, views, likes FROM little ORDER BY id DESC LIMIT 6");
                 }
                 if ($recentArticles && mysqli_num_rows($recentArticles) > 0):
                     $idx = 0; while ($art = mysqli_fetch_array($recentArticles)):
@@ -920,7 +920,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 $recentAlbums = null;
                 if ($connect) {
                     // 尝试从 photo 表获取相册数据
-                    $recentAlbums = @mysqli_query($connect, "SELECT * FROM photo ORDER BY id DESC LIMIT 6");
+                    $recentAlbums = @mysqli_query($connect, "SELECT id, code, title, img, `desc`, author, location, date FROM photo ORDER BY id DESC LIMIT 6");
                 }
                 if ($recentAlbums && mysqli_num_rows($recentAlbums) > 0):
                     $idx = 0; while ($album = mysqli_fetch_array($recentAlbums)):
@@ -983,7 +983,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <?php
                     $recentMsgs = null;
                     if ($connect) {
-                        $recentMsgs = @mysqli_query($connect, "SELECT * FROM leaving ORDER BY id DESC LIMIT 8");
+                        $recentMsgs = @mysqli_query($connect, "SELECT id, name, QQ, text, time, ip, city, device, browser, likes FROM leaving ORDER BY id DESC LIMIT 8");
                     }
                     if ($recentMsgs && mysqli_num_rows($recentMsgs) > 0):
                         while ($msg = mysqli_fetch_array($recentMsgs)):

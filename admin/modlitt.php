@@ -2,7 +2,7 @@
 session_start();
 include_once 'Nav.php';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$article = "SELECT * FROM article WHERE id=? limit 1";
+$article = "SELECT id, articletitle, articletext, articletime, articlename FROM article WHERE id=? limit 1";
 $stmt = mysqli_prepare($connect, $article);
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);

@@ -41,7 +41,7 @@ try {
         echo "</ul>";
         
         // 检查text表数据
-        $textResult = mysqli_query($connect, "SELECT * FROM text LIMIT 1");
+        $textResult = mysqli_query($connect, "SELECT boy, girl, startTime FROM text LIMIT 1");
         if ($textResult && mysqli_num_rows($textResult) > 0) {
             $text = mysqli_fetch_assoc($textResult);
             echo "<p class='success'>✅ 网站配置存在</p>";
