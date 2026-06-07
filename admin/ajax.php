@@ -1,4 +1,5 @@
-<!-- 
+<?php
+/* 
  * @Page：异步Ajax请求处理内容新增修改
  * @Version：Like Girl 5.2.1-Stable
  * @Author: Ki.
@@ -8,13 +9,8 @@
  * @Document：https://blog.kikiw.cn/index.php/archives/52/
  * @Copyright (c) 2023 - 2025 by Ki All Rights Reserved. 
  * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
- * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
- * @Warning：禁止以任何方式出售本项目 如有发现一切后果自行负责
- * @Message：开发不易 版权信息请保留 （删除/更改版权的无耻之人请勿使用 查到一个挂一个）
- * @Message：开发不易 版权信息请保留 （删除/更改版权的无耻之人请勿使用 查到一个挂一个）
- * @Message：开发不易 版权信息请保留 （删除/更改版权的无耻之人请勿使用 查到一个挂一个）
- -->
-<?php
+ * @Message：开发不易 版权信息请保留
+ */
 session_start();
 $file = $_SERVER['PHP_SELF'];
 if (!isset($_SESSION['loginadmin']) || $_SESSION['loginadmin'] === '') {

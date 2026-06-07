@@ -20,8 +20,12 @@ $file = $_SERVER['PHP_SELF'];
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
     if ($id > 0) {
-        $sql = "delete from IPerror where id = $id";
-        $result = mysqli_query($connect, $sql);
+        // 使用预处理语句
+        $stmt = mysqli_prepare($connect, "DELETE FROM IPerror WHERE id = ?");
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_affected_rows($stmt) > 0;
+        mysqli_stmt_close($stmt);
         if ($result) {
             echo "<script>alert('删除成功');location.href = 'ipList.php';</script>";
         } else {
