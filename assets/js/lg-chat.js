@@ -27,6 +27,10 @@
         chatBox = document.getElementById('chatBox');
         if (!chatBox) return;
 
+        // 显示聊天容器
+        var wrapper = document.querySelector('.lgnewui-chat-wrapper');
+        if (wrapper) wrapper.style.opacity = '1';
+
         bindControls();
         loadData();
     }

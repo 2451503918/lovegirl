@@ -148,6 +148,9 @@ $girlName = $text['girl'] ?? 'Ta';
         };
     </script>
 
+    <!-- 聊天回放脚本 -->
+    <script src="/assets/js/lg-chat.js"></script>
+
 </div><!-- /#pjax-container -->
 
 <!-- 留言弹窗遮罩层 -->
