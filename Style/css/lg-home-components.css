@@ -227,14 +227,6 @@
     .lgnewui-loveday-grid { grid-template-columns: 1fr; }
 }
 
-/* ===== 背景点阵 ===== */
-body.bg-pdot-vignette {
-    background-image:
-        radial-gradient(circle at 50% 50%, transparent 0%, rgba(255,255,255,0.8) 100%),
-        radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
-    background-size: 100% 100%, 20px 20px;
-}
-
 /* ===== Section Header 变体 ===== */
 .lgnewui-section-header--rose .lgnewui-section-title { color: #e11d48; }
 .lgnewui-section-header--purple .lgnewui-section-title { color: #7c3aed; }

@@ -33,7 +33,6 @@ if ($connect) {
 ?>
 
 <div id="pjax-container">
-    <link rel="stylesheet" href="/Style/LoveListStyle/styleCarousel.css">
     <style>
         :root {
             --main-accent: #71b7ff;

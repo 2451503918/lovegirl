@@ -40,10 +40,6 @@
     position: relative;
 }
 
-div#pjax-container {
-    width: 100%;
-}
-
 div#mask .close {
     position: absolute;
     right: 2rem;

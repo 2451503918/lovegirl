@@ -610,8 +610,8 @@ window.addEventListener('load', function() {
         <div class="lgnewui-header-actions" id="lgnewuiHeaderActions">
             <div class="lgnewui-couple-avatars-right">
                 <div class="lgnewui-avatar-group">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-female" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-male" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-female" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <span class="lgnewui-right-heart"></span>
             </div>

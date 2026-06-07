@@ -1095,7 +1095,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     </div>
 
     <!-- ===== 留言触发按钮 ===== -->
-    <div class="lgnewui-message-trigger" id="mes" onclick="openMessageModal()">
+    <div class="lgnewui-message-trigger" id="mes-home" onclick="openMessageModal()">
         <i class="ph-fill ph-chat-teardrop-dots"></i>
         <span>留言</span>
     </div>
@@ -1296,11 +1296,9 @@ $runtimeDays = floor((time() - $startTs) / 86400);
 
     <!-- ===== 底部脚本 ===== -->
     <!-- 字体图标 CSS -->
-    <link rel="stylesheet" href="/Style/Font/font_list/iconfont.css?LikeGirl=<?php echo $version ?>">
     <link rel="stylesheet" href="/Style/Font/font_leav/iconfont.css?LikeGirl=<?php echo $version ?>">
 
     <!-- 核心功能脚本 -->
-    <script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
     <script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/Style/vendor/lucide/lucide.min.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script>
@@ -1330,11 +1328,9 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     <script src="/Style/vendor/html2canvas/html2canvas.min.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
     <script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
 
     <!-- ===== 音乐播放器 ===== -->
-    <script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
     <script src="/Style/vendor/color-thief/color-thief.min.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/Style/vendor/meting/meting.js?LikeGirl=<?php echo $version ?>" defer></script>
 

@@ -197,47 +197,7 @@
     </style>
 </div>
 
-<?php if ($icp <> '' || $copy <> ''): ?>
-    <div class="footer-warp">
-        <div class="footer">
-            <?php if ($icp): ?>
-                <p><img src="/Style/img/icp.svg"><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank"><?php echo $icp ?></a></p>
-            <?php endif;
-            if ($copy): ?>
-                <p><?php echo $copy ?></p>
-            <?php endif; ?>
-        </div>
-    </div>
-<?php endif; ?>
-
-
 <?php echo htmlspecialchars_decode($diy['footerCon'], ENT_QUOTES) ?>
 
-<!-- 音乐播放器 -->
-<div id="lg-music-player" style="position:fixed;bottom:80px;right:1.5rem;z-index:998;"></div>
-<script>
-(function() {
-    var ap = new APlayer({
-        container: document.getElementById('lg-music-player'),
-        mini: true,
-        autoplay: false,
-        lrcType: 0,
-        mutex: true,
-        preload: 'none',
-        volume: 0.7,
-        audio: [{
-            name: '背景音乐',
-            artist: '默认',
-            url: '',
-            cover: ''
-        }]
-    });
-    // 如果没有有效URL，隐藏播放器
-    var el = document.getElementById('lg-music-player');
-    if (el && (!ap.list || !ap.list.audios || !ap.list.audios[0] || !ap.list.audios[0].url)) {
-        el.style.display = 'none';
-    }
-})();
-</script>
 </body>
 </html>

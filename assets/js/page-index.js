@@ -526,7 +526,7 @@
         },
 
         _openLeavingModal() {
-            const mesBtn = document.getElementById('mes');
+            const mesBtn = document.getElementById('mes-home') || document.getElementById('mes');
             if (mesBtn) {
                 mesBtn.click();
             } else {
