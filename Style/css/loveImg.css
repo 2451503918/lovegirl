@@ -61,6 +61,13 @@
 /* Masonry Grid 系统 */
 .lg-masonry-grid {
     width: 100%;
+    overflow: hidden;
+}
+
+.lg-masonry-grid::after {
+    content: '';
+    display: table;
+    clear: both;
 }
 
 .lg-masonry-col {

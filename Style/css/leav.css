@@ -61,29 +61,6 @@ div#mask .close svg {
     height: 3rem !important;
 }
 
-.card::before {
-    content: '';
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #fd6458;
-    box-shadow: 20px 0 0 #ffbf2b, 40px 0 0 #24cc3d;
-    position: absolute;
-    left: 0rem;
-    top: -2.5rem;
-}
-
-.central.central-800.bg .avatar {
-    width: 3em;
-    height: 3em;
-    border-radius: 0.8rem;
-    box-shadow: 0 2px 8px #bdb7b759;
-    border: 2px solid #fff;
-    margin-right: 0.8rem;
-}
-
-
 #show_mes {
     position: fixed;
     bottom: 0;
@@ -91,11 +68,6 @@ div#mask .close svg {
     top: 40%;
     transform: translate(-50%, -50%);
     z-index: 10002;
-}
-
-.card::before {
-    box-shadow: none;
-    background-color: transparent;
 }
 
 div#mask {

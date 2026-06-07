@@ -70,7 +70,10 @@
     }
 
     function showError(msg) {
-        chatBox.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">' + msg + '</div>';
+        chatBox.innerHTML = '<div style="text-align:center;padding:60px 20px;color:#6b7280;font-size:14px;line-height:1.6;">' +
+            '<div style="font-size:40px;margin-bottom:16px;opacity:0.4;">💬</div>' +
+            '<div style="font-weight:600;color:#374151;margin-bottom:8px;">' + msg + '</div>' +
+            '<div style="font-size:12px;color:#9ca3af;">请检查服务端配置后刷新页面</div></div>';
     }
 
     // ------------------------------------------------------------------ header

@@ -16,19 +16,19 @@
   margin: 0 0.6rem;
 }
 .central-600 {
-  background: url("https://img.gejiba.com/images/2e34a88491d60fa809883cc7cd149759.jpg") no-repeat center;
-  border-radius: 3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2rem;
   background-size: cover;
   overflow: hidden;
-  box-shadow: 0 8px 12px #ababab87;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   border: 2px solid rgba(208, 206, 206, 0.4) !important;
 }
 .central-600 .botui-app-container {
     width: 100%;
-    background: #35353563;
+    background: rgba(53, 53, 53, 0.39);
 }
 .central-600 .botui-container {
-  border-radius: 3rem;
+  border-radius: 2rem;
   background: transparent;
 }
 .central-600 .botui-actions-buttons-button {
@@ -39,14 +39,24 @@
 }
 .central-600 .botui-message-content {
   padding: 10px 16px;
-  color: #999999;
+  color: #374151;
   background-color: #ffffff;
 }
 .central-600 .botui-message-content.human {
   color: #fff;
-  background-color: #919292;
+  background-color: #6b7280;
 }
 .central-600 .botui-container {
     padding: 1rem;
     box-sizing: border-box;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .central-600 {
+    border-radius: 1.5rem;
+  }
+  .central-600 .botui-container {
+    border-radius: 1.5rem;
+  }
 }
