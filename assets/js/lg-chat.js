@@ -90,6 +90,9 @@
         isPlaying = true;
         isPaused = false;
         updatePlayBtn();
+        // 显示聊天容器
+        var wrapper = document.querySelector('.lgnewui-chat-wrapper');
+        if (wrapper) wrapper.style.opacity = '1';
         playNext();
     }
 

@@ -49,6 +49,92 @@ html.lg-scroll-locked #lgnewuiFloatingActions {
     box-shadow: 0 4px 20px rgba(0, 122, 255, 0.35);
 }
 
+/* ── 首页浮动留言按钮（.lgnewui-message-trigger） ── */
+.lgnewui-message-trigger {
+    position: fixed;
+    left: 20px;
+    bottom: 100px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px 12px 14px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #1f2937;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: 0.01em;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lgnewui-message-trigger i {
+    font-size: 20px;
+    color: #007aff;
+    line-height: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lgnewui-message-trigger span {
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.lgnewui-message-trigger:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 122, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.lgnewui-message-trigger:hover i {
+    transform: scale(1.15);
+}
+
+.lgnewui-message-trigger:active {
+    transform: translateY(0) scale(0.97);
+    box-shadow: 0 2px 12px rgba(0, 122, 255, 0.12);
+}
+
+/* 脉冲呼吸动画 */
+.lgnewui-message-trigger::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50px;
+    background: rgba(0, 122, 255, 0.08);
+    animation: lgMsgPulse 2.5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes lgMsgPulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.04); }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .lgnewui-message-trigger {
+        left: 16px;
+        bottom: 80px;
+        padding: 10px 16px 10px 12px;
+        font-size: 13px;
+        gap: 6px;
+    }
+
+    .lgnewui-message-trigger i {
+        font-size: 18px;
+    }
+}
+
 .leav .message_btn .mesly:hover svg {
     color: var(--lgmsg-primary, #007AFF);
     fill: var(--lgmsg-primary, #007AFF) !important;

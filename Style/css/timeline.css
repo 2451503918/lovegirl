@@ -863,13 +863,14 @@ body {
     overflow: hidden;
     background: #f3f3f3;
     border: 1px solid rgba(0, 0, 0, 0.03);
-    height: 256px;
+    height: 200px;
     width: 100%;
     contain: content;
     margin-top: 14px;
     margin-bottom: 12px;
     position: relative;
     transition: box-shadow 0.3s ease;
+    max-height: 256px;
 }
 
 .lgnewui-time-line-event:hover .lgnewui-time-line-media-container {

@@ -181,6 +181,7 @@
 .lg-photo-box {
     position: relative;
     width: 100%;
+    height: 100%;
     overflow: hidden;
     cursor: pointer;
 }
@@ -195,6 +196,14 @@
     object-fit: cover;
     display: block;
 }
+
+/* Grid 子项默认 aspect-ratio，确保图片不会显示过大 */
+.grid-1 .lg-photo-box { aspect-ratio: 16/9; }
+.grid-2 .lg-photo-box { aspect-ratio: 3/2; }
+.grid-3 .lg-photo-box { aspect-ratio: 4/3; }
+.grid-4 .lg-photo-box { aspect-ratio: 1/1; }
+.grid-6 .lg-photo-box { aspect-ratio: 1/1; }
+.grid-9 .lg-photo-box { aspect-ratio: 1/1; }
 
 .lg-photo.loaded {
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), .7s filter linear, .7s -webkit-filter linear;

@@ -493,7 +493,7 @@
                             ${header}
                             <div class="lgnewui-time-line-card-content">
                                 ${titleAndDesc}
-                                <div class="lgnewui-time-line-media-container video-player" data-url="${escapeHtml(item.mediaUrl)}" onclick="if(window.VideoModal){window.VideoModal.open('${escapeHtml(item.mediaUrl)}', '${escapeHtml(videoCoverUrl)}');}else{console.warn('VideoModal not loaded');}" style="cursor:pointer; position:relative; overflow:hidden; border-radius:12px; height:256px;">
+                                <div class="lgnewui-time-line-media-container video-player" data-url="${escapeHtml(item.mediaUrl)}" onclick="if(window.VideoModal){window.VideoModal.open('${escapeHtml(item.mediaUrl)}', '${escapeHtml(videoCoverUrl)}');}else{console.warn('VideoModal not loaded');}" style="cursor:pointer; position:relative; overflow:hidden; border-radius:12px;">
                                     ${videoCoverUrl ? `<img src="${escapeHtml(videoCoverUrl)}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">` : `<video src="${escapeHtml(item.mediaUrl)}" preload="metadata" muted playsinline style="width:100%; height:100%; object-fit:cover; pointer-events:none;"></video>`}
                                     <div class="lgnewui-tl-video-play-icon"><i class="ph-fill ph-play"></i></div>
                                     ${vidMetaTags ? `<div class="lgnewui-tl-media-meta">${vidMetaTags}</div>` : ''}

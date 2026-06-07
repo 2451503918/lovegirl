@@ -445,10 +445,17 @@
 /* ===== 头像遮罩层 ===== */
 .avatarArea {
     position: relative;
-    width: 100px; height: 100px;
+    width: 120px; height: 120px;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.avatarArea:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 .aiv_touxiang {
     width: 100%; height: 100%;
@@ -509,12 +516,15 @@
     display: flex; align-items: center; gap: 0.5rem;
     background: rgba(255,255,255,0.2);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 0.4rem 0.8rem;
     border-radius: 2rem;
     color: #fff;
     font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,0.3);
 }
 .distance-bubble:hover { background: rgba(255,255,255,0.3); }
 .distance-icon-box {
@@ -645,6 +655,6 @@
 @media (max-width: 768px) {
     .lg-sidebar { right: 0.8rem; bottom: 5rem; }
     .lg-sidebar-item { width: 36px; height: 36px; }
-    .avatarArea { width: 80px; height: 80px; }
+    .avatarArea { width: 90px; height: 90px; }
     .lgnewui-page-header { padding: 1rem 0; }
 }
