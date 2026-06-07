@@ -52,7 +52,13 @@ if (is_numeric($id) && $id > 0 && $connect) {
         mysqli_stmt_close($stmt);
     }
 } else {
-    echo ("<script>alert('参数错误或页面不存在！');history.back();</script>");
+    echo '<div id="pjax-container"><div class="lgnewui-no-data" style="text-align:center;padding:6rem 1rem;">
+        <div class="lgnewui-no-data__icon"><i class="ph-fill ph-warning" style="font-size:3rem;opacity:0.3;"></i></div>
+        <h3 style="margin-top:1rem;color:var(--lg-text-secondary);">404</h3>
+        <p style="color:var(--lg-text-muted);">当前参数有误 请输入正确参数后访问</p>
+        <a href="articles.php" style="display:inline-block;margin-top:1.5rem;padding:0.6rem 1.5rem;background:var(--lg-accent,#71b7ff);color:#fff;border-radius:50px;text-decoration:none;font-size:0.9rem;">返回点滴</a>
+    </div></div>';
+    include_once 'footer.php';
     exit;
 }
 

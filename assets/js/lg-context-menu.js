@@ -30,19 +30,19 @@
                     <i class="ph-bold ph-house"></i>
                     <span>首页</span>
                 </div>
-                <div class="lg-context-menu__item" onclick="location.href='little.php'">
+                <div class="lg-context-menu__item" onclick="location.href='articles.php'">
                     <i class="ph-bold ph-calendar-heart"></i>
                     <span>点点滴滴</span>
                 </div>
-                <div class="lg-context-menu__item" onclick="location.href='loveImg.php'">
+                <div class="lg-context-menu__item" onclick="location.href='albums.php'">
                     <i class="ph-bold ph-images"></i>
                     <span>相册</span>
                 </div>
-                <div class="lg-context-menu__item" onclick="location.href='list.php'">
+                <div class="lg-context-menu__item" onclick="location.href='lovelist.php'">
                     <i class="ph-bold ph-check-circle"></i>
                     <span>恋爱清单</span>
                 </div>
-                <div class="lg-context-menu__item" onclick="location.href='leaving.php'">
+                <div class="lg-context-menu__item" onclick="location.href='messages.php'">
                     <i class="ph-bold ph-chat-circle-text"></i>
                     <span>留言板</span>
                 </div>
