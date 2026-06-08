@@ -54,7 +54,6 @@ try {
                 'qq' => $row['QQ'] ?? '',
                 'text' => $row['text'] ?? '',
                 'time' => $row['time'] ?? '',
-                'ip' => $row['ip'] ?? '',
                 'city' => $row['city'] ?? '未知',
                 'device' => $row['device'] ?? '',
                 'browser' => $row['browser'] ?? '',

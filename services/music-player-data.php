@@ -17,19 +17,23 @@ header('Access-Control-Allow-Credentials: true');
 $playlist = [];
 
 if ($connect) {
-    $sql = "SELECT * FROM music ORDER BY id DESC";
-    $result = mysqli_query($connect, $sql);
-    if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $playlist[] = [
-                'name' => $row['music_name'] ?? $row['name'] ?? '',
-                'artist' => $row['music_artist'] ?? $row['artist'] ?? '',
-                'url' => $row['music_url'] ?? $row['url'] ?? '',
-                'cover' => $row['music_cover'] ?? $row['cover'] ?? '',
-                'lrc' => $row['music_lrc'] ?? $row['lrc'] ?? '',
-                'type' => 'auto'
-            ];
+    $stmt = mysqli_prepare($connect, "SELECT * FROM music ORDER BY id DESC");
+    if ($stmt) {
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if ($result && mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $playlist[] = [
+                    'name' => $row['music_name'] ?? $row['name'] ?? '',
+                    'artist' => $row['music_artist'] ?? $row['artist'] ?? '',
+                    'url' => $row['music_url'] ?? $row['url'] ?? '',
+                    'cover' => $row['music_cover'] ?? $row['cover'] ?? '',
+                    'lrc' => $row['music_lrc'] ?? $row['lrc'] ?? '',
+                    'type' => 'auto'
+                ];
+            }
         }
+        mysqli_stmt_close($stmt);
     }
 }
 

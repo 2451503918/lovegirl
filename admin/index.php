@@ -2,8 +2,9 @@
 session_start();
 
 include_once 'Nav.php';
-$liuyan = "SELECT id, name, QQ, text, time, ip FROM leaving ORDER BY id DESC LIMIT 0,6";
-$resliuyan = mysqli_query($connect, $liuyan);
+$stmt = mysqli_prepare($connect, "SELECT id, name, QQ, text, time, ip FROM leaving ORDER BY id DESC LIMIT 6");
+mysqli_stmt_execute($stmt);
+$resliuyan = mysqli_stmt_get_result($stmt);
 
 // 注释以下内容即可去除所有提示内容
 

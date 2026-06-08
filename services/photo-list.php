@@ -23,11 +23,14 @@ if (empty($code)) {
 // 查询相册信息
 $album = null;
 if ($connect) {
-    $sql = "SELECT id, code, title, img, `desc`, author, location, lng, lat, views, likes, password, private, date FROM photo WHERE code = '" . mysqli_real_escape_string($connect, $code) . "'";
-    $result = mysqli_query($connect, $sql);
+    $stmt = mysqli_prepare($connect, "SELECT id, code, title, img, `desc`, author, location, lng, lat, views, likes, password, private, date FROM photo WHERE code = ?");
+    mysqli_stmt_bind_param($stmt, 's', $code);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     if ($result && mysqli_num_rows($result) > 0) {
         $album = mysqli_fetch_assoc($result);
     }
+    mysqli_stmt_close($stmt);
 }
 
 if (!$album) {

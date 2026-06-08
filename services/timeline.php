@@ -4,7 +4,7 @@
  * 返回 JSON 格式的时间轴事件数据
  */
 header('Content-Type: application/json; charset=utf-8');
-$allowedOrigins = ['lovedemo.54oimx.top', 'love.54oimx.top'];
+$allowedOrigins = ['lovedemo.54oimx.top', 'love.54oimx.top', 'localhost', '127.0.0.1'];
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);

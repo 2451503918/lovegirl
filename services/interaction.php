@@ -5,10 +5,10 @@
  */
 header('Content-Type: application/json; charset=utf-8');
 
-$allowedOrigins = ['lovedemo.54oimx.top', 'love.54oimx.top'];
+$allowedOrigins = ['lovedemo.54oimx.top', 'love.54oimx.top', 'localhost', '127.0.0.1'];
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? parse_url($_SERVER['HTTP_ORIGIN'], PHP_URL_HOST) : '';
 if (in_array($origin, $allowedOrigins)) {
-    header("Access-Control-Allow-Origin: https://$origin");
+    header('Access-Control-Allow-Origin: ' . (isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : ''));
 }
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
