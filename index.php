@@ -146,7 +146,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div class="img-male">
                     <div class="avatarArea lgewui-head-avatar-boy">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
-                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($boyimg_val ?? 'https://q1.qlogo.cn/g?b=qq&nk=' . $text['boyimg'] . '&s=640', ENT_QUOTES, 'UTF-8') ?>">
+                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($boyimg_val ?? '/Style/img/boy.png', ENT_QUOTES, 'UTF-8') ?>">
                         <div class="lgnewui-head-avatar-mask">
                             <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
                                 <div class="lgnewui-head-avatar-gender-icon" data-gender="male"><i class="ph-fill ph-gender-male"></i></div>
@@ -177,7 +177,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div class="img-female">
                     <div class="avatarArea lgewui-head-avatar-girl">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
-                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($girlimg_val ?? 'https://q1.qlogo.cn/g?b=qq&nk=' . $text['girlimg'] . '&s=640', ENT_QUOTES, 'UTF-8') ?>">
+                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($girlimg_val ?? '/Style/img/girl.png', ENT_QUOTES, 'UTF-8') ?>">
                         <div class="lgnewui-head-avatar-mask">
                             <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
                                 <div class="lgnewui-head-avatar-gender-icon" data-gender="female"><i class="ph-fill ph-gender-female"></i></div>
@@ -1094,13 +1094,9 @@ $runtimeDays = floor((time() - $startTs) / 86400);
         <div class="lgnewui-emoji-panel__body" id="lgnewuiEmojiGrid"></div>
     </div>
 
-    <!-- ===== 留言触发按钮 ===== -->
-    <div class="lgnewui-message-trigger" id="mes" onclick="openMessageModal()">
-        <i class="ph-fill ph-chat-teardrop-dots"></i>
-        <span>留言</span>
-    </div>
+    <!-- 共享覆盖层元素（留言/音乐/地图/浮动按钮/footer/移动导航）已移至 footer.php -->
 
-    <!-- ===== 随机语录确认弹窗 ===== -->
+    <!-- ===== 访问信标脚本 ===== -->
     <div class="lgnewui-confirm-dialog" id="randomQuoteConfirm" style="display:none;">
         <div class="lgnewui-confirm-dialog__overlay"></div>
         <div class="lgnewui-confirm-dialog__content">
@@ -1295,288 +1291,22 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     </div>
 
     <!-- ===== 底部脚本 ===== -->
-    <!-- 字体图标 CSS -->
-    <link rel="stylesheet" href="/Style/Font/font_list/iconfont.css?LikeGirl=<?php echo $version ?>">
-    <link rel="stylesheet" href="/Style/Font/font_leav/iconfont.css?LikeGirl=<?php echo $version ?>">
-
-    <!-- 核心功能脚本 -->
-    <script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
+    <!-- 页面专属脚本（核心脚本已在head.php中加载） -->
     <script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script>
-    if (typeof lucide !== 'undefined' && lucide.createIcons) {
-        document.addEventListener('DOMContentLoaded', function() { lucide.createIcons(); });
-    }
-    </script>
-    <script src="/Style/toastify/toastify.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/clipboard.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/Style/js/view-image.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>" defer></script>
-
-    <!-- 轮播和灯箱 -->
-    <script src="/Style/LoveListStyle/carousel.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/LoveListStyle/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/LoveListStyle/fancybox.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-
-    <!-- 页面专属脚本 -->
     <script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
     <script src="/assets/js/page-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
-
-    <!-- 工具库 -->
-    <script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
     <script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
 
-    <!-- ===== 音乐播放器 ===== -->
-    <script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/Style/js/color-thief.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <!-- 音乐播放器/地图/浮动按钮/footer/移动导航已移至 footer.php -->
 
-    <!-- 音乐播放器导航入口 -->
-    <div id="nav-music">
-        <div id="nav-music-hoverTips" onclick="lg_love.musicToggle()">
-            <svg viewBox="0 0 1024 1024" class="lgnewui-nav-music-play-icon" aria-hidden="true">
-                <path d="M324.085 95.787l500.422 300.664c82.373 50.453 79.284 136.946-1.03 186.37v0l-506.6 304.784c-41.187 23.683-87.522 37.068-131.798 9.267-36.037-22.653-46.335-58.691-46.335-97.819v-616.774c0-39.127 13.386-75.166 48.395-97.819 45.305-27.801 94.731-14.416 136.946 11.327v0z" fill="#ffffff" />
-            </svg>
-        </div>
-        <meting-js api="/services/music-player-data.php" server="local" type="song" id="0"
-            mutex="true" preload="none" data-lrctype="3"
-            volume="1" order="list"
-            loop="all" data-expand="true">
-        </meting-js>
-        <div id="nav-music-progress">
-            <div class="lgnewui-nav-music-progress-loaded"></div>
-            <div class="lgnewui-nav-music-progress-played"></div>
-            <div class="lgnewui-nav-music-progress-thumb"></div>
-        </div>
-        <div class="lgnewui-nav-music-controls">
-            <button class="lgnewui-nav-music-btn lgnewui-nav-music-btn-back" type="button" onclick="lg_love.musicSkipBack()" aria-label="上一首">
-                <svg viewBox="0 0 24 24" class="lgnewui-nav-music-icon" aria-hidden="true"><path d="M6 5v14" /><path d="M18 5L10 12l8 7" /></svg>
-            </button>
-            <button class="lgnewui-nav-music-btn lgnewui-nav-music-btn-toggle" type="button" onclick="lg_love.musicToggle()" aria-label="播放或暂停">
-                <svg viewBox="0 0 24 24" class="lgnewui-nav-music-icon lgnewui-nav-music-icon-play" aria-hidden="true"><path d="M8 5v14l9-7z" /></svg>
-                <svg viewBox="0 0 24 24" class="lgnewui-nav-music-icon lgnewui-nav-music-icon-pause" aria-hidden="true"><path d="M9 6v12" /><path d="M15 6v12" /></svg>
-            </button>
-            <button class="lgnewui-nav-music-btn lgnewui-nav-music-btn-forward" type="button" onclick="lg_love.musicSkipForward()" aria-label="下一首">
-                <svg viewBox="0 0 24 24" class="lgnewui-nav-music-icon" aria-hidden="true"><path d="M18 5v14" /><path d="M6 5l8 7-8 7" /></svg>
-            </button>
-        </div>
-    </div>
-
-    <!-- 音乐播放列表面板 -->
-    <div class="lgnewui-music-panel" id="lgnewuiMusicPanel" style="display:none;">
-        <div class="lgnewui-music-panel__header">
-            <h4 class="lgnewui-music-panel__title">播放列表</h4>
-            <button class="lgnewui-music-panel__close" onclick="toggleMusicPanel()"><i class="ph-bold ph-x"></i></button>
-        </div>
-        <div class="lgnewui-music-panel__body" id="lgnewuiMusicPlaylist"></div>
-    </div>
-
-    <!-- 音乐确认弹窗 -->
-    <div class="lgnewui-confirm-dialog" id="musicConfirmDialog" style="display:none;">
-        <div class="lgnewui-confirm-dialog__overlay" onclick="closeMusicConfirm()"></div>
-        <div class="lgnewui-confirm-dialog__content">
-            <div class="lgnewui-confirm-dialog__icon"><i class="ph-fill ph-music-note"></i></div>
-            <h4 class="lgnewui-confirm-dialog__title">播放音乐</h4>
-            <p class="lgnewui-confirm-dialog__text" id="musicConfirmText">确定要播放这首音乐吗？</p>
-            <div class="lgnewui-confirm-dialog__actions">
-                <button class="lgnewui-confirm-dialog__btn lgnewui-confirm-dialog__btn--cancel" onclick="closeMusicConfirm()">取消</button>
-                <button class="lgnewui-confirm-dialog__btn lgnewui-confirm-dialog__btn--confirm" id="musicConfirmPlayBtn">播放</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- ===== 访问信标脚本 ===== -->
     <script>
-    function toggleMusicPanel() {
-        var panel = document.getElementById('lgnewuiMusicPanel');
-        if (panel) panel.style.display = panel.style.display === 'none' ? '' : 'none';
-    }
-    function closeMusicConfirm() {
-        var dialog = document.getElementById('musicConfirmDialog');
-        if (dialog) dialog.style.display = 'none';
-    }
-    </script>
+    <!-- 音乐播放器/地图/浮动按钮/footer/移动导航已移至 footer.php -->
 
-    <!-- ===== 地图浮层 ===== -->
-    <div class="lg-map-overlay" id="lgMapOverlay" style="display:none;">
-        <div class="lg-map-overlay__backdrop" onclick="closeLGMap()"></div>
-        <div class="lg-map-overlay__content">
-            <div class="lg-map-overlay__header">
-                <h3 class="lg-map-overlay__title">我们的足迹</h3>
-                <button class="lg-map-overlay__close" onclick="closeLGMap()"><i class="ph-bold ph-x"></i></button>
-            </div>
-            <div class="lg-map-overlay__body">
-                <div class="lg-map-modal" id="lg-map-container"></div>
-                <div class="lg-map-lovers-panel" id="lg-map-lovers-panel">
-                    <div class="lg-map-lover lg-map-lover--male">
-                        <img class="lg-map-lover__avatar lg-male-avatar" src="" alt="">
-                        <div class="lg-map-lover__info">
-                            <span class="lg-map-lover__name"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
-                            <span class="lg-map-lover__location" id="lg-map-male-location">--</span>
-                        </div>
-                    </div>
-                    <div class="lg-map-lover lg-map-lover--female">
-                        <img class="lg-map-lover__avatar lg-female-avatar" src="" alt="">
-                        <div class="lg-map-lover__info">
-                            <span class="lg-map-lover__name"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
-                            <span class="lg-map-lover__location" id="lg-map-female-location">--</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg-map-distance-panel" id="lg-map-distance-panel">
-                    <i class="ph-fill ph-map-pin-line"></i>
-                    <span>相距 <strong id="lg-map-distance-value">--</strong> km</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="/assets/js/lg-map.js?LikeGirl=<?php echo $version ?>"></script>
-    <script>
-    function closeLGMap() {
-        var overlay = document.getElementById('lgMapOverlay');
-        if (overlay) overlay.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-    // 地图头像填充
-    (function() {
-        var maleAvatar = (window.LG_CONFIG && window.LG_CONFIG.maleAvatar) || '';
-        var femaleAvatar = (window.LG_CONFIG && window.LG_CONFIG.femaleAvatar) || '';
-        document.querySelectorAll('.lg-map-lover__avatar.lg-male-avatar').forEach(function(el) {
-            if (maleAvatar) el.src = maleAvatar;
-        });
-        document.querySelectorAll('.lg-map-lover__avatar.lg-female-avatar').forEach(function(el) {
-            if (femaleAvatar) el.src = femaleAvatar;
-        });
-    })();
-    </script>
-
-    <!-- ===== 浮动操作按钮 + 初始化 ===== -->
-    <div class="lgnewui-fab-group" id="lgnewuiFabGroup">
-        <button class="lgnewui-fab lgnewui-fab--map" onclick="document.getElementById('lgMapOverlay').style.display='';document.body.style.overflow='hidden';if(window.initLGMap)initLGMap();" title="足迹地图">
-            <i class="ph-fill ph-map-trifold"></i>
-        </button>
-        <button class="lgnewui-fab lgnewui-fab--top" onclick="scrollToTop()" title="回到顶部">
-            <i class="ph-bold ph-arrow-up"></i>
-        </button>
-    </div>
-
-    <!-- ===== 底部 CSS ===== -->
-    <style>
-    /* 底部样式 */
-    .lgnewui-footer {
-        text-align: center;
-        padding: 2rem 1rem;
-        color: #94a3b8;
-        font-size: 0.85rem;
-    }
-    .lgnewui-footer__animal {
-        width: 80px;
-        margin: 0 auto 1rem;
-        opacity: 0.6;
-    }
-    .lgnewui-footer__badges {
-        display: flex;
-        justify-content: center;
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-        flex-wrap: wrap;
-    }
-    .lgnewui-footer__badge img {
-        height: 20px;
-        opacity: 0.7;
-    }
-    .lgnewui-footer__icp {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.3rem;
-        margin-top: 0.5rem;
-    }
-    .lgnewui-footer__icp img {
-        width: 14px;
-        height: 14px;
-    }
-    .lgnewui-footer__icp a {
-        color: #94a3b8;
-        text-decoration: none;
-    }
-    .lgnewui-footer__icp a:hover {
-        color: #64748b;
-    }
-    .lgnewui-footer__copyright {
-        margin-top: 0.5rem;
-    }
-    </style>
-
-    <!-- ===== 底部 HTML ===== -->
-    <footer class="lgnewui-footer">
-        <div class="lgnewui-footer__animal">
-            <img src="/Style/img/animals.png" alt="animals" onerror="this.parentElement.style.display='none'">
-        </div>
-        <div class="lgnewui-footer__badges">
-            <a href="https://github.com" target="_blank" rel="noopener" class="lgnewui-footer__badge">
-                <img src="https://img.shields.io/badge/Powered%20By-LikeGirl-ff69b4?style=flat-square" alt="LikeGirl">
-            </a>
-            <a href="https://github.com" target="_blank" rel="noopener" class="lgnewui-footer__badge">
-                <img src="https://img.shields.io/badge/Version-<?php echo htmlspecialchars($version ?? '5.0', ENT_QUOTES, 'UTF-8') ?>-blue?style=flat-square" alt="Version">
-            </a>
-            <a href="https://github.com" target="_blank" rel="noopener" class="lgnewui-footer__badge">
-                <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
-            </a>
-        </div>
-        <?php if (!empty($text['icp'])): ?>
-        <div class="lgnewui-footer__icp">
-            <img src="/Style/img/icp.svg" alt="" aria-hidden="true">
-            <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener"><?php echo htmlspecialchars($text['icp'], ENT_QUOTES, 'UTF-8') ?></a>
-        </div>
-        <?php endif; ?>
-        <?php if (!empty($text['Copyright'])): ?>
-        <div class="lgnewui-footer__copyright">
-            <?php echo htmlspecialchars($text['Copyright'], ENT_QUOTES, 'UTF-8') ?>
-        </div>
-        <?php endif; ?>
-        <?php echo htmlspecialchars_decode($diy['footerCon'] ?? '', ENT_QUOTES) ?>
-    </footer>
-
-    <!-- ===== 移动端底部导航 ===== -->
-    <div class="lgnewui-tab-template-v5-container lgnewui-mobile-bottom-nav" id="lgnewuiMobileNav">
-        <div class="lgnewui-tab-template-v5-wrap">
-            <a href="articles.php" class="lgnewui-tab-template-v5-item" data-title="点滴">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-notebook"></i></div>
-                <span class="lgnewui-tab-template-v5-text">点滴</span>
-            </a>
-            <a href="messages.php" class="lgnewui-tab-template-v5-item" data-title="留言">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-chat-teardrop-dots"></i></div>
-                <span class="lgnewui-tab-template-v5-text">留言</span>
-            </a>
-            <a href="timeline.php" class="lgnewui-tab-template-v5-item" data-title="轨迹">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-timeline"></i></div>
-                <span class="lgnewui-tab-template-v5-text">轨迹</span>
-            </a>
-            <a href="index.php" class="lgnewui-tab-template-v5-item active" data-title="首页">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-house"></i></div>
-                <span class="lgnewui-tab-template-v5-text">首页</span>
-            </a>
-            <a href="albums.php" class="lgnewui-tab-template-v5-item" data-title="相册">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-camera"></i></div>
-                <span class="lgnewui-tab-template-v5-text">相册</span>
-            </a>
-            <a href="lovelist.php" class="lgnewui-tab-template-v5-item" data-title="清单">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-check-square"></i></div>
-                <span class="lgnewui-tab-template-v5-text">清单</span>
-            </a>
-            <a href="about.php" class="lgnewui-tab-template-v5-item" data-title="关于">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-book-open-text"></i></div>
-                <span class="lgnewui-tab-template-v5-text">关于</span>
-            </a>
-        </div>
-    </div>
 
     <!-- ===== 访问信标脚本 ===== -->
     <script>

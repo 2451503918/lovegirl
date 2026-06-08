@@ -145,7 +145,7 @@ if ($connect) {
 
             <!-- 文章作者信息 -->
             <div class="lgnewui-article-detail-author">
-                <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8'); ?>&s=640" class="lgnewui-article-detail-avatar">
+                <img src="<?php echo htmlspecialchars($boyimg_val ?? '/Style/img/boy.png', ENT_QUOTES, 'UTF-8'); ?>" class="lgnewui-article-detail-avatar">
                 <div class="lgnewui-article-detail-author-info">
                     <span class="lgnewui-article-detail-author-name"><?php echo htmlspecialchars($articleData['author'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <span class="lgnewui-article-detail-author-label">作者</span>

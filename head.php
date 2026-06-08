@@ -43,6 +43,20 @@ if ($connect) {
 $copy = $text['Copyright'] ?? '';
 $icp = $text['icp'] ?? '';
 $Animation = $text['Animation'] ?? '';
+
+// 初始化头像URL变量（提前到meta标签之前）
+$boyimg_val = $text['boyimg'] ?? '';
+$girlimg_val = $text['girlimg'] ?? '';
+if ($boyimg_val && !preg_match('/^https?:\/\//', $boyimg_val)) {
+    $boyimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyimg_val . '&s=640';
+} elseif (!$boyimg_val) {
+    $boyimg_val = '/Style/img/boy.png';
+}
+if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
+    $girlimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg_val . '&s=640';
+} elseif (!$girlimg_val) {
+    $girlimg_val = '/Style/img/girl.png';
+}
 ?>
 
 <script>
@@ -273,16 +287,19 @@ function loadPhotos() {
 <meta property="og:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="https://love.54oimx.top/">
-<meta property="og:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
+<meta property="og:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
 <meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
-<meta name="twitter:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
+<meta name="twitter:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="x-lg-license-instance" content="858ee1d099b9">
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@400;600&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/Style/vendor/google-fonts/fonts-non-google.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/fontawesome/css/all.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/remixicon/remixicon.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/content.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lgnewui-home-style.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lgnewui-detail.css?LikeGirl=<?php echo $version ?>">
@@ -295,6 +312,8 @@ function loadPhotos() {
 <link rel="stylesheet" href="/Style/css/lg-accessibility.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/phosphor-icons.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/phosphor-fill.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-regular.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-duotone.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/leaving.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/leav.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/index.css?LikeGirl=<?php echo $version ?>">
@@ -303,10 +322,12 @@ function loadPhotos() {
 <link rel="stylesheet" href="/Style/css/animate.min.css">
 <link rel="stylesheet" href="/Botui/botui.min.css">
 <link rel="stylesheet" href="/Botui/botui-theme-default.css">
-<link rel="stylesheet" href="/Style/Font/font_list/iconfont.css">
+<link rel="stylesheet" href="/Style/Font/font_list/iconfont.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/loveImg.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/list.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/toastr/toastr.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/toastify/toastify.min.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/loadinglike.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/aos/aos.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-bento.css?LikeGirl=<?php echo $version ?>">
@@ -316,8 +337,15 @@ function loadPhotos() {
 <link rel="stylesheet" href="/Style/css/lg-context-menu.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-enhanced.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/APlayer.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/aplayer.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/kicode.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/plyr.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-map.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/video-modal.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/dplayer/DPlayer.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/qweather-icons/qweather-icons.css?LikeGirl=<?php echo $version ?>">
-<script src="/Style/Font/font_leav/iconfont.js"></script>
+<script src="/Style/Font/font_leav/iconfont.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Botui/botui.min.js"></script>
 <script src="/Style/js/vue.min.js"></script>
 <script src="/Style/jquery/jquery.min.js"></script>
@@ -330,20 +358,39 @@ function loadPhotos() {
 <script src="/Style/js/lg-home-app.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/lg-effects.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/LGNewUiOwO.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/plyr.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/highlight.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/lazyload.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/masonry.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/imagesloaded.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/dplayer/DPlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/video-modal.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/geetest-helper.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/qrcode/qrcode.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/qr-code-styling/qr-code-styling.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/toastify/toastify.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/clipboard.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/view-image.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/LoveListStyle/carousel.umd.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/LoveListStyle/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/LoveListStyle/fancybox.umd.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-pjax.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-mobile-nav.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/color-thief.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>"></script>
 <!-- LG_NewUI 核心框架配置 -->
 <script>
     <?php
-    $boyimg_val = $text['boyimg'] ?? '';
-    $girlimg_val = $text['girlimg'] ?? '';
-    if ($boyimg_val && !preg_match('/^https?:\/\//', $boyimg_val)) {
-        $boyimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyimg_val . '&s=640';
-    }
-    if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
-        $girlimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg_val . '&s=640';
-    }
     $lg_config = [
         'title' => $text['title'] ?? '情侣小站',
         'boy' => $text['boy'] ?? '男方',
@@ -451,8 +498,6 @@ if ($diy['Pjaxkg'] === "1"):
         
     </script>
 <?php endif; ?>
-<script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
-<link href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>" rel="stylesheet" type="text/css">
 </head>
 <body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
 <a href="#pjax-container" class="lg-skip-link">跳到主要内容</a>
@@ -610,8 +655,8 @@ window.addEventListener('load', function() {
         <div class="lgnewui-header-actions" id="lgnewuiHeaderActions">
             <div class="lgnewui-couple-avatars-right">
                 <div class="lgnewui-avatar-group">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-female" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?php echo htmlspecialchars($girlimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-female" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <span class="lgnewui-right-heart"></span>
             </div>
