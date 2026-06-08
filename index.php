@@ -116,21 +116,20 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     <div id="pjax-container">
 
     <!-- ===== 1. 轮播横幅区域 ===== -->
-    <div id="homePage" class="bg-wrap central limg" data-avatar-swap="1">
-        <div class="bg-img">
-            <div class="wrap">
-                <div class="list">
-                    <div class="item active"><img class="CarouselImage" src="/Style/img/banner/1.jpg" alt="" fetchpriority="high" decoding="sync"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/2.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/3.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/4.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/5.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/6.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/7.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/8.jpg" alt="" loading="lazy" decoding="async"></div>
-                </div>
-            </div>
-            <div class="middle Blurkg">
+    <div id="homePage" class="wrap" data-Fullscreen>
+        <ul class="list mask_black">
+            <li class="item active"><img class="CarouselImage" src="/Style/img/banner/1.jpg" alt="" fetchpriority="high" decoding="sync"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/2.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/3.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/4.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/5.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/6.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/7.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/8.jpg" alt="" draggable="false"></li>
+        </ul>
+        <div class="bg-wrap central limg" data-avatar-swap="1">
+            <div class="bg-img">
+                <div class="middle Blurkg">
                 <!-- 距离气泡 -->
                 <div class="love-info-wrapper">
                     <div class="distance-bubble" id="distanceBubble" onclick="if(window.LGMap&&LGMap.show){LGMap.show();}">
@@ -147,19 +146,19 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <div class="avatarArea lgewui-head-avatar-boy">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
                         <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($boyimg_val ?? '/Style/img/boy.png', ENT_QUOTES, 'UTF-8') ?>">
-                        <div class="lgnewui-head-avatar-mask">
-                            <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-gender-icon" data-gender="male"><i class="ph-fill ph-gender-male"></i></div>
+                        <div class="lgewui-head-avatar-mask">
+                            <div class="lgewui-head-avatar-top lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-gender-icon" data-gender="male"><i data-lucide="mars"></i></div>
                             </div>
-                            <div class="lgnewui-head-avatar-middle lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-status-text lgnewui-head-avatar-status-online">
-                                    <i class="ph-fill ph-wifi-high"></i>
-                                    <em>在线</em>
+                            <div class="lgewui-head-avatar-middle lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-status-text lgewui-head-avatar-status-away">
+                                    <i data-lucide="clock" class="lgewui-head-avatar-icon-away"></i>
+                                    <em>离线</em>
                                 </div>
-                                <div class="lgnewui-head-avatar-divider"></div>
+                                <div class="lgewui-head-avatar-divider"></div>
                             </div>
-                            <div class="lgnewui-head-avatar-bottom lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-location">
+                            <div class="lgewui-head-avatar-bottom lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-location">
                                     <i class="ph-fill ph-map-pin"></i>
                                     <span id="lgnewui-male-location">-- · --</span>
                                 </div>
@@ -178,19 +177,19 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <div class="avatarArea lgewui-head-avatar-girl">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
                         <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($girlimg_val ?? '/Style/img/girl.png', ENT_QUOTES, 'UTF-8') ?>">
-                        <div class="lgnewui-head-avatar-mask">
-                            <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-gender-icon" data-gender="female"><i class="ph-fill ph-gender-female"></i></div>
+                        <div class="lgewui-head-avatar-mask">
+                            <div class="lgewui-head-avatar-top lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-gender-icon" data-gender="female"><i data-lucide="venus"></i></div>
                             </div>
-                            <div class="lgnewui-head-avatar-middle lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-status-text lgnewui-head-avatar-status-online">
-                                    <i class="ph-fill ph-wifi-high"></i>
-                                    <em>在线</em>
+                            <div class="lgewui-head-avatar-middle lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-status-text lgewui-head-avatar-status-away">
+                                    <i data-lucide="clock" class="lgewui-head-avatar-icon-away"></i>
+                                    <em>离线</em>
                                 </div>
-                                <div class="lgnewui-head-avatar-divider"></div>
+                                <div class="lgewui-head-avatar-divider"></div>
                             </div>
-                            <div class="lgnewui-head-avatar-bottom lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-location">
+                            <div class="lgewui-head-avatar-bottom lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-location">
                                     <i class="ph-fill ph-map-pin"></i>
                                     <span id="lgnewui-female-location">-- · --</span>
                                 </div>
@@ -212,6 +211,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(255,255,255,1)" />
                 </g>
             </svg>
+            </div>
         </div>
     </div>
 

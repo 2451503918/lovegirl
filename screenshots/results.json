@@ -1,0 +1,196 @@
+{
+  "index": {
+    "ref_console": [
+      "[log] %c未经授权 盗版必究 禁止抄袭 感谢配合 color:#fadfa3;background:#333;padding:8px 15px;",
+      "[log] %c购买地址: https://blog.kikiw.cn/index.php/archives/65/ color:#fff;background-image:linear-gradient(to right,#1FA2FF 0%,#fdfdfd 21%,#fafafa 100%);padding:8px 15px;border-radius:5px;",
+      "[log] %cContact Me: 3439780232 | mail@kikiw.cn color:#fff;background:#000;padding:8px 15px;border-radius:10px",
+      "[log] %cLG_NewUi 2.2.5 | Powered by Ki color:#fff;background:linear-gradient(to right,hsl(206.57deg 100% 61.11%) 0%,hsl(57deg 100% 85.15%) 100%);padding:8px 15px;border-radius:15px",
+      "[log] %cDependencies: APlayer | MetingJS | Plyr | PJAX | Masonry | QRCodeStyling | AOS | Fancybox color:#fff;background:#475569;padding:8px 15px;border-radius:10px",
+      "[error] Access to image at 'https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp' from origin 'https://love-really.kikiw.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "[error] Failed to load resource: net::ERR_FAILED",
+      "[error] 封面加载失败 https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_console": [
+      "[log] %c Q & V | [已隐藏] color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px",
+      "[log] %c Like Girl 5.2.1-Stable | Powered by Ki color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px",
+      "[log] %c LG-NewUi Interactions Loaded  color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px;",
+      "[log] \n %c APlayer v1.10.1 af84efb %c http://aplayer.js.org \n color: #fadfa3; background: #030307; padding:5px 0; background: #fadfa3; padding:5px 0;",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100"
+    ],
+    "ref_404s": [
+      "https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_404s": [
+      "https://xi-1255495366.cos.ap-chengdu.myqcloud.com/46854f50ad83747f00cc49a33db38408.png"
+    ]
+  },
+  "about": {
+    "ref_console": [
+      "[log] %c未经授权 盗版必究 禁止抄袭 感谢配合 color:#fadfa3;background:#333;padding:8px 15px;",
+      "[log] %c购买地址: https://blog.kikiw.cn/index.php/archives/65/ color:#fff;background-image:linear-gradient(to right,#1FA2FF 0%,#fdfdfd 21%,#fafafa 100%);padding:8px 15px;border-radius:5px;",
+      "[log] %cContact Me: 3439780232 | mail@kikiw.cn color:#fff;background:#000;padding:8px 15px;border-radius:10px",
+      "[log] %cLG_NewUi 2.2.5 | Powered by Ki color:#fff;background:linear-gradient(to right,hsl(206.57deg 100% 61.11%) 0%,hsl(57deg 100% 85.15%) 100%);padding:8px 15px;border-radius:15px",
+      "[log] %cDependencies: APlayer | MetingJS | Plyr | PJAX | Masonry | QRCodeStyling | AOS | Fancybox color:#fff;background:#475569;padding:8px 15px;border-radius:10px",
+      "[error] Access to image at 'https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp' from origin 'https://love-really.kikiw.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "[error] Failed to load resource: net::ERR_FAILED",
+      "[error] 封面加载失败 https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_console": [
+      "[log] %c Q & V | [已隐藏] color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px",
+      "[log] %c Like Girl 5.2.1-Stable | Powered by Ki color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px",
+      "[log] %c LG-NewUi Interactions Loaded  color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px;",
+      "[log] \n %c APlayer v1.10.1 af84efb %c http://aplayer.js.org \n color: #fadfa3; background: #030307; padding:5px 0; background: #fadfa3; padding:5px 0;",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "ref_404s": [
+      "https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_404s": []
+  },
+  "loveImg": {
+    "ref_console": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "local_console": [
+      "[log] %c Q & V | [已隐藏] color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px",
+      "[log] %c Like Girl 5.2.1-Stable | Powered by Ki color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px",
+      "[log] %c LG-NewUi Interactions Loaded  color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px;",
+      "[log] \n %c APlayer v1.10.1 af84efb %c http://aplayer.js.org \n color: #fadfa3; background: #030307; padding:5px 0; background: #fadfa3; padding:5px 0;",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100"
+    ],
+    "ref_404s": [],
+    "local_404s": []
+  },
+  "articles": {
+    "ref_console": [
+      "[log] %c未经授权 盗版必究 禁止抄袭 感谢配合 color:#fadfa3;background:#333;padding:8px 15px;",
+      "[log] %c购买地址: https://blog.kikiw.cn/index.php/archives/65/ color:#fff;background-image:linear-gradient(to right,#1FA2FF 0%,#fdfdfd 21%,#fafafa 100%);padding:8px 15px;border-radius:5px;",
+      "[log] %cContact Me: 3439780232 | mail@kikiw.cn color:#fff;background:#000;padding:8px 15px;border-radius:10px",
+      "[log] %cLG_NewUi 2.2.5 | Powered by Ki color:#fff;background:linear-gradient(to right,hsl(206.57deg 100% 61.11%) 0%,hsl(57deg 100% 85.15%) 100%);padding:8px 15px;border-radius:15px",
+      "[log] %cDependencies: APlayer | MetingJS | Plyr | PJAX | Masonry | QRCodeStyling | AOS | Fancybox color:#fff;background:#475569;padding:8px 15px;border-radius:10px",
+      "[error] Access to image at 'https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp' from origin 'https://love-really.kikiw.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "[error] Failed to load resource: net::ERR_FAILED",
+      "[error] 封面加载失败 https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_console": [
+      "[log] %c Q & V | [已隐藏] color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px",
+      "[log] %c Like Girl 5.2.1-Stable | Powered by Ki color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px",
+      "[log] %c LG-NewUi Interactions Loaded  color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px;",
+      "[log] \n %c APlayer v1.10.1 af84efb %c http://aplayer.js.org \n color: #fadfa3; background: #030307; padding:5px 0; background: #fadfa3; padding:5px 0;",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100"
+    ],
+    "ref_404s": [
+      "https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_404s": []
+  },
+  "list": {
+    "ref_console": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "local_console": [
+      "[log] %c Q & V | [已隐藏] color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px",
+      "[log] %c Like Girl 5.2.1-Stable | Powered by Ki color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px",
+      "[log] %c LG-NewUi Interactions Loaded  color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px;",
+      "[log] \n %c APlayer v1.10.1 af84efb %c http://aplayer.js.org \n color: #fadfa3; background: #030307; padding:5px 0; background: #fadfa3; padding:5px 0;",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100"
+    ],
+    "ref_404s": [],
+    "local_404s": []
+  },
+  "timeline": {
+    "ref_console": [
+      "[log] %c未经授权 盗版必究 禁止抄袭 感谢配合 color:#fadfa3;background:#333;padding:8px 15px;",
+      "[log] %c购买地址: https://blog.kikiw.cn/index.php/archives/65/ color:#fff;background-image:linear-gradient(to right,#1FA2FF 0%,#fdfdfd 21%,#fafafa 100%);padding:8px 15px;border-radius:5px;",
+      "[log] %cContact Me: 3439780232 | mail@kikiw.cn color:#fff;background:#000;padding:8px 15px;border-radius:10px",
+      "[log] %cLG_NewUi 2.2.5 | Powered by Ki color:#fff;background:linear-gradient(to right,hsl(206.57deg 100% 61.11%) 0%,hsl(57deg 100% 85.15%) 100%);padding:8px 15px;border-radius:15px",
+      "[log] %cDependencies: APlayer | MetingJS | Plyr | PJAX | Masonry | QRCodeStyling | AOS | Fancybox color:#fff;background:#475569;padding:8px 15px;border-radius:10px",
+      "[error] Access to image at 'https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp' from origin 'https://love-really.kikiw.cn' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+      "[error] Failed to load resource: net::ERR_FAILED",
+      "[error] 封面加载失败 https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_console": [
+      "[log] %c Q & V | [已隐藏] color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px",
+      "[log] %c Like Girl 5.2.1-Stable | Powered by Ki color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px",
+      "[log] %c LG-NewUi Interactions Loaded  color: #fff; background: linear-gradient(135deg, #667eea, #764ba2); padding: 5px 10px; border-radius: 3px;",
+      "[log] \n %c APlayer v1.10.1 af84efb %c http://aplayer.js.org \n color: #fadfa3; background: #030307; padding:5px 0; background: #fadfa3; padding:5px 0;",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff2?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.woff?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100",
+      "[warning] Failed to decode downloaded font: http://localhost:8090/Style/vendor/qweather-icons/fonts/qweather-icons.ttf?683382eedec19edbc7e167b16847eb27",
+      "[warning] OTS parsing error: invalid sfntVersion: 1180789100"
+    ],
+    "ref_404s": [
+      "https://loveli-1255495366.cos.ap-guangzhou.myqcloud.com/Lovefolder/20260518040017_6a0a1e516c17e412251581.webp"
+    ],
+    "local_404s": []
+  }
+}

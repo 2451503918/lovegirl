@@ -273,7 +273,7 @@ function loadPhotos() {
 <html lang="zh-CN">
 <head>
 <link rel="shortcut icon" href="/favicon.ico" />
-<title><?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?> - <?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></title>
+<title><?php echo htmlspecialchars($text['title'] ?: 'Like Girl', ENT_QUOTES, 'UTF-8') ?> — <?php echo htmlspecialchars($text['writing'] ?: '愿得一心人 白头不相离', ENT_QUOTES, 'UTF-8') ?></title>
 <meta name="keywords"
     content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
 <meta name="description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
@@ -623,19 +623,54 @@ window.addEventListener('load', function() {
 <!-- 头部 -->
 <div class="header-wrap">
     <div class="header">
+        <!-- 吸顶 Logo -->
         <div class="lgnewui-header-left-avatar">
             <div class="stuck-logo stuck-logo--en-v7">
-                <span class="stuck-logo__name"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
                 <span class="stuck-logo__redline-l"></span>
                 <span class="stuck-logo__heart"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z" /></svg></span>
                 <span class="stuck-logo__redline-r"></span>
-                <span class="stuck-logo__name"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
             </div>
         </div>
+
+        <!-- 返回按钮 -->
+        <div class="lg-capsule-back">
+            <a href="javascript:void(0);" class="lg-capsule-back__btn lg-capsule-back__prev" title="返回">
+                <i data-lucide="chevron-left"></i>
+            </a>
+            <a href="/index.php" class="lg-capsule-back__btn lg-capsule-back__home" title="首页">
+                <i data-lucide="house"></i>
+            </a>
+        </div>
+
         <div class="logo">
             <h1><a class="alogo" href="index.php"><?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'], ENT_QUOTES, 'UTF-8')) ?></a></h1>
         </div>
+
+        <!-- 吸顶时显示的右侧区域: 天气 + 地图 + 情侣头像 -->
         <div class="lgnewui-header-actions" id="lgnewuiHeaderActions">
+            <!-- 天气按钮 -->
+            <div class="lgnewui-header-weather is-loading" id="lgHeaderVisitorWeather" title="点击查看当前天气信息" role="button" tabindex="0" aria-expanded="false">
+                <span class="lgnewui-header-weather-loading" id="lgHeaderVisitorWeatherLoading" aria-label="天气加载中">
+                    <i data-lucide="loader-circle"></i>
+                </span>
+                <span class="lgnewui-header-weather-icon-wrap">
+                    <i class="qi-999-fill lgnewui-header-weather-icon" id="lgHeaderVisitorWeatherIcon"></i>
+                </span>
+                <span class="lgnewui-header-weather-text" id="lgHeaderVisitorWeatherText"></span>
+            </div>
+
+            <!-- 地图按钮 -->
+            <a href="javascript:void(0);" class="lgnewui-header-map" id="lgMapOpenBtn" title="足迹地图">
+                <span class="lgnewui-header-map-icon-wrap">
+                    <i class="ph-fill ph-globe-hemisphere-west"></i>
+                </span>
+                <span class="lgnewui-header-map-text">足迹</span>
+            </a>
+
+            <div class="lgnewui-header-divider"></div>
+
             <div class="lgnewui-couple-avatars-right">
                 <div class="lgnewui-avatar-group">
                     <img src="<?php echo htmlspecialchars($girlimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
@@ -643,9 +678,52 @@ window.addEventListener('load', function() {
                 </div>
                 <span class="lgnewui-right-heart"></span>
             </div>
+
+            <!-- 移动端更多按钮 -->
+            <button type="button" class="lg-header-more-btn" id="lgHeaderMoreBtn" aria-label="更多信息">
+                <i data-lucide="ellipsis"></i>
+            </button>
         </div>
         <div class="word" data-tip="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>" data-tip-position="bottom">
             <span class="wenan"><?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></span>
+        </div>
+    </div>
+</div>
+
+<!-- 移动端更多面板（毛玻璃磨砂效果） -->
+<div class="lg-header-more-panel" id="lgHeaderMorePanel">
+    <div class="lg-header-more-overlay" data-close-panel></div>
+    <div class="lg-header-more-sheet">
+        <button type="button" class="lg-header-more-close" data-close-panel aria-label="关闭">
+            <i data-lucide="x"></i>
+        </button>
+
+        <!-- stuck-logo 展示 -->
+        <div class="lg-header-more-identity">
+            <div class="stuck-logo stuck-logo--en-v7">
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__redline-l"></span>
+                <span class="stuck-logo__heart"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z"/></svg></span>
+                <span class="stuck-logo__redline-r"></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+            </div>
+        </div>
+
+        <!-- 功能入口：天气、地图 -->
+        <div class="lg-header-more-actions">
+            <a href="javascript:void(0);" class="lg-header-more-action-item" id="lgMorePanelWeather" data-close-panel>
+                <span class="lg-header-more-action-icon">
+                    <i class="qi-999-fill" id="lgMorePanelWeatherIcon"></i>
+                </span>
+                <span class="lg-header-more-action-label" id="lgMorePanelWeatherText">天气</span>
+            </a>
+
+            <a href="javascript:void(0);" class="lg-header-more-action-item" id="lgMorePanelMap" data-close-panel>
+                <span class="lg-header-more-action-icon">
+                    <i class="ph-fill ph-globe-hemisphere-west"></i>
+                </span>
+                <span class="lg-header-more-action-label">足迹地图</span>
+            </a>
         </div>
     </div>
 </div>
