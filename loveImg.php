@@ -284,5 +284,6 @@ $('#loadMoreBtn').on('click', function() {
     Toastify.showScenario('info', { text: '已加载全部相册' });
 });
 </script>
+<script src="/assets/js/page-albums.js?LikeGirl=<?php echo $version ?? '1.0' ?>" defer></script>
 
 <?php include_once 'footer.php'; ?>

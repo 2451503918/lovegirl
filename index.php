@@ -1291,17 +1291,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     </div>
 
     <!-- ===== 底部脚本 ===== -->
-    <!-- 页面专属脚本（核心脚本已在head.php中加载） -->
-    <script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/assets/js/page-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
-
-    <!-- 音乐播放器/地图/浮动按钮/footer/移动导航已移至 footer.php -->
+    <!-- 所有脚本已在head.php中统一加载，此处无需重复引用 -->
 
     <!-- ===== 访问信标脚本 ===== -->
     <script>

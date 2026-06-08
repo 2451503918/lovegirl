@@ -205,5 +205,6 @@ $moodIconMap = [
     }
 })();
 </script>
+<script src="/assets/js/page-articles.js?LikeGirl=<?php echo $version ?? '1.0' ?>" defer></script>
 
 <?php include_once 'footer.php'; ?>

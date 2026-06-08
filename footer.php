@@ -197,36 +197,10 @@ $(function() {
 });
 </script>
 
-<link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
-
-<script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/toastify/toastify.js?LikeGirl=<?php echo $version ?>"></script>
+<!-- 所有CSS/JS已在head.php中统一加载，此处仅保留初始化调用 -->
 <script>if(typeof lucide!=='undefined')lucide.createIcons();</script>
-<script src="/Style/js/clipboard.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/view-image.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/LoveListStyle/carousel.umd.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/LoveListStyle/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/LoveListStyle/fancybox.umd.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-detail.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>"></script>
-
-<script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
 
 <!-- ============ 音乐播放器 (pjax 外，不随页面刷新) ============ -->
-<script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/color-thief.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>"></script>
 
 <div id="nav-music">
     <div id="nav-music-hoverTips" onclick="lg_love.musicToggle()">
@@ -313,7 +287,7 @@ $(function() {
     </div>
 </div>
 
-<script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
+<!-- music-player.js 已在head.php中加载 -->
 
 <!-- 音乐播放确认弹窗 -->
 <div class="music-modal-overlay" id="musicModal">
@@ -532,7 +506,7 @@ $(function() {
     </div>
 </div>
 <!-- ============ /足迹地图弹窗 ============ -->
-<script src="/assets/js/lg-map.js?LikeGirl=<?php echo $version ?>"></script>
+<!-- lg-map.js 已在head.php中加载 -->
 
 <!-- 浮动操作按钮 -->
 <div id="lgnewuiFloatingActions">
@@ -613,7 +587,6 @@ $(function() {
 </script>
 
 <!-- ============ 以下为原有 footer.php 内容 ============ -->
-<script src="/Style/toastr/toastr.js"></script>
 
     <div class="lg-sidebar">
       <ul>

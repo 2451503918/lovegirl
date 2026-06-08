@@ -297,97 +297,90 @@ function loadPhotos() {
 <meta name="x-lg-license-instance" content="858ee1d099b9">
 
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@400;600&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+<!-- ===== CSS（按参考站顺序排列） ===== -->
 <link rel="stylesheet" href="/Style/vendor/google-fonts/fonts-non-google.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/fontawesome/css/all.min.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/vendor/remixicon/remixicon.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/content.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lgnewui-home-style.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lgnewui-detail.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-message.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-header.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-interaction.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-variables.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-newui-nav.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-mobile-nav.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-accessibility.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-icons.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-fill.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-regular.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-duotone.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/leaving.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/leav.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-message.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/index.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/little.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/about.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/animate.min.css">
-<link rel="stylesheet" href="/Botui/botui.min.css">
-<link rel="stylesheet" href="/Botui/botui-theme-default.css">
-<link rel="stylesheet" href="/Style/Font/font_list/iconfont.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/loveImg.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/list.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/toastr/toastr.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/Font/font_list/iconfont.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/toastify/toastify.min.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/loadinglike.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/vendor/aos/aos.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-bento.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-weather.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-home-components.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-tooltip.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-context-menu.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-enhanced.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/APlayer.min.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/aplayer.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/kicode.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/loadinglike.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/aos/aos.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/plyr.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-map.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/video-modal.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/dplayer/DPlayer.min.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/kicode.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-regular.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-icons.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-fill.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-duotone.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/qweather-icons/qweather-icons.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/remixicon/remixicon.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-tooltip.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-interaction.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lgnewui-home-style.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lgnewui-detail.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-mobile-nav.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-header.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-context-menu.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-map.css?LikeGirl=<?php echo $version ?>">
+<!-- ===== JS（按参考站顺序排列） ===== -->
+<script src="/Style/jquery/jquery.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/Font/font_leav/iconfont.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Botui/botui.min.js"></script>
-<script src="/Style/js/vue.min.js"></script>
-<script src="/Style/jquery/jquery.min.js"></script>
-<script src="/Style/js/jquery.pjax.js" type="text/javascript"></script>
-<script src="/Style/pagelir/spotlight.bundle.js"></script>
-<script src="/Style/js/funlazy.min.js"></script>
-<script src="/Style/js/loading.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/vendor/aos/aos.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-home.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-home-app.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-effects.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/LGNewUiOwO.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/jquery.pjax.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/plyr.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/aos/aos.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/highlight.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/lazyload.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/masonry.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/imagesloaded.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/loading.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/LGNewUiOwO.js?LikeGirl=<?php echo $version ?>"></script>
+<link rel="stylesheet" href="/Style/dplayer/DPlayer.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/video-modal.css?LikeGirl=<?php echo $version ?>">
 <script src="/Style/dplayer/DPlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/video-modal.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="https://static.geetest.com/v4/gt4.js"></script>
 <script src="/Style/js/geetest-helper.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/vendor/qrcode/qrcode.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/vendor/qr-code-styling/qr-code-styling.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-app.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-components.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-pjax.js?LikeGirl=<?php echo $version ?>"></script>
+<link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
+<script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
 <script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/toastify/toastify.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/clipboard.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/view-image.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/LoveListStyle/carousel.umd.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/LoveListStyle/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/LoveListStyle/fancybox.umd.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-pjax.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-mobile-nav.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/page-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
 <script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/color-thief.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-mobile-nav.js?LikeGirl=<?php echo $version ?>"></script>
 <!-- LG_NewUI 核心框架配置 -->
 <script>
     <?php
@@ -436,16 +429,6 @@ function loadPhotos() {
     // AOS 动画配置
     window.LG_AOS_CONFIG = {"enabled":true,"animation":"fade-up","duration":800,"delay":0,"interval":50,"maxDelay":300,"easing":"ease-out-cubic","offset":50,"once":true,"mirror":true,"anchorPlacement":"top-bottom"};
 </script>
-
-<!-- LG-NewUi 核心功能模块 -->
-<script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-app.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-components.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-home-app.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-map.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-init.js?LikeGirl=<?php echo $version ?>"></script>
 
 <?php
 echo htmlspecialchars_decode($diy['headCon'], ENT_QUOTES);
