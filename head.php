@@ -374,6 +374,7 @@ function loadPhotos() {
 <script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
 <script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-map.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
@@ -689,6 +690,17 @@ window.addEventListener('load', function() {
         </div>
     </div>
 </div>
+<div class="lgnewui-sticky-sentinel" id="lgnewuiStickySentinel"></div>
+
+<!-- 旧版音乐播放器元素 -->
+<div class="music_info">
+    <div class="music_info_time" id="musicInfoTime"></div>
+    <div class="music_info_btn">
+        <span class="music_info_btn_play" data-music></span>
+        <span class="music_info_btn_close"></span>
+    </div>
+</div>
+<audio id="music"></audio>
 
 <!-- 移动端更多面板（毛玻璃磨砂效果） -->
 <div class="lg-header-more-panel" id="lgHeaderMorePanel">
