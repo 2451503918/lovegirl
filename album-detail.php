@@ -1,4 +1,5 @@
 <?php
+$pageTitle = '相册详情';
 include_once 'head.php';
 
 // 获取相册code

@@ -1,4 +1,5 @@
 <?php
+$pageTitle = '文章详情';
 include_once 'head.php';
 
 // 为text数组提供默认值，防止未定义

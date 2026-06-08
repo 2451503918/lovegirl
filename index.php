@@ -915,11 +915,18 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     </a>
                 </div>
             </div>
-            <div class="lgnewui-mosaic-grid">
+            <div class="lgnewui-mosaic-grid<?php
+                // 计算相册数量用于动态class
+                $mosaicCount = 0;
+                if ($connect) {
+                    $countResult = @mysqli_query($connect, "SELECT COUNT(*) as cnt FROM photo");
+                    if ($countResult) { $countRow = mysqli_fetch_array($countResult); $mosaicCount = intval($countRow['cnt']); }
+                }
+                echo ' lgnewui-mosaic-count-' . min(max($mosaicCount, 1), 6);
+            ?>">
                 <?php
                 $recentAlbums = null;
                 if ($connect) {
-                    // 尝试从 photo 表获取相册数据
                     $recentAlbums = @mysqli_query($connect, "SELECT id, code, title, img, `desc`, author, location, date FROM photo ORDER BY id DESC LIMIT 6");
                 }
                 if ($recentAlbums && mysqli_num_rows($recentAlbums) > 0):
@@ -929,21 +936,53 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         $albumDate = $album['date'] ?? '';
                         $albumCount = $album['count'] ?? $album['photo_count'] ?? 0;
                         $albumCode = $album['img_code'] ?? $album['code'] ?? '';
+                        $albumAuthor = $album['author'] ?? '';
+                        $albumLocation = $album['location'] ?? '';
+                        // 作者头像
+                        $authorImg = '';
+                        if ($albumAuthor === ($text['boy'] ?? '')) {
+                            $authorImg = $boyimg_val;
+                        } elseif ($albumAuthor === ($text['girl'] ?? '')) {
+                            $authorImg = $girlimg_val;
+                        }
+                        // 格式化日期为中文
+                        $formattedDate = '';
+                        if (!empty($albumDate)) {
+                            $ts = strtotime($albumDate);
+                            if ($ts) {
+                                $y = date('Y', $ts); $m = (int)date('n', $ts); $d = (int)date('j', $ts);
+                                $cnNums = ['〇','一','二','三','四','五','六','七','八','九','十','十一','十二'];
+                                $formattedDate = $cnNums[0] . str_repeat($cnNums[0], 3) . '年' . $cnNums[$m] . '月' . ($d > 10 ? $cnNums[10] . $cnNums[$d-10] : $cnNums[$d]) . '日';
+                            }
+                        }
                 ?>
-                <div class="lgnewui-mosaic-item lgnewui-mosaic-item--<?php echo ($idx % 6 < 2) ? 'large' : 'small'; ?>" data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
-                    <a href="<?php echo !empty($albumCode) ? 'album-detail.php?code=' . urlencode($albumCode) : 'albums.php'; ?>" class="lgnewui-album-card">
-                        <div class="lgnewui-album-cover">
-                            <img data-src="<?php echo htmlspecialchars($albumCover, ENT_QUOTES, 'UTF-8') ?>" class="lgnewui-album-img lazy" alt="<?php echo htmlspecialchars($albumTitle, ENT_QUOTES, 'UTF-8') ?>">
-                            <div class="lgnewui-album-overlay"></div>
-                        </div>
-                        <div class="lgnewui-album-info">
-                            <h4 class="lgnewui-album-title"><?php echo htmlspecialchars($albumTitle, ENT_QUOTES, 'UTF-8') ?></h4>
-                            <div class="lgnewui-album-meta">
-                                <?php if ($albumCount > 0): ?>
-                                <span class="lgnewui-chip lgnewui-chip--glass"><i class="ph-fill ph-images"></i> <?php echo intval($albumCount) ?>张</span>
+                <div data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
+                    <a href="<?php echo !empty($albumCode) ? 'album-detail.php?code=' . urlencode($albumCode) : 'albums.php'; ?>" class="lgnewui-mosaic-item">
+                        <img data-src="<?php echo htmlspecialchars($albumCover, ENT_QUOTES, 'UTF-8') ?>" class="lgnewui-mosaic-img lazy">
+                        <?php if (!empty($albumLocation) || $albumCount > 0): ?>
+                        <div class="lgnewui-mosaic-pos-tr">
+                            <div class="lgnewui-chip--dark-glass">
+                                <?php if (!empty($albumLocation)): ?>
+                                <span class="lgnewui-flex-center-gap-xs"><i class="ph-fill ph-map-pin"></i> <?php echo htmlspecialchars($albumLocation, ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="lgnewui-mosaic-divider"></span>
                                 <?php endif; ?>
-                                <?php if (!empty($albumDate)): ?>
-                                <span class="lgnewui-chip lgnewui-chip--glass"><i class="ph-bold ph-calendar-blank"></i> <?php echo htmlspecialchars($albumDate, ENT_QUOTES, 'UTF-8') ?></span>
+                                <?php if ($albumCount > 0): ?>
+                                <span class="lgnewui-flex-center-gap-xs"><i class="ph-fill ph-image"></i> <?php echo intval($albumCount) ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                        <div class="lgnewui-mosaic-overlay">
+                            <div class="lgnewui-mosaic-overlay-content">
+                                <?php if (!empty($authorImg)): ?>
+                                <div class="lgnewui-capsule lgnewui-capsule--avatar lgnewui-mosaic-avatar-mb">
+                                    <img data-src="<?php echo htmlspecialchars($authorImg, ENT_QUOTES, 'UTF-8') ?>" class="lgnewui-capsule__img lazy">
+                                    <span class="lgnewui-capsule__text lgnewui-text-white"><?php echo htmlspecialchars($albumAuthor, ENT_QUOTES, 'UTF-8') ?></span>
+                                </div>
+                                <?php endif; ?>
+                                <h3 class="u-font-serif lgnewui-mosaic-title"><?php echo htmlspecialchars($albumTitle, ENT_QUOTES, 'UTF-8') ?></h3>
+                                <?php if (!empty($formattedDate)): ?>
+                                <div class="u-font-serif lgnewui-mosaic-date"><?php echo $formattedDate ?></div>
                                 <?php endif; ?>
                             </div>
                         </div>

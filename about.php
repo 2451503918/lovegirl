@@ -1,4 +1,5 @@
 <?php
+$pageTitle = '关于';
 include_once 'head.php';
 
 // Resolve avatar URLs for use in template

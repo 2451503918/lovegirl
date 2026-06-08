@@ -273,7 +273,15 @@ function loadPhotos() {
 <html lang="zh-CN">
 <head>
 <link rel="shortcut icon" href="/favicon.ico" />
-<title><?php echo htmlspecialchars($text['title'] ?: 'Like Girl', ENT_QUOTES, 'UTF-8') ?> — <?php echo htmlspecialchars($text['writing'] ?: '愿得一心人 白头不相离', ENT_QUOTES, 'UTF-8') ?></title>
+<title><?php
+    $siteName = $text['title'] ?: 'Like Girl';
+    $siteSlogan = $text['writing'] ?: '愿得一心人 白头不相离';
+    if (!empty($pageTitle)) {
+        echo htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') . ' — ' . htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8');
+    } else {
+        echo htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8') . ' — ' . htmlspecialchars($siteSlogan, ENT_QUOTES, 'UTF-8');
+    }
+?></title>
 <meta name="keywords"
     content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
 <meta name="description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">

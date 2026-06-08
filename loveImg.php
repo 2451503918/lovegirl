@@ -1,4 +1,5 @@
 <?php
+$pageTitle = '相册';
 include_once 'head.php';
 
 if (!isset($text) || !is_array($text)) {
