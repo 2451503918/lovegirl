@@ -1302,23 +1302,23 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     <!-- 核心功能脚本 -->
     <script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
     <script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/lucide/lucide.min.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script>
     if (typeof lucide !== 'undefined' && lucide.createIcons) {
         document.addEventListener('DOMContentLoaded', function() { lucide.createIcons(); });
     }
     </script>
-    <script src="/Style/vendor/toastify/toastify.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/clipboard/clipboard.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/toastify/toastify.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/js/clipboard.min.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/assets/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/Style/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/Style/vendor/view-image/view-image.min.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/js/view-image.min.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>" defer></script>
 
     <!-- 轮播和灯箱 -->
-    <script src="/Style/vendor/carousel/carousel.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/carousel/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/fancybox/fancybox.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/LoveListStyle/carousel.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/LoveListStyle/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/LoveListStyle/fancybox.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
 
     <!-- 页面专属脚本 -->
     <script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>" defer></script>
@@ -1327,7 +1327,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     <script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
 
     <!-- 工具库 -->
-    <script src="/Style/vendor/html2canvas/html2canvas.min.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>" defer></script>
     <script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
@@ -1335,8 +1335,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
 
     <!-- ===== 音乐播放器 ===== -->
     <script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/Style/vendor/color-thief/color-thief.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/meting/meting.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/js/color-thief.min.js?LikeGirl=<?php echo $version ?>" defer></script>
+    <script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>" defer></script>
 
     <!-- 音乐播放器导航入口 -->
     <div id="nav-music">
