@@ -513,12 +513,12 @@ window.addEventListener('load', function() {
            data-page="index">
             <i class="ph-fill ph-house"></i>
         </a>
-        <a href="loveImg.php"
+        <a href="albums.php"
            class="lgnewui-nav-island-item"
            draggable="false"
            data-desc="收藏见面与出游的闪亮瞬间"
            data-meta="Photo Keepsakes"
-           data-page="loveImg">
+           data-page="albums">
             <i class="ph-fill ph-camera"></i>
             <span>相册</span>
         </a>
@@ -564,7 +564,7 @@ window.addEventListener('load', function() {
             <i class="ph-fill ph-house"></i>
             <span>首页</span>
         </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="loveImg.php" data-page="loveImg">
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="albums.php" data-page="albums">
             <i class="ph-fill ph-camera"></i>
             <span>相册</span>
         </a>
@@ -658,7 +658,8 @@ window.addEventListener('load', function() {
         'articles.php': 'articles.php',
         'messages.php': 'messages.php',
         'lovelist.php': 'lovelist.php',
-        'loveImg.php': 'loveImg.php',
+        'albums.php': 'albums.php',
+        'loveImg.php': 'albums.php',
         'about.php': 'about.php',
         'timeline.php': 'timeline.php'
     };

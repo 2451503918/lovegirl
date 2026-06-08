@@ -1547,11 +1547,11 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     <!-- ===== 移动端底部导航 ===== -->
     <div class="lgnewui-tab-template-v5-container lgnewui-mobile-bottom-nav" id="lgnewuiMobileNav">
         <div class="lgnewui-tab-template-v5-wrap">
-            <a href="little.php" class="lgnewui-tab-template-v5-item" data-title="点滴">
+            <a href="articles.php" class="lgnewui-tab-template-v5-item" data-title="点滴">
                 <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-notebook"></i></div>
                 <span class="lgnewui-tab-template-v5-text">点滴</span>
             </a>
-            <a href="leaving.php" class="lgnewui-tab-template-v5-item" data-title="留言">
+            <a href="messages.php" class="lgnewui-tab-template-v5-item" data-title="留言">
                 <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-chat-teardrop-dots"></i></div>
                 <span class="lgnewui-tab-template-v5-text">留言</span>
             </a>
@@ -1563,11 +1563,11 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-house"></i></div>
                 <span class="lgnewui-tab-template-v5-text">首页</span>
             </a>
-            <a href="loveImg.php" class="lgnewui-tab-template-v5-item" data-title="相册">
+            <a href="albums.php" class="lgnewui-tab-template-v5-item" data-title="相册">
                 <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-camera"></i></div>
                 <span class="lgnewui-tab-template-v5-text">相册</span>
             </a>
-            <a href="list.php" class="lgnewui-tab-template-v5-item" data-title="清单">
+            <a href="lovelist.php" class="lgnewui-tab-template-v5-item" data-title="清单">
                 <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-check-square"></i></div>
                 <span class="lgnewui-tab-template-v5-text">清单</span>
             </a>

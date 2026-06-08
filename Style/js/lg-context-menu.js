@@ -26,8 +26,8 @@
             var item = e.target.closest('[data-action]');
             if (!item) return;
             var action = item.getAttribute('data-action');
-            var urls = { home:'index.php', articles:'little.php', messages:'leaving.php',
-                timeline:'timeline.php', albums:'loveImg.php', list:'list.php', about:'about.php' };
+            var urls = { home:'index.php', articles:'articles.php', messages:'messages.php',
+                timeline:'timeline.php', albums:'albums.php', list:'lovelist.php', about:'about.php' };
             if (action === 'top') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else if (urls[action]) {
