@@ -23,7 +23,10 @@ $Filter_IP = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0
 
 function checkQQ($qq)
 {
-    if (preg_match("/^[1-9][0-9]{4,}$/", $qq)) {
+    if (empty($qq)) {
+        return false;
+    }
+    if (preg_match("/^[1-9][0-9]{4,12}$/", $qq)) {
         return true;
     } else {
         return false;
