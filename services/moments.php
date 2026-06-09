@@ -19,7 +19,7 @@ $connect = null;
 if (file_exists('../admin/Config_DB.php')) {
     include_once '../admin/Config_DB.php';
     try {
-        $connect = @mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
+        $connect = @mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '', 3306, $db_socket ?? null);
         if ($connect) {
             $connect->set_charset("utf8mb4");
             $db_connected = true;

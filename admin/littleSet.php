@@ -50,10 +50,10 @@ $resarticle = mysqli_query($connect, $article);
                                     </div>
                                 </td>
                                 <td><?php echo htmlspecialchars($info['title'], ENT_QUOTES, 'UTF-8') ?></td>
-                                <td><?php echo $info['date'] ?></td>
+                                <td><?php echo htmlspecialchars($info['date'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td><?php echo htmlspecialchars($info['author'], ENT_QUOTES, 'UTF-8') ?></td>
                                 <td>
-                                    <a href="modlitt.php?id=<?php echo $info['id'] ?>">
+                                    <a href="modlitt.php?id=<?php echo intval($info['id']) ?>">
                                         <button type="button" class="btn btn-secondary btn-rounded">
                                             <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                         </button>
@@ -65,7 +65,7 @@ $resarticle = mysqli_query($connect, $article);
                                             <i class=" mdi mdi-delete-empty mr-1"></i>删除
                                         </button>
                                     </form>
-                                    <input name="id" value="<?php echo $info['id']; ?>" type="hidden">
+                                    <input name="id" value="<?php echo intval($info['id']); ?>" type="hidden">
 
                                 </td>
                             </tr>

@@ -350,6 +350,24 @@ CREATE TABLE `visitor_ips` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='IP去重';
 
 -- ============================================================================
+-- 16. music - 音乐（v5.2.1 新增）
+-- ============================================================================
+DROP TABLE IF EXISTS `music`;
+CREATE TABLE `music` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `music_name` varchar(200) NOT NULL COMMENT '歌曲名',
+  `music_artist` varchar(200) NOT NULL COMMENT '歌手',
+  `music_url` varchar(500) NOT NULL COMMENT '播放地址',
+  `music_cover` varchar(500) NOT NULL DEFAULT '' COMMENT '封面图',
+  `music_lrc` text NOT NULL COMMENT '歌词',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='音乐';
+
+INSERT INTO `music` (`id`, `music_name`, `music_artist`, `music_url`, `music_cover`, `music_lrc`) VALUES
+(1, '晴天', '周杰伦', 'https://music.163.com/song/media/outer/url?id=186016', 'https://p1.music.126.net/2z85NMpJcJqJnJXy5kVJjA==/109951163445204916.jpg', ''),
+(2, '简单爱', '周杰伦', 'https://music.163.com/song/media/outer/url?id=186016', '', '');
+
+-- ============================================================================
 -- 兼容：保留原 v5.2.0 的旧表结构（不再使用，但为兼容外部脚本保留）
 -- ============================================================================
 DROP TABLE IF EXISTS `article`;
@@ -389,6 +407,7 @@ ALTER TABLE `leaving` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMEN
 ALTER TABLE `visitor_stats` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `visitor_total` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `visitor_ips` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `music` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 ALTER TABLE `article` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `loveImg` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 

@@ -43,8 +43,288 @@ if ($connect) {
 $copy = $text['Copyright'] ?? '';
 $icp = $text['icp'] ?? '';
 $Animation = $text['Animation'] ?? '';
-?>
 
+// 初始化头像URL变量（提前到meta标签之前）
+$boyimg_val = $text['boyimg'] ?? '';
+$girlimg_val = $text['girlimg'] ?? '';
+if ($boyimg_val && !preg_match('/^https?:\/\//', $boyimg_val)) {
+    $boyimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyimg_val . '&s=640';
+} elseif (!$boyimg_val) {
+    $boyimg_val = '/Style/img/boy.png';
+}
+if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
+    $girlimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg_val . '&s=640';
+} elseif (!$girlimg_val) {
+    $girlimg_val = '/Style/img/girl.png';
+}
+?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.ico" />
+<link rel="canonical" href="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/') ?>" />
+<title><?php
+    $siteName = ($text['title'] ?? '') ?: 'Like Girl';
+    $siteSlogan = ($text['writing'] ?? '') ?: '愿得一心人 白头不相离';
+    if (!empty($pageTitle)) {
+        echo htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') . ' — ' . htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8');
+    } else {
+        echo htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8') . ' — ' . htmlspecialchars($siteSlogan, ENT_QUOTES, 'UTF-8');
+    }
+?></title>
+<meta name="keywords"
+    content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
+<meta name="description" content="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
+<meta name="author" content="Ki">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (Facebook/微信/QQ) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:title" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:description" content="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:url" content="https://love.54oimx.top/">
+<meta property="og:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
+<meta name="x-lg-license-instance" content="858ee1d099b9">
+
+    <!-- Google Fonts CDN 版本 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500&family=Oswald:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap"
+        rel="stylesheet">
+<link rel="stylesheet" href="/Style/vendor/google-fonts/fonts-non-google.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/fontawesome/css/all.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/leaving.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/leav.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-message.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/index.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/little.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/loveImg.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/list.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/Font/font_list/iconfont.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/toastify/toastify.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/APlayer.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/aplayer.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/loadinglike.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/aos/aos.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/plyr.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/kicode.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-regular.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-icons.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-fill.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/phosphor-duotone.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/qweather-icons/qweather-icons.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/vendor/remixicon/remixicon.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-tooltip.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-interaction.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lgnewui-home-style.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lgnewui-detail.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-mobile-nav.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-header.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-context-menu.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/lg-map.css?LikeGirl=<?php echo $version ?>">
+<script src="/Style/jquery/jquery.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/Font/font_leav/iconfont.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/jquery.pjax.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/plyr.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/aos/aos.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/highlight.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/lazyload.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/funlazy.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/masonry.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/imagesloaded.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/loading.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/LGNewUiOwO.js?LikeGirl=<?php echo $version ?>"></script>
+<!-- 全局滚动锁工具（所有弹窗共用，防止滚动条消失时布局跳动） -->
+<script>
+(function(){
+    var _count = 0;
+    window.lgScrollLock = function(){
+        _count++;
+        if (_count === 1) {
+            var w = window.innerWidth - document.documentElement.clientWidth;
+            document.documentElement.style.setProperty('--lg-scrollbar-compensate', w + 'px');
+            document.documentElement.classList.add('lg-scroll-locked');
+        }
+    };
+    window.lgScrollUnlock = function(){
+        _count = Math.max(0, _count - 1);
+        if (_count === 0) {
+            document.documentElement.classList.remove('lg-scroll-locked');
+            document.documentElement.style.removeProperty('--lg-scrollbar-compensate');
+        }
+    };
+    window.lgScrollReset = function(){
+        _count = 0;
+        document.documentElement.classList.remove('lg-scroll-locked');
+        document.documentElement.style.removeProperty('--lg-scrollbar-compensate');
+    };
+})();
+</script>
+<link rel="stylesheet" href="/Style/dplayer/DPlayer.min.css?LikeGirl=<?php echo $version ?>">
+<link rel="stylesheet" href="/Style/css/video-modal.css?LikeGirl=<?php echo $version ?>">
+<script src="/Style/dplayer/DPlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/video-modal.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="https://static.geetest.com/v4/gt4.js"></script>
+<script src="/Style/js/geetest-helper.js?LikeGirl=<?php echo $version ?>"></script>
+<script>if (typeof GeetestHelper !== 'undefined') GeetestHelper.setCaptchaId("");</script>
+<script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/qrcode/qrcode.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/vendor/qr-code-styling/qr-code-styling.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-app.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-components.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-pjax.js?LikeGirl=<?php echo $version ?>"></script>
+<script>if(window.LGPjax&&typeof window.LGPjax.init==="function")window.LGPjax.init();</script>
+<link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
+<script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/toastify/toastify.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/clipboard.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/view-image.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/LoveListStyle/carousel.umd.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/LoveListStyle/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/LoveListStyle/fancybox.umd.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/page-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
+<script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-map.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/color-thief.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/assets/js/lg-mobile-nav.js?LikeGirl=<?php echo $version ?>"></script>
+<script>
+    <?php
+    $lg_config = [
+        'title' => $text['title'] ?? '情侣小站',
+        'boy' => $text['boy'] ?? '男方',
+        'girl' => $text['girl'] ?? '女方',
+        'startTime' => str_replace('T', ' ', $text['startTime'] ?? '2022-06-05 00:00:00'),
+        'version' => '5.2.1',
+        'pcCarouselHeight' => '80vh',
+        'mobileCarouselHeight' => '50vh',
+        'pcPhotoCoverHeight' => '80vh',
+        'mobilePhotoCoverHeight' => '60vh',
+        'pcImgMaxHeight' => '450px',
+        'mobileImgMaxHeight' => '260px',
+        'maleName' => $text['boy'] ?? '男方',
+        'maleAvatar' => $boyimg_val,
+        'femaleName' => $text['girl'] ?? '女方',
+        'femaleAvatar' => $girlimg_val,
+        'siteBase' => '',
+        'assetBase' => '',
+        'imageErrorFallback' => '/Style/img/file-placeholder.svg',
+        'owoBase' => '/OwO',
+        'soloMode' => false,
+        'weatherEnabled' => true,
+        'weatherToken' => '',
+        'bannedChars' => '',
+        'endpoints' => [
+            'mapApi' => '/assets/map-api.php',
+            'weatherNow' => '/services/weather.php',
+            'interaction' => '/services/interaction.php',
+        ],
+    ];
+    ?>
+    window.LG_CONFIG = Object.assign(window.LG_CONFIG || {}, <?php echo json_encode($lg_config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>);
+
+    // AOS 动画配置
+    window.LG_AOS_CONFIG = {"enabled":true,"animation":"fade-up","duration":800,"delay":0,"interval":50,"maxDelay":300,"easing":"ease-out-cubic","offset":50,"once":true,"mirror":true,"anchorPlacement":"top-bottom"};
+
+    // 访客地理缓存
+    window.LGVisitorGeoCache = window.LGVisitorGeoCache || (function () {
+        var storageKey = 'lgnewui_visitor_geo_v1';
+        var cookieKey = 'lg_visitor_geo';
+        var maxAgeMs = 6 * 60 * 60 * 1000;
+        function normalize(p) {
+            if (!p || typeof p !== 'object') return null;
+            var lat = Number(p.lat), lng = Number(p.lng), ts = Number(p.ts || Date.now()), city = typeof p.city === 'string' ? p.city.trim() : '';
+            if (!isFinite(lat) || !isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180 || (lat === 0 && lng === 0)) return null;
+            if (!isFinite(ts) || ts <= 0) ts = Date.now();
+            return { lat: Number(lat.toFixed(6)), lng: Number(lng.toFixed(6)), ts: ts, city: city };
+        }
+        function writeCookie(p) { var n = normalize(p); if (!n) return; document.cookie = cookieKey + '=' + encodeURIComponent(JSON.stringify(n)) + '; path=/; max-age=' + String(Math.floor(maxAgeMs / 1000)) + '; SameSite=Lax'; }
+        function clear() { try { window.localStorage.removeItem(storageKey); } catch(e) {} document.cookie = cookieKey + '=; path=/; max-age=0; SameSite=Lax'; }
+        function getCached() { try { var raw = window.localStorage.getItem(storageKey); if (!raw) return null; var n = normalize(JSON.parse(raw)); if (!n) return null; if (Date.now() - n.ts > maxAgeMs) { clear(); return null; } return n; } catch(e) { return null; } }
+        function setCached(p) { var n = normalize(p); if (!n) return; try { window.localStorage.setItem(storageKey, JSON.stringify(n)); } catch(e) {} writeCookie(n); }
+        function syncCookieFromCache() { var c = getCached(); if (c) writeCookie(c); }
+        return { get: getCached, set: setCached, clear: clear, syncCookieFromCache: syncCookieFromCache };
+    })();
+    window.LGVisitorGeoCache.syncCookieFromCache();
+
+    // 高德地图安全配置
+    window._AMapSecurityConfig = {"securityJsCode":""};
+
+    // 地图配置
+    window.LGMAP_CONFIG = {"amapKey":"","modeConfig":{"lovers":{"title":"情侣模式","desc":"无论相隔多远，心始终在一起"},"moments":{"title":"点点滴滴","desc":"记录我们的每一个美好瞬间"},"messages":{"title":"留言模式","desc":"来自世界各地的温暖祝福"},"albums":{"title":"相册模式","desc":"用照片定格我们的回忆"},"events":{"title":"事件清单","desc":"一起完成的每一个小目标"}},"lovers":[],"milestones":[],"events":[],"albums":[],"messages":[],"moments":[],"loveStartDate":"","hsla":"345deg,70%,55%","mapStyle":"amap://styles/grey","soloMode":false,"_apiBase":"/assets/map-api.php"};
+
+    // 地图数据
+    window.LGMapData = window.LGMapData || {
+        assign: function (data) {
+            if (data.lovers) window.LGMAP_CONFIG.lovers = data.lovers;
+            if (typeof data.loveStartDate !== 'undefined') window.LGMAP_CONFIG.loveStartDate = data.loveStartDate;
+            if (data.milestones) window.LGMAP_CONFIG.milestones = data.milestones;
+            if (data.moments) window.LGMAP_CONFIG.moments = data.moments;
+            if (data.messages) window.LGMAP_CONFIG.messages = data.messages;
+            if (data.albums) window.LGMAP_CONFIG.albums = data.albums;
+            if (data.events) window.LGMAP_CONFIG.events = data.events;
+            return data;
+        },
+        fetchAll: function () {
+            var apiUrl = new URL(window.LGMAP_CONFIG._apiBase, window.location.origin);
+            apiUrl.searchParams.set('module', 'all');
+            return fetch(apiUrl.toString(), {
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+            })
+                .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(this.assign.bind(this));
+        }
+    };
+
+    window.LGMAP_DATA_READY = window.LGMapData.fetchAll()
+        .catch(function (err) {
+            if (window.LG_CONFIG && window.LG_CONFIG.debugMap && window.console && typeof window.console.warn === 'function') {
+                window.console.warn('地图数据加载失败:', err);
+            }
+        });
+</script>
+
+<script>
+    // 倒计时、高度调整、轮播图、导航栏等功能已迁移到 lg-app.js 和 lg-components.js
+    // 保留必要的全局变量供旧代码兼容
+    var pcCarouselHeight = "80vh";
+    var mobileCarouselHeight = "50vh";
+    var pcPhotoCoverHeight = "80vh";
+    var mobilePhotoCoverHeight = "60vh";
+    var pcImgMaxHeight = "450px";
+    var mobileImgMaxHeight = "260px";
+</script>
+
+<?php
+echo htmlspecialchars_decode($diy['headCon'] ?? '', ENT_QUOTES);
+?>
+</head>
+<body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
 <script>
 
     console.log("%c Q & V | [已隐藏]", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
@@ -102,7 +382,7 @@ $Animation = $text['Animation'] ?? '';
 
     function show_date_time() {
         setTimeout(show_date_time, 1000);
-        var BirthDay = new Date(<?php echo json_encode($text['startTime']); ?>);
+        var BirthDay = new Date(<?php echo json_encode($text['startTime'] ?? ''); ?>);
         var today = new Date();
         var timeold = (today.getTime() - BirthDay.getTime());
         var msPerDay = 24 * 60 * 60 * 1000;
@@ -151,6 +431,9 @@ function showPhotos(photos) {
     const $gallery = $('#photoGallery');
     const startIndex = $gallery.children().length;
 
+    if (!photos || !Array.isArray(photos)) {
+        return;
+    }
     photos.forEach(photo => {
         const photoElement = createPhotoElement(photo);
         $gallery.append(photoElement);
@@ -256,254 +539,10 @@ function loadPhotos() {
 }
 
 </script>
-<html lang="zh-CN">
-<head>
-<link rel="shortcut icon" href="/favicon.ico" />
-<title><?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?> - <?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></title>
-<meta name="keywords"
-    content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
-<meta name="description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
-<meta name="author" content="Ki">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes,viewport-fit=cover">
-<meta name="robots" content="index, follow">
 
-<!-- Open Graph (Facebook/微信/QQ) -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:url" content="https://love.54oimx.top/">
-<meta property="og:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
-<meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
-<meta name="twitter:image" content="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640">
-<meta name="x-lg-license-instance" content="858ee1d099b9">
-
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500&family=Oswald:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/Style/vendor/google-fonts/fonts-non-google.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/vendor/fontawesome/css/all.min.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/content.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lgnewui-home-style.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lgnewui-detail.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-message.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-header.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-interaction.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-variables.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-newui-nav.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-mobile-nav.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-accessibility.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-regular.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-icons.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-fill.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/phosphor-duotone.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/vendor/remixicon/remixicon.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/leaving.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/leav.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/index.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/little.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/about.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/animate.min.css">
-<link rel="stylesheet" href="/Botui/botui.min.css">
-<link rel="stylesheet" href="/Botui/botui-theme-default.css">
-<link rel="stylesheet" href="/Style/Font/font_list/iconfont.css">
-<link rel="stylesheet" href="/Style/css/loveImg.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/list.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/toastify/toastify.min.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/APlayer.min.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/aplayer.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/loadinglike.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/vendor/aos/aos.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/plyr.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/kicode.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-bento.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-weather.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-home-components.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-tooltip.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-context-menu.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-enhanced.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/lg-map.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/vendor/qweather-icons/qweather-icons.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/dplayer/DPlayer.min.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/video-modal.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
-<link rel="stylesheet" href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>">
-<script src="/Style/Font/font_leav/iconfont.js"></script>
-<script src="/Botui/botui.min.js"></script>
-<script src="/Style/js/vue.min.js"></script>
-<script src="/Style/jquery/jquery.min.js"></script>
-<script src="/Style/js/jquery.pjax.js" type="text/javascript"></script>
-<script src="/Style/js/plyr.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/pagelir/spotlight.bundle.js"></script>
-<script src="/Style/js/funlazy.min.js"></script>
-<script src="/Style/vendor/aos/aos.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/highlight.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lazyload.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/masonry.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/imagesloaded.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/loading.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/LGNewUiOwO.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/dplayer/DPlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/video-modal.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/geetest-helper.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/vendor/qrcode/qrcode.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/vendor/qr-code-styling/qr-code-styling.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-home.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-home-app.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/lg-effects.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/toastify/toastify.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/clipboard.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/view-image.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/LoveListStyle/carousel.umd.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/LoveListStyle/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/LoveListStyle/fancybox.umd.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/APlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/color-thief.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>"></script>
-<!-- LG_NewUI 核心框架配置 -->
-<script>
-    <?php
-    $boyimg_val = $text['boyimg'] ?? '';
-    $girlimg_val = $text['girlimg'] ?? '';
-    if ($boyimg_val && !preg_match('/^https?:\/\//', $boyimg_val)) {
-        $boyimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyimg_val . '&s=640';
-    }
-    if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
-        $girlimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg_val . '&s=640';
-    }
-    $lg_config = [
-        'title' => $text['title'] ?? '情侣小站',
-        'boy' => $text['boy'] ?? '男方',
-        'girl' => $text['girl'] ?? '女方',
-        'startTime' => str_replace('T', ' ', $text['startTime'] ?? '2022-06-05 00:00:00'),
-        'version' => '5.2.1',
-        'pcCarouselHeight' => '80vh',
-        'mobileCarouselHeight' => '50vh',
-        'pcPhotoCoverHeight' => '80vh',
-        'mobilePhotoCoverHeight' => '60vh',
-        'pcImgMaxHeight' => '450px',
-        'mobileImgMaxHeight' => '260px',
-        'maleName' => $text['boy'] ?? '男方',
-        'maleAvatar' => $boyimg_val,
-        'femaleName' => $text['girl'] ?? '女方',
-        'femaleAvatar' => $girlimg_val,
-        'siteBase' => '',
-        'assetBase' => '',
-        'imageErrorFallback' => '/Style/img/error.svg',
-        'owoBase' => '/OwO',
-        'soloMode' => false,
-        'weatherEnabled' => true,
-        'weatherToken' => '',
-        'bannedChars' => '',
-        'endpoints' => [
-            'weatherNow' => '/services/weather.php',
-            'interaction' => '/services/interaction.php',
-            'messageList' => '/services/message-list.php',
-            'messageSubmit' => '/services/message.php',
-            'infoService' => '/services/info-service.php',
-            'chatData' => '/services/chat-data.php',
-            'timelineData' => '/services/timeline.php',
-            'momentsData' => '/services/moments.php',
-            'randomQuote' => '/services/random_quote.php',
-            'visitorStats' => '/services/visitor-stats.php',
-            'musicPlayerData' => '/services/music-player-data.php',
-            'mapApi' => '/assets/map-api.php',
-        ],
-    ];
-    ?>
-    window.LG_CONFIG = Object.assign(window.LG_CONFIG || {}, <?php echo json_encode($lg_config, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>);
-
-    // AOS 动画配置
-    window.LG_AOS_CONFIG = {"enabled":true,"animation":"fade-up","duration":800,"delay":0,"interval":50,"maxDelay":300,"easing":"ease-out-cubic","offset":50,"once":true,"mirror":true,"anchorPlacement":"top-bottom"};
-</script>
-
-<!-- LG-NewUi 核心功能模块 -->
-<script src="/assets/js/lg-app.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-components.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-pjax.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-detail.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/html2canvas.min.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-home-app.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-interaction.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-map.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-mobile-nav.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="/assets/js/lg-init.js?LikeGirl=<?php echo $version ?>"></script>
-
-<?php
-echo htmlspecialchars_decode($diy['headCon'], ENT_QUOTES);
-if ($diy['Pjaxkg'] === "1"):
-    ?>
-    <script>
-        $(document).pjax('a[target!=_blank]', '#pjax-container', { fragment: '#pjax-container', timeout: 15000 });
-        $(document).on('pjax:send', function () {
-            NProgress.start();
-        });
-        $(document).on('pjax:complete', function () {
-            $(".love_img img,.lovelist img,.little_texts img").addClass("spotlight");
-            NProgress.done();
-            
-            FunLazy({
-                placeholder: "Style/img/Loading2.gif",
-                effect: "show",
-                strictLazyMode: false,
-                useErrorImagePlaceholder: "Style/img/error.svg"
-            })
-            
-            $('.card, .card-b').click(function() {
-                var link = $(this).find('a').get(0);
-                if (link) {
-                    link.click();
-                }
-            });
-            
-            $('#MessageBtn').click(function() {
-                var targetOffset = $('#MessageArea').offset().top;
-                if ($(window).scrollTop() !== targetOffset) {
-                    $('html, body').animate({
-                        scrollTop: targetOffset
-                    }, 800);
-                }
-            });
-            
-            
-            $('video').each(function() {
-                var video = $(this);
-                setupVideoPlayer(video);
-            });
-            
-            initLoveAlbum();
-
-            initScrollButton('#MessageBtn', '#MessageArea', 800, 800);
-
-        });
-        
-        
-    </script>
-<?php endif; ?>
-<link href="/Style/css/nprogress.css?LikeGirl=<?php echo $version ?>" rel="stylesheet" type="text/css">
-</head>
-<body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
-<a href="#pjax-container" class="lg-skip-link">跳到主要内容</a>
-<div class="lg-aria-live" id="lgAriaLive" aria-live="polite" aria-atomic="true"></div>
-
-<!-- 加载动画 -->
 <div id="loader-wrapper">
-    <div class="loader-section"></div>
     <div id="loader"></div>
+    <div class="loader-section"></div>
 </div>
 <script>
 window.addEventListener('load', function() {
@@ -514,7 +553,6 @@ window.addEventListener('load', function() {
 });
 </script>
 
-<!-- 灵动岛导航栏 -->
 <div class="lgnewui-nav-placeholder" id="lgnewuiNavPlaceholder"></div>
 <div class="lgnewui-nav-wrapper" id="lgnewuiNavWrapper">
     <nav class="lgnewui-nav-island-container" id="lgnewuiNavIsland">
@@ -585,43 +623,6 @@ window.addEventListener('load', function() {
     </nav>
 </div>
 
-<!-- 移动端导航栏 -->
-<div class="lgnewui-mobile-nav-root">
-    <!-- 极简包裹点阵 (v5) -->
-    <div class="lgnewui-tab-template-v5-container lgnewui-glass-panel" id="lgnewui-mobile-nav-v5">
-        <div class="lgnewui-tab-template-v5-indicator"></div>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="articles.php" data-page="articles">
-            <i class="ph-fill ph-notebook"></i>
-            <span>点滴</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="messages.php" data-page="messages">
-            <i class="ph-fill ph-chat-teardrop-dots"></i>
-            <span>留言</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="timeline.php" data-page="timeline">
-            <i class="ph-fill ph-clock-countdown"></i>
-            <span>轨迹</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item active" href="index.php" data-page="index">
-            <i class="ph-fill ph-house"></i>
-            <span>首页</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="albums.php" data-page="albums">
-            <i class="ph-fill ph-camera"></i>
-            <span>相册</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="lovelist.php" data-page="lovelist">
-            <i class="ph-fill ph-list-checks"></i>
-            <span>清单</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="about.php" data-page="about">
-            <i class="ph-fill ph-book-open-text"></i>
-            <span>关于</span>
-        </a>
-    </div>
-</div>
-
-<!-- 页面标题栏 -->
 <div class="lgnewui-page-header">
     <div class="lgnewui-meta-container">
         <div class="lgnewui-meta-tag" id="lgnewuiMetaTag">
@@ -637,34 +638,121 @@ window.addEventListener('load', function() {
 <!-- 头部 -->
 <div class="header-wrap">
     <div class="header">
+        <!-- 吸顶 Logo -->
         <div class="lgnewui-header-left-avatar">
             <div class="stuck-logo stuck-logo--en-v7">
-                <span class="stuck-logo__name"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 <span class="stuck-logo__redline-l"></span>
                 <span class="stuck-logo__heart"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z" /></svg></span>
                 <span class="stuck-logo__redline-r"></span>
-                <span class="stuck-logo__name"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
             </div>
         </div>
-        <div class="logo">
-            <h1><a class="alogo" href="index.php"><?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'], ENT_QUOTES, 'UTF-8')) ?></a></h1>
+
+        <!-- 返回按钮 -->
+        <div class="lg-capsule-back">
+            <a href="javascript:void(0);" class="lg-capsule-back__btn lg-capsule-back__prev" title="返回">
+                <i data-lucide="chevron-left"></i>
+            </a>
+            <a href="/index.php" class="lg-capsule-back__btn lg-capsule-back__home" title="首页">
+                <i data-lucide="house"></i>
+            </a>
         </div>
+
+        <div class="logo">
+            <h1><a class="alogo" href="index.php"><?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'] ?? '', ENT_QUOTES, 'UTF-8')) ?></a></h1>
+        </div>
+
+        <!-- 吸顶时显示的右侧区域: 天气 + 地图 + 情侣头像 -->
         <div class="lgnewui-header-actions" id="lgnewuiHeaderActions">
+            <!-- 天气按钮 -->
+            <div class="lgnewui-header-weather is-loading" id="lgHeaderVisitorWeather" title="点击查看当前天气信息" role="button" tabindex="0" aria-expanded="false">
+                <span class="lgnewui-header-weather-loading" id="lgHeaderVisitorWeatherLoading" aria-label="天气加载中">
+                    <i data-lucide="loader-circle"></i>
+                </span>
+                <span class="lgnewui-header-weather-icon-wrap">
+                    <i class="qi-999-fill lgnewui-header-weather-icon" id="lgHeaderVisitorWeatherIcon"></i>
+                </span>
+                <span class="lgnewui-header-weather-text" id="lgHeaderVisitorWeatherText"></span>
+            </div>
+
+            <!-- 地图按钮 -->
+            <a href="javascript:void(0);" class="lgnewui-header-map" id="lgMapOpenBtn" title="足迹地图">
+                <span class="lgnewui-header-map-icon-wrap">
+                    <i class="ph-fill ph-globe-hemisphere-west"></i>
+                </span>
+                <span class="lgnewui-header-map-text">足迹</span>
+            </a>
+
+            <div class="lgnewui-header-divider"></div>
+
             <div class="lgnewui-couple-avatars-right">
                 <div class="lgnewui-avatar-group">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['boyimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-male" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
-                    <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['girlimg'], ENT_QUOTES, 'UTF-8') ?>&s=640" class="avatar-female" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?php echo htmlspecialchars($girlimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-female" alt="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <span class="lgnewui-right-heart"></span>
             </div>
+
+            <!-- 移动端更多按钮 -->
+            <button type="button" class="lg-header-more-btn" id="lgHeaderMoreBtn" aria-label="更多信息">
+                <i data-lucide="ellipsis"></i>
+            </button>
         </div>
-        <div class="word" data-tip="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>" data-tip-position="bottom">
-            <span class="wenan"><?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></span>
+        <div class="word" data-tip="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>" data-tip-position="bottom">
+            <span class="wenan"><?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+        </div>
+    </div>
+</div>
+<div class="lgnewui-sticky-sentinel" id="lgnewuiStickySentinel"></div>
+
+<div class="music_info">
+    <div class="music_info_time" id="musicInfoTime"></div>
+    <div class="music_info_btn">
+        <span class="music_info_btn_play" data-music></span>
+        <span class="music_info_btn_close"></span>
+    </div>
+</div>
+<audio id="music"></audio>
+
+<!-- 移动端更多面板（毛玻璃磨砂效果） -->
+<div class="lg-header-more-panel" id="lgHeaderMorePanel">
+    <div class="lg-header-more-overlay" data-close-panel></div>
+    <div class="lg-header-more-sheet">
+        <button type="button" class="lg-header-more-close" data-close-panel aria-label="关闭">
+            <i data-lucide="x"></i>
+        </button>
+
+        <!-- stuck-logo 展示 -->
+        <div class="lg-header-more-identity">
+            <div class="stuck-logo stuck-logo--en-v7">
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__redline-l"></span>
+                <span class="stuck-logo__heart"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z"/></svg></span>
+                <span class="stuck-logo__redline-r"></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+            </div>
+        </div>
+
+        <!-- 功能入口：天气、地图 -->
+        <div class="lg-header-more-actions">
+            <a href="javascript:void(0);" class="lg-header-more-action-item" id="lgMorePanelWeather" data-close-panel>
+                <span class="lg-header-more-action-icon">
+                    <i class="qi-999-fill" id="lgMorePanelWeatherIcon"></i>
+                </span>
+                <span class="lg-header-more-action-label" id="lgMorePanelWeatherText">天气</span>
+            </a>
+
+            <a href="javascript:void(0);" class="lg-header-more-action-item" id="lgMorePanelMap" data-close-panel>
+                <span class="lg-header-more-action-icon">
+                    <i class="ph-fill ph-globe-hemisphere-west"></i>
+                </span>
+                <span class="lg-header-more-action-label">足迹地图</span>
+            </a>
         </div>
     </div>
 </div>
 
-<!-- bg-wrap 移至各页面独立控制 -->
 
 
 <style>
@@ -686,7 +774,7 @@ window.addEventListener('load', function() {
     }
 </style>
 <style>
-    <?php echo preg_replace('/<\/style/i', '<\\/style', $diy['cssCon']) ?>
+    <?php echo preg_replace('/<\/style/i', '<\\/style', $diy['cssCon'] ?? '') ?>
 </style>
 
 <script>
@@ -850,87 +938,6 @@ window.addEventListener('load', function() {
         document.addEventListener('DOMContentLoaded', init);
     } else {
         init();
-    }
-})();
-</script>
-<script>
-// 移动端导航指示器 - 基于LG-NewUi研究成果
-(function() {
-    'use strict';
-
-    var mobileNav = document.getElementById('lgnewui-mobile-nav-v5');
-    var mobileIndicator = mobileNav ? mobileNav.querySelector('.lgnewui-tab-template-v5-indicator') : null;
-    var mobileItems = document.querySelectorAll('.js-lgnewui-v5-item');
-
-    if (!mobileNav || !mobileIndicator || !mobileItems.length) {
-        return;
-    }
-
-    // 根据当前路径设置活动状态
-    function setMobileActiveByPath() {
-        var currentPath = window.location.pathname;
-        var currentPage = currentPath.split('/').pop() || 'index.php';
-
-        mobileItems.forEach(function(item) {
-            item.classList.remove('active');
-            var href = item.getAttribute('href');
-
-            if (href === currentPage ||
-                (href === 'index.php' && (currentPath === '/' || currentPath.endsWith('/') || currentPath.endsWith('index.php')))) {
-                item.classList.add('active');
-            }
-        });
-
-        // 默认首页
-        if (!document.querySelector('.js-lgnewui-v5-item.active')) {
-            var homeItem = document.querySelector('.js-lgnewui-v5-item[href="index.php"]');
-            if (homeItem) homeItem.classList.add('active');
-        }
-    }
-
-    // 更新指示器位置
-    function updateMobileIndicator() {
-        var activeItem = document.querySelector('.js-lgnewui-v5-item.active');
-        if (activeItem && mobileIndicator) {
-            var itemRect = activeItem.getBoundingClientRect();
-            var navRect = mobileNav.getBoundingClientRect();
-            mobileIndicator.style.left = (itemRect.left - navRect.left) + 'px';
-        }
-    }
-
-    // 绑定事件
-    function bindMobileEvents() {
-        mobileItems.forEach(function(item) {
-            item.addEventListener('click', function(e) {
-                mobileItems.forEach(function(i) { i.classList.remove('active'); });
-                this.classList.add('active');
-                updateMobileIndicator();
-            });
-        });
-
-        // 窗口大小变化
-        var resizeTimeout;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(updateMobileIndicator, 200);
-        });
-    }
-
-    // 初始化
-    function initMobile() {
-        setMobileActiveByPath();
-        updateMobileIndicator();
-        bindMobileEvents();
-
-        // 延迟更新指示器
-        setTimeout(updateMobileIndicator, 100);
-    }
-
-    // 页面加载完成后初始化
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMobile);
-    } else {
-        initMobile();
     }
 })();
 </script>

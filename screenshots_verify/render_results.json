@@ -1,0 +1,621 @@
+{
+  "首页": {
+    "url": "http://localhost:8090/",
+    "html_size": 325662,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 6个",
+      "资源404: 1个"
+    ]
+  },
+  "时光轴": {
+    "url": "http://localhost:8090/timeline.php",
+    "html_size": 283797,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 12个",
+      "资源404: 2个"
+    ]
+  },
+  "关于": {
+    "url": "http://localhost:8090/about.php",
+    "html_size": 284224,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 18个",
+      "资源404: 3个"
+    ]
+  },
+  "留言": {
+    "url": "http://localhost:8090/messages.php",
+    "html_size": 299026,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 24个",
+      "资源404: 4个"
+    ]
+  },
+  "清单": {
+    "url": "http://localhost:8090/list.php",
+    "html_size": 306154,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 30个",
+      "资源404: 5个"
+    ]
+  },
+  "点点滴滴": {
+    "url": "http://localhost:8090/lovelist.php",
+    "html_size": 306184,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] FunLazy is not defined"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 36个",
+      "资源404: 6个"
+    ]
+  },
+  "相册": {
+    "url": "http://localhost:8090/albums.php",
+    "html_size": 279772,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 42个",
+      "资源404: 7个"
+    ]
+  },
+  "文章": {
+    "url": "http://localhost:8090/articles.php",
+    "html_size": 279179,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 48个",
+      "资源404: 8个"
+    ]
+  },
+  "留言板": {
+    "url": "http://localhost:8090/leaving.php",
+    "html_size": 299976,
+    "found_ids": [
+      "loader-wrapper(1)",
+      "lgnewuiNavWrapper(1)",
+      "pjax-container(2)",
+      "lgHeaderMorePanel(1)"
+    ],
+    "missing_ids": [
+      "lgnewuiMobileNav"
+    ],
+    "found_classes": [
+      "lgnewui-nav-island-container(1)",
+      "stuck-logo(2)",
+      "lg-header-more-panel(1)",
+      "lgnewui-mobile-nav-root(1)"
+    ],
+    "missing_classes": [
+      "lg-footer"
+    ],
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined"
+    ],
+    "js_warnings": [],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "all_console": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[error] [Geetest] captchaId 未配置"
+    ],
+    "status": "ERROR",
+    "issues": [
+      "缺失ID: ['lgnewuiMobileNav']",
+      "JS错误: 63个",
+      "资源404: 9个"
+    ]
+  },
+  "移动端-首页": {
+    "status": "OK",
+    "mobile_nav_present": false,
+    "mobile_sentinel_present": false,
+    "viewport": "375x812",
+    "js_errors": [
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[PAGE_ERROR] getMusicSetting is not defined",
+      "[error] [Geetest] captchaId 未配置",
+      "[PAGE_ERROR] FunLazy is not defined",
+      "[PAGE_ERROR] Cannot read properties of undefined (reading 'forEach')",
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "not_found": [
+      "[error] Failed to load resource: the server responded with a status of 404 ()"
+    ]
+  }
+}

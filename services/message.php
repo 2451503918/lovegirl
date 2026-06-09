@@ -41,6 +41,63 @@ if (!$connect) {
 $name = trim($_POST['name'] ?? '');
 $text = trim($_POST['text'] ?? '');
 $qq   = trim($_POST['qq'] ?? '');
+$parentId = intval($_POST['parent_id'] ?? 0);
+$replyToId = intval($_POST['reply_to_id'] ?? 0);
+$weather = trim($_POST['weather'] ?? '');
+$weatherIcon = trim($_POST['weather_icon'] ?? '');
+
+// 极验验证（如果配置了极验，验证前端传来的极验参数）
+$geetestValid = true;
+$geetestId = '';
+// 尝试从配置获取极验ID
+if (file_exists(__DIR__ . '/../admin/Config_DB.php')) {
+    include_once __DIR__ . '/../admin/Config_DB.php';
+    if (defined('GEETEST_ID') && !empty(GEETEST_ID)) {
+        $geetestId = GEETEST_ID;
+    }
+}
+if (!empty($geetestId) && !empty($_POST['lot_number'])) {
+    // 极验二次验证
+    $lotNumber = trim($_POST['lot_number'] ?? '');
+    $captchaOutput = trim($_POST['captcha_output'] ?? '');
+    $passToken = trim($_POST['pass_token'] ?? '');
+    $genTime = trim($_POST['gen_time'] ?? '');
+    if (empty($lotNumber) || empty($captchaOutput) || empty($passToken) || empty($genTime)) {
+        echo json_encode(['success' => false, 'code' => 400, 'msg' => '验证信息不完整']);
+        exit;
+    }
+    // 极验服务端验证请求
+    $geetestKey = defined('GEETEST_KEY') ? GEETEST_KEY : '';
+    if (!empty($geetestKey)) {
+        $verifyUrl = 'https://gc.geetest.com/validate';
+        $verifyData = [
+            'lot_number' => $lotNumber,
+            'captcha_output' => $captchaOutput,
+            'pass_token' => $passToken,
+            'gen_time' => $genTime,
+            'captcha_id' => $geetestId,
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $verifyUrl);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($verifyData));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        $verifyResult = curl_exec($ch);
+        curl_close($ch);
+        if ($verifyResult) {
+            $verifyData = json_decode($verifyResult, true);
+            if (!isset($verifyData['result']) || $verifyData['result'] !== 'success') {
+                $geetestValid = false;
+            }
+        }
+    }
+}
+if (!$geetestValid) {
+    echo json_encode(['success' => false, 'code' => 400, 'msg' => '人机验证失败，请重试']);
+    exit;
+}
 
 // 校验
 if ($text === '' || mb_strlen($text, 'UTF-8') > 500) {
@@ -66,12 +123,33 @@ elseif (preg_match('/Chrome\/([\d\.]+)/i', $userAgent, $m)) $browser = 'Chrome '
 elseif (preg_match('/Firefox\/([\d\.]+)/i', $userAgent, $m)) $browser = 'Firefox ' . $m[1];
 elseif (preg_match('/Safari\/([\d\.]+)/i', $userAgent, $m)) $browser = 'Safari ' . $m[1];
 
+// IP归属地查询
+$city = '未知';
+if (function_exists('get_ip_city_New') && filter_var($ip, FILTER_VALIDATE_IP)) {
+    $cityResult = get_ip_city_New($ip);
+    if ($cityResult && $cityResult !== '未知') {
+        $city = $cityResult;
+    }
+}
+
+// 防灌水：同一IP 60秒内只能留言1次
+$spamCheck = mysqli_prepare($connect, "SELECT id FROM leaving WHERE ip = ? AND time > ? LIMIT 1");
+$spamTime = time() - 60;
+mysqli_stmt_bind_param($spamCheck, 'ss', $ip, $spamTime);
+mysqli_stmt_execute($spamCheck);
+$spamResult = mysqli_stmt_get_result($spamCheck);
+if ($spamResult && mysqli_num_rows($spamResult) > 0) {
+    mysqli_stmt_close($spamCheck);
+    echo json_encode(['success' => false, 'code' => 429, 'msg' => '操作太频繁，请稍后再试']);
+    exit;
+}
+mysqli_stmt_close($spamCheck);
+
 try {
     // 插入留言（v5.2.1: leaving.time 是 varchar(200)，存储Unix时间戳）
-    $stmt = mysqli_prepare($connect, "INSERT INTO leaving (name, QQ, text, time, ip, city, device, browser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = mysqli_prepare($connect, "INSERT INTO leaving (name, QQ, text, time, ip, city, device, browser, parent_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $now = time();
-    $city = '未知';
-    mysqli_stmt_bind_param($stmt, 'ssssssss', $name, $qq, $text, $now, $ip, $city, $device, $browser);
+    mysqli_stmt_bind_param($stmt, 'ssssssssi', $name, $qq, $text, $now, $ip, $city, $device, $browser, $parentId);
     $ok = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     if ($ok) {
@@ -80,7 +158,7 @@ try {
         $response['msg'] = '保存失败，请稍后再试';
     }
 } catch (Throwable $e) {
-    $response['msg'] = '提交失败：' . $e->getMessage();
+    $response['msg'] = '提交失败，请稍后再试';
 }
 
 echo json_encode($response, JSON_UNESCAPED_UNICODE);

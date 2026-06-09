@@ -3680,9 +3680,7 @@ a.lgnewui-review-card:visited {
    ======================================== */
 
 .Width_limit_10rem {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 10rem;
 }
 
 .central {
@@ -3766,7 +3764,7 @@ a.lgnewui-review-card:visited {
 
 @media screen and (max-width: 1200px) {
     .Width_limit_10rem {
-        padding: 0 1.5rem;
+        padding: 0 3rem;
     }
 
     .central {

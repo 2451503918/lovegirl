@@ -420,6 +420,37 @@ if (!isset($_SESSION['loginadmin']) || $_SESSION['loginadmin'] === '') {
         }
         )
     })
+    // 位置配置提交
+    $("#locationPost").click(function () {
+        var boyCity = $("input[name='boyCity']").val();
+        var boyLat = $("input[name='boyLat']").val();
+        var boyLng = $("input[name='boyLng']").val();
+        var girlCity = $("input[name='girlCity']").val();
+        var girlLat = $("input[name='girlLat']").val();
+        var girlLng = $("input[name='girlLng']").val();
+
+        $.ajax({
+            url: "locationPost.php",
+            data: {
+                boyCity: boyCity, boyLat: boyLat, boyLng: boyLng,
+                girlCity: girlCity, girlLat: girlLat, girlLng: girlLng,
+                csrf_token: $("#csrf_token").val(),
+            },
+            type: "POST",
+            dataType: "text",
+            success: function (res) {
+                if (res === "1") {
+                    toastr["success"]("位置配置修改成功！", "Like_Girl");
+                } else {
+                    toastr["error"]("位置配置修改失败！", "Like_Girl");
+                }
+            },
+            error: function () {
+                toastr["error"]("网络错误 请稍后重试！", "Like_Girl");
+            }
+        })
+    })
+
     $("#aboutPost").click(function () {
         var title = $("input[name='title']").val();
         var aboutimg = $("input[name='aboutimg']").val();

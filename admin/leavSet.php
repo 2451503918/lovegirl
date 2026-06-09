@@ -8,14 +8,10 @@ $res = mysqli_query($connect, $nub);
 $leav = mysqli_fetch_array($res);
 $shu = $leav['shu'];
 
-include_once 'Database.php';
 $liuyan = "SELECT id, name, QQ, text, time, ip, city FROM leaving order by id desc";
-$stmt = $conn->prepare($liuyan);
-$stmt->bind_result($id, $name, $qq, $text, $time, $ip, $city);
-$result = $stmt->execute();
-if (!$result) {
-    error_log("leavSet.php query error: " . $stmt->error);
-}
+$stmt = mysqli_prepare($connect, $liuyan);
+mysqli_stmt_execute($stmt);
+$liuyanResult = mysqli_stmt_get_result($stmt);
 
 ?>
 
@@ -33,7 +29,7 @@ if (!$result) {
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="text-lg-right">
-                            <a class="fabu" href="/admin/leavP.php">
+                            <a class="fabu" href="/admin/leavPPost.php">
                                 <button type="button" class="btn btn-success mb-2 mr-2"><i
                                         class=" mdi mdi-brightness-5"></i> 留言相关设置
                                 </button>
@@ -64,8 +60,15 @@ if (!$result) {
                         <tbody>
                             <?php
                             $SerialNumber = 0;
-                            while ($stmt->fetch()) {
+                            while ($row = mysqli_fetch_assoc($liuyanResult)) {
                                 $SerialNumber++;
+                                $id = $row['id'];
+                                $name = $row['name'];
+                                $qq = $row['QQ'];
+                                $text = $row['text'];
+                                $time = $row['time'];
+                                $ip = $row['ip'];
+                                $city = $row['city'];
                             
                                 ?>
                                 <tr>
@@ -87,18 +90,18 @@ if (!$result) {
                                     <td>
                                         <h5><span class="badge badge-success-lighten"><i
                                                     class="mdi mdi-account-circle mr-1 rihjt-0"></i>
-                                                <?php echo $name ?></span>
+                                                <?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></span>
                                         </h5>
                                     </td>
                                     <td>
-                                        <?php echo $qq ?>
+                                        <?php echo htmlspecialchars($qq, ENT_QUOTES, 'UTF-8') ?>
                                     </td>
                                     <td>
                                         <h5>
                                             <span
-                                                class="badge badge-danger-lighten"><?php echo $ip ? $ip : '127.0.0.1'; ?></span>
+                                                class="badge badge-danger-lighten"><?php echo htmlspecialchars($ip ? $ip : '127.0.0.1', ENT_QUOTES, 'UTF-8'); ?></span>
                                         </h5>
-                                        <i><?php echo $city ? $city : '未知'; ?></i>
+                                        <i><?php echo htmlspecialchars($city ? $city : '未知', ENT_QUOTES, 'UTF-8'); ?></i>
                                     </td>
                                     <td>
                                         <form method="POST" action="delleav.php" style="display:inline" onsubmit="return confirm('您确认要删除 <?php echo escapeXSS($text) ?> 内容吗')">

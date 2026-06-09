@@ -21,12 +21,12 @@ include_once 'Nav.php';
                     <div class="form-group mb-3">
                         <label for="validationCustom05">管理员Name</label>
                         <input type="text" class="form-control" id="validationCustom05" placeholder="请输入管理员Name"
-                               name="userName" value="<?php echo $text['userName'] ?>" required>
+                               name="userName" value="<?php echo htmlspecialchars($text['userName'], ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">管理员QQ</label>
                         <input type="text" class="form-control" id="validationCustom05" placeholder="请输入管理员QQ"
-                               name="userQQ" value="<?php echo $text['userQQ'] ?>" required>
+                               name="userQQ" value="<?php echo htmlspecialchars($text['userQQ'], ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom04">管理员登录账号</label>
@@ -45,7 +45,7 @@ include_once 'Nav.php';
                         <label for="validationCustom05">自定义前端全局CSS样式
                             <span class="badge badge-primary-lighten">请按CSS格式填写你的代码</span></label>
                         <textarea name="cssCon"  class="form-control"  rows="5"
-                                  placeholder=""><?php echo $diy['cssCon'] ?></textarea>
+                                  placeholder=""><?php echo htmlspecialchars($diy['cssCon'], ENT_QUOTES, 'UTF-8') ?></textarea>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">自定义头部标签

@@ -86,6 +86,9 @@ function GetEm() {
 
                 let tabData = res[key].container;
 
+                if (!tabData || !Array.isArray(tabData)) {
+                    return;
+                }
                 tabData.forEach(element => {
                     $(`#OwO_${index + 1} ul`).append(`
         <li class="Item_OwO" title="${_owoEscapeHtml(element.text)}" data-emoticon="${_owoEscapeHtml(element.data)}">

@@ -5,7 +5,7 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
-$allowedOrigins = ['lovedemo.54oimx.top', 'love.54oimx.top'];
+$allowedOrigins = ['lovedemo.54oimx.top', 'love.54oimx.top', 'localhost', '127.0.0.1'];
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
     header('Access-Control-Allow-Origin: ' . $origin);
@@ -17,7 +17,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 $action = isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : '');
 
 // Validate action parameter against whitelist
-$validActions = ['get_stats', 'get_location', 'heartbeat'];
+$validActions = ['get_stats', 'get_location', 'heartbeat', 'geo'];
 if ($action !== '' && !in_array($action, $validActions)) {
     http_response_code(400);
     echo json_encode([

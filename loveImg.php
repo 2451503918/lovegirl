@@ -1,4 +1,5 @@
 <?php
+$pageTitle = '相册';
 include_once 'head.php';
 
 if (!isset($text) || !is_array($text)) {
@@ -72,7 +73,7 @@ function formatFileSize($bytes) {
                     $isPrivate = !empty($album['password']) || !empty($album['private']);
                     $isMaleAuthor = ($albumAuthor === 'boy' || $albumAuthor === 'male');
                     $authorAvatar = $isMaleAuthor ? $boyimg_val : $girlimg_val;
-                    $authorName = $isMaleAuthor ? htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') : htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8');
+                    $authorName = $isMaleAuthor ? htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') : htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8');
                     $badgeClass = $isMaleAuthor ? 'male' : 'female';
                     $iconClass = $isMaleAuthor ? 'ph-bold ph-gender-male' : 'ph-bold ph-gender-female';
 
@@ -260,8 +261,8 @@ function formatFileSize($bytes) {
 <script>
 var boyAvatar = <?php echo json_encode($boyimg_val); ?>;
 var girlAvatar = <?php echo json_encode($girlimg_val); ?>;
-var boyName = <?php echo json_encode($text['boy']); ?>;
-var girlName = <?php echo json_encode($text['girl']); ?>;
+var boyName = <?php echo json_encode($text['boy'] ?? ''); ?>;
+var girlName = <?php echo json_encode($text['girl'] ?? ''); ?>;
 
 // 初始化图片查看器
 if (typeof ViewImage !== 'undefined') {
@@ -284,11 +285,6 @@ $('#loadMoreBtn').on('click', function() {
     Toastify.showScenario('info', { text: '已加载全部相册' });
 });
 </script>
-
-<div class="message_btn" id="mes">
-    <span class="mesly shadow-blur">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="message-circle" aria-hidden="true" style="width:2rem;height:2rem;fill:currentColor;stroke:none;" class="lucide lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"></path></svg>
-    </span>
-</div>
+<script src="/assets/js/page-albums.js?LikeGirl=<?php echo $version ?? '1.0' ?>" defer></script>
 
 <?php include_once 'footer.php'; ?>

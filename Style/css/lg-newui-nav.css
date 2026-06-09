@@ -128,21 +128,21 @@
 }
 
 .lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item {
-    padding: 8px 14px;
-    font-size: 14px;
-    gap: 4px;
+    padding: 10px 18px;
+    font-size: 16px;
+    gap: 6px;
 }
 
 .lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item i {
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item.nav-home {
-    padding: 8px 18px;
+    padding: 8px 24px;
 }
 
 .lgnewui-nav-island-container.lgnewui-is-stuck .lgnewui-nav-island-item.nav-home i {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 /* 导航项 - 灵动岛风格过渡 */
@@ -152,7 +152,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 18px;
+    padding: 12px 24px;
     text-decoration: none;
     color: #6f6f6f;
     border-radius: 32px;
@@ -173,20 +173,7 @@
 
 .lgnewui-nav-island-item i {
     transition: font-size 0.25s ease-out;
-    font-size: 18px !important;
-    line-height: 1;
-}
-
-/* 非活跃项隐藏文字，只显示图标 */
-.lgnewui-nav-island-item:not(.active) span {
-    display: none;
-}
-
-/* 活跃项显示图标+文字 */
-.lgnewui-nav-island-item.active span {
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-size: 16px !important;
 }
 
 .lgnewui-nav-island-item .nav-icon {

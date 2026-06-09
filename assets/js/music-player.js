@@ -363,4 +363,32 @@
         playMusic(currentIndex);
     };
     
+    // lg_love 桥接对象：供 HTML onclick 调用
+    window.lg_love = {
+        musicToggle: function() {
+            var meting = document.querySelector('#nav-music meting-js');
+            if (meting && meting.aplayer) {
+                meting.aplayer.toggle();
+            } else {
+                togglePlay();
+            }
+        },
+        musicSkipBack: function() {
+            var meting = document.querySelector('#nav-music meting-js');
+            if (meting && meting.aplayer) {
+                meting.aplayer.skipBack();
+            } else {
+                prevMusic();
+            }
+        },
+        musicSkipForward: function() {
+            var meting = document.querySelector('#nav-music meting-js');
+            if (meting && meting.aplayer) {
+                meting.aplayer.skipForward();
+            } else {
+                nextMusic();
+            }
+        }
+    };
+
 })();

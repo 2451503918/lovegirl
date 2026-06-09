@@ -1,11 +1,14 @@
 <?php
 /**
  * 音乐播放器数据接口 - LG-NewUi
- * 提供播放列表（MetingJS 兼容格式）
- * MetingJS 期望返回直接的数组: [{name, artist, url, cover, lrc}, ...]
+ * MetingJS 期望直接的数组格式: [{name, artist, url, cover, lrc}, ...]
+ * 不能用 {code, data} 包装，否则 MetingJS 报 "API response is not an array"
  */
 
 header('Content-Type: application/json; charset=utf-8');
+
+include_once __DIR__ . '/../admin/connect.php';
+
 $allowedOrigins = [$_SERVER['HTTP_HOST']];
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
@@ -13,30 +16,31 @@ if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {
 }
 header('Access-Control-Allow-Credentials: true');
 
-// 尝试从数据库获取音乐列表
+// 尝试从数据库获取播放列表
 $playlist = [];
-if (isset($connect) && $connect) {
-    $result = mysqli_query($connect, "SELECT * FROM music ORDER BY id DESC");
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $item = [
-                'name' => $row['name'] ?? $row['title'] ?? 'Unknown',
-                'artist' => $row['artist'] ?? $row['author'] ?? 'Unknown',
-                'url' => $row['url'] ?? '',
-                'cover' => $row['cover'] ?? $row['pic'] ?? '',
-                'lrc' => $row['lrc'] ?? $row['lyric'] ?? '',
-                'type' => 'auto'
-            ];
-            // 如果有代理URL，使用代理URL
-            if (!empty($row['proxy_url'])) {
-                $item['url'] = $row['proxy_url'];
+
+if ($connect) {
+    $stmt = mysqli_prepare($connect, "SELECT * FROM music ORDER BY id DESC");
+    if ($stmt) {
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if ($result && mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $playlist[] = [
+                    'name' => $row['music_name'] ?? $row['name'] ?? '',
+                    'artist' => $row['music_artist'] ?? $row['artist'] ?? '',
+                    'url' => $row['music_url'] ?? $row['url'] ?? '',
+                    'cover' => $row['music_cover'] ?? $row['cover'] ?? '',
+                    'lrc' => $row['music_lrc'] ?? $row['lrc'] ?? '',
+                    'type' => 'auto'
+                ];
             }
-            $playlist[] = $item;
         }
+        mysqli_stmt_close($stmt);
     }
 }
 
-// 如果数据库没有数据，使用默认列表
+// 如果数据库没有数据，使用默认播放列表
 if (empty($playlist)) {
     $playlist = [
         [
@@ -74,5 +78,5 @@ if (empty($playlist)) {
     ];
 }
 
-// MetingJS 期望直接的数组格式
+// MetingJS 期望直接的数组格式，不要包装
 echo json_encode($playlist, JSON_UNESCAPED_UNICODE);

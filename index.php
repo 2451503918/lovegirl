@@ -116,57 +116,45 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     <div id="pjax-container">
 
     <!-- ===== 1. 轮播横幅区域 ===== -->
-    <div id="homePage" class="bg-wrap central limg" data-avatar-swap="1">
-        <div class="bg-img">
-            <div class="wrap">
-                <div class="list">
-                    <div class="item active"><img class="CarouselImage" src="/Style/img/banner/1.jpg" alt="" fetchpriority="high" decoding="sync"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/2.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/3.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/4.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/5.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/6.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/7.jpg" alt="" loading="lazy" decoding="async"></div>
-                    <div class="item"><img class="CarouselImage" src="/Style/img/banner/8.jpg" alt="" loading="lazy" decoding="async"></div>
-                </div>
-            </div>
-            <div class="middle Blurkg">
-                <!-- 距离气泡 -->
-                <div class="love-info-wrapper">
-                    <div class="distance-bubble" id="distanceBubble" onclick="if(window.LGMap&&LGMap.show){LGMap.show();}">
-                        <div class="distance-icon-box"><i class="ph-fill ph-map-pin-line"></i></div>
-                        <div class="distance-text">
-                            <span class="distance-text-sm">相距</span>
-                            <span class="km-value" id="distanceKm">--</span>
-                            <span class="distance-text-sm">km</span>
-                        </div>
-                    </div>
-                </div>
+    <div id="homePage" class="wrap" data-Fullscreen>
+        <ul class="list mask_black">
+            <li class="item active"><img class="CarouselImage" src="/Style/img/banner/1.jpg" alt="" fetchpriority="high" decoding="sync"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/2.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/3.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/4.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/5.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/6.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/7.jpg" alt="" draggable="false"></li>
+            <li class="item"><img class="CarouselImage lazy" data-src="/Style/img/banner/8.jpg" alt="" draggable="false"></li>
+        </ul>
+        <div class="bg-wrap central limg" data-avatar-swap="1">
+            <div class="bg-img">
+                <div class="middle Blurkg">
                 <!-- 男方头像 -->
                 <div class="img-male">
                     <div class="avatarArea lgewui-head-avatar-boy">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
-                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($boyimg_val ?? 'https://q1.qlogo.cn/g?b=qq&nk=' . $text['boyimg'] . '&s=640', ENT_QUOTES, 'UTF-8') ?>">
-                        <div class="lgnewui-head-avatar-mask">
-                            <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-gender-icon" data-gender="male"><i class="ph-fill ph-gender-male"></i></div>
+                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($boyimg_val ?? '/Style/img/boy.png', ENT_QUOTES, 'UTF-8') ?>">
+                        <div class="lgewui-head-avatar-mask">
+                            <div class="lgewui-head-avatar-top lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-gender-icon" data-gender="male"><i data-lucide="mars"></i></div>
                             </div>
-                            <div class="lgnewui-head-avatar-middle lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-status-text lgnewui-head-avatar-status-online">
-                                    <i class="ph-fill ph-wifi-high"></i>
-                                    <em>在线</em>
+                            <div class="lgewui-head-avatar-middle lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-status-text lgewui-head-avatar-status-away">
+                                    <i data-lucide="clock" class="lgewui-head-avatar-icon-away"></i>
+                                    <em>离线</em>
                                 </div>
-                                <div class="lgnewui-head-avatar-divider"></div>
+                                <div class="lgewui-head-avatar-divider"></div>
                             </div>
-                            <div class="lgnewui-head-avatar-bottom lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-location">
+                            <div class="lgewui-head-avatar-bottom lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-location">
                                     <i class="ph-fill ph-map-pin"></i>
                                     <span id="lgnewui-male-location">-- · --</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <span class="shadow-blur"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="shadow-blur"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
                 <!-- 爱心图标 -->
                 <div class="love-icon">
@@ -177,27 +165,27 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div class="img-female">
                     <div class="avatarArea lgewui-head-avatar-girl">
                         <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
-                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($girlimg_val ?? 'https://q1.qlogo.cn/g?b=qq&nk=' . $text['girlimg'] . '&s=640', ENT_QUOTES, 'UTF-8') ?>">
-                        <div class="lgnewui-head-avatar-mask">
-                            <div class="lgnewui-head-avatar-top lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-gender-icon" data-gender="female"><i class="ph-fill ph-gender-female"></i></div>
+                        <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($girlimg_val ?? '/Style/img/girl.png', ENT_QUOTES, 'UTF-8') ?>">
+                        <div class="lgewui-head-avatar-mask">
+                            <div class="lgewui-head-avatar-top lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-gender-icon" data-gender="female"><i data-lucide="venus"></i></div>
                             </div>
-                            <div class="lgnewui-head-avatar-middle lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-status-text lgnewui-head-avatar-status-online">
-                                    <i class="ph-fill ph-wifi-high"></i>
-                                    <em>在线</em>
+                            <div class="lgewui-head-avatar-middle lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-status-text lgewui-head-avatar-status-away">
+                                    <i data-lucide="clock" class="lgewui-head-avatar-icon-away"></i>
+                                    <em>离线</em>
                                 </div>
-                                <div class="lgnewui-head-avatar-divider"></div>
+                                <div class="lgewui-head-avatar-divider"></div>
                             </div>
-                            <div class="lgnewui-head-avatar-bottom lgnewui-head-avatar-anim-item">
-                                <div class="lgnewui-head-avatar-location">
+                            <div class="lgewui-head-avatar-bottom lgewui-head-avatar-anim-item">
+                                <div class="lgewui-head-avatar-location">
                                     <i class="ph-fill ph-map-pin"></i>
                                     <span id="lgnewui-female-location">-- · --</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <span class="shadow-blur"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="shadow-blur"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
             </div>
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -212,6 +200,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(255,255,255,1)" />
                 </g>
             </svg>
+            </div>
         </div>
     </div>
 
@@ -229,14 +218,14 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 </div>
                 <div class="lgnewui-day-left-section">
                     <h2 class="lgnewui-day-poetic-title">
-                        <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'], ENT_QUOTES, 'UTF-8')) ?><br>
+                        <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'] ?? '', ENT_QUOTES, 'UTF-8')) ?><br>
                         <span style="font-size:0.7em;opacity:0.7;">与你行至天光</span>
                     </h2>
                     <div class="lgnewui-day-start-date-capsule">
                         <div class="lgnewui-day-icon-circle"><i class="ph-fill ph-heart"></i></div>
                         <div>
                             <span class="lgnewui-day-date-label-small">Together Since</span>
-                            <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo htmlspecialchars(str_replace('T', ' ', $text['startTime']), ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo htmlspecialchars(str_replace('T', ' ', $text['startTime'] ?? ''), ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
                     </div>
                 </div>
@@ -302,8 +291,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-home-weather-bg-decoration"></div>
                         <div class="lgnewui-home-weather-row-top">
                             <div class="lgnewui-home-weather-user-pill">
-                                <img src="" class="lgnewui-home-weather-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
-                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <img src="" class="lgnewui-home-weather-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <div class="lgnewui-home-weather-time-tag">--</div>
                         </div>
@@ -340,8 +329,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-home-weather-bg-decoration"></div>
                         <div class="lgnewui-home-weather-row-top">
                             <div class="lgnewui-home-weather-user-pill">
-                                <img src="" class="lgnewui-home-weather-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
-                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <img src="" class="lgnewui-home-weather-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <div class="lgnewui-home-weather-time-tag">--</div>
                         </div>
@@ -367,54 +356,6 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             <div class="lgnewui-home-weather-stat-pill">
                                 <i class="ph-fill ph-thermometer lgnewui-home-weather-icon-stat"></i>
                                 <span class="lgnewui-home-weather-text-stat stat-feels">--°</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 双方头像卡片（我们） -->
-                <div class="lgnewui-col-2" data-aos="fade-up" data-aos-delay="120">
-                    <div class="lgnewui-widget lgnewui-widget--presence">
-                        <div class="lgnewui-widget__bg-icon"><i class="ph-fill ph-heart"></i></div>
-                        <div class="lgnewui-flex-col-between-relative">
-                            <div class="lgnewui-flex-between-center lgnewui-mb-4">
-                                <div class="lgnewui-flex-center-gap">
-                                    <div class="lgnewui-icon-box-glass">
-                                        <i class="ph-bold ph-users-three lgnewui-icon-md-white"></i>
-                                    </div>
-                                    <div class="lgnewui-card-title-lg">我们</div>
-                                </div>
-                                <div class="lgnewui-presence-badge">Together</div>
-                            </div>
-                            <div class="lgnewui-presence-card">
-                                <div class="lgnewui-presence-people">
-                                    <div class="lgnewui-presence-person">
-                                        <img src="" class="lgnewui-presence-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
-                                        <div class="lgnewui-presence-person__body">
-                                            <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
-                                                <span class="lgnewui-presence-gender is-male">♂</span>
-                                            </div>
-                                            <div class="lgnewui-presence-state">
-                                                <span class="lgnewui-presence-state__dot"></span>
-                                                <span>在线</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="lgnewui-presence-person">
-                                        <img src="" class="lgnewui-presence-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
-                                        <div class="lgnewui-presence-person__body">
-                                            <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
-                                                <span class="lgnewui-presence-gender is-female">♀</span>
-                                            </div>
-                                            <div class="lgnewui-presence-state">
-                                                <span class="lgnewui-presence-state__dot"></span>
-                                                <span>在线</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -915,11 +856,18 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     </a>
                 </div>
             </div>
-            <div class="lgnewui-mosaic-grid">
+            <div class="lgnewui-mosaic-grid<?php
+                // 计算相册数量用于动态class
+                $mosaicCount = 0;
+                if ($connect) {
+                    $countResult = @mysqli_query($connect, "SELECT COUNT(*) as cnt FROM photo");
+                    if ($countResult) { $countRow = mysqli_fetch_array($countResult); $mosaicCount = intval($countRow['cnt']); }
+                }
+                echo ' lgnewui-mosaic-count-' . min(max($mosaicCount, 1), 6);
+            ?>">
                 <?php
                 $recentAlbums = null;
                 if ($connect) {
-                    // 尝试从 photo 表获取相册数据
                     $recentAlbums = @mysqli_query($connect, "SELECT id, code, title, img, `desc`, author, location, date FROM photo ORDER BY id DESC LIMIT 6");
                 }
                 if ($recentAlbums && mysqli_num_rows($recentAlbums) > 0):
@@ -929,21 +877,53 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         $albumDate = $album['date'] ?? '';
                         $albumCount = $album['count'] ?? $album['photo_count'] ?? 0;
                         $albumCode = $album['img_code'] ?? $album['code'] ?? '';
+                        $albumAuthor = $album['author'] ?? '';
+                        $albumLocation = $album['location'] ?? '';
+                        // 作者头像
+                        $authorImg = '';
+                        if ($albumAuthor === ($text['boy'] ?? '')) {
+                            $authorImg = $boyimg_val;
+                        } elseif ($albumAuthor === ($text['girl'] ?? '')) {
+                            $authorImg = $girlimg_val;
+                        }
+                        // 格式化日期为中文
+                        $formattedDate = '';
+                        if (!empty($albumDate)) {
+                            $ts = strtotime($albumDate);
+                            if ($ts) {
+                                $y = date('Y', $ts); $m = (int)date('n', $ts); $d = (int)date('j', $ts);
+                                $cnNums = ['〇','一','二','三','四','五','六','七','八','九','十','十一','十二'];
+                                $formattedDate = $cnNums[0] . str_repeat($cnNums[0], 3) . '年' . $cnNums[$m] . '月' . ($d > 10 ? $cnNums[10] . $cnNums[$d-10] : $cnNums[$d]) . '日';
+                            }
+                        }
                 ?>
-                <div class="lgnewui-mosaic-item lgnewui-mosaic-item--<?php echo ($idx % 6 < 2) ? 'large' : 'small'; ?>" data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
-                    <a href="<?php echo !empty($albumCode) ? 'album-detail.php?code=' . urlencode($albumCode) : 'albums.php'; ?>" class="lgnewui-album-card">
-                        <div class="lgnewui-album-cover">
-                            <img data-src="<?php echo htmlspecialchars($albumCover, ENT_QUOTES, 'UTF-8') ?>" class="lgnewui-album-img lazy" alt="<?php echo htmlspecialchars($albumTitle, ENT_QUOTES, 'UTF-8') ?>">
-                            <div class="lgnewui-album-overlay"></div>
-                        </div>
-                        <div class="lgnewui-album-info">
-                            <h4 class="lgnewui-album-title"><?php echo htmlspecialchars($albumTitle, ENT_QUOTES, 'UTF-8') ?></h4>
-                            <div class="lgnewui-album-meta">
-                                <?php if ($albumCount > 0): ?>
-                                <span class="lgnewui-chip lgnewui-chip--glass"><i class="ph-fill ph-images"></i> <?php echo intval($albumCount) ?>张</span>
+                <div data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
+                    <a href="<?php echo !empty($albumCode) ? 'album-detail.php?code=' . urlencode($albumCode) : 'albums.php'; ?>" class="lgnewui-mosaic-item">
+                        <img data-src="<?php echo htmlspecialchars($albumCover, ENT_QUOTES, 'UTF-8') ?>" class="lgnewui-mosaic-img lazy">
+                        <?php if (!empty($albumLocation) || $albumCount > 0): ?>
+                        <div class="lgnewui-mosaic-pos-tr">
+                            <div class="lgnewui-chip--dark-glass">
+                                <?php if (!empty($albumLocation)): ?>
+                                <span class="lgnewui-flex-center-gap-xs"><i class="ph-fill ph-map-pin"></i> <?php echo htmlspecialchars($albumLocation, ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="lgnewui-mosaic-divider"></span>
                                 <?php endif; ?>
-                                <?php if (!empty($albumDate)): ?>
-                                <span class="lgnewui-chip lgnewui-chip--glass"><i class="ph-bold ph-calendar-blank"></i> <?php echo htmlspecialchars($albumDate, ENT_QUOTES, 'UTF-8') ?></span>
+                                <?php if ($albumCount > 0): ?>
+                                <span class="lgnewui-flex-center-gap-xs"><i class="ph-fill ph-image"></i> <?php echo intval($albumCount) ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                        <div class="lgnewui-mosaic-overlay">
+                            <div class="lgnewui-mosaic-overlay-content">
+                                <?php if (!empty($authorImg)): ?>
+                                <div class="lgnewui-capsule lgnewui-capsule--avatar lgnewui-mosaic-avatar-mb">
+                                    <img data-src="<?php echo htmlspecialchars($authorImg, ENT_QUOTES, 'UTF-8') ?>" class="lgnewui-capsule__img lazy">
+                                    <span class="lgnewui-capsule__text lgnewui-text-white"><?php echo htmlspecialchars($albumAuthor, ENT_QUOTES, 'UTF-8') ?></span>
+                                </div>
+                                <?php endif; ?>
+                                <h3 class="u-font-serif lgnewui-mosaic-title"><?php echo htmlspecialchars($albumTitle, ENT_QUOTES, 'UTF-8') ?></h3>
+                                <?php if (!empty($formattedDate)): ?>
+                                <div class="u-font-serif lgnewui-mosaic-date"><?php echo $formattedDate ?></div>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -1082,298 +1062,14 @@ $runtimeDays = floor((time() - $startTs) / 86400);
 
     </main>
 
-    <!-- ===== 留言弹窗遮罩 ===== -->
-    <div class="lgnewui-mask" id="lgnewuiMessageMask"></div>
-
-    <!-- ===== 表情面板 ===== -->
-    <div class="lgnewui-emoji-panel" id="lgnewuiEmojiPanel">
-        <div class="lgnewui-emoji-panel__header">
-            <span class="lgnewui-emoji-panel__title">表情</span>
-            <button class="lgnewui-emoji-panel__close" onclick="closeEmojiPanel()"><i class="ph-bold ph-x"></i></button>
-        </div>
-        <div class="lgnewui-emoji-panel__body" id="lgnewuiEmojiGrid"></div>
     </div>
 
-    <!-- ===== 留言触发按钮 ===== -->
-    <div class="lgnewui-message-trigger" id="mes-home" onclick="openMessageModal()">
-        <i class="ph-fill ph-chat-teardrop-dots"></i>
-        <span>留言</span>
-    </div>
-
-    <!-- ===== 随机语录确认弹窗 ===== -->
-    <div class="lgnewui-confirm-dialog" id="randomQuoteConfirm" style="display:none;">
-        <div class="lgnewui-confirm-dialog__overlay"></div>
-        <div class="lgnewui-confirm-dialog__content">
-            <div class="lgnewui-confirm-dialog__icon"><i class="ph-fill ph-quote"></i></div>
-            <h4 class="lgnewui-confirm-dialog__title">随机语录</h4>
-            <p class="lgnewui-confirm-dialog__text" id="randomQuoteText"></p>
-            <div class="lgnewui-confirm-dialog__actions">
-                <button class="lgnewui-confirm-dialog__btn lgnewui-confirm-dialog__btn--cancel" onclick="closeRandomQuoteConfirm()">关闭</button>
-                <button class="lgnewui-confirm-dialog__btn lgnewui-confirm-dialog__btn--confirm" id="randomQuoteCopyBtn">复制</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== 留言弹窗 ===== -->
-    <div class="lgnewui-message-modal" id="lgnewuiMessageModal">
-        <div class="lgnewui-message-modal__overlay" onclick="closeMessageModal()"></div>
-        <div class="lgnewui-message-modal__content">
-            <div class="lgnewui-message-modal__header">
-                <h3 class="lgnewui-message-modal__title" id="lgnewuiMessageModalTitle">留下你的祝福</h3>
-                <button class="lgnewui-message-modal__close" onclick="closeMessageModal()" aria-label="关闭留言弹窗"><i class="ph-bold ph-x" aria-hidden="true"></i></button>
-            </div>
-            <div class="lgnewui-message-modal__tabs">
-                <button class="lgnewui-message-modal__tab active" data-tab="qq" onclick="switchMessageTab('qq', this)">QQ 登录</button>
-                <button class="lgnewui-message-modal__tab" data-tab="anonymous" onclick="switchMessageTab('anonymous', this)">匿名留言</button>
-            </div>
-            <div class="lgnewui-message-modal__body">
-                <!-- QQ 登录表单 -->
-                <div class="lgnewui-message-modal__form" id="messageFormQQ">
-                    <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label" for="msgQQInput">QQ 号</label>
-                        <input type="number" inputmode="numeric" class="lgnewui-message-modal__input" id="msgQQInput" name="qq" placeholder="请输入 QQ 号获取头像和昵称…" autocomplete="off" spellcheck="false" maxlength="12" aria-describedby="msgQQInputHint">
-                    </div>
-                    <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label" for="msgQQContent">留言内容</label>
-                        <textarea class="lgnewui-message-modal__textarea" id="msgQQContent" name="text" placeholder="写下你想说的话…" rows="4" maxlength="500"></textarea>
-                    </div>
-                    <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label" id="msgQQTagsLabel">访客标签</label>
-                        <div class="lgnewui-message-modal__tags" id="msgQQTags" role="group" aria-labelledby="msgQQTagsLabel">
-                            <button type="button" class="lgnewui-message-modal__tag" data-tag="祝福" aria-pressed="false" onclick="toggleMsgTag(this)">祝福</button>
-                            <button type="button" class="lgnewui-message-modal__tag" data-tag="喜欢" aria-pressed="false" onclick="toggleMsgTag(this)">喜欢</button>
-                            <button type="button" class="lgnewui-message-modal__tag" data-tag="路过" aria-pressed="false" onclick="toggleMsgTag(this)">路过</button>
-                            <button type="button" class="lgnewui-message-modal__tag" data-tag="打卡" aria-pressed="false" onclick="toggleMsgTag(this)">打卡</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- 匿名留言表单 -->
-                <div class="lgnewui-message-modal__form" id="messageFormAnonymous" style="display:none;">
-                    <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label" for="msgAnonName">昵称</label>
-                        <input type="text" class="lgnewui-message-modal__input" id="msgAnonName" name="name" placeholder="匿名访客" autocomplete="nickname" maxlength="20">
-                    </div>
-                    <div class="lgnewui-message-modal__field">
-                        <label class="lgnewui-message-modal__label" for="msgAnonContent">留言内容</label>
-                        <textarea class="lgnewui-message-modal__textarea" id="msgAnonContent" name="text" placeholder="写下你想说的话…" rows="4" maxlength="500"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="lgnewui-message-modal__footer">
-                <button class="lgnewui-message-modal__emoji-btn" onclick="toggleEmojiPanel()" aria-label="切换表情面板">
-                    <i class="ph-bold ph-smiley" aria-hidden="true"></i>
-                </button>
-                <button class="lgnewui-message-modal__submit" id="msgSubmitBtn" onclick="submitMessage()">发送留言</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== LG_CONFIG 城市和匿名头像输出 ===== -->
-    <script>
-    window.LG_CONFIG = window.LG_CONFIG || {};
-    window.LG_CONFIG.userCity = <?php echo json_encode($text['city'] ?? '', JSON_UNESCAPED_UNICODE); ?>;
-    window.LG_CONFIG.anonymousAvatar = <?php echo json_encode('https://weavatar.com/avatar/?s=120&d=mp', JSON_UNESCAPED_SLASHES); ?>;
-    </script>
-
-    <!-- ===== Geetest 验证绑定 ===== -->
-    <script>
-    if (typeof initGeetest === 'function') {
-        // Geetest 初始化将在留言提交时触发
-    }
-    </script>
-
-    <!-- ===== 用 LG_CONFIG 头像填充所有头像占位 ===== -->
+    <!-- 访问信标 -->
     <script>
     (function() {
-        var maleAvatar = (window.LG_CONFIG && window.LG_CONFIG.maleAvatar) || '';
-        var femaleAvatar = (window.LG_CONFIG && window.LG_CONFIG.femaleAvatar) || '';
-        if (maleAvatar) {
-            document.querySelectorAll('.lg-male-avatar').forEach(function(el) {
-                if (!el.src || el.src === '' || el.src === window.location.href) {
-                    el.src = maleAvatar;
-                }
-            });
-        }
-        if (femaleAvatar) {
-            document.querySelectorAll('.lg-female-avatar').forEach(function(el) {
-                if (!el.src || el.src === '' || el.src === window.location.href) {
-                    el.src = femaleAvatar;
-                }
-            });
-        }
-    })();
-    </script>
-
-    <!-- ===== AOS + 模块初始化 ===== -->
-    <script>
-        if (typeof AOS !== 'undefined') {
-            AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 50 });
-        }
-        if (typeof initLGHome === 'function') {
-            initLGHome({
-                startTime: <?php echo json_encode($text['startTime']); ?>
-            });
-        }
-        if (typeof initLGHomeApp === 'function') {
-            initLGHomeApp({
-                startTime: <?php echo json_encode($text['startTime']); ?>
-            });
-        }
-        // 初始化礼花效果
-        if (typeof ConfettiEffect !== 'undefined') {
-            ConfettiEffect.init();
-        }
-        // 纪念日筛选
-        function filterLoveDays(filter, btn) {
-            var tabs = document.querySelectorAll('.lgnewui-ios-tab');
-            var slider = document.querySelector('.lgnewui-ios-tabs-slider');
-            tabs.forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            if (slider) {
-                slider.style.width = btn.offsetWidth + 'px';
-                slider.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
-            }
-            var items = document.querySelectorAll('[data-loveday-type]');
-            items.forEach(function(item) {
-                var type = item.getAttribute('data-loveday-type');
-                var card = item.querySelector('.lgnewui-widget--loveday-vibrant');
-                if (filter === 'all') {
-                    item.style.display = '';
-                    if (card) card.classList.remove('lgnewui-skeleton-card');
-                } else if (filter === type) {
-                    item.style.display = '';
-                    if (card) card.classList.remove('lgnewui-skeleton-card');
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-        // 留言弹窗
-        function openMessageModal() {
-            var modal = document.getElementById('lgnewuiMessageModal');
-            var mask = document.getElementById('lgnewuiMessageMask');
-            if (modal) modal.classList.add('active');
-            if (mask) mask.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeMessageModal() {
-            var modal = document.getElementById('lgnewuiMessageModal');
-            var mask = document.getElementById('lgnewuiMessageMask');
-            if (modal) modal.classList.remove('active');
-            if (mask) mask.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-        function switchMessageTab(tab, btn) {
-            document.querySelectorAll('.lgnewui-message-modal__tab').forEach(function(t) { t.classList.remove('active'); });
-            btn.classList.add('active');
-            document.getElementById('messageFormQQ').style.display = tab === 'qq' ? '' : 'none';
-            document.getElementById('messageFormAnonymous').style.display = tab === 'anonymous' ? '' : 'none';
-        }
-        function toggleMsgTag(el) {
-            el.classList.toggle('active');
-        }
-        function toggleEmojiPanel() {
-            var panel = document.getElementById('lgnewuiEmojiPanel');
-            if (panel) panel.classList.toggle('active');
-        }
-        function closeEmojiPanel() {
-            var panel = document.getElementById('lgnewuiEmojiPanel');
-            if (panel) panel.classList.remove('active');
-        }
-        function submitMessage() {
-            // 留言提交逻辑由 page-messages.js 处理
-            if (typeof submitLeavingMessage === 'function') {
-                submitLeavingMessage();
-            }
-        }
-        function closeRandomQuoteConfirm() {
-            var dialog = document.getElementById('randomQuoteConfirm');
-            if (dialog) dialog.style.display = 'none';
-        }
-    </script>
-
-    </div>
-
-    <!-- ===== 底部脚本 ===== -->
-    <!-- 字体图标 CSS -->
-    <link rel="stylesheet" href="/Style/Font/font_leav/iconfont.css?LikeGirl=<?php echo $version ?>">
-
-    <!-- 核心功能脚本 -->
-    <script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/lucide/lucide.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script>
-    if (typeof lucide !== 'undefined' && lucide.createIcons) {
-        document.addEventListener('DOMContentLoaded', function() { lucide.createIcons(); });
-    }
-    </script>
-    <script src="/Style/vendor/toastify/toastify.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/clipboard/clipboard.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/lg-clipboard.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/lg-tooltip.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/Style/vendor/view-image/view-image.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/js/mian.js?LikeGirl=<?php echo $version ?>" defer></script>
-
-    <!-- 轮播和灯箱 -->
-    <script src="/Style/vendor/carousel/carousel.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/carousel/carousel.thumbs.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/Style/vendor/fancybox/fancybox.umd.js?LikeGirl=<?php echo $version ?>" defer></script>
-
-    <!-- 页面专属脚本 -->
-    <script src="/assets/js/page-lovelist.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/page-index.js?LikeGirl=<?php echo $version ?>"></script>
-    <script src="/assets/js/page-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/page-album-detail.js?LikeGirl=<?php echo $version ?>" defer></script>
-
-    <!-- 工具库 -->
-    <script src="/Style/vendor/html2canvas/html2canvas.min.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-chat.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-visitor-hash.js?LikeGirl=<?php echo $version ?>" defer></script>
-    <script src="/assets/js/lg-context-menu.js?LikeGirl=<?php echo $version ?>"></script>
-
-    <!-- ===== 移动端底部导航 ===== -->
-    <div class="lgnewui-tab-template-v5-container lgnewui-mobile-bottom-nav" id="lgnewuiMobileNav">
-        <div class="lgnewui-tab-template-v5-wrap">
-            <a href="articles.php" class="lgnewui-tab-template-v5-item" data-title="点滴">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-notebook"></i></div>
-                <span class="lgnewui-tab-template-v5-text">点滴</span>
-            </a>
-            <a href="messages.php" class="lgnewui-tab-template-v5-item" data-title="留言">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-chat-teardrop-dots"></i></div>
-                <span class="lgnewui-tab-template-v5-text">留言</span>
-            </a>
-            <a href="timeline.php" class="lgnewui-tab-template-v5-item" data-title="轨迹">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-timeline"></i></div>
-                <span class="lgnewui-tab-template-v5-text">轨迹</span>
-            </a>
-            <a href="index.php" class="lgnewui-tab-template-v5-item active" data-title="首页">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-house"></i></div>
-                <span class="lgnewui-tab-template-v5-text">首页</span>
-            </a>
-            <a href="albums.php" class="lgnewui-tab-template-v5-item" data-title="相册">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-camera"></i></div>
-                <span class="lgnewui-tab-template-v5-text">相册</span>
-            </a>
-            <a href="lovelist.php" class="lgnewui-tab-template-v5-item" data-title="清单">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-check-square"></i></div>
-                <span class="lgnewui-tab-template-v5-text">清单</span>
-            </a>
-            <a href="about.php" class="lgnewui-tab-template-v5-item" data-title="关于">
-                <div class="lgnewui-tab-template-v5-icon"><i class="ph-fill ph-book-open-text"></i></div>
-                <span class="lgnewui-tab-template-v5-text">关于</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- ===== 访问信标脚本 ===== -->
-    <script>
-    (function() {
-        // 访问统计信标
         var beacon = new Image();
         beacon.src = 'services/visitor-stats.php?t=' + Date.now();
     })();
-    if (typeof AccessBeacon !== 'undefined') {
-        AccessBeacon.init('', '');
-    }
     </script>
 
     <?php include_once 'footer.php'; ?>

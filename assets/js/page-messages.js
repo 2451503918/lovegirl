@@ -2492,7 +2492,7 @@
             var self = this;
             // 优先复用 LGVisitorGeoCache（head.php 中缓存的 IP 定位）
             if (window.LGVisitorGeoCache) {
-                var cached = window.LGVisitorGeoCache.getCached();
+                var cached = window.LGVisitorGeoCache.get();
                 if (cached && cached.city) {
                     self.location = cached.city;
                     self.lat = cached.lat || null;

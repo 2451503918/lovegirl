@@ -18,6 +18,11 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 include_once 'connect.php';
 include_once 'Function.php';
+
+if (!$connect) {
+    die("<script>alert('数据库连接失败，请检查配置');location.href = 'login.php';</script>");
+}
+
 $stmt = mysqli_prepare($connect, "SELECT id, user, pw FROM login WHERE user = ?");
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['loginadmin']);
 mysqli_stmt_execute($stmt);
@@ -85,20 +90,24 @@ if ($result && mysqli_num_rows($result)) {
         });
     </script>
     <?php
-    // 合并4个COUNT查询为1个，减少数据库往返
-    $counts = ['leaving' => 0, 'little' => 0, 'lovelist' => 0, 'photo' => 0];
+    // 合并6个COUNT查询为1个，减少数据库往返
+    $counts = ['leaving' => 0, 'little' => 0, 'lovelist' => 0, 'photo' => 0, 'music' => 0, 'timeline' => 0];
     if ($connect) {
         $countSql = "SELECT
             (SELECT COUNT(id) FROM leaving) AS leaving_cnt,
             (SELECT COUNT(id) FROM little) AS little_cnt,
             (SELECT COUNT(id) FROM lovelist) AS lovelist_cnt,
-            (SELECT COUNT(id) FROM photo) AS photo_cnt";
+            (SELECT COUNT(id) FROM photo) AS photo_cnt,
+            (SELECT COUNT(id) FROM music) AS music_cnt,
+            (SELECT COUNT(id) FROM timeline) AS timeline_cnt";
         $countRes = mysqli_query($connect, $countSql);
         if ($countRes && $countRow = mysqli_fetch_assoc($countRes)) {
             $counts['leaving'] = intval($countRow['leaving_cnt']);
             $counts['little'] = intval($countRow['little_cnt']);
             $counts['lovelist'] = intval($countRow['lovelist_cnt']);
             $counts['photo'] = intval($countRow['photo_cnt']);
+            $counts['music'] = intval($countRow['music_cnt']);
+            $counts['timeline'] = intval($countRow['timeline_cnt']);
         }
         if ($countRes) mysqli_free_result($countRes);
     }
@@ -106,6 +115,8 @@ if ($result && mysqli_num_rows($result)) {
     $diannub = $counts['little'];
     $listnub = $counts['lovelist'];
     $imgnub = $counts['photo'];
+    $musicnub = $counts['music'];
+    $timelinenub = $counts['timeline'];
     ?>
 
     <!--顶部栏 Start-->
@@ -243,6 +254,24 @@ if ($result && mysqli_num_rows($result)) {
                             <i class="dripicons-location"></i>
                             <span> 恋爱清单
                                 <span class="badge badge-danger float-right"><?php echo $listnub ?></span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/admin/musicSet.php" class="side-nav-link">
+                            <i class="dripicons-jukebox"></i>
+                            <span> 音乐管理
+                                <span class="badge badge-danger float-right"><?php echo $musicnub ?></span>
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="side-nav-item">
+                        <a href="/admin/timelineSet.php" class="side-nav-link">
+                            <i class="dripicons-timeline"></i>
+                            <span> 轨迹管理
+                                <span class="badge badge-danger float-right"><?php echo $timelinenub ?></span>
                             </span>
                         </a>
                     </li>

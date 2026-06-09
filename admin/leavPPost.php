@@ -17,10 +17,11 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
         echo "0";
         exit;
     }
-    $lanjiezf = htmlspecialchars(trim($_POST['lanjiezf']), ENT_QUOTES);
+    $lanjie = htmlspecialchars(trim($_POST['lanjie'] ?? ''), ENT_QUOTES, 'UTF-8');
+    $lanjiezf = htmlspecialchars(trim($_POST['lanjiezf']), ENT_QUOTES, 'UTF-8');
     
-    $stmt = mysqli_prepare($connect, "update leavSet set jiequ = ?, lanjiezf = ?");
-    mysqli_stmt_bind_param($stmt, "ss", $jiequ, $lanjiezf);
+    $stmt = mysqli_prepare($connect, "update leavSet set jiequ = ?, lanjie = ?, lanjiezf = ?");
+    mysqli_stmt_bind_param($stmt, "sss", $jiequ, $lanjie, $lanjiezf);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_affected_rows($stmt) >= 0;
     mysqli_stmt_close($stmt);

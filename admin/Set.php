@@ -30,14 +30,14 @@ include_once 'Nav.php';
                         <label for="validationCustom06">是否关闭头像背景高斯模糊</label>
                         <select class="form-control" id="example-select" name="WebBlur">
                             <option value="1" <?php  if($diy['Blurkg'] === "1"){ ?> selected <?php } ?>>开启</option>
-                            <option value="2" <?php  if($diy['Blurkg'] === "2"){ ?> selected <?php } ?> >关闭</option>
+                            <option value="0" <?php  if($diy['Blurkg'] === "0"){ ?> selected <?php } ?> >关闭</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="validationCustom07">是否开启前端无刷新加载</label>
                         <select class="form-control" id="example-select" name="WebPjax">
                             <option value="1" <?php  if($diy['Pjaxkg'] === "1"){ ?> selected <?php } ?>>开启</option>
-                            <option value="2" <?php  if($diy['Pjaxkg'] === "2"){ ?> selected <?php } ?> >关闭</option>
+                            <option value="0" <?php  if($diy['Pjaxkg'] === "0"){ ?> selected <?php } ?> >关闭</option>
                         </select>
                     </div>
                     <div class="form-group mb-3 text_right">
@@ -83,6 +83,9 @@ include_once 'Nav.php';
                         <label for="validationCustom05">起始时间</label>
                         <input type="datetime-local" class="form-control"  placeholder="请输入起始时间"
                                name="startTime" value="<?php echo htmlspecialchars($text['startTime'], ENT_QUOTES, 'UTF-8') ?>" required>
+                    </div>
+                    <div class="form-group mb-3 text-right">
+                        <button class="btn btn-primary" type="button" id="loveadminPost">提交修改</button>
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->

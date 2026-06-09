@@ -45,9 +45,9 @@ $resImg = mysqli_query($connect, $loveImg);
                                 </div>
                             </td>
                             <td><?php echo htmlspecialchars($list['title'], ENT_QUOTES, 'UTF-8') ?></td>
-                            <td><?php echo $list['date'] ?></td>
+                            <td><?php echo htmlspecialchars($list['date'], ENT_QUOTES, 'UTF-8') ?></td>
                             <td>
-                                <a href="modImg.php?id=<?php echo $list['id'] ?>">
+                                <a href="modImg.php?id=<?php echo intval($list['id']) ?>">
                                     <button type="button" class="btn btn-secondary btn-rounded">
                                         <i class=" mdi mdi-clipboard-text-play-outline mr-1"></i>修改
                                     </button>
