@@ -173,7 +173,7 @@
                 }
             };
 
-            if (typeof $.fn.imagesLoaded === 'function') {
+            if (typeof $.fn.imagesLoaded === 'function' && $articleGrid.find('img').length > 0) {
                 $articleGrid.imagesLoaded(initMasonry);
             } else {
                 TimerManager.setTimeout('articleMasonry', initMasonry, 100);

@@ -142,6 +142,7 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <script src="/Style/vendor/aos/aos.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/highlight.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/lazyload.min.js?LikeGirl=<?php echo $version ?>"></script>
+<script src="/Style/js/funlazy.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/masonry.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/imagesloaded.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/loading.js?LikeGirl=<?php echo $version ?>"></script>
@@ -434,6 +435,9 @@ function showPhotos(photos) {
     const $gallery = $('#photoGallery');
     const startIndex = $gallery.children().length;
 
+    if (!photos || !Array.isArray(photos)) {
+        return;
+    }
     photos.forEach(photo => {
         const photoElement = createPhotoElement(photo);
         $gallery.append(photoElement);
