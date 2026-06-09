@@ -62,7 +62,7 @@ if ($connect) {
         .LgLoveList-tab i { font-size: 16px; transition: all 0.3s ease; line-height: 1; vertical-align: middle; }
         .LgLoveList-tab-active i { transform: scale(1.1); color: #000; }
 
-        .tab-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; font-size: 0.65rem; font-weight: 600; font-family: 'Inter', sans-serif; color: #999; background: #f0f0f0; border-radius: 10px; margin-left: 4px; transition: all 0.3s ease; box-sizing: border-box; }
+        .tab-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; font-size: 11px; font-weight: 600; font-family: 'Inter', sans-serif; color: #999; background: #f0f0f0; border-radius: 10px; margin-left: 4px; transition: all 0.3s ease; box-sizing: border-box; }
         .LgLoveList-tab-active .tab-badge { background: #58aaff; color: #ffffff; }
 
         .scope-tag { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #f8f8f8; border-radius: 20px; cursor: pointer; font-family: 'Noto Serif SC', serif; font-size: 0.82rem; font-weight: 500; color: #999; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); user-select: none; z-index: 2; white-space: nowrap; }
@@ -166,15 +166,15 @@ if ($connect) {
         @keyframes lgCardSlideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 480px) {
-            .scope-tag { padding: 6px 10px; font-size: 0.75rem; gap: 5px; left: 6px; }
-            .scope-tag i { font-size: 10px; }
+            .scope-tag { padding: 8px 12px; font-size: 0.8rem; gap: 5px; left: 6px; }
+            .scope-tag i { font-size: 11px; }
             .Search_warp #search { padding: 1rem 5.5rem 1rem 6rem; font-size: 0.85rem; }
             .Search_warp #search_btn { padding: 0.6rem 1rem; font-size: 0.8rem; }
             .Tab_Warp { max-width: 100%; margin: 0.8rem auto 1.2rem; }
             .LgLoveList-tab-container { padding: 2px; gap: 2px; border-radius: 10px; }
-            .LgLoveList-tab { padding: 7px 10px; font-size: 0.8rem; gap: 4px; }
+            .LgLoveList-tab { padding: 10px 12px; font-size: 0.85rem; gap: 4px; min-height: 44px; }
             .LgLoveList-tab i { font-size: 14px; }
-            .tab-badge { min-width: 16px; height: 16px; padding: 0 4px; font-size: 0.6rem; border-radius: 8px; }
+            .tab-badge { min-width: 18px; height: 18px; padding: 0 5px; font-size: 10px; border-radius: 10px; }
         }
     </style>
 
