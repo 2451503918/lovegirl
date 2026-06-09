@@ -788,6 +788,95 @@ $(function() {
     </div>
     </div>
 
+<!-- 移动端底部导航栏（参考站标准位置：footer-warp 之后） -->
+<div class="lgnewui-mobile-nav-root">
+    <div class="lgnewui-tab-template-v5-container lgnewui-glass-panel" id="lgnewui-mobile-nav-v5">
+        <div class="lgnewui-tab-template-v5-indicator"></div>
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="articles.php" data-page="articles">
+            <i class="ph-fill ph-notebook"></i>
+            <span>点滴</span>
+        </a>
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="messages.php" data-page="messages">
+            <i class="ph-fill ph-chat-teardrop-dots"></i>
+            <span>留言</span>
+        </a>
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="timeline.php" data-page="timeline">
+            <i class="ph-fill ph-clock-countdown"></i>
+            <span>轨迹</span>
+        </a>
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item active" href="index.php" data-page="index">
+            <i class="ph-fill ph-house"></i>
+            <span>首页</span>
+        </a>
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="albums.php" data-page="albums">
+            <i class="ph-fill ph-camera"></i>
+            <span>相册</span>
+        </a>
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="lovelist.php" data-page="lovelist">
+            <i class="ph-fill ph-list-checks"></i>
+            <span>清单</span>
+        </a>
+        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="about.php" data-page="about">
+            <i class="ph-fill ph-book-open-text"></i>
+            <span>关于</span>
+        </a>
+    </div>
+</div>
+
+<!-- 移动端导航指示器 -->
+<script>
+(function() {
+    'use strict';
+    var mobileNav = document.getElementById('lgnewui-mobile-nav-v5');
+    var mobileIndicator = mobileNav ? mobileNav.querySelector('.lgnewui-tab-template-v5-indicator') : null;
+    var mobileItems = document.querySelectorAll('.js-lgnewui-v5-item');
+    if (!mobileNav || !mobileIndicator || !mobileItems.length) return;
+
+    function setMobileActiveByPath() {
+        var currentPath = window.location.pathname;
+        var currentPage = currentPath.split('/').pop() || 'index.php';
+        mobileItems.forEach(function(item) {
+            item.classList.remove('active');
+            var href = item.getAttribute('href');
+            if (href === currentPage || (href === 'index.php' && (currentPath === '/' || currentPath.endsWith('/') || currentPath.endsWith('index.php')))) {
+                item.classList.add('active');
+            }
+        });
+        if (!document.querySelector('.js-lgnewui-v5-item.active')) {
+            var homeItem = document.querySelector('.js-lgnewui-v5-item[href="index.php"]');
+            if (homeItem) homeItem.classList.add('active');
+        }
+    }
+
+    function updateMobileIndicator() {
+        var activeItem = document.querySelector('.js-lgnewui-v5-item.active');
+        if (activeItem && mobileIndicator) {
+            var itemRect = activeItem.getBoundingClientRect();
+            var navRect = mobileNav.getBoundingClientRect();
+            mobileIndicator.style.left = (itemRect.left - navRect.left) + 'px';
+        }
+    }
+
+    mobileItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            mobileItems.forEach(function(i) { i.classList.remove('active'); });
+            this.classList.add('active');
+            updateMobileIndicator();
+        });
+    });
+
+    var resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateMobileIndicator, 200);
+    });
+
+    setMobileActiveByPath();
+    updateMobileIndicator();
+    setTimeout(updateMobileIndicator, 100);
+})();
+</script>
+
 <?php echo htmlspecialchars_decode($diy['footerCon'], ENT_QUOTES) ?>
 
 <!-- 访问时长追踪信标 -->

@@ -58,7 +58,218 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
     $girlimg_val = '/Style/img/girl.png';
 }
 ?>
-<!DOCTYPE html>
+
+<script>
+
+    console.log("%c Q & V | [已隐藏]", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
+    console.log("%c Like Girl 5.2.1-Stable | Powered by Ki", "color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px");
+    
+
+    function setupVideoPlayer(video) {
+        var videoContainer = $('<div class="video-container"></div>');
+        var playPauseBtn = $('<div class="play-pause-btn"></div>');
+    
+        var playPauseIcon = `
+            <svg t="1730884474730" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="7671" width="200" height="200">
+                <path
+                    d="M861.829969 330.562413L391.150271 33.456576A214.465233 214.465233 0 0 0 62.30358 214.751187V809.248813a214.465233 214.465233 0 0 0 328.846691 181.294611l470.679698-297.105837a214.751187 214.751187 0 0 0 0-362.875174z"
+                    fill="#ffffff" p-id="7672"></path>
+            </svg>
+        `;
+        playPauseBtn.html(playPauseIcon);
+    
+        video.wrap(videoContainer);
+        video.parent().append(playPauseBtn);
+    
+        video.attr('controls', false);
+    
+        video.css({
+            'width': '100%',
+            'height': 'auto'
+        });
+    
+        playPauseBtn.show();
+    
+        playPauseBtn.on('click', function(e) {
+            e.stopPropagation();
+    
+            if (video[0].paused) {
+                video[0].play();
+                playPauseBtn.hide();
+            } else {
+                video[0].pause();
+                playPauseBtn.show();
+            }
+        });
+    
+        video.on('click', function() {
+            if (video[0].paused) {
+                video[0].play();
+                playPauseBtn.hide();
+            } else {
+                video[0].pause();
+                playPauseBtn.show();
+            }
+        });
+    }
+
+    function show_date_time() {
+        setTimeout(show_date_time, 1000);
+        var BirthDay = new Date(<?php echo json_encode($text['startTime']); ?>);
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000;
+        var e_daysold = timeold / msPerDay;
+        var daysold = Math.floor(e_daysold);
+        var e_hrsold = (e_daysold - daysold) * 24;
+        var hrsold = Math.floor(e_hrsold);
+        var e_minsold = (e_hrsold - hrsold) * 60;
+        var minsold = Math.floor((e_hrsold - hrsold) * 60);
+        var seconds = Math.floor((e_minsold - minsold) * 60);
+        var timeKi = document.getElementById('span_dt_dt');
+        if (timeKi !== null) {
+            document.getElementById('span_dt_dt').innerHTML = "这是我们一起走过的";
+            document.getElementById('tian').innerHTML = daysold + '天';
+            document.getElementById('shi').innerHTML = hrsold + '时';
+            document.getElementById('fen').innerHTML = minsold + '分';
+            document.getElementById('miao').innerHTML = (seconds < 10 ? "0" : "") + seconds + '秒';
+        }
+    }
+
+    show_date_time();
+    
+let currentPage = 1;
+const limit = 6;
+let total = 0;
+
+function createPhotoElement(photo) {
+    return `
+
+<div class="img_card col-lg-4 col-md-6 col-sm-12 col-sm-x-12 photo-item">
+    <div class="love_img">
+        <img class="spotlight" data-funlazy="${photo.img}" alt="${photo.text}" 
+             data-description="${photo.date}">
+        
+        <div class="words" data-tip="${photo.text}" data-tip-position="top">
+            <i>${photo.date}</i>
+            <span>${photo.text}</span>
+        </div>
+    </div>
+</div>
+
+    `;
+}
+
+function showPhotos(photos) {
+    const $gallery = $('#photoGallery');
+    const startIndex = $gallery.children().length;
+
+    photos.forEach(photo => {
+        const photoElement = createPhotoElement(photo);
+        $gallery.append(photoElement);
+    });
+
+    // 逐张显示动画
+    const newItems = $('.photo-item').slice(startIndex);
+    newItems.each(function(index) {
+        const $item = $(this);
+        setTimeout(function() {
+            $item.addClass('show');
+        }, index * 300);
+    });
+}
+
+// 加载照片
+function loadPhotos() {
+    const $loading = $('#loading');
+    const $loadBtn = $('#loadMoreBtn');
+
+    $loading.show();
+    $loadBtn.prop('disabled', true);
+
+    $.post('getPhotos.php', { page: currentPage, limit: limit }, function(res) {
+        if (res.code === 200) {
+            total = res.total;
+            showPhotos(res.data);
+            
+            FunLazy({
+                placeholder: "Style/img/Loading2.gif",
+                effect: "show",
+                strictLazyMode: false,
+                useErrorImagePlaceholder: "https://img.gejiba.com/images/dbc7f2562e051afc3c39f916689ba5f0.png"
+            });
+
+            currentPage++;
+
+            $loading.hide();
+
+            if ($('#photoGallery .photo-item').length >= total) {
+                $loadBtn.html(`
+                <svg t="1756817423631" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="20662" width="256" height="256"><path d="M866.944 256.768c-95.488-95.488-250.496-95.488-345.984 0l-13.312 13.312-9.472-9.472c-93.824-93.824-246.656-100.736-343.68-10.368-101.888 94.976-104.064 254.592-6.4 352.256l13.568 13.568 299.264 299.264c25.728 25.728 67.584 25.728 93.44 0l312.576-312.576c95.488-95.488 95.488-250.368 0-345.984zM335.36 352.64c-20.48 0-40.832 6.016-56.704 18.944a85.4912 85.4912 0 0 0-6.912 126.976c9.984 9.984 9.984 26.24 0 36.224l-3.2 3.2c-8.192 8.192-21.632 8.192-29.952 0-52.608-52.608-57.216-138.496-6.528-192.896 26.112-28.032 61.952-43.52 100.096-43.52 14.08 0 25.6 11.52 25.6 25.6v3.072c0 12.416-9.984 22.4-22.4 22.4z" fill="#333333" p-id="20663"></path></svg>
+                暂无更多数据
+                `).prop('disabled', true);
+            } else {
+                $loadBtn.prop('disabled', false);
+            }
+        } else {
+            $loading.hide();
+            $loadBtn.prop('disabled', false);
+        }
+    }, 'json');
+}
+
+    
+    
+    function initLoveAlbum() {
+        const $gallery = $('#photoGallery');
+        if ($gallery.length === 0) {
+            return;
+        }
+
+        // 重置
+        currentPage = 1;
+        total = 0;
+        $('#photoGallery').empty();
+            $('#loadMoreBtn').html(`
+                            <svg t="1756817125714" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4311" width="256" height="256"><path d="M849.799529 168.357647A481.882353 481.882353 0 1 0 993.882353 512a90.352941 90.352941 0 0 0-180.705882 0 301.176471 301.176471 0 1 1-90.051765-214.799059 90.352941 90.352941 0 1 0 126.674823-128.843294z" p-id="4312"></path></svg>
+              加载更多
+              `).prop('disabled', false);
+    
+        // 首次加载
+        loadPhotos();
+    
+        $('#loadMoreBtn').off('click').on('click', loadPhotos);
+    }
+    
+    
+    
+    function initScrollButton(btnSelector, targetSelector, tolerance = 800, duration = 800) {
+    const $btn = $(btnSelector);
+    const $target = $(targetSelector);
+
+    if ($btn.length && $target.length) {
+        // 点击按钮滚动到目标
+        $btn.on('click', () => {
+            const targetOffset = $target.offset().top;
+            $('html, body').animate({ scrollTop: targetOffset }, duration);
+        });
+
+        // 根据滚动位置显示/隐藏按钮
+        $(window).on('scroll resize', () => {
+            const scrollTop = $(window).scrollTop();
+            const targetOffset = $target.offset().top;
+
+            if (Math.abs(scrollTop - targetOffset) <= tolerance) {
+                $btn.fadeOut();
+            } else {
+                $btn.fadeIn();
+            }
+        }).trigger('scroll');
+    }
+}
+
+</script>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -304,217 +515,6 @@ echo htmlspecialchars_decode($diy['headCon'], ENT_QUOTES);
 ?>
 </head>
 <body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
-<script>
-
-    console.log("%c Q & V | [已隐藏]", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
-    console.log("%c Like Girl 5.2.1-Stable | Powered by Ki", "color:#fff;font-weight: 700;background:linear-gradient(270deg,#986fee,#8695e6,#68b7dd,#18d7d3);padding:8px 15px;border-radius:15px");
-    
-
-    function setupVideoPlayer(video) {
-        var videoContainer = $('<div class="video-container"></div>');
-        var playPauseBtn = $('<div class="play-pause-btn"></div>');
-    
-        var playPauseIcon = `
-            <svg t="1730884474730" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                p-id="7671" width="200" height="200">
-                <path
-                    d="M861.829969 330.562413L391.150271 33.456576A214.465233 214.465233 0 0 0 62.30358 214.751187V809.248813a214.465233 214.465233 0 0 0 328.846691 181.294611l470.679698-297.105837a214.751187 214.751187 0 0 0 0-362.875174z"
-                    fill="#ffffff" p-id="7672"></path>
-            </svg>
-        `;
-        playPauseBtn.html(playPauseIcon);
-    
-        video.wrap(videoContainer);
-        video.parent().append(playPauseBtn);
-    
-        video.attr('controls', false);
-    
-        video.css({
-            'width': '100%',
-            'height': 'auto'
-        });
-    
-        playPauseBtn.show();
-    
-        playPauseBtn.on('click', function(e) {
-            e.stopPropagation();
-    
-            if (video[0].paused) {
-                video[0].play();
-                playPauseBtn.hide();
-            } else {
-                video[0].pause();
-                playPauseBtn.show();
-            }
-        });
-    
-        video.on('click', function() {
-            if (video[0].paused) {
-                video[0].play();
-                playPauseBtn.hide();
-            } else {
-                video[0].pause();
-                playPauseBtn.show();
-            }
-        });
-    }
-
-    function show_date_time() {
-        setTimeout(show_date_time, 1000);
-        var BirthDay = new Date(<?php echo json_encode($text['startTime']); ?>);
-        var today = new Date();
-        var timeold = (today.getTime() - BirthDay.getTime());
-        var msPerDay = 24 * 60 * 60 * 1000;
-        var e_daysold = timeold / msPerDay;
-        var daysold = Math.floor(e_daysold);
-        var e_hrsold = (e_daysold - daysold) * 24;
-        var hrsold = Math.floor(e_hrsold);
-        var e_minsold = (e_hrsold - hrsold) * 60;
-        var minsold = Math.floor((e_hrsold - hrsold) * 60);
-        var seconds = Math.floor((e_minsold - minsold) * 60);
-        var timeKi = document.getElementById('span_dt_dt');
-        if (timeKi !== null) {
-            document.getElementById('span_dt_dt').innerHTML = "这是我们一起走过的";
-            document.getElementById('tian').innerHTML = daysold + '天';
-            document.getElementById('shi').innerHTML = hrsold + '时';
-            document.getElementById('fen').innerHTML = minsold + '分';
-            document.getElementById('miao').innerHTML = (seconds < 10 ? "0" : "") + seconds + '秒';
-        }
-    }
-
-    show_date_time();
-    
-let currentPage = 1;
-const limit = 6;
-let total = 0;
-
-function createPhotoElement(photo) {
-    return `
-
-<div class="img_card col-lg-4 col-md-6 col-sm-12 col-sm-x-12 photo-item">
-    <div class="love_img">
-        <img class="spotlight" data-funlazy="${photo.img}" alt="${photo.text}" 
-             data-description="${photo.date}">
-        
-        <div class="words" data-tip="${photo.text}" data-tip-position="top">
-            <i>${photo.date}</i>
-            <span>${photo.text}</span>
-        </div>
-    </div>
-</div>
-
-    `;
-}
-
-function showPhotos(photos) {
-    const $gallery = $('#photoGallery');
-    const startIndex = $gallery.children().length;
-
-    photos.forEach(photo => {
-        const photoElement = createPhotoElement(photo);
-        $gallery.append(photoElement);
-    });
-
-    // 逐张显示动画
-    const newItems = $('.photo-item').slice(startIndex);
-    newItems.each(function(index) {
-        const $item = $(this);
-        setTimeout(function() {
-            $item.addClass('show');
-        }, index * 300);
-    });
-}
-
-// 加载照片
-function loadPhotos() {
-    const $loading = $('#loading');
-    const $loadBtn = $('#loadMoreBtn');
-
-    $loading.show();
-    $loadBtn.prop('disabled', true);
-
-    $.post('getPhotos.php', { page: currentPage, limit: limit }, function(res) {
-        if (res.code === 200) {
-            total = res.total;
-            showPhotos(res.data);
-            
-            FunLazy({
-                placeholder: "Style/img/Loading2.gif",
-                effect: "show",
-                strictLazyMode: false,
-                useErrorImagePlaceholder: "https://img.gejiba.com/images/dbc7f2562e051afc3c39f916689ba5f0.png"
-            });
-
-            currentPage++;
-
-            $loading.hide();
-
-            if ($('#photoGallery .photo-item').length >= total) {
-                $loadBtn.html(`
-                <svg t="1756817423631" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="20662" width="256" height="256"><path d="M866.944 256.768c-95.488-95.488-250.496-95.488-345.984 0l-13.312 13.312-9.472-9.472c-93.824-93.824-246.656-100.736-343.68-10.368-101.888 94.976-104.064 254.592-6.4 352.256l13.568 13.568 299.264 299.264c25.728 25.728 67.584 25.728 93.44 0l312.576-312.576c95.488-95.488 95.488-250.368 0-345.984zM335.36 352.64c-20.48 0-40.832 6.016-56.704 18.944a85.4912 85.4912 0 0 0-6.912 126.976c9.984 9.984 9.984 26.24 0 36.224l-3.2 3.2c-8.192 8.192-21.632 8.192-29.952 0-52.608-52.608-57.216-138.496-6.528-192.896 26.112-28.032 61.952-43.52 100.096-43.52 14.08 0 25.6 11.52 25.6 25.6v3.072c0 12.416-9.984 22.4-22.4 22.4z" fill="#333333" p-id="20663"></path></svg>
-                暂无更多数据
-                `).prop('disabled', true);
-            } else {
-                $loadBtn.prop('disabled', false);
-            }
-        } else {
-            $loading.hide();
-            $loadBtn.prop('disabled', false);
-        }
-    }, 'json');
-}
-
-    
-    
-    function initLoveAlbum() {
-        const $gallery = $('#photoGallery');
-        if ($gallery.length === 0) {
-            return;
-        }
-
-        // 重置
-        currentPage = 1;
-        total = 0;
-        $('#photoGallery').empty();
-            $('#loadMoreBtn').html(`
-                            <svg t="1756817125714" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4311" width="256" height="256"><path d="M849.799529 168.357647A481.882353 481.882353 0 1 0 993.882353 512a90.352941 90.352941 0 0 0-180.705882 0 301.176471 301.176471 0 1 1-90.051765-214.799059 90.352941 90.352941 0 1 0 126.674823-128.843294z" p-id="4312"></path></svg>
-              加载更多
-              `).prop('disabled', false);
-    
-        // 首次加载
-        loadPhotos();
-    
-        $('#loadMoreBtn').off('click').on('click', loadPhotos);
-    }
-    
-    
-    
-    function initScrollButton(btnSelector, targetSelector, tolerance = 800, duration = 800) {
-    const $btn = $(btnSelector);
-    const $target = $(targetSelector);
-
-    if ($btn.length && $target.length) {
-        // 点击按钮滚动到目标
-        $btn.on('click', () => {
-            const targetOffset = $target.offset().top;
-            $('html, body').animate({ scrollTop: targetOffset }, duration);
-        });
-
-        // 根据滚动位置显示/隐藏按钮
-        $(window).on('scroll resize', () => {
-            const scrollTop = $(window).scrollTop();
-            const targetOffset = $target.offset().top;
-
-            if (Math.abs(scrollTop - targetOffset) <= tolerance) {
-                $btn.fadeOut();
-            } else {
-                $btn.fadeIn();
-            }
-        }).trigger('scroll');
-    }
-}
-
-</script>
 <a href="#pjax-container" class="lg-skip-link">跳到主要内容</a>
 <div class="lg-aria-live" id="lgAriaLive" aria-live="polite" aria-atomic="true"></div>
 
@@ -926,4 +926,84 @@ window.addEventListener('load', function() {
     }
 })();
 </script>
-<!-- 移动端导航指示器脚本已移至 footer.php（与移动端导航DOM同位置） -->
+<script>
+// 移动端导航指示器 - 基于LG-NewUi研究成果
+(function() {
+    'use strict';
+
+    var mobileNav = document.getElementById('lgnewui-mobile-nav-v5');
+    var mobileIndicator = mobileNav ? mobileNav.querySelector('.lgnewui-tab-template-v5-indicator') : null;
+    var mobileItems = document.querySelectorAll('.js-lgnewui-v5-item');
+
+    if (!mobileNav || !mobileIndicator || !mobileItems.length) {
+        return;
+    }
+
+    // 根据当前路径设置活动状态
+    function setMobileActiveByPath() {
+        var currentPath = window.location.pathname;
+        var currentPage = currentPath.split('/').pop() || 'index.php';
+
+        mobileItems.forEach(function(item) {
+            item.classList.remove('active');
+            var href = item.getAttribute('href');
+
+            if (href === currentPage ||
+                (href === 'index.php' && (currentPath === '/' || currentPath.endsWith('/') || currentPath.endsWith('index.php')))) {
+                item.classList.add('active');
+            }
+        });
+
+        // 默认首页
+        if (!document.querySelector('.js-lgnewui-v5-item.active')) {
+            var homeItem = document.querySelector('.js-lgnewui-v5-item[href="index.php"]');
+            if (homeItem) homeItem.classList.add('active');
+        }
+    }
+
+    // 更新指示器位置
+    function updateMobileIndicator() {
+        var activeItem = document.querySelector('.js-lgnewui-v5-item.active');
+        if (activeItem && mobileIndicator) {
+            var itemRect = activeItem.getBoundingClientRect();
+            var navRect = mobileNav.getBoundingClientRect();
+            mobileIndicator.style.left = (itemRect.left - navRect.left) + 'px';
+        }
+    }
+
+    // 绑定事件
+    function bindMobileEvents() {
+        mobileItems.forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                mobileItems.forEach(function(i) { i.classList.remove('active'); });
+                this.classList.add('active');
+                updateMobileIndicator();
+            });
+        });
+
+        // 窗口大小变化
+        var resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(updateMobileIndicator, 200);
+        });
+    }
+
+    // 初始化
+    function initMobile() {
+        setMobileActiveByPath();
+        updateMobileIndicator();
+        bindMobileEvents();
+
+        // 延迟更新指示器
+        setTimeout(updateMobileIndicator, 100);
+    }
+
+    // 页面加载完成后初始化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobile);
+    } else {
+        initMobile();
+    }
+})();
+</script>
