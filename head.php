@@ -65,8 +65,8 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <link rel="icon" href="/favicon.png" />
 <link rel="canonical" href="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/') ?>" />
 <title><?php
-    $siteName = $text['title'] ?: 'Like Girl';
-    $siteSlogan = $text['writing'] ?: '愿得一心人 白头不相离';
+    $siteName = ($text['title'] ?? '') ?: 'Like Girl';
+    $siteSlogan = ($text['writing'] ?? '') ?: '愿得一心人 白头不相离';
     if (!empty($pageTitle)) {
         echo htmlspecialchars($pageTitle, ENT_QUOTES, 'UTF-8') . ' — ' . htmlspecialchars($siteName, ENT_QUOTES, 'UTF-8');
     } else {
@@ -74,24 +74,24 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
     }
 ?></title>
 <meta name="keywords"
-    content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
-<meta name="description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
+    content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
+<meta name="description" content="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
 <meta name="author" content="Ki">
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph (Facebook/微信/QQ) -->
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:site_name" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:title" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta property="og:description" content="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:url" content="https://love.54oimx.top/">
 <meta property="og:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>">
-<meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:title" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+<meta name="twitter:description" content="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 <meta name="twitter:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="x-lg-license-instance" content="858ee1d099b9">
 
@@ -324,7 +324,7 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 </script>
 
 <?php
-echo htmlspecialchars_decode($diy['headCon'], ENT_QUOTES);
+echo htmlspecialchars_decode($diy['headCon'] ?? '', ENT_QUOTES);
 ?>
 </head>
 <body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
@@ -385,7 +385,7 @@ echo htmlspecialchars_decode($diy['headCon'], ENT_QUOTES);
 
     function show_date_time() {
         setTimeout(show_date_time, 1000);
-        var BirthDay = new Date(<?php echo json_encode($text['startTime']); ?>);
+        var BirthDay = new Date(<?php echo json_encode($text['startTime'] ?? ''); ?>);
         var today = new Date();
         var timeold = (today.getTime() - BirthDay.getTime());
         var msPerDay = 24 * 60 * 60 * 1000;
@@ -648,11 +648,11 @@ window.addEventListener('load', function() {
         <!-- 吸顶 Logo -->
         <div class="lgnewui-header-left-avatar">
             <div class="stuck-logo stuck-logo--en-v7">
-                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 <span class="stuck-logo__redline-l"></span>
                 <span class="stuck-logo__heart"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z" /></svg></span>
                 <span class="stuck-logo__redline-r"></span>
-                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
             </div>
         </div>
 
@@ -667,7 +667,7 @@ window.addEventListener('load', function() {
         </div>
 
         <div class="logo">
-            <h1><a class="alogo" href="index.php"><?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'], ENT_QUOTES, 'UTF-8')) ?></a></h1>
+            <h1><a class="alogo" href="index.php"><?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'] ?? '', ENT_QUOTES, 'UTF-8')) ?></a></h1>
         </div>
 
         <!-- 吸顶时显示的右侧区域: 天气 + 地图 + 情侣头像 -->
@@ -695,8 +695,8 @@ window.addEventListener('load', function() {
 
             <div class="lgnewui-couple-avatars-right">
                 <div class="lgnewui-avatar-group">
-                    <img src="<?php echo htmlspecialchars($girlimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
-                    <img src="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-female" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?php echo htmlspecialchars($girlimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-male" alt="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                    <img src="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>" class="avatar-female" alt="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                 </div>
                 <span class="lgnewui-right-heart"></span>
             </div>
@@ -734,11 +734,11 @@ window.addEventListener('load', function() {
         <!-- stuck-logo 展示 -->
         <div class="lg-header-more-identity">
             <div class="stuck-logo stuck-logo--en-v7">
-                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 <span class="stuck-logo__redline-l"></span>
                 <span class="stuck-logo__heart"><svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M240,94c0,70-103.79,126.66-108.21,129a8,8,0,0,1-7.58,0C119.79,220.66,16,164,16,94A62.07,62.07,0,0,1,78,32c20.65,0,38.73,8.88,50,23.89C139.27,40.88,157.35,32,178,32A62.07,62.07,0,0,1,240,94Z"/></svg></span>
                 <span class="stuck-logo__redline-r"></span>
-                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="stuck-logo__name" data-lg-tip="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
             </div>
         </div>
 
@@ -783,7 +783,7 @@ window.addEventListener('load', function() {
     }
 </style>
 <style>
-    <?php echo preg_replace('/<\/style/i', '<\\/style', $diy['cssCon']) ?>
+    <?php echo preg_replace('/<\/style/i', '<\\/style', $diy['cssCon'] ?? '') ?>
 </style>
 
 <script>

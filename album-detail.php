@@ -64,7 +64,7 @@ $isPrivate = !empty($album['password']) || !empty($album['private']);
 
 $isMaleAuthor = ($album['author'] === 'boy' || $album['author'] === 'male');
 $authorAvatar = $isMaleAuthor ? $boyimg_val : $girlimg_val;
-$authorName = $isMaleAuthor ? htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') : htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8');
+$authorName = $isMaleAuthor ? htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') : htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8');
 
 // 格式化日期
 $albumDateFormatted = '';

@@ -882,7 +882,15 @@ $(function() {
 })();
 </script>
 
-<?php echo htmlspecialchars_decode($diy['footerCon'], ENT_QUOTES) ?>
+<?php echo htmlspecialchars_decode($diy['footerCon'] ?? '', ENT_QUOTES) ?>
+
+<script>
+    window.LG_CONFIG = Object.assign(window.LG_CONFIG || {}, {
+        endpoints: Object.assign({}, (window.LG_CONFIG && window.LG_CONFIG.endpoints) || {}, {
+            accessBeacon: "/services/access-beacon.php"
+        })
+    });
+</script>
 
 <!-- 访问时长追踪信标 -->
 <script>

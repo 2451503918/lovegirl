@@ -165,7 +165,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             </div>
                         </div>
                     </div>
-                    <span class="shadow-blur"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="shadow-blur"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
                 <!-- 爱心图标 -->
                 <div class="love-icon">
@@ -196,7 +196,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             </div>
                         </div>
                     </div>
-                    <span class="shadow-blur"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="shadow-blur"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
             </div>
             <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -229,14 +229,14 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 </div>
                 <div class="lgnewui-day-left-section">
                     <h2 class="lgnewui-day-poetic-title">
-                        <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'], ENT_QUOTES, 'UTF-8')) ?><br>
+                        <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'] ?? '', ENT_QUOTES, 'UTF-8')) ?><br>
                         <span style="font-size:0.7em;opacity:0.7;">与你行至天光</span>
                     </h2>
                     <div class="lgnewui-day-start-date-capsule">
                         <div class="lgnewui-day-icon-circle"><i class="ph-fill ph-heart"></i></div>
                         <div>
                             <span class="lgnewui-day-date-label-small">Together Since</span>
-                            <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo htmlspecialchars(str_replace('T', ' ', $text['startTime']), ENT_QUOTES, 'UTF-8') ?></span>
+                            <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo htmlspecialchars(str_replace('T', ' ', $text['startTime'] ?? ''), ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
                     </div>
                 </div>
@@ -302,8 +302,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-home-weather-bg-decoration"></div>
                         <div class="lgnewui-home-weather-row-top">
                             <div class="lgnewui-home-weather-user-pill">
-                                <img src="" class="lgnewui-home-weather-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
-                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <img src="" class="lgnewui-home-weather-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <div class="lgnewui-home-weather-time-tag">--</div>
                         </div>
@@ -340,8 +340,8 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-home-weather-bg-decoration"></div>
                         <div class="lgnewui-home-weather-row-top">
                             <div class="lgnewui-home-weather-user-pill">
-                                <img src="" class="lgnewui-home-weather-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
-                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                                <img src="" class="lgnewui-home-weather-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+                                <span class="lgnewui-home-weather-username"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                             </div>
                             <div class="lgnewui-home-weather-time-tag">--</div>
                         </div>
@@ -389,10 +389,10 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             <div class="lgnewui-presence-card">
                                 <div class="lgnewui-presence-people">
                                     <div class="lgnewui-presence-person">
-                                        <img src="" class="lgnewui-presence-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <img src="" class="lgnewui-presence-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                                         <div class="lgnewui-presence-person__body">
                                             <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') ?></span>
+                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                                                 <span class="lgnewui-presence-gender is-male">♂</span>
                                             </div>
                                             <div class="lgnewui-presence-state">
@@ -402,10 +402,10 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                                         </div>
                                     </div>
                                     <div class="lgnewui-presence-person">
-                                        <img src="" class="lgnewui-presence-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?>">
+                                        <img src="" class="lgnewui-presence-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                                         <div class="lgnewui-presence-person__body">
                                             <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8') ?></span>
+                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                                                 <span class="lgnewui-presence-gender is-female">♀</span>
                                             </div>
                                             <div class="lgnewui-presence-state">

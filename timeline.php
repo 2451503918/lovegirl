@@ -162,12 +162,12 @@ if ($girlimg && !preg_match('/^https?:\/\//', $girlimg)) {
     <script>
         window.TIMELINE_AUTHORS = {};
         window.TIMELINE_AUTHORS[1] = {
-            name: <?php echo json_encode($text['boy'], JSON_UNESCAPED_UNICODE); ?>,
+            name: <?php echo json_encode($text['boy'] ?? '', JSON_UNESCAPED_UNICODE); ?>,
             avatar: <?php echo json_encode($boyimg, JSON_UNESCAPED_UNICODE); ?>,
             gender: "male"
         };
         window.TIMELINE_AUTHORS[2] = {
-            name: <?php echo json_encode($text['girl'], JSON_UNESCAPED_UNICODE); ?>,
+            name: <?php echo json_encode($text['girl'] ?? '', JSON_UNESCAPED_UNICODE); ?>,
             avatar: <?php echo json_encode($girlimg, JSON_UNESCAPED_UNICODE); ?>,
             gender: "female"
         };

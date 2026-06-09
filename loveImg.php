@@ -73,7 +73,7 @@ function formatFileSize($bytes) {
                     $isPrivate = !empty($album['password']) || !empty($album['private']);
                     $isMaleAuthor = ($albumAuthor === 'boy' || $albumAuthor === 'male');
                     $authorAvatar = $isMaleAuthor ? $boyimg_val : $girlimg_val;
-                    $authorName = $isMaleAuthor ? htmlspecialchars($text['boy'], ENT_QUOTES, 'UTF-8') : htmlspecialchars($text['girl'], ENT_QUOTES, 'UTF-8');
+                    $authorName = $isMaleAuthor ? htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') : htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8');
                     $badgeClass = $isMaleAuthor ? 'male' : 'female';
                     $iconClass = $isMaleAuthor ? 'ph-bold ph-gender-male' : 'ph-bold ph-gender-female';
 
@@ -261,8 +261,8 @@ function formatFileSize($bytes) {
 <script>
 var boyAvatar = <?php echo json_encode($boyimg_val); ?>;
 var girlAvatar = <?php echo json_encode($girlimg_val); ?>;
-var boyName = <?php echo json_encode($text['boy']); ?>;
-var girlName = <?php echo json_encode($text['girl']); ?>;
+var boyName = <?php echo json_encode($text['boy'] ?? ''); ?>;
+var girlName = <?php echo json_encode($text['girl'] ?? ''); ?>;
 
 // 初始化图片查看器
 if (typeof ViewImage !== 'undefined') {
