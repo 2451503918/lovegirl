@@ -508,6 +508,9 @@ $(function() {
 <!-- ============ /足迹地图弹窗 ============ -->
 <!-- lg-map.js 已在head.php中加载 -->
 
+<!-- 第二个 pjax-container 包裹浮动按钮+加密提示+LGApp初始化（参考站标准结构） -->
+<div id="pjax-container">
+
 <!-- 浮动操作按钮 -->
 <div id="lgnewuiFloatingActions">
     <a href="javascript:void(0)" id="scrollTopBtn" title="回到顶部">
@@ -767,6 +770,8 @@ $(function() {
             }
         }
     </style>
+
+</div><!-- /第二个 pjax-container -->
 
 <!-- 底部动物装饰 -->
 <div id="footer-animal">

@@ -283,20 +283,44 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 
     // 地图数据
     window.LGMapData = window.LGMapData || {
-        fetchAll: function() {
+        assign: function (data) {
+            if (data.lovers) window.LGMAP_CONFIG.lovers = data.lovers;
+            if (typeof data.loveStartDate !== 'undefined') window.LGMAP_CONFIG.loveStartDate = data.loveStartDate;
+            if (data.milestones) window.LGMAP_CONFIG.milestones = data.milestones;
+            if (data.moments) window.LGMAP_CONFIG.moments = data.moments;
+            if (data.messages) window.LGMAP_CONFIG.messages = data.messages;
+            if (data.albums) window.LGMAP_CONFIG.albums = data.albums;
+            if (data.events) window.LGMAP_CONFIG.events = data.events;
+            return data;
+        },
+        fetchAll: function () {
             var apiUrl = new URL(window.LGMAP_CONFIG._apiBase, window.location.origin);
-            return fetch(apiUrl.toString()).then(function(r){return r.json()}).then(function(data){
-                if (data.lovers) window.LGMAP_CONFIG.lovers = data.lovers;
-                if (typeof data.loveStartDate !== 'undefined') window.LGMAP_CONFIG.loveStartDate = data.loveStartDate;
-                if (data.milestones) window.LGMAP_CONFIG.milestones = data.milestones;
-                if (data.moments) window.LGMAP_CONFIG.moments = data.moments;
-                if (data.messages) window.LGMAP_CONFIG.messages = data.messages;
-                if (data.albums) window.LGMAP_CONFIG.albums = data.albums;
-                if (data.events) window.LGMAP_CONFIG.events = data.events;
-            }).catch(function(){});
+            apiUrl.searchParams.set('module', 'all');
+            return fetch(apiUrl.toString(), {
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' }
+            })
+                .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+                .then(this.assign.bind(this));
         }
     };
-    window.LGMAP_DATA_READY = window.LGMapData.fetchAll();
+
+    window.LGMAP_DATA_READY = window.LGMapData.fetchAll()
+        .catch(function (err) {
+            if (window.LG_CONFIG && window.LG_CONFIG.debugMap && window.console && typeof window.console.warn === 'function') {
+                window.console.warn('地图数据加载失败:', err);
+            }
+        });
+</script>
+
+<script>
+    // 倒计时、高度调整、轮播图、导航栏等功能已迁移到 lg-app.js 和 lg-components.js
+    // 保留必要的全局变量供旧代码兼容
+    var pcCarouselHeight = "80vh";
+    var mobileCarouselHeight = "50vh";
+    var pcPhotoCoverHeight = "80vh";
+    var mobilePhotoCoverHeight = "60vh";
+    var pcImgMaxHeight = "450px";
+    var mobileImgMaxHeight = "260px";
 </script>
 
 <?php
