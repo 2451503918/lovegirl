@@ -130,17 +130,6 @@ $runtimeDays = floor((time() - $startTs) / 86400);
         <div class="bg-wrap central limg" data-avatar-swap="1">
             <div class="bg-img">
                 <div class="middle Blurkg">
-                <!-- 距离气泡 -->
-                <div class="love-info-wrapper">
-                    <div class="distance-bubble" id="distanceBubble" onclick="if(window.LGMap&&LGMap.show){LGMap.show();}">
-                        <div class="distance-icon-box"><i class="ph-fill ph-map-pin-line"></i></div>
-                        <div class="distance-text">
-                            <span class="distance-text-sm">相距</span>
-                            <span class="km-value" id="distanceKm">--</span>
-                            <span class="distance-text-sm">km</span>
-                        </div>
-                    </div>
-                </div>
                 <!-- 男方头像 -->
                 <div class="img-male">
                     <div class="avatarArea lgewui-head-avatar-boy">
@@ -367,54 +356,6 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             <div class="lgnewui-home-weather-stat-pill">
                                 <i class="ph-fill ph-thermometer lgnewui-home-weather-icon-stat"></i>
                                 <span class="lgnewui-home-weather-text-stat stat-feels">--°</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 双方头像卡片（我们） -->
-                <div class="lgnewui-col-2" data-aos="fade-up" data-aos-delay="120">
-                    <div class="lgnewui-widget lgnewui-widget--presence">
-                        <div class="lgnewui-widget__bg-icon"><i class="ph-fill ph-heart"></i></div>
-                        <div class="lgnewui-flex-col-between-relative">
-                            <div class="lgnewui-flex-between-center lgnewui-mb-4">
-                                <div class="lgnewui-flex-center-gap">
-                                    <div class="lgnewui-icon-box-glass">
-                                        <i class="ph-bold ph-users-three lgnewui-icon-md-white"></i>
-                                    </div>
-                                    <div class="lgnewui-card-title-lg">我们</div>
-                                </div>
-                                <div class="lgnewui-presence-badge">Together</div>
-                            </div>
-                            <div class="lgnewui-presence-card">
-                                <div class="lgnewui-presence-people">
-                                    <div class="lgnewui-presence-person">
-                                        <img src="" class="lgnewui-presence-avatar lg-male-avatar" alt="<?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                                        <div class="lgnewui-presence-person__body">
-                                            <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['boy'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
-                                                <span class="lgnewui-presence-gender is-male">♂</span>
-                                            </div>
-                                            <div class="lgnewui-presence-state">
-                                                <span class="lgnewui-presence-state__dot"></span>
-                                                <span>在线</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="lgnewui-presence-person">
-                                        <img src="" class="lgnewui-presence-avatar lg-female-avatar" alt="<?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                                        <div class="lgnewui-presence-person__body">
-                                            <div class="lgnewui-presence-person__name-row">
-                                                <span class="lgnewui-presence-name"><?php echo htmlspecialchars($text['girl'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
-                                                <span class="lgnewui-presence-gender is-female">♀</span>
-                                            </div>
-                                            <div class="lgnewui-presence-state">
-                                                <span class="lgnewui-presence-state__dot"></span>
-                                                <span>在线</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
