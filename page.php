@@ -108,7 +108,7 @@ if ($connect) {
         <h2 class="lgnewui-hero-title"><?php echo htmlspecialchars($articleData['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
     </div>
 
-    <div class="lgnewui-container lgnewui-main">
+    <div class="lgnewui-container">
         <!-- 文章内容卡片 -->
         <div class="lgnewui-article-detail-card" data-aos="fade-up">
             <!-- 文章头部 -->

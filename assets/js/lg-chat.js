@@ -27,6 +27,10 @@
         chatBox = document.getElementById('chatBox');
         if (!chatBox) return;
 
+        // 移除 FOUC 防护内联样式
+        var wrapper = document.querySelector('.lgnewui-chat-wrapper');
+        if (wrapper) wrapper.removeAttribute('style');
+
         bindControls();
         loadData();
     }

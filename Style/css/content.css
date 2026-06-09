@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'TimeFont';
+  src: url('../../Style/Font/Time.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,11 +17,10 @@ ul {
 a {
   text-decoration: none;
   color: #777;
-  transition: all .15s;
 }
 
 a:hover {
-  color: #10bbff;
+  color: #03A9F4;
 }
 
 :root {
@@ -31,7 +37,8 @@ h6 {
 }
 
 input,
-textarea {
+textarea,
+button {
   outline: none;
 }
 
@@ -180,7 +187,6 @@ a:hover {
 .bg-img {
   width: 100%;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #fce4ec 0%, #e8eaf6 50%, #e3f2fd 100%) no-repeat center;
   background-size: cover;
   padding-top: 8rem;
   position: relative;
@@ -189,32 +195,30 @@ a:hover {
 .bg-img .middle {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 3rem;
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  background: rgba(255, 255, 255, 0.25);
-  padding: 3rem 2rem;
-  border-radius: 2.5rem;
+  justify-content: space-around;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff63;
+  padding: 3rem 5rem 2rem;
+  border-radius: 4rem;
   user-select: none;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  border: 1px solid #ffffff6e;
   transition: all 0.3s ease;
-  flex-wrap: wrap;
 }
 
 .bg-img .middle:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 40px rgba(31, 38, 135, 0.25);
-  background: rgba(255, 255, 255, 0.35);
+  background: #ffffffa5;
 }
 
 .bg-img .middle img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 0.2rem solid #fff;
-  max-width: 30vw;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 10rem;
+  border: 1px solid #fff;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgb(255 255 255 / 3%), 0 16px 48px 8px rgb(255 255 255 / 8%);
 }
 
 .bg-img .middle .img-male span {

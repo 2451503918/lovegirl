@@ -130,7 +130,7 @@
 <script>
     window.LG_CONFIG = window.LG_CONFIG || {};
     window.LG_CONFIG.userCity = "中国 · 中国";
-    window.LG_CONFIG.anonymousAvatar = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c7c7cc'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M20 21a8 8 0 1 0-16 0'/%3E%3C/svg%3E";
+    window.LG_CONFIG.anonymousAvatar = "https://q1.qlogo.cn/g?b=qq&nk=10000&s=100";
 </script>
 
 <!-- 极验验证与留言提交绑定 -->
