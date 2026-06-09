@@ -192,6 +192,4 @@ if ($connect) {
     </div>
 </div>
 
-<!-- 留言弹窗/表情面板/确认弹窗已移至 footer.php 统一管理 -->
-
 <?php include_once 'footer.php'; ?>

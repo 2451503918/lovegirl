@@ -1,4 +1,4 @@
-<!-- 遮罩层 -->
+<!-- 留言弹窗遮罩层 -->
 <div class="mask" id="mask">
     <div class="close">
         <svg t="1682818912164" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -31,7 +31,7 @@
     </span>
 </div>
 
-<!-- 随机一言确认弹窗 -->
+<!-- 随机一言确认弹窗（about.php 风格） -->
 <div class="lgmsg-confirm-overlay" id="lgmsgConfirmOverlay">
     <div class="lgmsg-confirm-panel">
         <button class="lgmsg-confirm-close-btn" id="lgmsgConfirmClose" aria-label="关闭">
@@ -197,7 +197,6 @@ $(function() {
 });
 </script>
 
-<!-- 所有CSS/JS已在head.php中统一加载，此处仅保留初始化调用 -->
 <script>if(typeof lucide!=='undefined')lucide.createIcons();</script>
 
 <!-- ============ 音乐播放器 (pjax 外，不随页面刷新) ============ -->
@@ -286,8 +285,6 @@ $(function() {
         </button>
     </div>
 </div>
-
-<!-- music-player.js 已在head.php中加载 -->
 
 <!-- 音乐播放确认弹窗 -->
 <div class="music-modal-overlay" id="musicModal">
@@ -405,6 +402,7 @@ function setMusicSetting(key, value) {
 </script>
 <!-- ============ /音乐播放器 ============ -->
 
+<!-- 足迹地图弹窗 -->
 <!-- ============ 足迹地图弹窗 ============ -->
 <div class="lg-map-overlay" id="lgMapOverlay" style="display:none;">
     <div class="lg-map-modal">
@@ -522,12 +520,8 @@ function setMusicSetting(key, value) {
     </div>
 </div>
 <!-- ============ /足迹地图弹窗 ============ -->
-<!-- lg-map.js 已在head.php中加载 -->
-
-<!-- 第二个 pjax-container 包裹浮动按钮+加密提示+LGApp初始化（参考站标准结构） -->
 <div id="pjax-container">
 
-<!-- 浮动操作按钮 -->
 <div id="lgnewuiFloatingActions">
     <a href="javascript:void(0)" id="scrollTopBtn" title="回到顶部">
         <i class="ph-fill ph-arrow-circle-up"></i>
@@ -787,9 +781,8 @@ function setMusicSetting(key, value) {
         }
     </style>
 
-</div><!-- /第二个 pjax-container -->
+</div>
 
-<!-- 底部动物装饰 -->
 <div id="footer-animal">
     <img class="animal" src="/Style/img/animals.png" draggable="false" alt="动物">
 </div>
@@ -809,7 +802,6 @@ function setMusicSetting(key, value) {
     </div>
     </div>
 
-<!-- 移动端底部导航栏（参考站标准位置：footer-warp 之后） -->
 <div class="lgnewui-mobile-nav-root">
     <div class="lgnewui-tab-template-v5-container lgnewui-glass-panel" id="lgnewui-mobile-nav-v5">
         <div class="lgnewui-tab-template-v5-indicator"></div>
@@ -844,7 +836,6 @@ function setMusicSetting(key, value) {
     </div>
 </div>
 
-<!-- 移动端导航指示器 -->
 <script>
 (function() {
     'use strict';
@@ -908,7 +899,6 @@ function setMusicSetting(key, value) {
     });
 </script>
 
-<!-- 访问时长追踪信标 -->
 <script>
 (function(){
     var key='lg_stay_ts',dKey='lg_stay_dur';

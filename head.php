@@ -101,7 +101,6 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
     <link
         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500&family=Oswald:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap"
         rel="stylesheet">
-<!-- ===== CSS（按参考站顺序排列） ===== -->
 <link rel="stylesheet" href="/Style/vendor/google-fonts/fonts-non-google.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/fontawesome/css/all.min.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/leaving.css?LikeGirl=<?php echo $version ?>">
@@ -134,7 +133,6 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <link rel="stylesheet" href="/Style/css/lg-header.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-context-menu.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/lg-map.css?LikeGirl=<?php echo $version ?>">
-<!-- ===== JS（按参考站顺序排列） ===== -->
 <script src="/Style/jquery/jquery.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/Font/font_leav/iconfont.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/jquery.pjax.js?LikeGirl=<?php echo $version ?>"></script>
@@ -216,7 +214,6 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <script src="/Style/js/meting.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/music-player.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-mobile-nav.js?LikeGirl=<?php echo $version ?>"></script>
-<!-- LG_NewUI 核心框架配置 -->
 <script>
     <?php
     $lg_config = [
@@ -543,10 +540,7 @@ function loadPhotos() {
 }
 
 </script>
-<a href="#pjax-container" class="lg-skip-link">跳到主要内容</a>
-<div class="lg-aria-live" id="lgAriaLive" aria-live="polite" aria-atomic="true"></div>
 
-<!-- 加载动画 -->
 <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-section"></div>
@@ -560,7 +554,6 @@ window.addEventListener('load', function() {
 });
 </script>
 
-<!-- 灵动岛导航栏 -->
 <div class="lgnewui-nav-placeholder" id="lgnewuiNavPlaceholder"></div>
 <div class="lgnewui-nav-wrapper" id="lgnewuiNavWrapper">
     <nav class="lgnewui-nav-island-container" id="lgnewuiNavIsland">
@@ -631,9 +624,6 @@ window.addEventListener('load', function() {
     </nav>
 </div>
 
-<!-- 移动端导航栏已移至 footer.php（参考站标准位置：footer-warp 之后） -->
-
-<!-- 页面标题栏 -->
 <div class="lgnewui-page-header">
     <div class="lgnewui-meta-container">
         <div class="lgnewui-meta-tag" id="lgnewuiMetaTag">
@@ -717,7 +707,6 @@ window.addEventListener('load', function() {
 </div>
 <div class="lgnewui-sticky-sentinel" id="lgnewuiStickySentinel"></div>
 
-<!-- 旧版音乐播放器元素 -->
 <div class="music_info">
     <div class="music_info_time" id="musicInfoTime"></div>
     <div class="music_info_btn">
@@ -765,7 +754,6 @@ window.addEventListener('load', function() {
     </div>
 </div>
 
-<!-- bg-wrap 移至各页面独立控制 -->
 
 
 <style>
@@ -954,4 +942,3 @@ window.addEventListener('load', function() {
     }
 })();
 </script>
-<!-- 移动端导航指示器脚本已移至 footer.php（与移动端导航DOM同位置） -->
