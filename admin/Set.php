@@ -84,6 +84,9 @@ include_once 'Nav.php';
                         <input type="datetime-local" class="form-control"  placeholder="请输入起始时间"
                                name="startTime" value="<?php echo htmlspecialchars($text['startTime'], ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
+                    <div class="form-group mb-3 text-right">
+                        <button class="btn btn-primary" type="button" id="loveadminPost">提交修改</button>
+                    </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
         </div> <!-- end col-->

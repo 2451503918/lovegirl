@@ -87,11 +87,11 @@ if (!$result) {
                                     <td>
                                         <h5><span class="badge badge-success-lighten"><i
                                                     class="mdi mdi-account-circle mr-1 rihjt-0"></i>
-                                                <?php echo $name ?></span>
+                                                <?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8') ?></span>
                                         </h5>
                                     </td>
                                     <td>
-                                        <?php echo $qq ?>
+                                        <?php echo htmlspecialchars($qq, ENT_QUOTES, 'UTF-8') ?>
                                     </td>
                                     <td>
                                         <h5>

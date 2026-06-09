@@ -15,7 +15,7 @@ $about = mysqli_fetch_array($resab);
                     <div class="form-group mb-3">
                         <label for="validationCustom01">对话标题</label>
                         <input type="text" class="form-control" id="validationCustom01" placeholder="请输入标题" name="title"
-                               value="<?php echo $about['title'] ?>" required>
+                               value="<?php echo htmlspecialchars($about['title'], ENT_QUOTES, 'UTF-8') ?>" required>
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom01">对话模块背景图片地址</label>
@@ -25,13 +25,13 @@ $about = mysqli_fetch_array($resab);
                     <div class="form-group mb-3">
                         <label for="validationCustom02">对话1文本</label>
                         <input type="text" class="form-control" id="validationCustom02" placeholder="请填写对话内容"
-                               name="info1" value="<?php echo $about['info1'] ?>" required>
+                               name="info1" value="<?php echo htmlspecialchars($about['info1'], ENT_QUOTES, 'UTF-8') ?>" required>
 
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom03">对话2文本</label>
                         <input type="text" class="form-control" id="validationCustom03" placeholder="请填写对话内容"
-                               name="info2" value="<?php echo $about['info2'] ?>" required>
+                               name="info2" value="<?php echo htmlspecialchars($about['info2'], ENT_QUOTES, 'UTF-8') ?>" required>
 
                     </div>
                     <div class="form-group mb-3">
@@ -43,7 +43,7 @@ $about = mysqli_fetch_array($resab);
                     <div class="form-group mb-3">
                         <label for="validationCustom05">对话1按钮确认文本</label>
                         <input type="text" class="form-control" id="validationCustom05" name="btn1"
-                               value="<?php echo $about['btn1'] ?>" placeholder="请填写确认按钮文本">
+                               value="<?php echo htmlspecialchars($about['btn1'], ENT_QUOTES, 'UTF-8') ?>" placeholder="请填写确认按钮文本">
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">对话1按钮取消文本</label>
@@ -67,7 +67,7 @@ $about = mysqli_fetch_array($resab);
                     <div class="form-group mb-3">
                         <label for="validationCustom02">对话2-2文本</label>
                         <input type="text" class="form-control" id="validationCustom02" placeholder="请填写对话内容"
-                               name="infox2" value="<?php echo $about['infox2'] ?>" required>
+                               name="infox2" value="<?php echo htmlspecialchars($about['infox2'], ENT_QUOTES, 'UTF-8') ?>" required>
 
                     </div>
                     <div class="form-group mb-3">
@@ -85,7 +85,7 @@ $about = mysqli_fetch_array($resab);
                     <div class="form-group mb-3">
                         <label for="validationCustom05">对话2-5文本</label>
                         <input type="text" class="form-control" id="validationCustom05" name="infox5"
-                               value="<?php echo $about['infox5'] ?>" placeholder="请填写对话内容">
+                               value="<?php echo htmlspecialchars($about['infox5'], ENT_QUOTES, 'UTF-8') ?>" placeholder="请填写对话内容">
                     </div>
                     <div class="form-group mb-3">
                         <label for="validationCustom05">对话2-6文本</label>
@@ -95,7 +95,7 @@ $about = mysqli_fetch_array($resab);
                     <div class="form-group mb-3">
                         <label for="validationCustom05">对话2-1按钮文本</label>
                         <input type="text" class="form-control" id="validationCustom05" name="btnx2"
-                               value="<?php echo $about['btnx2'] ?>" placeholder="请填写按钮文本">
+                               value="<?php echo htmlspecialchars($about['btnx2'], ENT_QUOTES, 'UTF-8') ?>" placeholder="请填写按钮文本">
                     </div>
                 </div> <!-- end card-body-->
             </div> <!-- end card-->
