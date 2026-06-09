@@ -18,6 +18,11 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 include_once 'connect.php';
 include_once 'Function.php';
+
+if (!$connect) {
+    die("<script>alert('数据库连接失败，请检查配置');location.href = 'login.php';</script>");
+}
+
 $stmt = mysqli_prepare($connect, "SELECT id, user, pw FROM login WHERE user = ?");
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['loginadmin']);
 mysqli_stmt_execute($stmt);

@@ -2,15 +2,6 @@
 session_start();
 $file = $_SERVER['PHP_SELF'];
 
-function checkQQ($qq)
-{
-    if (preg_match("/^[1-9][0-9]{4,}$/", $qq)) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 include_once 'Database.php';
 include_once 'Function.php';
 

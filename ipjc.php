@@ -2,8 +2,12 @@
 
 include_once 'admin/connect.php';
 
-$ip = $_SERVER["REMOTE_ADDR"];
+$ip = $_SERVER["REMOTE_ADDR"] ?? '127.0.0.1';
 if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+    return;
+}
+if (!$connect) {
+    // 数据库不可用时跳过IP检查
     return;
 }
 $ipcheck = "SELECT 1 FROM IPerror WHERE State = ? LIMIT 1";

@@ -8,21 +8,14 @@ if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
     exit;
 }
 
-$name = htmlspecialchars(trim($_POST['eventname']),ENT_QUOTES);
-$icon = $_POST['icon'];
-$id = $_POST['id'];
-$img = htmlspecialchars($_POST['imgurl'],ENT_QUOTES);
+$name = htmlspecialchars(trim($_POST['eventname']), ENT_QUOTES, 'UTF-8');
+$icon = intval($_POST['icon'] ?? 0);
+$id = intval($_POST['id'] ?? 0);
+$img = htmlspecialchars(trim($_POST['imgurl'] ?? ''), ENT_QUOTES, 'UTF-8');
 $file = $_SERVER['PHP_SELF'];
 include_once 'connect.php';
-if (!empty($img)) {
-    $img = htmlspecialchars($_POST['imgurl'],ENT_QUOTES);
-} else {
-    $img = 0;
-}
-if (!$icon) {
-    $icon = 0;
-} else {
-    $icon = $_POST['icon'];
+if (empty($img)) {
+    $img = '0';
 }
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {

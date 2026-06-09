@@ -6,6 +6,9 @@
  */
 
 header('Content-Type: application/json; charset=utf-8');
+
+include_once __DIR__ . '/../admin/connect.php';
+
 $allowedOrigins = [$_SERVER['HTTP_HOST']];
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 if ($origin && in_array(parse_url($origin, PHP_URL_HOST), $allowedOrigins)) {

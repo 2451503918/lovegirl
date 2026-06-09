@@ -33,7 +33,7 @@ $content = htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
 $location = htmlspecialchars($location, ENT_QUOTES, 'UTF-8');
 $date = htmlspecialchars($date, ENT_QUOTES, 'UTF-8');
 
-$stmt = mysqli_prepare($connect, "INSERT INTO timeline (type, title, content, date, location) VALUES (?, ?, ?, ?, ?)");
+$stmt = mysqli_prepare($connect, "INSERT INTO timeline (type, title, content, date, location, images) VALUES (?, ?, ?, ?, ?, '')");
 mysqli_stmt_bind_param($stmt, 'sssss', $type, $title, $content, $date, $location);
 $ok = mysqli_stmt_execute($stmt);
 mysqli_stmt_close($stmt);

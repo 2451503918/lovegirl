@@ -15,6 +15,9 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $writing = htmlspecialchars(trim($_POST['writing']), ENT_QUOTES);
     $WebPjax = trim($_POST['WebPjax']);
     $WebBlur = trim($_POST['WebBlur']);
+    // 将"on"/"off"映射为"1"/"0"，兼容diySet的varchar(1)字段
+    $WebPjax = ($WebPjax === 'on' || $WebPjax === '1') ? '1' : '0';
+    $WebBlur = ($WebBlur === 'on' || $WebBlur === '1') ? '1' : '0';
 
     $stmt = mysqli_prepare($connect, "update text set title = ?, logo = ?, writing = ? where id = '1'");
     mysqli_stmt_bind_param($stmt, "sss", $title, $logo, $writing);

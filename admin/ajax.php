@@ -420,8 +420,6 @@ if (!isset($_SESSION['loginadmin']) || $_SESSION['loginadmin'] === '') {
         }
         )
     })
-    $("#aboutPost").click(function () {
-
     // 位置配置提交
     $("#locationPost").click(function () {
         var boyCity = $("input[name='boyCity']").val();
