@@ -544,8 +544,8 @@ function loadPhotos() {
 
 <!-- 加载动画 -->
 <div id="loader-wrapper">
-    <div class="loader-section"></div>
     <div id="loader"></div>
+    <div class="loader-section"></div>
 </div>
 <script>
 window.addEventListener('load', function() {
@@ -706,8 +706,8 @@ window.addEventListener('load', function() {
                 <i data-lucide="ellipsis"></i>
             </button>
         </div>
-        <div class="word" data-tip="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?>" data-tip-position="bottom">
-            <span class="wenan"><?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?></span>
+        <div class="word" data-tip="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>" data-tip-position="bottom">
+            <span class="wenan"><?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
         </div>
     </div>
 </div>
