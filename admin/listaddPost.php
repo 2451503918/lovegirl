@@ -23,8 +23,10 @@ if (empty($eventname)) {
     exit;
 }
 
-$stmt = mysqli_prepare($connect, "INSERT INTO lovelist (icon, is_done, eventname, imgurl, note, location, lng, lat, date) VALUES (?, 0, ?, ?, '', '', 0, 0, NOW())");
-mysqli_stmt_bind_param($stmt, 'iss', $icon, $eventname, $img);
+$isDone = $icon >= 1 ? 1 : 0;
+
+$stmt = mysqli_prepare($connect, "INSERT INTO lovelist (icon, is_done, eventname, imgurl, note, location, lng, lat, date) VALUES (?, ?, ?, ?, '', '', 0, 0, NOW())");
+mysqli_stmt_bind_param($stmt, 'iiss', $icon, $isDone, $eventname, $img);
 $result = mysqli_stmt_execute($stmt);
 mysqli_stmt_close($stmt);
 

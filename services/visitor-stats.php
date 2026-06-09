@@ -40,7 +40,7 @@ $connect = null;
 if (file_exists(__DIR__ . '/../admin/Config_DB.php')) {
     include_once __DIR__ . '/../admin/Config_DB.php';
     try {
-        $connect = @mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '');
+        $connect = @mysqli_connect($db_address ?? '', $db_username ?? '', $db_password ?? '', $db_name ?? '', 3306, $db_socket ?? null);
         if ($connect) {
             $connect->set_charset("utf8mb4");
             $db_connected = true;
@@ -80,8 +80,7 @@ switch ($action) {
         
         // 更新累计访问次数 (Query 2)
         $stmt = mysqli_prepare($connect, "UPDATE visitor_total SET 
-            total_visits = total_visits + 1,
-            last_visit_time = NOW()
+            total_visits = total_visits + 1
             WHERE id = 1");
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);

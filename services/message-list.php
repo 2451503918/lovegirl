@@ -42,7 +42,7 @@ try {
     if ($r) { $row = mysqli_fetch_assoc($r); $total = intval($row['total'] ?? 0); }
     mysqli_stmt_close($stmt);
 
-    $stmt = mysqli_prepare($connect, "SELECT id, name, QQ, text, time, ip, city, device, browser, likes FROM leaving ORDER BY id DESC LIMIT ? OFFSET ?");
+    $stmt = mysqli_prepare($connect, "SELECT id, name, QQ, text, time, ip, city, device, browser, likes, parent_id FROM leaving ORDER BY id DESC LIMIT ? OFFSET ?");
     mysqli_stmt_bind_param($stmt, 'ii', $limit, $offset);
     mysqli_stmt_execute($stmt);
     $r = mysqli_stmt_get_result($stmt);
@@ -58,6 +58,7 @@ try {
                 'device' => $row['device'] ?? '',
                 'browser' => $row['browser'] ?? '',
                 'likes' => intval($row['likes'] ?? 0),
+                'parent_id' => intval($row['parent_id'] ?? 0),
                 'avatar' => !empty($row['QQ']) ? 'https://q1.qlogo.cn/g?b=qq&nk=' . $row['QQ'] . '&s=640' : '',
             ];
         }

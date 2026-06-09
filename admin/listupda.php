@@ -19,8 +19,9 @@ if (empty($img)) {
 }
 
 if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
-    $stmt = mysqli_prepare($connect, "update lovelist set eventname = ?, icon = ?, imgurl = ? where id = ?");
-    mysqli_stmt_bind_param($stmt, "sssi", $name, $icon, $img, $id);
+    $isDone = $icon >= 1 ? 1 : 0;
+    $stmt = mysqli_prepare($connect, "update lovelist set eventname = ?, icon = ?, is_done = ?, imgurl = ? where id = ?");
+    mysqli_stmt_bind_param($stmt, "siisi", $name, $icon, $isDone, $img, $id);
     mysqli_stmt_execute($stmt);
     $reslove = mysqli_stmt_affected_rows($stmt) >= 0;
     mysqli_stmt_close($stmt);

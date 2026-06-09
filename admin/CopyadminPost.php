@@ -15,8 +15,8 @@ if (isset($_SESSION['loginadmin']) && $_SESSION['loginadmin'] <> '') {
     $icp = htmlspecialchars(trim($_POST['icp']), ENT_QUOTES, 'UTF-8');
     $Copyright = htmlspecialchars(trim($_POST['Copyright']), ENT_QUOTES, 'UTF-8');
 
-    $stmt = mysqli_prepare($connect, "update text set icp = ?, Copyright = ?");
-    mysqli_stmt_bind_param($stmt, "ss", $icp, $Copyright);
+    $stmt = mysqli_prepare($connect, "update text set user = ?, icp = ?, Copyright = ?");
+    mysqli_stmt_bind_param($stmt, "sss", $adminName, $icp, $Copyright);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_affected_rows($stmt) >= 0;
     mysqli_stmt_close($stmt);

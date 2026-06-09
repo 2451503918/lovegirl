@@ -147,9 +147,9 @@ mysqli_stmt_close($spamCheck);
 
 try {
     // 插入留言（v5.2.1: leaving.time 是 varchar(200)，存储Unix时间戳）
-    $stmt = mysqli_prepare($connect, "INSERT INTO leaving (name, QQ, text, time, ip, city, device, browser) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = mysqli_prepare($connect, "INSERT INTO leaving (name, QQ, text, time, ip, city, device, browser, parent_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $now = time();
-    mysqli_stmt_bind_param($stmt, 'ssssssss', $name, $qq, $text, $now, $ip, $city, $device, $browser);
+    mysqli_stmt_bind_param($stmt, 'ssssssssi', $name, $qq, $text, $now, $ip, $city, $device, $browser, $parentId);
     $ok = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     if ($ok) {
