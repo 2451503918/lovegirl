@@ -272,7 +272,9 @@ function loadPhotos() {
 </script>
 <html lang="zh-CN">
 <head>
-<link rel="shortcut icon" href="/favicon.ico" />
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.png" />
+<link rel="canonical" href="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/') ?>" />
 <title><?php
     $siteName = $text['title'] ?: 'Like Girl';
     $siteSlogan = $text['writing'] ?: '愿得一心人 白头不相离';
@@ -286,7 +288,7 @@ function loadPhotos() {
     content="<?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?>,Like Girl 5.2.1-Stable,LGNeUi,情侣小站,开源情侣网站,PHP情侣网站,情侣记录,情侣网站,情侣项目,情侣小窝,Love,LikeGirl,Ki,PHP情侣小站,情侣小站使用教程,情侣小站使用文档">
 <meta name="description" content="<?php echo htmlspecialchars($text['writing'], ENT_QUOTES, 'UTF-8') ?> - Like Girl 5.2.1-Stable">
 <meta name="author" content="Ki">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0,user-scalable=yes,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph (Facebook/微信/QQ) -->
@@ -304,7 +306,12 @@ function loadPhotos() {
 <meta name="twitter:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="x-lg-license-instance" content="858ee1d099b9">
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@400;700&family=Oswald:wght@400;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@400;600&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400;600;700&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+    <!-- Google Fonts CDN 版本 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500&family=Oswald:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap"
+        rel="stylesheet">
 <!-- ===== CSS（按参考站顺序排列） ===== -->
 <link rel="stylesheet" href="/Style/vendor/google-fonts/fonts-non-google.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/fontawesome/css/all.min.css?LikeGirl=<?php echo $version ?>">
@@ -350,12 +357,39 @@ function loadPhotos() {
 <script src="/Style/js/imagesloaded.pkgd.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/loading.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/LGNewUiOwO.js?LikeGirl=<?php echo $version ?>"></script>
+<!-- 全局滚动锁工具（所有弹窗共用，防止滚动条消失时布局跳动） -->
+<script>
+(function(){
+    var _count = 0;
+    window.lgScrollLock = function(){
+        _count++;
+        if (_count === 1) {
+            var w = window.innerWidth - document.documentElement.clientWidth;
+            document.documentElement.style.setProperty('--lg-scrollbar-compensate', w + 'px');
+            document.documentElement.classList.add('lg-scroll-locked');
+        }
+    };
+    window.lgScrollUnlock = function(){
+        _count = Math.max(0, _count - 1);
+        if (_count === 0) {
+            document.documentElement.classList.remove('lg-scroll-locked');
+            document.documentElement.style.removeProperty('--lg-scrollbar-compensate');
+        }
+    };
+    window.lgScrollReset = function(){
+        _count = 0;
+        document.documentElement.classList.remove('lg-scroll-locked');
+        document.documentElement.style.removeProperty('--lg-scrollbar-compensate');
+    };
+})();
+</script>
 <link rel="stylesheet" href="/Style/dplayer/DPlayer.min.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/video-modal.css?LikeGirl=<?php echo $version ?>">
 <script src="/Style/dplayer/DPlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/video-modal.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="https://static.geetest.com/v4/gt4.js"></script>
 <script src="/Style/js/geetest-helper.js?LikeGirl=<?php echo $version ?>"></script>
+<script>if (typeof GeetestHelper !== 'undefined') GeetestHelper.setCaptchaId("");</script>
 <script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/vendor/qrcode/qrcode.min.js?LikeGirl=<?php echo $version ?>"></script>
@@ -363,6 +397,8 @@ function loadPhotos() {
 <script src="/assets/js/lg-app.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-components.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-pjax.js?LikeGirl=<?php echo $version ?>"></script>
+<script>if(window.LGPjax&&typeof window.LGPjax.init==="function")window.LGPjax.init();</script>
+<script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
 <link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
 <script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
 <script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>"></script>
@@ -411,25 +447,16 @@ function loadPhotos() {
         'femaleAvatar' => $girlimg_val,
         'siteBase' => '',
         'assetBase' => '',
-        'imageErrorFallback' => '/Style/img/error.svg',
+        'imageErrorFallback' => '/Style/img/file-placeholder.svg',
         'owoBase' => '/OwO',
         'soloMode' => false,
         'weatherEnabled' => true,
         'weatherToken' => '',
         'bannedChars' => '',
         'endpoints' => [
+            'mapApi' => '/assets/map-api.php',
             'weatherNow' => '/services/weather.php',
             'interaction' => '/services/interaction.php',
-            'messageList' => '/services/message-list.php',
-            'messageSubmit' => '/services/message.php',
-            'infoService' => '/services/info-service.php',
-            'chatData' => '/services/chat-data.php',
-            'timelineData' => '/services/timeline.php',
-            'momentsData' => '/services/moments.php',
-            'randomQuote' => '/services/random_quote.php',
-            'visitorStats' => '/services/visitor-stats.php',
-            'musicPlayerData' => '/services/music-player-data.php',
-            'mapApi' => '/assets/map-api.php',
         ],
     ];
     ?>
@@ -437,59 +464,55 @@ function loadPhotos() {
 
     // AOS 动画配置
     window.LG_AOS_CONFIG = {"enabled":true,"animation":"fade-up","duration":800,"delay":0,"interval":50,"maxDelay":300,"easing":"ease-out-cubic","offset":50,"once":true,"mirror":true,"anchorPlacement":"top-bottom"};
+
+    // 访客地理缓存
+    window.LGVisitorGeoCache = window.LGVisitorGeoCache || (function () {
+        var storageKey = 'lgnewui_visitor_geo_v1';
+        var cookieKey = 'lg_visitor_geo';
+        var maxAgeMs = 6 * 60 * 60 * 1000;
+        function normalize(p) {
+            if (!p || typeof p !== 'object') return null;
+            var lat = Number(p.lat), lng = Number(p.lng), ts = Number(p.ts || Date.now()), city = typeof p.city === 'string' ? p.city.trim() : '';
+            if (!isFinite(lat) || !isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180 || (lat === 0 && lng === 0)) return null;
+            if (!isFinite(ts) || ts <= 0) ts = Date.now();
+            return { lat: Number(lat.toFixed(6)), lng: Number(lng.toFixed(6)), ts: ts, city: city };
+        }
+        function writeCookie(p) { var n = normalize(p); if (!n) return; document.cookie = cookieKey + '=' + encodeURIComponent(JSON.stringify(n)) + '; path=/; max-age=' + String(Math.floor(maxAgeMs / 1000)) + '; SameSite=Lax'; }
+        function clear() { try { window.localStorage.removeItem(storageKey); } catch(e) {} document.cookie = cookieKey + '=; path=/; max-age=0; SameSite=Lax'; }
+        function getCached() { try { var raw = window.localStorage.getItem(storageKey); if (!raw) return null; var n = normalize(JSON.parse(raw)); if (!n) return null; if (Date.now() - n.ts > maxAgeMs) { clear(); return null; } return n; } catch(e) { return null; } }
+        function setCached(p) { var n = normalize(p); if (!n) return; try { window.localStorage.setItem(storageKey, JSON.stringify(n)); } catch(e) {} writeCookie(n); }
+        function syncCookieFromCache() { var c = getCached(); if (c) writeCookie(c); }
+        return { get: getCached, set: setCached, clear: clear, syncCookieFromCache: syncCookieFromCache };
+    })();
+    window.LGVisitorGeoCache.syncCookieFromCache();
+
+    // 高德地图安全配置
+    window._AMapSecurityConfig = {"securityJsCode":""};
+
+    // 地图配置
+    window.LGMAP_CONFIG = {"amapKey":"","modeConfig":{"lovers":{"title":"情侣模式","desc":"无论相隔多远，心始终在一起"},"moments":{"title":"点点滴滴","desc":"记录我们的每一个美好瞬间"},"messages":{"title":"留言模式","desc":"来自世界各地的温暖祝福"},"albums":{"title":"相册模式","desc":"用照片定格我们的回忆"},"events":{"title":"事件清单","desc":"一起完成的每一个小目标"}},"lovers":[],"milestones":[],"events":[],"albums":[],"messages":[],"moments":[],"loveStartDate":"","hsla":"345deg,70%,55%","mapStyle":"amap://styles/grey","soloMode":false,"_apiBase":"/assets/map-api.php"};
+
+    // 地图数据
+    window.LGMapData = window.LGMapData || {
+        fetchAll: function() {
+            var apiUrl = new URL(window.LGMAP_CONFIG._apiBase, window.location.origin);
+            return fetch(apiUrl.toString()).then(function(r){return r.json()}).then(function(data){
+                if (data.lovers) window.LGMAP_CONFIG.lovers = data.lovers;
+                if (typeof data.loveStartDate !== 'undefined') window.LGMAP_CONFIG.loveStartDate = data.loveStartDate;
+                if (data.milestones) window.LGMAP_CONFIG.milestones = data.milestones;
+                if (data.moments) window.LGMAP_CONFIG.moments = data.moments;
+                if (data.messages) window.LGMAP_CONFIG.messages = data.messages;
+                if (data.albums) window.LGMAP_CONFIG.albums = data.albums;
+                if (data.events) window.LGMAP_CONFIG.events = data.events;
+            }).catch(function(){});
+        }
+    };
+    window.LGMAP_DATA_READY = window.LGMapData.fetchAll();
 </script>
 
 <?php
 echo htmlspecialchars_decode($diy['headCon'], ENT_QUOTES);
-if ($diy['Pjaxkg'] === "1"):
-    ?>
-    <script>
-        $(document).pjax('a[target!=_blank]', '#pjax-container', { fragment: '#pjax-container', timeout: 15000 });
-        $(document).on('pjax:send', function () {
-            NProgress.start();
-        });
-        $(document).on('pjax:complete', function () {
-            $(".love_img img,.lovelist img,.little_texts img").addClass("spotlight");
-            NProgress.done();
-            
-            FunLazy({
-                placeholder: "Style/img/Loading2.gif",
-                effect: "show",
-                strictLazyMode: false,
-                useErrorImagePlaceholder: "Style/img/error.svg"
-            })
-            
-            $('.card, .card-b').click(function() {
-                var link = $(this).find('a').get(0);
-                if (link) {
-                    link.click();
-                }
-            });
-            
-            $('#MessageBtn').click(function() {
-                var targetOffset = $('#MessageArea').offset().top;
-                if ($(window).scrollTop() !== targetOffset) {
-                    $('html, body').animate({
-                        scrollTop: targetOffset
-                    }, 800);
-                }
-            });
-            
-            
-            $('video').each(function() {
-                var video = $(this);
-                setupVideoPlayer(video);
-            });
-            
-            initLoveAlbum();
-
-            initScrollButton('#MessageBtn', '#MessageArea', 800, 800);
-
-        });
-        
-        
-    </script>
-<?php endif; ?>
+?>
 </head>
 <body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
 <a href="#pjax-container" class="lg-skip-link">跳到主要内容</a>
