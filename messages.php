@@ -107,10 +107,10 @@ if ($connect) {
                                         <div class="lgnewui-message-drawer-editor" id="lgmsgDrawerEditor" contenteditable="true" data-placeholder="友善的留言是交流的起点..."></div>
                                         <div class="lgnewui-message-drawer-toolbar">
                                             <div class="lgnewui-message-tb-left" style="gap: 2px;">
-                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerEmoji" title="表情" style="width:32px;height:32px;">
+                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerEmoji" title="表情" style="width:36px;height:36px;">
                                                     <i data-lucide="smile"></i>
                                                 </button>
-                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerQuote" title="随机一言" style="width:32px;height:32px;">
+                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerQuote" title="随机一言" style="width:36px;height:36px;">
                                                     <i data-lucide="sparkles"></i>
                                                 </button>
                                                 <div class="lgnewui-message-switch-wrap" id="lgmsgDrawerEnterSwitch">
@@ -150,7 +150,7 @@ if ($connect) {
         <div class="lgnewui-message-modal-overlay" id="lgmsgAuthModal">
             <div class="lgnewui-message-modal-content" style="max-width: 400px; max-height: unset; border-radius: 20px;">
                 <div class="lgnewui-message-close-wrapper" style="top: 16px; right: 16px;">
-                    <button class="lgnewui-message-close-btn" id="lgmsgAuthCloseBtn" style="width: 28px; height: 28px;">
+                    <button class="lgnewui-message-close-btn" id="lgmsgAuthCloseBtn" style="width: 44px; height: 44px;">
                         <i data-lucide="x" style="width:16px;height:16px;"></i>
                     </button>
                 </div>

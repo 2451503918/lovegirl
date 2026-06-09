@@ -173,6 +173,7 @@
     border-radius: 2rem;
     font-size: 1rem;
     font-weight: 600;
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
