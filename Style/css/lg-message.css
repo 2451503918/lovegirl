@@ -4062,4 +4062,10 @@ html.lg-scroll-locked #lgnewuiFloatingActions {
     .lgnewui-btn-primary {
         justify-content: center;
     }
+
+    /* 留言页面底部导航间距补偿 */
+    .lgnewui-message-page,
+    .Message_Wrap {
+        padding-bottom: 100px !important;
+    }
 }

@@ -2510,3 +2510,16 @@ body {
         left: -64px;
     }
 }
+
+/* ============================================
+   移动端底部导航间距补偿
+   ============================================ */
+@media (max-width: 768px) {
+    .lgnewui-time-line-main {
+        padding-bottom: 100px !important;
+    }
+
+    .lgnewui-time-line-year-section:last-child {
+        margin-bottom: 120px;
+    }
+}

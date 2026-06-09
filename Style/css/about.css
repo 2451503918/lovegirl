@@ -50,3 +50,25 @@
     padding: 1rem;
     box-sizing: border-box;
 }
+
+/* ============================================
+   移动端适配
+   ============================================ */
+@media (max-width: 768px) {
+    .central-600 {
+        border-radius: 1.5rem;
+    }
+
+    .central-600 .botui-container {
+        border-radius: 1.5rem;
+    }
+
+    .text-ce {
+        font-size: 1.5rem;
+    }
+
+    /* 底部导航间距补偿 */
+    .central-600 {
+        margin-bottom: 100px !important;
+    }
+}

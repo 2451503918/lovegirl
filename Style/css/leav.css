@@ -340,6 +340,15 @@ span.iconfont.icon-liuyan {
     flex-direction: column;
 }
 
+/* 移动端留言按钮上移，避免被底部导航遮挡 */
+@media (max-width: 768px) {
+    #mes {
+        right: 0.75rem;
+        bottom: 96px;
+        top: auto;
+    }
+}
+
 .mesly {
     /* font-size: 2.5rem !important; */
     background: #fb6e6e;

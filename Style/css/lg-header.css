@@ -1027,12 +1027,32 @@
     .lgnewui-header-actions {
         opacity: 1 !important;
         pointer-events: auto !important;
-        transform: translateY(-50%) !important;
+        transform: none !important;
         gap: 6px !important;
+        position: absolute !important;
+        right: 16px !important;
+        top: 50% !important;
+        margin-top: 0 !important;
     }
 
     /* 6. header布局 */
     .header {
         justify-content: flex-end !important;
+        position: relative !important;
+    }
+
+    /* 7. 移动端隐藏天气文字和足迹文字，只显示图标 */
+    .lgnewui-header-weather-text,
+    .lgnewui-header-map-text {
+        display: none !important;
+    }
+
+    .lgnewui-header-weather {
+        padding: 6px !important;
+    }
+
+    .lgnewui-header-map {
+        padding: 0 6px !important;
+        height: auto !important;
     }
 }

@@ -6206,3 +6206,96 @@ body.bg-grad-grid::before {
         justify-content: center;
     }
 }
+
+/* ============================================
+   移动端底部导航间距补偿
+   防止内容被底部导航栏遮挡
+   ============================================ */
+@media (max-width: 768px) {
+    /* 页面主内容区底部留白 */
+    .lgnewui-home,
+    .Width_limit_10rem,
+    #pjax-container {
+        padding-bottom: 100px !important;
+    }
+
+    /* footer 底部留白 */
+    .footer-warp {
+        padding-bottom: 100px !important;
+    }
+
+    /* 回到顶部按钮上移 */
+    #lgnewuiFloatingActions {
+        bottom: 100px !important;
+        right: 0.75rem !important;
+    }
+
+    #lgnewuiFloatingActions>a {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.3rem;
+    }
+
+    /* Bento 网格移动端单列 */
+    .lgnewui-home .lgnewui-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* 智能卡片移动端适配 */
+    .lgnewui-home .lgnewui-smart-card {
+        min-height: 260px !important;
+    }
+
+    /* 统计卡片移动端适配 */
+    .lgnewui-home .lgnewui-stat-card {
+        padding: 1rem !important;
+    }
+
+    /* 时光计时器移动端适配 */
+    .lgnewui-home .lgnewui-day-fusion-card {
+        padding: 2rem 1rem !important;
+    }
+
+    .lgnewui-home .lgnewui-day-digital-timer {
+        gap: 0.8rem !important;
+    }
+
+    .lgnewui-home .lgnewui-day-timer-val {
+        font-size: 1.8rem !important;
+    }
+
+    /* 结尾区域移动端适配 */
+    .lgnewui-home .lgnewui-epilogue__card {
+        padding: 3rem 1.5rem 2rem !important;
+    }
+
+    /* 确保横向不溢出 */
+    .lgnewui-home {
+        overflow-x: hidden !important;
+    }
+
+    /* section header 移动端紧凑 */
+    .lgnewui-home .lgnewui-section-header {
+        padding: 0 0.5rem !important;
+    }
+
+    .lgnewui-home .lgnewui-section-title {
+        font-size: 1.1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 更小屏幕进一步优化 */
+    .lgnewui-home .lgnewui-day-timer-val {
+        font-size: 1.5rem !important;
+    }
+
+    .lgnewui-home .lgnewui-day-date-label-small {
+        font-size: 10px !important;
+    }
+
+    .lgnewui-home .lgnewui-day-timer-label {
+        font-size: 11px !important;
+    }
+}

@@ -175,12 +175,64 @@ li {
 }
 
 span.weisc {
-  padding: 0.4rem 1rem;
-  border-radius: 0.5rem;
-  display: inline-block;
-  text-align: center;
-  margin: 0.5rem 0;
-  margin-top: 1rem;
-  color: #ffbc00;
-  border: 1px solid #ffbc00;
+    padding: 0.4rem 1rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+    text-align: center;
+    margin: 0.5rem 0;
+    margin-top: 1rem;
+    color: #ffbc00;
+    border: 1px solid #ffbc00;
+}
+
+/* ============================================
+   移动端适配
+   ============================================ */
+@media (max-width: 768px) {
+    .central .list_texts {
+        padding: 1rem 0;
+        border-radius: 0.75rem;
+    }
+
+    .central .list_texts .top-title {
+        font-size: 1.2rem;
+        line-height: 3rem;
+    }
+
+    .row .card .list_texts {
+        padding: 1rem;
+    }
+
+    .row .card .list_texts .lovelist {
+        line-height: 2.5rem;
+    }
+
+    .row .card .list_texts i {
+        font-size: 1.4rem;
+        margin-right: 0.5rem;
+    }
+
+    .row .card .list_texts span {
+        font-size: 1.1rem;
+    }
+
+    .ding_icon {
+        right: 1rem;
+        top: 0.5rem;
+    }
+
+    .ding_icon svg {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .list_env .list_num {
+        font-size: 1.1rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    /* 底部导航间距补偿 */
+    .central {
+        padding-bottom: 100px !important;
+    }
 }
