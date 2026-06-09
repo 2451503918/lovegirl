@@ -493,9 +493,9 @@
 }
 
 #nav-music .lgnewui-nav-music-btn {
-    width: 26px;
-    height: 26px;
-    border-radius: 26px;
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
     border: none;
     background: transparent;
     color: #ffffff;
@@ -507,6 +507,14 @@
     transition: background 0.2s ease, transform 0.1s ease, opacity 0.2s ease;
     pointer-events: auto;
     /* 确保按钮可点击 */
+}
+
+@media (max-width: 768px) {
+    #nav-music .lgnewui-nav-music-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 36px;
+    }
 }
 
 #nav-music.stretch:hover .lgnewui-nav-music-btn {
@@ -780,6 +788,13 @@
 /* 保持所有设备显示 */
 #nav-music {
     display: flex !important;
+}
+
+@media screen and (max-width: 768px) {
+    #nav-music {
+        bottom: 80px;
+        left: 10px;
+    }
 }
 
 @media screen and (max-width: 400px) {
@@ -1333,8 +1348,8 @@
 }
 
 .lgnewui-music-playlist-close {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     border: none;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 50%;
@@ -1343,6 +1358,13 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .lgnewui-music-playlist-close {
+        width: 36px;
+        height: 36px;
+    }
 }
 
 .lgnewui-music-playlist-close:hover {
