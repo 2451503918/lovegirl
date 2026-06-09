@@ -108,7 +108,7 @@ if ($connect) {
         <h2 class="lgnewui-hero-title"><?php echo htmlspecialchars($articleData['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
     </div>
 
-    <div class="lgnewui-container">
+    <div class="lgnewui-container lgnewui-main">
         <!-- 文章内容卡片 -->
         <div class="lgnewui-article-detail-card" data-aos="fade-up">
             <!-- 文章头部 -->
@@ -140,7 +140,7 @@ if ($connect) {
             <div class="lgnewui-article-detail-content">
                 <h1 class="lgnewui-article-detail-title"><?php echo htmlspecialchars($articleData['title'], ENT_QUOTES, 'UTF-8'); ?></h1>
                 <div class="lgnewui-article-detail-body">
-                    <?php echo htmlspecialchars($articleData['text'], ENT_QUOTES, 'UTF-8'); ?>
+                    <?php echo $articleData['text']; ?>
                 </div>
             </div>
 

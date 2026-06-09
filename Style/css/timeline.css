@@ -2,6 +2,15 @@
    RESET & BASE STYLES
    ============================================ */
 
+/* 时间轴内图片约束 */
+.lgnewui-time-line-main img,
+.lgnewui-time-line-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    display: block;
+}
+
 /* 覆盖全局 overflow-x: hidden，使 sticky 定位正常工作 */
 html {
     overflow-x: clip !important;

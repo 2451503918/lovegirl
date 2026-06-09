@@ -42,34 +42,40 @@ $mockWeatherData = [
         'city' => '深圳',
         'temp' => '26',
         'text' => '多云',
+        'desc' => '多云',
         'icon' => '104',
         'humidity' => '72',
         'vis' => '25',
         'feelsLike' => '28',
         'windDir' => '东南风',
-        'windScale' => '3'
+        'windScale' => '3',
+        'obsTime' => date('c')
     ],
     '2' => [
         'city' => '广州',
         'temp' => '28',
         'text' => '晴',
+        'desc' => '晴',
         'icon' => '100',
         'humidity' => '65',
         'vis' => '30',
         'feelsLike' => '31',
         'windDir' => '南风',
-        'windScale' => '2'
+        'windScale' => '2',
+        'obsTime' => date('c')
     ],
     'ip' => [
         'city' => '本地',
         'temp' => '25',
         'text' => '晴间多云',
+        'desc' => '晴间多云',
         'icon' => '101',
         'humidity' => '68',
         'vis' => '28',
         'feelsLike' => '27',
         'windDir' => '东北风',
-        'windScale' => '2'
+        'windScale' => '2',
+        'obsTime' => date('c')
     ]
 ];
 

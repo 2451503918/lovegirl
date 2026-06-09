@@ -49,14 +49,17 @@
         return name;
     }
 
-    var _defaultAvatar = 'https://q1.qlogo.cn/g?b=qq&nk=10000&s=100';
+    var _defaultAvatar = 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23c7c7cc%27%3E%3Ccircle cx=%2712%27 cy=%278%27 r=%274%27/%3E%3Cpath d=%27M20 21a8 8 0 1 0-16 0%27/%3E%3C/svg%3E';
 
     function getAvatarUrl(qq) {
+        if (qq && qq !== 'anon' && /^\d+$/.test(qq)) {
+            return 'https://q1.qlogo.cn/g?b=qq&nk=' + qq + '&s=640';
+        }
         if (qq === 'anon') {
             var list = LGConfig.anonAvatars || [];
-            return list.length ? list[Math.floor(Math.random() * list.length)] : _defaultAvatar;
+            return list.length ? list[Math.floor(Math.random() * list.length)] : (LGConfig.anonymousAvatar || _defaultAvatar);
         }
-        return _defaultAvatar;
+        return LGConfig.anonymousAvatar || _defaultAvatar;
     }
 
     // 滚动锁定（复用 head.php 中定义的全局 lgScrollLock/lgScrollUnlock）

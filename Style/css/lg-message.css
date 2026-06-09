@@ -785,7 +785,13 @@ html.lg-scroll-locked #lgnewuiFloatingActions {
     padding: 3px;
     box-sizing: content-box;
     background: rgba(0, 0, 0, 0.05);
-    border-radius: 5px;
+}
+
+/* 修复 lucide 创建的 SVG 图标尺寸 */
+.Message_Wrap .MessageCard .MsgFooter .InfoItem svg {
+    width: 10px !important;
+    height: 10px !important;
+    flex-shrink: 0;
 }
 
 .Message_Wrap .MessageCard .MsgFooter .InfoItem i[class*="qi-"].lgmsg-ico {
@@ -3294,6 +3300,12 @@ html.lg-scroll-locked #lgnewuiFloatingActions {
         height: 12px !important;
         padding: 3px;
         border-radius: 5px;
+    }
+
+    /* 修复 lucide SVG 图标尺寸 */
+    .Message_Wrap .MessageCard .MsgFooter .InfoItem svg {
+        width: 12px !important;
+        height: 12px !important;
     }
 
     .Message_Wrap .MessageCard .MsgFooter .InfoItem i[class*="qi-"].lgmsg-ico {

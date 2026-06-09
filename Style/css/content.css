@@ -180,7 +180,7 @@ a:hover {
 .bg-img {
   width: 100%;
   box-sizing: border-box;
-  background: url(https://xi-1255495366.cos.ap-chengdu.myqcloud.com/46854f50ad83747f00cc49a33db38408.png) no-repeat center;
+  background: linear-gradient(135deg, #fce4ec 0%, #e8eaf6 50%, #e3f2fd 100%) no-repeat center;
   background-size: cover;
   padding-top: 8rem;
   position: relative;
@@ -189,16 +189,18 @@ a:hover {
 .bg-img .middle {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 3rem;
   backdrop-filter: blur(25px) saturate(180%);
   -webkit-backdrop-filter: blur(25px) saturate(180%);
   background: rgba(255, 255, 255, 0.25);
-  padding: 4rem 5rem 3rem;
+  padding: 3rem 2rem;
   border-radius: 2.5rem;
   user-select: none;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
   transition: all 0.3s ease;
+  flex-wrap: wrap;
 }
 
 .bg-img .middle:hover {
@@ -208,10 +210,11 @@ a:hover {
 }
 
 .bg-img .middle img {
-  width: 10rem;
-  height: 10rem;
-  border-radius: 10rem;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   border: 0.2rem solid #fff;
+  max-width: 30vw;
 }
 
 .bg-img .middle .img-male span {

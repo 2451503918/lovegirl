@@ -3189,6 +3189,15 @@ html {
     margin: 1.5rem auto;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* Article detail body images - constrain max size */
+.lgnewui-article-detail-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    display: block;
+    margin: 1rem auto;
+}
 .lgnewui-main img:last-child {
     margin-bottom: 0;
 }

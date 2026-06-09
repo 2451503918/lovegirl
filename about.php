@@ -20,15 +20,15 @@ $girlName = $text['girl'] ?? 'Ta';
     <link rel="stylesheet" href="/Style/css/lg-chat.css?LikeGirl=<?php echo $version ?>">
 
     <!-- chat-demo 完整结构 -->
-    <div class="lgnewui-chat-wrapper" style="opacity:0;transition:opacity .3s ease;">
+    <div class="lgnewui-chat-wrapper" style="opacity:1;transition:opacity .3s ease;">
         <div class="lgnewui-chat-device">
             <!-- 顶部导航 -->
             <div class="lgnewui-chat-header">
                 <div class="lgnewui-chat-header-info">
                     <img src="<?php echo htmlspecialchars($boyAvatarUrl, ENT_QUOTES, 'UTF-8') ?>" alt="Avatar" class="lgnewui-chat-avatar" id="headerAvatar">
                     <div class="lgnewui-chat-user-info">
-                        <div class="lgnewui-chat-user-name" id="headerName">加载中...</div>
-                        <div class="lgnewui-chat-user-status"><span class="lgnewui-chat-status-dot"></span> 回忆连接中...</div>
+                        <div class="lgnewui-chat-user-name" id="headerName"><?php echo htmlspecialchars($boyName, ENT_QUOTES, 'UTF-8') ?> ♥ <?php echo htmlspecialchars($girlName, ENT_QUOTES, 'UTF-8') ?></div>
+                        <div class="lgnewui-chat-user-status"><span class="lgnewui-chat-status-dot" style="background:#4ade80"></span> 回忆连接中...</div>
                     </div>
                 </div>
                 <div class="lgnewui-chat-header-icon" id="menuToggle" title="菜单">

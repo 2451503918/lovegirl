@@ -70,6 +70,14 @@
     box-sizing: border-box;
 }
 
+/* 相册图片大小约束 */
+.lg-masonry-grid img,
+.lg-page-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 @media (min-width: 640px) {
     .lg-masonry-col {
         width: 50%;

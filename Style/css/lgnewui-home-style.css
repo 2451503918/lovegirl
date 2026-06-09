@@ -8,6 +8,17 @@ html {
     overflow-x: hidden;
 }
 
+/* PJAX 页面切换平滑过渡 */
+#pjax-container {
+    transition: opacity 0.25s ease;
+    opacity: 1;
+}
+
+#pjax-container.pjax-loading {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 body {
     overflow-x: hidden;
 }
