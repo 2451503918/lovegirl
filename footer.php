@@ -386,7 +386,7 @@ function setMusicSetting(key, value) {
     showModalWhenReady();
 
     confirmBtn.addEventListener('click', function () {
-        if (dismissed) saveMusicSetting('modalDismissed', true);
+        if (dismissed) setMusicSetting('modalDismissed', true);
         modal.classList.remove('show');
         setTimeout(function () {
             if (window.lg_love && typeof lg_love.musicToggle === 'function') {
@@ -395,7 +395,7 @@ function setMusicSetting(key, value) {
         }, 300);
     });
     cancelBtn.addEventListener('click', function () {
-        if (dismissed) saveMusicSetting('modalDismissed', true);
+        if (dismissed) setMusicSetting('modalDismissed', true);
         modal.classList.remove('show');
     });
 })();

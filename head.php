@@ -62,7 +62,7 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="/favicon.png" />
+<link rel="icon" href="/favicon.ico" />
 <link rel="canonical" href="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/') ?>" />
 <title><?php
     $siteName = ($text['title'] ?? '') ?: 'Like Girl';
@@ -186,7 +186,6 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <script src="/assets/js/lg-components.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/assets/js/lg-pjax.js?LikeGirl=<?php echo $version ?>"></script>
 <script>if(window.LGPjax&&typeof window.LGPjax.init==="function")window.LGPjax.init();</script>
-<script src="/Style/vendor/confetti/confetti.browser.min.js?LikeGirl=<?php echo $version ?>"></script>
 <link rel="stylesheet" href="/Style/Font/font_footer/iconfont.css?LikeGirl=<?php echo $version ?>">
 <script src="/assets/js/page-messages.js?LikeGirl=<?php echo $version ?>" defer></script>
 <script src="/Style/toastify/lucide.min.js?LikeGirl=<?php echo $version ?>"></script>
