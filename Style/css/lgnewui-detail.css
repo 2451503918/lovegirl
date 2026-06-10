@@ -4501,25 +4501,3 @@ html {
     list-style-type: inherit;
     margin: 0.25em 0;
 }
-
-/* 文章内容区图片尺寸约束 */
-.lgnewui-article-detail-body img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    margin: 1rem 0;
-    display: block;
-}
-.lgnewui-article-detail-body video {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-}
-.lgnewui-article-detail-body p {
-    margin-bottom: 1rem;
-    line-height: 1.8;
-}
-.lgnewui-article-detail-body a {
-    color: #3b82f6;
-    text-decoration: underline;
-}

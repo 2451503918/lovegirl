@@ -140,7 +140,7 @@ $moodIconMap = [
                             <footer class="lgnewui-article-card-footer">
                                 <div class="lg-author show-gender">
                                     <div class="lg-author__ring">
-                                        <div class="lg-author__avatar <?php echo $isMaleAuthor ? 'lg-male-avatar' : 'lg-female-avatar'; ?>"
+                                        <div class="lg-author__avatar"
                                              style="background-image: url()"></div>
                                         <?php if ($isMaleAuthor): ?>
                                         <div class="lg-author__badge male">
@@ -154,12 +154,10 @@ $moodIconMap = [
                                     </div>
                                     <div class="lg-author__text">
                                         <span class="lg-author__name"><?php echo htmlspecialchars($artAuthor, ENT_QUOTES, 'UTF-8') ?></span>
-                                        <?php if (!empty($artLocation)): ?>
-                                        <span class="lg-author__meta" data-tooltip="<?php echo htmlspecialchars($artLocation, ENT_QUOTES, 'UTF-8') ?>">
+                                        <span class="lg-author__meta" data-tooltip="<?php echo !empty($artLocation) ? htmlspecialchars($artLocation, ENT_QUOTES, 'UTF-8') : '' ?>">
                                             <i class="ph-fill ph-map-pin"></i>
-                                            <span><?php echo htmlspecialchars($artLocation, ENT_QUOTES, 'UTF-8') ?></span>
+                                            <span><?php echo !empty($artLocation) ? htmlspecialchars($artLocation, ENT_QUOTES, 'UTF-8') : '' ?></span>
                                         </span>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="lgnewui-article-interact-box">
@@ -195,13 +193,21 @@ $moodIconMap = [
     var maleAvatar = (window.LG_CONFIG && window.LG_CONFIG.maleAvatar) || '';
     var femaleAvatar = (window.LG_CONFIG && window.LG_CONFIG.femaleAvatar) || '';
     if (maleAvatar) {
-        document.querySelectorAll('.lg-male-avatar').forEach(function(el) {
-            el.style.backgroundImage = 'url(' + maleAvatar + ')';
+        document.querySelectorAll('.lg-author__ring .lg-author__badge.male').forEach(function(badge) {
+            var ring = badge.closest('.lg-author__ring');
+            if (ring) {
+                var avatar = ring.querySelector('.lg-author__avatar');
+                if (avatar) avatar.style.backgroundImage = 'url(' + maleAvatar + ')';
+            }
         });
     }
     if (femaleAvatar) {
-        document.querySelectorAll('.lg-female-avatar').forEach(function(el) {
-            el.style.backgroundImage = 'url(' + femaleAvatar + ')';
+        document.querySelectorAll('.lg-author__ring .lg-author__badge.female').forEach(function(badge) {
+            var ring = badge.closest('.lg-author__ring');
+            if (ring) {
+                var avatar = ring.querySelector('.lg-author__avatar');
+                if (avatar) avatar.style.backgroundImage = 'url(' + femaleAvatar + ')';
+            }
         });
     }
 })();

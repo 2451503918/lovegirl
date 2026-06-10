@@ -72,8 +72,8 @@ if ($connect) {
                             <div class="lgnewui-message-drawer-subtitle" id="lgmsgDrawerSubtitle">0 条回复</div>
                         </div>
                     </div>
-                    <button class="lgnewui-message-close-btn" id="lgmsgDrawerClose" aria-label="关闭留言详情">
-                        <i data-lucide="x" style="width:20px;height:20px;" aria-hidden="true"></i>
+                    <button class="lgnewui-message-close-btn" id="lgmsgDrawerClose">
+                        <i data-lucide="x" style="width:20px;height:20px;"></i>
                     </button>
                 </div>
                 <div class="lgnewui-message-drawer-scroll" id="lgmsgDrawerScroll">
@@ -94,7 +94,7 @@ if ($connect) {
                                 <div class="lgnewui-message-drawer-expanded" id="lgmsgDrawerExpanded">
                                     <div class="lgnewui-message-drawer-identity" id="lgmsgDrawerIdentityBar">
                                         <div id="lgmsgDrawerIdentityClickArea" style="display:flex; align-items:center; gap:10px; flex:1; overflow:hidden;">
-                                            <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23c7c7cc%22%3E%3Ccircle cx=%2212%22 cy=%228%22 r=%224%22/%3E%3Cpath d=%22M20 21a8 8 0 1 0-16 0%22/%3E%3C/svg%3E" id="lgmsgDrawerIdentityAvatar" alt="用户头像">
+                                            <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23c7c7cc%22%3E%3Ccircle cx=%2212%22 cy=%228%22 r=%224%22/%3E%3Cpath d=%22M20 21a8 8 0 1 0-16 0%22/%3E%3C/svg%3E" id="lgmsgDrawerIdentityAvatar">
                                             <span id="lgmsgDrawerIdentityName">未认证，点击设置身份</span>
                                             <i data-lucide="square-pen" class="edit-icon"></i>
                                         </div>
@@ -107,10 +107,10 @@ if ($connect) {
                                         <div class="lgnewui-message-drawer-editor" id="lgmsgDrawerEditor" contenteditable="true" data-placeholder="友善的留言是交流的起点..."></div>
                                         <div class="lgnewui-message-drawer-toolbar">
                                             <div class="lgnewui-message-tb-left" style="gap: 2px;">
-                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerEmoji" title="表情" style="width:36px;height:36px;">
+                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerEmoji" title="表情" style="width:32px;height:32px;">
                                                     <i data-lucide="smile"></i>
                                                 </button>
-                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerQuote" title="随机一言" style="width:36px;height:36px;">
+                                                <button class="lgnewui-message-tb-btn" id="lgmsgBtnDrawerQuote" title="随机一言" style="width:32px;height:32px;">
                                                     <i data-lucide="sparkles"></i>
                                                 </button>
                                                 <div class="lgnewui-message-switch-wrap" id="lgmsgDrawerEnterSwitch">
@@ -119,7 +119,7 @@ if ($connect) {
                                                 </div>
                                             </div>
                                             <span class="lgnewui-message-char-counter" id="lgmsgDrawerCharCounter" style="margin-right: 12px; margin-left: auto;">0/500</span>
-                                            <button class="lgnewui-message-reply-btn" id="lgmsgReplySendBtn" aria-label="发送回复"><i data-lucide="send" style="width:16px;height:16px;" aria-hidden="true"></i></button>
+                                            <button class="lgnewui-message-reply-btn" id="lgmsgReplySendBtn"><i data-lucide="send" style="width:16px;height:16px;"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -150,12 +150,12 @@ if ($connect) {
         <div class="lgnewui-message-modal-overlay" id="lgmsgAuthModal">
             <div class="lgnewui-message-modal-content" style="max-width: 400px; max-height: unset; border-radius: 20px;">
                 <div class="lgnewui-message-close-wrapper" style="top: 16px; right: 16px;">
-                    <button class="lgnewui-message-close-btn" id="lgmsgAuthCloseBtn" style="width: 44px; height: 44px;">
+                    <button class="lgnewui-message-close-btn" id="lgmsgAuthCloseBtn" style="width: 28px; height: 28px;">
                         <i data-lucide="x" style="width:16px;height:16px;"></i>
                     </button>
                 </div>
                 <div class="lgnewui-message-modal-body" style="padding: 24px;">
-                    <div class="lgnewui-message-drawer-title" id="lgmsgAuthTitle" style="text-align: center; margin-bottom: 20px;">身份设置</div>
+                    <div class="lgnewui-message-drawer-title" style="text-align: center; margin-bottom: 20px;">身份设置</div>
                     <div class="lgnewui-message-ios-tabs-wrap" style="justify-content: center; margin-bottom: 24px;">
                         <div class="lgnewui-message-ios-tabs" id="lgmsgAuthTabContainer">
                             <div class="lgnewui-message-ios-tab-slider" id="lgmsgAuthTabSlider"></div>

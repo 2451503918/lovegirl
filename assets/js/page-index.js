@@ -619,6 +619,8 @@
             const slot = cardEl.getAttribute('data-weather-slot') || '1';
             u.searchParams.set('mode', 'couple');
             u.searchParams.set('slot', slot);
+            const wt = (window.LG_CONFIG && window.LG_CONFIG.weatherToken) || '';
+            if (wt) u.searchParams.set('_wt', wt);
             return u.toString();
         },
 
@@ -743,7 +745,6 @@
 
         _initLockedCardGlow() {
             var cards = document.querySelectorAll('.lgnewui-event-card--locked');
-            if (!cards || cards.length === 0) return;
             var colors = [
                 'rgba(196, 181, 253, 0.22)', // 淡紫
                 'rgba(147, 197, 253, 0.22)',  // 淡蓝
@@ -753,7 +754,7 @@
                 'rgba(165, 180, 252, 0.20)',  // 靛蓝
             ];
             function pick() { return colors[Math.floor(Math.random() * colors.length)]; }
-            Array.from(cards).forEach(function(card) {
+            cards.forEach(function(card) {
                 var c1 = pick(), c2 = pick();
                 while (c2 === c1) c2 = pick();
                 card.style.setProperty('--glow-tl', c1);

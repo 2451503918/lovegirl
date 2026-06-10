@@ -173,7 +173,7 @@
                 }
             };
 
-            if (typeof $.fn.imagesLoaded === 'function' && $articleGrid.find('img').length > 0) {
+            if (typeof $.fn.imagesLoaded === 'function') {
                 $articleGrid.imagesLoaded(initMasonry);
             } else {
                 TimerManager.setTimeout('articleMasonry', initMasonry, 100);
@@ -206,28 +206,22 @@
             }
 
             // 重置 pjax-container 内的懒加载图片状态
-            const pjaxContainer = document.getElementById('pjax-container');
-            if (pjaxContainer) {
-                const lazyImages = pjaxContainer.querySelectorAll('[data-src]');
-                Array.from(lazyImages).forEach(el => {
-                    el.removeAttribute('data-ll-status');
-                    el.classList.remove('loaded', 'entered', 'error', 'applied');
+            document.querySelectorAll('#pjax-container [data-src]').forEach(el => {
+                el.removeAttribute('data-ll-status');
+                el.classList.remove('loaded', 'entered', 'error', 'applied');
+            });
+
+            // 重新初始化
+            if (typeof LazyLoad !== 'undefined') {
+                window.lazyLoadInstance = new LazyLoad({
+                    threshold: 200,
+                    elements_selector: this._selector,
+                    callback_loaded: () => {
+                        // 图片加载完成后触发 Masonry 重新布局
+                        MasonryManager.initAlbumGrid();
+                    }
                 });
             }
-
-            // 重新初始化 LazyLoad
-            this._initLazyLoad();
-        },
-        
-        _initLazyLoad() {
-            if (typeof LazyLoad === 'undefined') return;
-            window.lazyLoadInstance = new LazyLoad({
-                threshold: 200,
-                elements_selector: this._selector,
-                callback_loaded: () => {
-                    MasonryManager.initAlbumGrid();
-                }
-            });
         }
     };
 
@@ -615,9 +609,6 @@
             $(document).on('pjax:start.lgPjax', () => {
                 $('html').css('scroll-behavior', 'auto');
                 LoadingIndicator.show();
-                // 页面淡出过渡
-                const container = document.getElementById('pjax-container');
-                if (container) container.classList.add('pjax-loading');
 
                 // ---- 统一清理：防止内存泄漏 ----
                 // 0. 强制释放滚动锁（弹窗打开时切页会导致 lg-scroll-locked 残留）
@@ -696,9 +687,6 @@
             // ========== pjax:complete ==========
             $(document).on('pjax:complete.lgPjax', () => {
                 $('html').css('scroll-behavior', 'smooth');
-                // 页面淡入过渡
-                const container = document.getElementById('pjax-container');
-                if (container) container.classList.remove('pjax-loading');
 
                 // 如果是 lovelist.php#event-xxx 或 messages.php#comment_xxx 跳转，跳过通用滚动
                 const hash = window.location.hash;

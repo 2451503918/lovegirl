@@ -807,37 +807,47 @@ if (typeof setMusicSetting === 'undefined') {
     </div>
 
 <div class="lgnewui-mobile-nav-root">
+
+    <!-- 方案5: 极简包裹点阵 -->
     <div class="lgnewui-tab-template-v5-container lgnewui-glass-panel" id="lgnewui-mobile-nav-v5">
         <div class="lgnewui-tab-template-v5-indicator"></div>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="articles.php" data-page="articles">
-            <i class="ph-fill ph-notebook"></i>
-            <span>点滴</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="messages.php" data-page="messages">
-            <i class="ph-fill ph-chat-teardrop-dots"></i>
-            <span>留言</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="timeline.php" data-page="timeline">
-            <i class="ph-fill ph-clock-countdown"></i>
-            <span>轨迹</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item active" href="index.php" data-page="index">
-            <i class="ph-fill ph-house"></i>
-            <span>首页</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="albums.php" data-page="albums">
-            <i class="ph-fill ph-camera"></i>
-            <span>相册</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="lovelist.php" data-page="lovelist">
-            <i class="ph-fill ph-list-checks"></i>
-            <span>清单</span>
-        </a>
-        <a class="lgnewui-base-nav-item js-lgnewui-v5-item" href="about.php" data-page="about">
-            <i class="ph-fill ph-book-open-text"></i>
-            <span>关于</span>
-        </a>
-    </div>
+                                <a class="lgnewui-base-nav-item js-lgnewui-v5-item"
+               href="articles.php">
+                <i class="ph-fill ph-notebook"></i>
+                <span>点滴</span>
+            </a>
+                                <a class="lgnewui-base-nav-item js-lgnewui-v5-item"
+               href="messages.php">
+                <i class="ph-fill ph-chat-teardrop-dots"></i>
+                <span>留言</span>
+            </a>
+                                <a class="lgnewui-base-nav-item js-lgnewui-v5-item"
+               href="timeline.php">
+                <i class="ph-fill ph-clock-countdown"></i>
+                <span>轨迹</span>
+            </a>
+                                <a class="lgnewui-base-nav-item js-lgnewui-v5-item active"
+               href="index.php">
+                <i class="ph-fill ph-house"></i>
+                <span>首页</span>
+            </a>
+                                <a class="lgnewui-base-nav-item js-lgnewui-v5-item"
+               href="albums.php">
+                <i class="ph-fill ph-camera"></i>
+                <span>相册</span>
+            </a>
+                                <a class="lgnewui-base-nav-item js-lgnewui-v5-item"
+               href="lovelist.php">
+                <i class="ph-fill ph-list-checks"></i>
+                <span>清单</span>
+            </a>
+                                <a class="lgnewui-base-nav-item js-lgnewui-v5-item"
+               href="about.php">
+                <i class="ph-fill ph-book-open-text"></i>
+                <span>关于</span>
+            </a>
+            </div>
+
 </div>
 
 <script>

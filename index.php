@@ -205,7 +205,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
     </div>
 
     <!-- ===== 2. 主内容区域 ===== -->
-    <main class="lgnewui-home lgnewui-container" style="padding-bottom:2rem;">
+    <main class="lgnewui-home lgnewui-container">
 
         <!-- ===== 天数计数器 ===== -->
         <div class="lgnewui-day-wrapper lgnewui-mb-4" data-aos="fade-up" data-aos-delay="0">
@@ -217,18 +217,20 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <div class="lgnewui-day-dot lgnewui-day-dot-green"></div>
                 </div>
                 <div class="lgnewui-day-left-section">
-                    <h2 class="lgnewui-day-poetic-title">
-                        <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'] ?? '', ENT_QUOTES, 'UTF-8')) ?><br>
-                        <span style="font-size:0.7em;opacity:0.7;">与你行至天光</span>
-                    </h2>
-                    <div class="lgnewui-day-start-date-capsule">
-                        <div class="lgnewui-day-icon-circle"><i class="ph-fill ph-heart"></i></div>
-                        <div>
-                            <span class="lgnewui-day-date-label-small">Together Since</span>
-                            <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo htmlspecialchars(str_replace('T', ' ', $text['startTime'] ?? ''), ENT_QUOTES, 'UTF-8') ?></span>
+                        <div class="lgnewui-day-title-container">
+                            <h2 class="lgnewui-day-poetic-title">
+                                <?php echo preg_replace('/\{([^}]+)\}/', '<b>$1</b>', htmlspecialchars($text['logo'] ?? '', ENT_QUOTES, 'UTF-8')) ?><br>
+                                <span style="font-size:0.7em;opacity:0.7;">与你行至天光</span>
+                            </h2>
+                        </div>
+                        <div class="lgnewui-day-start-date-capsule">
+                            <div class="lgnewui-day-icon-circle"><i class="ph-fill ph-heart"></i></div>
+                            <div class="lgnewui-day-date-text-group">
+                                <span class="lgnewui-day-date-label-small">Together Since</span>
+                                <span class="lgnewui-day-date-value-clean" id="lgnewui-day-start-date-display"><?php echo htmlspecialchars(str_replace('T', ' ', $text['startTime'] ?? ''), ENT_QUOTES, 'UTF-8') ?></span>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="lgnewui-day-right-section">
                     <div class="lgnewui-day-main-days-wrapper">
                         <div class="lgnewui-day-main-days-number" id="lgnewui-day-counter-days">0</div>
@@ -616,17 +618,26 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-event-overlay"></div>
                         <?php endif; ?>
                         <div class="lgnewui-event-content">
+                            <?php if (!$isDone && !$hasImg): ?>
+                            <div class="lgnewui-flex-between-start">
+                                <div class="lgnewui-event-icon">
+                                    <i class="ph-duotone ph-lock-key"></i>
+                                </div>
+                                <i class="ph-fill ph-lock-key lgnewui-event-seal"></i>
+                            </div>
+                            <?php else: ?>
                             <div>
                                 <div class="lgnewui-event-icon">
-                                    <i class="ph-fill <?php echo $isDone ? 'ph-heart' : ($hasImg ? 'ph-heart' : 'ph-lock-key'); ?>"></i>
+                                    <i class="ph-fill ph-heart"></i>
                                 </div>
                             </div>
+                            <?php endif; ?>
                             <div class="lgnewui-event-content-mt">
                                 <h3 class="lgnewui-event-title <?php echo $hasImg ? 'lgnewui-text-white' : '' ?> lgnewui-text-xl lgnewui-font-bold lgnewui-mb-1">
                                     <?php echo htmlspecialchars($evt['eventname']) ?>
                                 </h3>
                                 <?php if (!empty($evtNote)): ?>
-                                <p class="lgnewui-event-note <?php echo $hasImg ? 'lgnewui-text-white' : 'lgnewui-text-muted' ?>">
+                                <p class="lgnewui-event-note <?php echo $hasImg ? 'lgnewui-text-white lgnewui-opacity-80 lgnewui-event-note-sm' : (!$isDone ? 'lgnewui-event-note-color' : 'lgnewui-text-muted'); ?>">
                                     <?php echo htmlspecialchars(mb_substr($evtNote, 0, 50, 'UTF-8')) ?>
                                 </p>
                                 <?php endif; ?>
@@ -638,21 +649,23 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                                 </span>
                                 <?php if (!empty($evtLocation)): ?>
                                 <span class="lgnewui-chip <?php echo $hasImg ? 'lgnewui-chip--glass' : 'lgnewui-chip--light'; ?>">
-                                    <i class="ph-fill ph-map-pin"></i>
+                                    <i class="ph-<?php echo $hasImg ? 'fill' : 'bold'; ?> ph-map-pin"></i>
                                     <?php echo htmlspecialchars($evtLocation) ?>
                                 </span>
                                 <?php endif; ?>
                                 <?php if (!empty($evtDate)): ?>
                                 <span class="lgnewui-chip <?php echo $hasImg ? 'lgnewui-chip--glass' : 'lgnewui-chip--light'; ?>">
+                                    <i class="ph-fill ph-calendar-blank"></i>
+                                    <?php echo (!$isDone && !$hasImg) ? '待解锁' : htmlspecialchars($evtDate); ?>
+                                </span>
+                                <?php elseif (!$isDone && !$hasImg): ?>
+                                <span class="lgnewui-chip lgnewui-chip--light">
                                     <i class="ph-bold ph-calendar-blank"></i>
-                                    <?php echo htmlspecialchars($evtDate) ?>
+                                    待解锁
                                 </span>
                                 <?php endif; ?>
                             </div>
                         </div>
-                        <?php if (!$isDone && !$hasImg): ?>
-                        <i class="ph-fill ph-lock-key lgnewui-event-seal"></i>
-                        <?php endif; ?>
                     </a>
                 </div>
                 <?php $eidx++; endwhile; else: ?>
@@ -683,13 +696,13 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     <div class="lgnewui-ios-tabs">
                         <div class="lgnewui-ios-tabs-slider"></div>
                         <button class="lgnewui-ios-tab active" data-filter="all" onclick="filterLoveDays('all', this)">
-                            <i class="ph-fill ph-heart"></i> 全部
+                            <i class="ph-fill ph-squares-four"></i> <span>全部</span>
                         </button>
-                        <button class="lgnewui-ios-tab" data-filter="anniversary" onclick="filterLoveDays('anniversary', this)">
-                            <i class="ph-fill ph-calendar-heart"></i> 纪念日
+                        <button class="lgnewui-ios-tab" data-filter="past" onclick="filterLoveDays('past', this)">
+                            <i class="ph-fill ph-heart"></i> <span>纪念日</span>
                         </button>
-                        <button class="lgnewui-ios-tab" data-filter="countdown" onclick="filterLoveDays('countdown', this)">
-                            <i class="ph-fill ph-clock-countdown"></i> 倒计时
+                        <button class="lgnewui-ios-tab" data-filter="future" onclick="filterLoveDays('future', this)">
+                            <i class="ph-fill ph-hourglass"></i> <span>倒计时</span>
                         </button>
                     </div>
                 </div>
@@ -730,24 +743,36 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 $ldIdx = 0;
                 foreach ($lovedays as $ld):
                 ?>
-                <div data-aos="fade-up" data-aos-delay="<?php echo $ldIdx * 50 ?>" data-loveday-type="<?php echo $ld['isFuture'] ? 'countdown' : 'anniversary'; ?>">
+                <div data-aos="fade-up" data-aos-delay="<?php echo $ldIdx * 50 ?>" data-loveday-type="<?php echo $ld['isFuture'] ? 'future' : 'past'; ?>">
                     <div class="lgnewui-widget lgnewui-widget--loveday-vibrant <?php echo $ld['isFuture'] ? 'lgnewui-widget--loveday-future' : 'lgnewui-widget--loveday-past' ?>">
                         <div class="lgnewui-loveday-sup-label"><?php echo $ld['isFuture'] ? '还有' : '已经' ?></div>
+                        <?php if ($ld['isFuture']): ?>
+                        <svg class="lgnewui-loveday-bg-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M792 120H232a40 40 0 0 0-40 40v56c0 88.4 71.6 160 160 160 5.2 0 10.4-.2 15.6-.6 4.4 11.8 4.4 24.8 0 36.6-5.2-.4-10.4-.6-15.6-.6-88.4 0-160 71.6-160 160v56a40 40 0 0 0 40 40h560a40 40 0 0 0 40-40v-56c0-88.4-71.6-160-160-160-5.2 0-10.4.2-15.6.6-4.4-11.8-4.4-24.8 0-36.6 5.2.4 10.4.6 15.6.6 88.4 0 160-71.6 160-160v-56a40 40 0 0 0-40-40z" fill="currentColor"></path>
+                        </svg>
+                        <?php else: ?>
                         <svg class="lgnewui-loveday-bg-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
                             <path d="M923 283.6a260.04 260.04 0 0 0-56.9-82.6c-64.5-70-170.8-84-245.5-32.9L512 216.7l-108.6-48.6c-74.7-51.1-181-37.1-245.5 32.9-64.5 70-79.9 174.6-44.1 262.8 33.3 82.3 98.7 151.7 185.3 227.1L512 884.2l212.9-193.3c86.6-75.4 152-144.8 185.3-227.1 35.8-88.2 20.4-192.8-44.1-262.8z" fill="currentColor"></path>
                         </svg>
+                        <?php endif; ?>
                         <div class="lgnewui-flex-between-center lgnewui-loveday-content">
                             <div class="lgnewui-flex-center-gap" tabindex="0">
                                 <div class="lgnewui-icon-box-glass-white">
-                                    <i class="ph-fill <?php echo $ld['isFuture'] ? 'ph-clock-countdown' : 'ph-heart' ?>"></i>
+                                    <?php if ($ld['isFuture']): ?>
+                                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M810 249.5c-38.6-38.6-83.5-68.8-133.5-90-51.8-21.9-106.8-33-163.5-33s-111.7 11.1-163.5 33c-50 21.2-94.9 51.4-133.5 90-38.6 38.6-68.8 83.5-90 133.5-21.9 51.8-33 106.8-33 163.5s11.1 111.7 33 163.5c21.2 50 51.4 94.9 90 133.5s83.5 68.8 133.5 90c51.8 21.9 106.8 33 163.5 33s111.7-11.1 163.5-33c50-21.2 94.9-51.4 133.5-90S878.8 760 900 710c21.9-51.8 33-106.8 33-163.5S921.9 434.8 900 383c-21.2-50-51.5-94.9-90-133.5z m-297 657c-198.5 0-360-161.5-360-360s161.5-360 360-360 360 161.5 360 360-161.5 360-360 360zM357 96.5c-42.3-49.6-141-53.3-208.1 4s-77.3 153.9-35 203.5L357 96.5zM877.2 100.5C810 43.2 711.3 47 669 96.5L912.2 304c42.3-49.6 32.1-146.2-35-203.5z"></path>
+                                        <path d="M667.1 558.6H543V351c0-17.9-14.5-32.4-32.4-32.4-15.2 0-27.6 12.3-27.6 27.6v272.4h182.2c17.1 0 30.9-13.8 30.9-30.9 0-16.1-13-29.1-29-29.1z"></path>
+                                    </svg>
+                                    <?php else: ?>
+                                    <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M470.4 204.8l44.8 44.8 44.8-44.8c99.2-99.2 262.4-99.2 361.6 0 48 48 73.6 112 73.6 179.2 0 19.2-12.8 32-32 32s-32-12.8-32-32c0-51.2-19.2-99.2-57.6-134.4-73.6-73.6-195.2-73.6-272 0l-67.2 67.2c-12.8 12.8-32 12.8-44.8 0l-67.2-67.2c-73.6-73.6-195.2-73.6-272 0-73.6 73.6-73.6 195.2 0 272L512 883.2c12.8 12.8 12.8 32 0 44.8s-32 12.8-44.8 0L105.6 566.4c-99.2-99.2-99.2-262.4 0-361.6 102.4-102.4 262.4-102.4 364.8 0z m176 710.4L425.6 694.4c-57.6-57.6-57.6-147.2 0-204.8 57.6-57.6 147.2-57.6 204.8 0l57.6 57.6 57.6-57.6c57.6-57.6 147.2-57.6 204.8 0 57.6 57.6 57.6 147.2 0 204.8L729.6 915.2c-9.6 9.6-25.6 16-38.4 16-19.2 0-32-6.4-44.8-16z m256-265.6c32-32 32-83.2 0-112-32-32-83.2-32-112 0l-80 80c-12.8 12.8-32 12.8-44.8 0l-80-80c-32-32-83.2-32-112 0-32 32-32 83.2 0 112L688 864l214.4-214.4z" fill="#ffffff"></path>
+                                    </svg>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="lgnewui-loveday-copy">
-                                    <div class="lgnewui-loveday-title"><?php echo htmlspecialchars($ld['title']) ?></div>
+                                    <div class="lgnewui-loveday-title" data-lg-tip="<?php echo htmlspecialchars($ld['title']) ?>"><?php echo htmlspecialchars($ld['title']) ?></div>
                                     <div class="lgnewui-loveday-date">
                                         <span class="lgnewui-loveday-date-line"><?php echo ($ld['isFuture'] ? '目标日：' : '起始日：') . $ld['date'] ?></span>
-                                        <?php if (!empty($ld['lunarDate'])): ?>
-                                        <span class="lgnewui-loveday-lunar"><?php echo htmlspecialchars($ld['lunarDate']) ?></span>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -755,6 +780,9 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                                 <div class="lgnewui-loveday-count">
                                     <?php echo $ld['days'] ?><span class="lgnewui-loveday-unit">天</span>
                                 </div>
+                                <?php if (!empty($ld['lunarDate'])): ?>
+                                <div class="lgnewui-loveday-lunar-inline"><?php echo htmlspecialchars($ld['lunarDate']) ?></div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -803,23 +831,24 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-watermark">DAY <?php echo $dayNum ?></div>
                         <div class="lgnewui-journal-header">
                             <div class="lgnewui-journal-user">
-                                <img data-src="" class="lgnewui-journal-avatar lazy <?php echo $isMaleAuthor ? 'lg-male-avatar' : 'lg-female-avatar'; ?>">
+                                <img data-src="" class="lgnewui-journal-avatar lazy">
                                 <div>
                                     <div class="lgnewui-font-sm-bold"><?php echo htmlspecialchars($artAuthor, ENT_QUOTES, 'UTF-8') ?></div>
                                     <div class="lgnewui-journal-meta"><?php echo htmlspecialchars($art['date'], ENT_QUOTES, 'UTF-8') ?></div>
                                 </div>
                             </div>
                         </div>
-                        <h3 class="lgnewui-journal-title"><?php echo htmlspecialchars(mb_substr($art['title'], 0, 30, 'UTF-8')) ?></h3>
-                        <p class="lgnewui-journal-body lgnewui-journal-body-clamp"><?php echo htmlspecialchars(strip_tags(mb_substr($art['text'], 0, 100, 'UTF-8'))) ?></p>
+                        <div class="lgnewui-journal-content">
+                            <h3 class="lgnewui-journal-title lgnewui-journal-title-text"><?php echo htmlspecialchars(mb_substr($art['title'], 0, 30, 'UTF-8')) ?></h3>
+                            <p class="lgnewui-journal-body lgnewui-journal-body-clamp"><?php echo htmlspecialchars(strip_tags(mb_substr($art['text'], 0, 100, 'UTF-8'))) ?></p>
+                        </div>
                         <div class="lgnewui-journal-footer">
                             <div class="lgnewui-flex-gap-sm">
-                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-calendar-blank"></i> <?php echo date('Y-m-d', strtotime($art['date'])) ?></span>
                                 <?php if (!empty($artLocation)): ?>
-                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-fill ph-map-pin"></i> <?php echo htmlspecialchars($artLocation, ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-map-pin"></i> <?php echo htmlspecialchars($artLocation, ENT_QUOTES, 'UTF-8') ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($artWeather)): ?>
-                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-fill ph-cloud"></i> <?php echo htmlspecialchars($artWeather, ENT_QUOTES, 'UTF-8') ?></span>
+                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-cloud-sun"></i> <?php echo htmlspecialchars($artWeather, ENT_QUOTES, 'UTF-8') ?></span>
                                 <?php endif; ?>
                                 <?php if (!empty($artMood)): ?>
                                 <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-smiley"></i> <?php echo htmlspecialchars($artMood, ENT_QUOTES, 'UTF-8') ?></span>
@@ -828,7 +857,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                                 <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-eye"></i> <?php echo intval($artViews) ?></span>
                                 <?php endif; ?>
                                 <?php if ($artLikes > 0): ?>
-                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-fill ph-heart"></i> <?php echo intval($artLikes) ?></span>
+                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-heart"></i> <?php echo intval($artLikes) ?></span>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -900,19 +929,15 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <div data-aos="fade-up" data-aos-delay="<?php echo $idx * 50 ?>">
                     <a href="<?php echo !empty($albumCode) ? 'album-detail.php?code=' . urlencode($albumCode) : 'albums.php'; ?>" class="lgnewui-mosaic-item">
                         <img data-src="<?php echo htmlspecialchars($albumCover, ENT_QUOTES, 'UTF-8') ?>" class="lgnewui-mosaic-img lazy">
-                        <?php if (!empty($albumLocation) || $albumCount > 0): ?>
                         <div class="lgnewui-mosaic-pos-tr">
                             <div class="lgnewui-chip--dark-glass">
                                 <?php if (!empty($albumLocation)): ?>
                                 <span class="lgnewui-flex-center-gap-xs"><i class="ph-fill ph-map-pin"></i> <?php echo htmlspecialchars($albumLocation, ENT_QUOTES, 'UTF-8') ?></span>
                                 <span class="lgnewui-mosaic-divider"></span>
                                 <?php endif; ?>
-                                <?php if ($albumCount > 0): ?>
                                 <span class="lgnewui-flex-center-gap-xs"><i class="ph-fill ph-image"></i> <?php echo intval($albumCount) ?></span>
-                                <?php endif; ?>
                             </div>
                         </div>
-                        <?php endif; ?>
                         <div class="lgnewui-mosaic-overlay">
                             <div class="lgnewui-mosaic-overlay-content">
                                 <?php if (!empty($authorImg)): ?>
@@ -958,7 +983,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                     </a>
                 </div>
             </div>
-            <div id="messageCarousel" class="lgnewui-home-message-carousel">
+            <div class="lgnewui-home-message-container" id="messageCarousel">
                 <div class="lgnewui-home-message-track">
                     <?php
                     $recentMsgs = null;
@@ -982,20 +1007,17 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                                 $msgAvatar = '/assets/img/avatars/default.png';
                             }
                     ?>
-                    <div class="lgnewui-home-message-card">
+                    <a href="messages.php#comment_<?php echo $msg['id'] ?>" class="lgnewui-home-message-card">
                         <div class="lgnewui-home-message-header">
                             <img class="lgnewui-home-message-avatar" src="<?php echo htmlspecialchars($msgAvatar, ENT_QUOTES, 'UTF-8') ?>" alt="<?php echo htmlspecialchars($msgName, ENT_QUOTES, 'UTF-8') ?>">
-                            <div class="lgnewui-home-message-user">
+                            <div class="lgnewui-home-message-user-info">
                                 <div class="lgnewui-home-message-name-row">
                                     <span class="lgnewui-home-message-user-name"><?php echo htmlspecialchars($msgName, ENT_QUOTES, 'UTF-8') ?></span>
                                     <?php if ($msgIsAdmin): ?>
-                                    <span class="lgnewui-badge lgnewui-badge--admin">站长</span>
-                                    <?php endif; ?>
-                                    <?php if (!empty($msg['is_developer'])): ?>
-                                    <span class="lgnewui-badge lgnewui-badge--developer">开发者</span>
+                                    <span class="lgnewui-home-message-badge lgnewui-home-message-badge--admin">站长</span>
                                     <?php endif; ?>
                                     <?php if ($msgLevel > 0): ?>
-                                    <span class="lgnewui-badge lgnewui-badge--level">Lv.<?php echo intval($msgLevel) ?></span>
+                                    <span class="lgnewui-home-message-badge lgnewui-home-message-badge--level"><i class="ph ph-arrow-bend-down-right"></i> <?php echo $msgLevel <= 1 ? '一级' : ($msgLevel <= 2 ? '二级' : '三级'); ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <span class="lgnewui-home-message-post-time"><?php echo htmlspecialchars($msg['date'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
@@ -1004,19 +1026,17 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                         <div class="lgnewui-home-message-content"><?php echo htmlspecialchars(mb_substr($msg['text'], 0, 80, 'UTF-8')) ?></div>
                         <div class="lgnewui-home-message-divider"></div>
                         <div class="lgnewui-home-message-footer">
-                            <div class="lgnewui-flex-gap-sm">
-                                <?php if (!empty($msgLocation)): ?>
-                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-fill ph-map-pin"></i> <?php echo htmlspecialchars($msgLocation, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php endif; ?>
-                                <?php if (!empty($msgDevice)): ?>
-                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-device-mobile"></i> <?php echo htmlspecialchars($msgDevice, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php endif; ?>
-                                <?php if (!empty($msgBrowser)): ?>
-                                <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-bold ph-globe"></i> <?php echo htmlspecialchars($msgBrowser, ENT_QUOTES, 'UTF-8') ?></span>
-                                <?php endif; ?>
-                            </div>
+                            <?php if (!empty($msgLocation)): ?>
+                            <span class="lgnewui-chip lgnewui-chip--light"><i class="ph-fill ph-map-pin"></i> <?php echo htmlspecialchars($msgLocation, ENT_QUOTES, 'UTF-8') ?></span>
+                            <?php endif; ?>
+                            <?php if (!empty($msgDevice)): ?>
+                            <span class="lgnewui-chip lgnewui-chip--light lgnewui-chip--no-transform"><i class="ph-bold ph-devices"></i> <?php echo htmlspecialchars($msgDevice, ENT_QUOTES, 'UTF-8') ?></span>
+                            <?php endif; ?>
+                            <?php if (!empty($msgBrowser)): ?>
+                            <span class="lgnewui-chip lgnewui-chip--light lgnewui-chip--no-transform"><i class="ph-bold ph-globe"></i> <?php echo htmlspecialchars($msgBrowser, ENT_QUOTES, 'UTF-8') ?></span>
+                            <?php endif; ?>
                         </div>
-                    </div>
+                    </a>
                     <?php endwhile; endif; ?>
                 </div>
             </div>

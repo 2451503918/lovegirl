@@ -147,8 +147,6 @@ body {
 
 .lgnewui-home .lgnewui-section {
     margin-bottom: 5rem;
-    content-visibility: auto;
-    contain-intrinsic-size: auto 500px;
 }
 
 .lgnewui-home .lgnewui-section:last-child,
@@ -639,8 +637,8 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 2.3rem;
+    height: 2.3rem;
     border-radius: 50%;
     color: #ffffff;
     background: #f87171;
@@ -1478,10 +1476,9 @@ body {
     }
 
     .lgnewui-home .lgnewui-ios-tab {
-        padding: 10px 14px;
+        padding: 8px 10px;
         font-size: 0.8rem;
         gap: 0;
-        min-height: 44px;
     }
 
     .lgnewui-home .lgnewui-ios-tab span {
@@ -3386,7 +3383,7 @@ a.lgnewui-review-card:visited {
 
 .lgnewui-day-date-label-small {
     font-family: var(--lgnewui-day-font-ui);
-    font-size: 11px;
+    font-size: 0.55rem;
     color: var(--lgnewui-day-text-light);
     text-transform: uppercase;
     font-weight: 700;
@@ -3484,7 +3481,7 @@ a.lgnewui-review-card:visited {
 .lgnewui-day-timer-label {
     margin-top: 0.5rem;
     font-family: var(--lgnewui-day-font-ui);
-    font-size: 12px;
+    font-size: 0.65rem;
     color: var(--lgnewui-day-text-light);
     text-transform: uppercase;
     letter-spacing: 0.15em;
@@ -3506,14 +3503,6 @@ a.lgnewui-review-card:visited {
 
     .lgnewui-day-timer-val {
         font-size: 1.5rem;
-    }
-
-    .lgnewui-day-date-label-small {
-        font-size: 12px;
-    }
-
-    .lgnewui-day-timer-label {
-        font-size: 13px;
     }
 }
 
@@ -4699,8 +4688,8 @@ body.bg-grad-grid::before {
     align-items: center;
     justify-content: center;
     gap: 0;
-    width: 44px;
-    height: 44px;
+    width: 2.25rem;
+    height: 2.25rem;
     padding: 0;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
@@ -4935,8 +4924,8 @@ body.bg-grad-grid::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
@@ -5230,8 +5219,8 @@ body.bg-grad-grid::before {
 }
 
 .lgnewui-home .lgnewui-epilogue__btn-icon {
-    width: 44px;
-    height: 44px;
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
     background-color: #f7f7f7;
     color: #666;
@@ -5256,31 +5245,6 @@ body.bg-grad-grid::before {
 .lgnewui-home .lgnewui-epilogue__btn-icon i {
     font-size: 1rem;
     opacity: 0.8;
-}
-
-/* 工具按钮（刷新/复制） */
-.lgnewui-home .lgnewui-epilogue__tool-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: #f7f7f7;
-    color: #666;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lgnewui-home .lgnewui-epilogue__tool-btn:hover {
-    background-color: #f0f0f0;
-    color: #000;
-    transform: translateY(-1px);
-}
-
-.lgnewui-home .lgnewui-epilogue__tool-btn:active {
-    transform: scale(0.96);
 }
 
 /* 响应式 */
@@ -6028,181 +5992,5 @@ body.bg-grad-grid::before {
         width: 3.75rem;
         height: 3.75rem;
         font-size: 1.875rem;
-    }
-}
-
-/* ============================================
-   相册照片网格样式 (lgnewui-photo-grid)
-   ============================================ */
-
-.lgnewui-home .lgnewui-photo-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
-@media (min-width: 640px) {
-    .lgnewui-home .lgnewui-photo-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.25rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .lgnewui-home .lgnewui-photo-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.5rem;
-    }
-}
-
-.lgnewui-home .lgnewui-photo-card {
-    position: relative;
-    border-radius: 1.25rem;
-    overflow: hidden;
-    background: #f3f4f6;
-    aspect-ratio: 4/3;
-}
-
-.lgnewui-home .lgnewui-photo-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.lgnewui-home .lgnewui-photo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-.lgnewui-home .lgnewui-photo-card:hover .lgnewui-photo-img {
-    transform: scale(1.08);
-}
-
-.lgnewui-home .lgnewui-photo-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
-    display: flex;
-    align-items: flex-end;
-    padding: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.lgnewui-home .lgnewui-photo-card:hover .lgnewui-photo-overlay {
-    opacity: 1;
-}
-
-.lgnewui-home .lgnewui-photo-text {
-    color: white;
-    font-size: 0.875rem;
-    font-weight: 500;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* ============================================
-   首页结语区域样式 (Epilogue)
-   ============================================ */
-
-.lgnewui-home .lgnewui-epilogue {
-    position: relative;
-    padding: 4rem 1.5rem;
-    text-align: center;
-    margin-top: 3rem;
-}
-
-.lgnewui-home .lgnewui-epilogue__holes {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 2rem;
-}
-
-.lgnewui-home .lgnewui-epilogue__hole {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #f0f0f0;
-    border: 1px solid #e0e0e0;
-}
-
-.lgnewui-home .lgnewui-epilogue__content {
-    margin-bottom: 2rem;
-}
-
-.lgnewui-home .lgnewui-epilogue__text {
-    font-family: var(--lg-font-serif);
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--lg-color-text);
-    margin: 0 0 0.75rem 0;
-    letter-spacing: 0.05em;
-}
-
-.lgnewui-home .lgnewui-epilogue__subtext {
-    font-family: var(--lg-font-sans);
-    font-size: 1rem;
-    color: var(--lg-color-text-muted);
-    margin: 0;
-    font-weight: 400;
-}
-
-.lgnewui-home .lgnewui-epilogue__actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.lgnewui-home .lgnewui-epilogue__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.875rem 1.5rem;
-    background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-    color: white;
-    border-radius: 9999px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(225, 29, 72, 0.3);
-}
-
-.lgnewui-home .lgnewui-epilogue__btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(225, 29, 72, 0.4);
-}
-
-.lgnewui-home .lgnewui-epilogue__btn:active {
-    transform: translateY(-1px);
-}
-
-.lgnewui-home .lgnewui-epilogue__btn i {
-    font-size: 1.1rem;
-}
-
-@media (max-width: 640px) {
-    .lgnewui-home .lgnewui-epilogue {
-        padding: 3rem 1rem;
-    }
-    
-    .lgnewui-home .lgnewui-epilogue__text {
-        font-size: 1.35rem;
-    }
-    
-    .lgnewui-home .lgnewui-epilogue__actions {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    
-    .lgnewui-home .lgnewui-epilogue__btn {
-        width: 100%;
-        justify-content: center;
     }
 }

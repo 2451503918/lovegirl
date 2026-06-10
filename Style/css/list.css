@@ -184,10 +184,3 @@ span.weisc {
   color: #ffbc00;
   border: 1px solid #ffbc00;
 }
-
-/* 图片尺寸安全约束 */
-.list_texts img, .open img {
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-}

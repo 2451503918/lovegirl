@@ -1,11 +1,47 @@
+/*!
+ *      _      ____ _   _ _____ _    _ _   _ ___
+ *     | |    / ___| \ | | ____| |  | | | | |_ _|
+ *     | |   | |  _|  \| |  _| | |  | | | | || |
+ *     | |___| |_| | |\  | |___| |__| | |_| || |
+ *     |_____|\____|_| \_|_____|____/ \___/|___|
+ *
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ * Project      : LGNewUi
+ * Author       : Ki
+ * Last Updated : 2026-03-31
+ * Description  : A private place to preserve love, memory, and the
+ *                years shared between two people.
+ *
+ * Copyright (c) 2022-2026 by Ki. All Rights Reserved.
+ *
+ * Type         : Native PHP web application built with PHP, HTML,
+ *                CSS, JavaScript, and selected third-party libraries.
+ * License      : This project is licensed for personal couple-record
+ *                use only.
+ * Restriction  : Commercial, corporate, organizational, platform,
+ *                or enterprise use is strictly prohibited.
+ * Restriction  : Redistribution, modification, repackaging, resale,
+ *                or unauthorized public deployment without explicit
+ *                written permission is strictly prohibited.
+ *
+ * Official Authorization Site:
+ * https://auth-love.kikiw.cn/
+ *
+ * Warning      : LGNewUi is an original work. Any unauthorized
+ *                copying, scraping, resale, redistribution, or
+ *                commercial use is forbidden.
+ * Notice       : Development and long-term maintenance require
+ *                substantial time and effort. Please respect the
+ *                work involved and the applicable authorization terms.
+ *
+ */
 .central.bg {
-    background: rgba(255, 255, 255, 0.95);
+    background: #fff;
     border-radius: 2rem;
-    padding: 2rem 3rem;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: 4rem 2rem;
+    box-shadow: 0 8px 12px #ebedf0;
+    border: 1px solid rgba(208, 206, 206, 0.4) !important;
 }
 
 .central.bg h3 {
@@ -14,229 +50,51 @@
     padding: 2rem 0;
     font-family: 'Noto Serif SC', serif;
     font-weight: 700;
-    color: #333;
-    margin-bottom: 1rem;
 }
 
 .central.bg h3 b {
     font-size: 2.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-    font-weight: 800;
+    color: #00bcd4;
 }
 
 .central.bg .row .card .leavform {
     display: flex;
-    align-items: stretch;
-    margin: 1.5rem 0;
+    align-items: center;
+    margin: 2.8rem 0;
     position: relative;
 }
 
 .jiequ {
     display: block;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-style: normal;
-    color: #9ca3af;
-    margin-top: 0.5rem;
-    font-weight: 400;
-}
-
-/* ========== 升级版留言卡片样式 ========== */
-.central.bg .row .card .leavform .textinfo {
-    width: 100%;
-    padding: 1.5rem 2rem;
-    border-radius: 1.2rem;
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease;
-}
-
-.central.bg .row .card .leavform .textinfo:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-}
-
-.message-header {
-    margin-bottom: 1rem;
-}
-
-.user_info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: 3px solid #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    object-fit: cover;
-}
-
-.head_content {
-    flex: 1;
-}
-
-.name-row {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.3rem;
-}
-
-.name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #333;
-    font-family: 'Noto Serif SC', serif;
-}
-
-.user-badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.2rem 0.8rem;
-    border-radius: 2rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.level-visitor {
-    background: rgba(156, 163, 175, 0.2);
-    color: #6b7280;
-}
-
-.level-regular {
-    background: rgba(59, 130, 246, 0.2);
-    color: #3b82f6;
-}
-
-.level-elder {
-    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(236, 72, 153, 0.2));
-    color: #7c3aed;
-}
-
-.post-time {
-    font-size: 0.85rem;
-    color: #9ca3af;
-}
-
-.message-content {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: #374151;
-    margin: 1rem 0;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.message-divider {
-    height: 1px;
-    background: rgba(0, 0, 0, 0.05);
-    margin: 0.8rem 0;
-}
-
-.message-footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 0.8rem;
-}
-
-.info-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.35rem 0.9rem;
-    background: rgba(0, 0, 0, 0.04);
-    border-radius: 2rem;
-    font-size: 0.8rem;
-    color: #6b7280;
-    transition: all 0.2s ease;
-}
-
-.info-chip:hover {
-    background: rgba(0, 0, 0, 0.08);
-    transform: translateY(-1px);
-}
-
-.chip-icon {
-    font-size: 0.9rem;
-    font-style: normal;
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .central.bg .row .card .leavform .textinfo {
-        padding: 1.2rem;
-    }
-
-    .user-avatar {
-        width: 40px;
-        height: 40px;
-    }
-
-    .name {
-        font-size: 1rem;
-    }
-
-    .message-content {
-        font-size: 0.95rem;
-    }
-
-    .info-chip {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.7rem;
-    }
+    color: #969292;
+    margin-top: 0.9rem;
 }
 
 .central.bg .row .card .leavform img {
-    width: 4.5rem;
-    height: 4.5rem;
-    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 5rem;
     display: block;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border: 3px solid #fff;
-    transition: all 0.3s ease;
-    object-fit: cover;
-}
-
-.central.bg .row .card .leavform img:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.central.bg .row .card .textinfo .user_info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    box-shadow: 0 2px 12px #7c7c7cba;
+    border: 2px solid #fff;
 }
 
 .central.bg .row .card .leavform .textinfo {
-    width: 100%;
-    padding: 2rem 2rem 1rem;
-    border-radius: 1.2rem;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    width: 70%;
+    margin-left: 1rem;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 10px 0 rgb(143 143 143 / 12%);
+    border: 1px solid #ddddddc2;
+    border-radius: 1rem;
 }
 
-.central.bg .row .card .leavform .textinfo:hover{
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-    cursor: url(../cur/hover.cur), pointer;
+.central.bg .row .card .leavform .textinfo b {
+    line-height: 2rem;
+    border-left: 1.5px solid #acacac;
+    margin: 0 1rem;
 }
-
 
 .central.bg .row .card .leavform .textinfo .name {
     font-size: 1.2rem;
@@ -245,137 +103,83 @@
 }
 
 .central.bg .row .card .leavform .textinfo .time {
-    font-size: .9rem;
+    font-size: .75rem;
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0rem;
 }
 
-.central.bg .row .card .leavform .textinfo .MsgTopInfo {
-    position: absolute;
-    top: .5rem;
-    right: .5rem;
-}
-
 .central.bg .row .card .leavform .textinfo .text {
-    margin-top: 1.2rem;
-    padding: 1rem 0;
-    color: #3d3d3d;
-    border-top: 1px dashed rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
+    padding: 0.8rem 0;
+    color: #a3a3a3;
+    border-top: 2px dotted #cbcbcbb3;
     letter-spacing: 0.1rem;
-    line-height: 1.8rem;
-    font-size: 1.05rem;
+    line-height: 1.6rem;
 }
 
 .central.bg .row .card .inputbox {
-    margin-top: 5rem;
-    padding: 2.5rem 2rem;
+    margin-top: 7rem;
+    padding: 3rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid #e8e8e8ee;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 1.5rem;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    margin-bottom: 2rem;
+    border-top: 4px dotted #ffbaba;
 }
 
 .central.bg .row .card .inputbox input {
-    border: none;
-    padding: 1.2rem 1.8rem;
-    box-shadow: 0 4px 15px 0 rgb(148 147 147 / 20%);
-    border-radius: 1rem;
-    width: 40%;
-    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #fff;
+    padding: 1rem 1.5rem; 
+    box-shadow: 0 2px 8px rgba(28, 31, 35, .03), 0 16px 48px 8px rgba(28, 31, 35, .08);
+    border-radius: 0.5rem;
+    width: 50%;
+    background: #ffffff85;
     font-family: 'Noto Serif SC', serif;
     font-weight: 400;
-    transition: all .3s ease;
-    font-size: 1rem;
-    color: #333;
-}
-
-.central.bg .row .card .inputbox input::placeholder {
-    color: #9ca3af;
-    font-size: 0.95rem;
-}
-
-.central.bg .row .card .inputbox input:focus,
-.central.bg .row .card #wenben:focus {
-    background: #fff;
-    border-color: #818cf8;
-    box-shadow: 0 4px 20px rgba(129, 140, 248, 0.25);
-    transform: translateY(-2px);
 }
 
 .central.bg .row .card .inputbox .rig {
     margin-right: 1rem;
 }
 
-input#QQ {
-    margin-bottom: 0;
-}
-
 .central.bg .row .card #wenben {
     box-sizing: border-box;
-    padding: 1.5rem 2rem;
+    padding: 0.8rem 1.5rem;
     width: 100%;
     resize: vertical;
-    border-radius: 1.2rem;
+    border-radius: 1rem;
     font-size: 1.1rem;
-    background: rgba(255, 255, 255, 0.95);
-    transition: all 0.3s ease;
+    background-color: #ffffff85;
+    transition: all 0.25s ease-in-out 0s;
     border: none !important;
-    box-shadow: 0 4px 15px 0 rgb(148 147 147 / 20%);
+    box-shadow: 0 2px 8px rgba(28, 31, 35, .03), 0 16px 48px 8px rgba(28, 31, 35, .08);
     font-family: 'Noto Serif SC', serif;
-    font-weight: 400;
-    min-height: 120px;
-    line-height: 1.6;
-}
-
-.central.bg .row .card #wenben::placeholder {
-    color: #9ca3af;
-    font-size: 1rem;
-}
-
-.central.bg .row .card #wenben:focus {
-    background: #fff;
-    border-color: #818cf8;
-    box-shadow: 0 4px 20px rgba(129, 140, 248, 0.25);
-    transform: translateY(-2px);
+    color: #706868;
 }
 
 .central.bg .row .card .input-sub {
-    text-align: center;
-    margin: 2rem 0;
+    text-align: right;
+    margin: 1rem 0;
 }
 
 .central.bg .row .card .input-sub .tijiao {
-    padding: 1rem 3rem;
+    padding: 0.8rem 3rem;
     border: none;
-    border-radius: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 0.5rem;
+    /*background: #000;*/
     color: #fff;
-    font-size: 1.2rem;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+    font-size: 1.3rem;
+    /*border: 2px solid #fff;*/
+    /*box-shadow: 0 2px 10px 0 rgb(92 92 92 / 44%);*/
+    background-image: linear-gradient(45deg, #ff7494, #f55555);
     font-family: 'Noto Serif SC', serif;
     font-weight: 700;
     margin-top: 20px;
-    transition: all 0.3s ease;
-    letter-spacing: 0.1rem;
 }
 
 .central.bg .row .card .input-sub .tijiao:hover {
     cursor: pointer;
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(102, 126, 234, 0.5);
-    opacity: 0.9;
-}
-
-.central.bg .row .card .input-sub .tijiao:active {
-    transform: translateY(0);
+    opacity: 0.7;
 }
 
 .leav_icon {
@@ -386,22 +190,16 @@ input#QQ {
     overflow: hidden;
 }
 
-
-.central.bg .row .card .leavform .textinfo span.name {
-    padding: 0.3rem 1rem;
+span.name {
+    padding: 0.2rem 0.8rem;
     border-radius: 2rem;
-    font-size: 1.1rem !important;
+    background: #232323ab;
+    color: #fff;
+    font-size: 1rem !important;
     text-transform: capitalize;
-    color: #3f3f3f;
-    font-weight: 700;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-    display: inline-block;
 }
 
-.central.bg .row .card .leavform .textinfo span.name.ipclass {
+span.name.ipclass {
     color: #fa5c7c;
     background-color: rgba(250, 92, 124, .18);
     font-size: 0.8rem !important;
@@ -418,153 +216,9 @@ input#QQ {
     font-family: 'Noto Serif SC', serif;
     font-weight: 400;
 }
-
 svg.leav_icon.sm22 {
     padding: 0.5rem;
     background: #f3f3f3;
     border-radius: 50%;
     margin-right: 0.8rem;
-}
-
-.central.bg .row .card .leavform .textinfo .time {
-    text-align: right;
-    font-family: 'Noto Serif SC', serif;
-    font-weight: 400;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-    color: #667eea;
-    padding: 0.6rem 1.2rem;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    font-size: 0.85rem;
-    position: relative;
-    border: 1px solid rgba(102, 126, 234, 0.2);
-}
-
-.central.bg .row .card .leavform .textinfo .time .yuan {
-    display: block;
-    margin: 0 .5rem;
-    width: 0.35rem;
-    height: 0.35rem;
-    border-radius: 10rem;
-    background-color: #00a4ff;
-    border: 1px solid #fff;
-}
-
-
-.MessageButtonCard{
-    position: fixed;
-    top: 8rem;
-    right: 3rem;
-    z-index: 100;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1rem;
-    border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.MessageButtonCard:hover{
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5);
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
-
-.MessageButtonCard:active {
-    transform: translateY(0) scale(0.98);
-}
-
-.MessageButtonCard .Message-Icon{
-    color: #fff;
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.central.bg .row .card .leavform .textinfo .level {
-    display: inline-flex;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
-    padding: 0.5rem 1rem;
-    border-radius: 0.8rem;
-    color: #667eea;
-    font-size: 0.9rem;
-    font-family: 'Noto Serif SC', serif;
-    flex-shrink: 0;
-    margin-left: 1rem;
-    border: 1px solid rgba(102, 126, 234, 0.2);
-}
-
-.central.bg .row .card .leavform .textinfo .level b{
-    font-weight: bold;
-    margin-left: .3rem;
-}
-
-
-.central.bg .row .card .leavform .head_content{
-    display: flex;
-    align-items: center;
-    width: 80%;
-    gap: 0.5rem;
-}
-
-/* 移动端响应式 */
-@media (max-width: 768px) {
-    .central.bg {
-        padding: 1.5rem;
-        border-radius: 1.5rem;
-    }
-
-    .central.bg .row .card .inputbox {
-        flex-direction: column;
-        padding: 2rem 1.5rem;
-    }
-
-    .central.bg .row .card .inputbox input {
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 1rem;
-    }
-
-    .central.bg .row .card .inputbox .rig {
-        margin-right: 0;
-    }
-
-    .central.bg .row .card .leavform .textinfo {
-        padding: 1.5rem;
-    }
-
-    .central.bg .row .card .leavform .head_content {
-        flex-wrap: wrap;
-        width: 100%;
-    }
-
-    .MessageButtonCard {
-        top: 5rem;
-        right: 1.5rem;
-        padding: 0.8rem;
-    }
-
-    .MessageButtonCard .Message-Icon {
-        width: 2rem !important;
-        height: 2rem !important;
-    }
-
-    .bg-img .middle {
-        padding: 2rem 2.5rem;
-        border-radius: 1.5rem;
-    }
-
-    .bg-img .middle img {
-        width: 7rem;
-        height: 7rem;
-    }
-
-    .bg-img .middle .love-icon img {
-        width: 5rem;
-        height: 5rem;
-    }
 }

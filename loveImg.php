@@ -219,11 +219,11 @@ function formatFileSize($bytes) {
                         <div class="lg-actions-left">
                             <div class="lg-action-item">
                                 <i class="ph ph-eye"></i>
-                                <span data-view-count="album:<?php echo $albumId ?>"><?php echo $albumViews ?></span>
+                                <span data-view-count="album:<?php echo $albumCode ?>"><?php echo $albumViews ?></span>
                             </div>
-                            <div class="lg-action-item" data-like-target="album" data-like-id="<?php echo $albumId ?>">
+                            <div class="lg-action-item" data-like-target="album" data-like-id="<?php echo $albumCode ?>">
                                 <i class="ph ph-heart"></i>
-                                <span class="lg-interaction-like-num" data-like-count="album:<?php echo $albumId ?>"><?php echo $albumLikes ?></span>
+                                <span class="lg-interaction-like-num" data-like-count="album:<?php echo $albumCode ?>"><?php echo $albumLikes ?></span>
                             </div>
                             <?php if ($photoCount > 1): ?>
                             <div class="lg-photo-count">

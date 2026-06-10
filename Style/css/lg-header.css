@@ -1036,29 +1036,3 @@
         justify-content: flex-end !important;
     }
 }
-
-/* === 参考站内联CSS补充 === */
-
-/* Logo 淡出效果 - 通过JS添加类控制 */
-.alogo.lgnewui-logo-faded {
-    opacity: 0.3;
-    transform: scale(0.92);
-}
-
-/* 吸附时显示 - 通过JS添加类控制 - 灵动岛弹出效果 */
-.lgnewui-header-left-avatar.lgnewui-avatar-visible,
-.lgnewui-header-actions.lgnewui-actions-visible {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0) scale(1);
-    pointer-events: auto;
-}
-
-/* 爱心微呼吸动画 */
-@keyframes stuckHeartPulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.15);
-    }
-}

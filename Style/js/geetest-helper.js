@@ -6,7 +6,7 @@
  * @version 1.0
  * 
  * 使用方式：
- * 1. 引入 gt4.js: <script src="/assets/vendor/geetest/gt4.js"></script>
+ * 1. 引入 gt4.js: <script src="https://static.geetest.com/v4/gt4.js"></script>
  * 2. 引入本文件: <script src="Style/js/geetest-helper.js"></script>
  * 3. 初始化: GeetestHelper.init({ onSuccess: (result) => { ... } })
  */

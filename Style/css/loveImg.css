@@ -183,8 +183,6 @@
     width: 100%;
     overflow: hidden;
     cursor: pointer;
-    max-height: 500px;
-    aspect-ratio: auto;
 }
 
 .lg-photo-box.square {

@@ -49,20 +49,12 @@
         return name;
     }
 
-    var _defaultAvatar = '/assets/img/avatars/default.png';
+    var _defaultAvatar = '/services/avatar-proxy.php?type=qq&qq=10000&s=100';
 
     function getAvatarUrl(qq) {
         if (qq === 'anon') {
             var list = LGConfig.anonAvatars || [];
             return list.length ? list[Math.floor(Math.random() * list.length)] : _defaultAvatar;
-        }
-        // 使用 QQ 号生成头像 URL
-        if (qq && qq !== 'anon') {
-            // 提取纯数字 QQ 号（去除脱敏星号）
-            var pureQQ = String(qq).replace(/\*/g, '');
-            if (pureQQ && /^\d+$/.test(pureQQ) && pureQQ.length >= 4) {
-                return '/services/avatar-proxy.php?type=qq&qq=' + encodeURIComponent(pureQQ) + '&s=100';
-            }
         }
         return _defaultAvatar;
     }
@@ -2500,7 +2492,7 @@
             var self = this;
             // 优先复用 LGVisitorGeoCache（head.php 中缓存的 IP 定位）
             if (window.LGVisitorGeoCache) {
-                var cached = window.LGVisitorGeoCache.get();
+                var cached = window.LGVisitorGeoCache.getCached();
                 if (cached && cached.city) {
                     self.location = cached.city;
                     self.lat = cached.lat || null;

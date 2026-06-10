@@ -351,8 +351,10 @@ function setMusicSetting(key, value) {
 <?php
 echo htmlspecialchars_decode($diy['headCon'] ?? '', ENT_QUOTES);
 ?>
+<!-- 参考站内联关键CSS（loader、气泡、导航栏、头像等样式） -->
+<link rel="stylesheet" href="/Style/css/lg-inline-critical.css?LikeGirl=<?php echo $version ?>">
 </head>
-<body class="bg-pdot-vignette" onload="document.body.classList.add('loaded')" data-aos-easing="ease-out-cubic" data-aos-duration="800" data-aos-delay="0">
+<body class="bg-pdot-vignette">
 <script>
 
     console.log("%c Q & V | [已隐藏]", "color:#fff;background:#000;padding:8px 15px;font-weight: 700;border-radius:15px");
@@ -586,81 +588,70 @@ window.addEventListener('load', function() {
     <nav class="lgnewui-nav-island-container" id="lgnewuiNavIsland">
         <div class="lgnewui-nav-indicator" id="lgnewuiNavIndicator"></div>
 
-        <a href="articles.php"
-           class="lgnewui-nav-island-item"
+                <a href="articles.php"
+           class="lgnewui-nav-island-item  "
            draggable="false"
-           data-desc="记录在一起的点滴时光"
-           data-meta="Memory Notes"
-           data-page="articles">
+           data-desc="写下日常、心情与想念"
+           data-meta="Memory Notes">
             <i class="ph-fill ph-notebook"></i>
-            <span>点滴</span>
-        </a>
-        <a href="messages.php"
-           class="lgnewui-nav-island-item"
+            <span>点滴</span>        </a>
+                <a href="messages.php"
+           class="lgnewui-nav-island-item  "
            draggable="false"
            data-desc="留下想说的话与温柔回应"
-           data-meta="Kind Messages"
-           data-page="messages">
+           data-meta="Kind Messages">
             <i class="ph-fill ph-chat-teardrop-dots"></i>
-            <span>留言</span>
-        </a>
-        <a href="timeline.php"
-           class="lgnewui-nav-island-item"
+            <span>留言</span>        </a>
+                <a href="timeline.php"
+           class="lgnewui-nav-island-item  "
            draggable="false"
            data-desc="回看我们一路走来的轨迹"
-           data-meta="Steps of Us"
-           data-page="timeline">
+           data-meta="Steps of Us">
             <i class="ph-fill ph-clock-countdown"></i>
-            <span>轨迹</span>
-        </a>
-        <a href="index.php"
+            <span>轨迹</span>        </a>
+                <a href="index.php"
            class="lgnewui-nav-island-item active nav-home"
            draggable="false"
            data-desc="收好我们的日常与心动"
-           data-meta="Our Cozy Place"
-           data-page="index">
+           data-meta="Our Cozy Place">
             <i class="ph-fill ph-house"></i>
-        </a>
-        <a href="albums.php"
-           class="lgnewui-nav-island-item"
+                    </a>
+                <a href="albums.php"
+           class="lgnewui-nav-island-item  "
            draggable="false"
            data-desc="收藏见面与出游的闪亮瞬间"
-           data-meta="Photo Keepsakes"
-           data-page="albums">
+           data-meta="Photo Keepsakes">
             <i class="ph-fill ph-camera"></i>
-            <span>相册</span>
-        </a>
-        <a href="lovelist.php"
-           class="lgnewui-nav-island-item"
+            <span>相册</span>        </a>
+                <a href="lovelist.php"
+           class="lgnewui-nav-island-item  "
            draggable="false"
            data-desc="记下想一起完成的心愿"
-           data-meta="Plans Together"
-           data-page="lovelist">
+           data-meta="Plans Together">
             <i class="ph-fill ph-list-checks"></i>
-            <span>清单</span>
-        </a>
-        <a href="about.php"
-           class="lgnewui-nav-island-item"
+            <span>清单</span>        </a>
+                <a href="about.php"
+           class="lgnewui-nav-island-item  "
            draggable="false"
            data-desc="用对话回放我们的故事"
-           data-meta="Story Replay"
-           data-page="about">
+           data-meta="Story Replay">
             <i class="ph-fill ph-book-open-text"></i>
-            <span>关于</span>
-        </a>
-    </nav>
+            <span>关于</span>        </a>
+            </nav>
 </div>
 
-<div class="lgnewui-page-header">
-    <div class="lgnewui-meta-container">
-        <div class="lgnewui-meta-tag" id="lgnewuiMetaTag">
-            <i class="ph-fill ph-star-of-life lgnewui-meta-icon"></i>
-            <span id="lgnewuiMetaText">Sanctuary of Us</span>
-            <i class="ph-fill ph-star-of-life lgnewui-meta-icon"></i>
+<div class="Width_limit_10rem">
+    <div class="lgnewui-page-header">
+        <div class="lgnewui-meta-container">
+            <div class="lgnewui-meta-tag" id="lgnewuiMetaTag">
+                <i class="fa-solid fa-star-of-life lgnewui-meta-icon"></i>
+                <span id="lgnewuiMetaText">Sanctuary of Us</span>
+                <i class="fa-solid fa-star-of-life lgnewui-meta-icon"></i>
+            </div>
+            <div class="lgnewui-meta-line" id="lgnewuiMetaLine"></div>
         </div>
-        <div class="lgnewui-meta-line" id="lgnewuiMetaLine"></div>
+        <h2 class="lgnewui-hero-title" id="lgnewuiHeroTitle"></h2>
     </div>
-    <h2 class="lgnewui-hero-title" id="lgnewuiHeroTitle"></h2>
 </div>
 
 <!-- 头部 -->
@@ -727,12 +718,11 @@ window.addEventListener('load', function() {
                 <i data-lucide="ellipsis"></i>
             </button>
         </div>
-        <div class="word" data-tip="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>" data-tip-position="bottom">
-            <span class="wenan"><?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
-        </div>
     </div>
 </div>
-<div class="lgnewui-sticky-sentinel" id="lgnewuiStickySentinel"></div>
+<div class="Width_limit_10rem">
+    <div class="lgnewui-sticky-sentinel" id="lgnewuiStickySentinel"></div>
+</div>
 
 <div class="music_info">
     <div class="music_info_time" id="musicInfoTime"></div>

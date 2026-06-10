@@ -1,85 +1,44 @@
-@import url(content.css?LikeGirl=v5.2.0);
-@import url(small-x.css?LikeGirl=v5.2.0) only screen and (max-width: 768px);
-@import url(small.css?LikeGirl=v5.2.0) only screen and (min-width: 768px);
-@import url(medium.css?LikeGirl=v5.2.0) only screen and (min-width: 960px);
-@import url(big.css?LikeGirl=v5.2.0) only screen and (min-width: 1200px);
-
-/* === 参考站内联CSS补充 === */
-
-/* 图片查看器 */
-.CarouselImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.CarouselImage:hover {
-    transform: scale(1.02);
-}
-
-.view-image-lead img {
-    cursor: zoom-in;
-    transition: transform 0.3s ease;
-}
-
-.view-image-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 8px;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.view-image-btn:hover {
-    background: rgba(0, 0, 0, 0.7);
-}
-
-.view-image {
-    cursor: zoom-in;
-}
-
-/* 轮播列表 */
-.list {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-}
-
-.item.active {
-    opacity: 1;
-    z-index: 1;
-}
-
-/* 通用杂项 */
-.div_off {
-    display: none !important;
-}
-
-.nub_1 b {
-    font-size: 13px;
-    font-weight: 600;
-    color: #fff;
-    background: #FE9600;
-    padding: 2px 8px;
-    border-radius: 10px;
-    margin-left: 6px;
-    vertical-align: middle;
-}
+/*!
+ *      _      ____ _   _ _____ _    _ _   _ ___
+ *     | |    / ___| \ | | ____| |  | | | | |_ _|
+ *     | |   | |  _|  \| |  _| | |  | | | | || |
+ *     | |___| |_| | |\  | |___| |__| | |_| || |
+ *     |_____|\____|_| \_|_____|____/ \___/|___|
+ *
+ *      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *
+ * Project      : LGNewUi
+ * Author       : Ki
+ * Last Updated : 2026-03-31
+ * Description  : A private place to preserve love, memory, and the
+ *                years shared between two people.
+ *
+ * Copyright (c) 2022-2026 by Ki. All Rights Reserved.
+ *
+ * Type         : Native PHP web application built with PHP, HTML,
+ *                CSS, JavaScript, and selected third-party libraries.
+ * License      : This project is licensed for personal couple-record
+ *                use only.
+ * Restriction  : Commercial, corporate, organizational, platform,
+ *                or enterprise use is strictly prohibited.
+ * Restriction  : Redistribution, modification, repackaging, resale,
+ *                or unauthorized public deployment without explicit
+ *                written permission is strictly prohibited.
+ *
+ * Official Authorization Site:
+ * https://auth-love.kikiw.cn/
+ *
+ * Warning      : LGNewUi is an original work. Any unauthorized
+ *                copying, scraping, resale, redistribution, or
+ *                commercial use is forbidden.
+ * Notice       : Development and long-term maintenance require
+ *                substantial time and effort. Please respect the
+ *                work involved and the applicable authorization terms.
+ *
+ */
+@import url(content.css);
+@import url(home.css);
+@import url(small-x.css) only screen and (max-width: 768px);
+@import url(small.css) only screen and (min-width: 768px);
+@import url(medium.css) only screen and (min-width: 960px);
+@import url(big.css) only screen and (min-width: 1200px);

@@ -754,16 +754,12 @@
         _renderText(desc) {
             if (!desc || !this._heroTitle) return;
 
-            // 使用 textContent 代替逐字创建 span，避免大量 DOM 节点
-            this._heroTitle.textContent = desc;
+            this._heroTitle.innerHTML = desc.split('').map((char, i) => {
+                return `<span class="char" style="transition-delay: ${i * 30}ms">${char === ' ' ? '&nbsp;' : char}</span>`;
+            }).join('');
 
-            // 单次 CSS 动画处理整体标题
-            this._heroTitle.style.opacity = '0';
-            this._heroTitle.style.transform = 'translateY(8px)';
-            this._heroTitle.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             TimerManager.setTimeout('heroText', () => {
-                this._heroTitle.style.opacity = '1';
-                this._heroTitle.style.transform = 'translateY(0)';
+                this._heroTitle.querySelectorAll('.char').forEach(span => span.classList.add('in'));
             }, 50);
         },
 
@@ -1052,9 +1048,9 @@
 
             try {
                 this._setLoading(true);
-                const _wtParam = '';
+                const _wtParam = (window.LG_CONFIG && window.LG_CONFIG.weatherToken) ? '&_wt=' + encodeURIComponent(window.LG_CONFIG.weatherToken) : '';
                 var _siteBase = (window.LG_CONFIG && window.LG_CONFIG.siteBase) || '';
-                this._pendingRequest = fetch(_siteBase + 'services/weather.php?mode=ip', {
+                this._pendingRequest = fetch(_siteBase + 'services/weather.php?mode=ip' + _wtParam, {
                     method: 'GET',
                     credentials: 'same-origin',
                     cache: 'default'
