@@ -103,6 +103,123 @@ if ($row['c'] == 0) {
     $messages[] = "○ 已初始化: visitor_total";
 }
 
+// 5. 创建 photo_images 相册图片表（规范化 photo.img 换行分隔存储）
+$createPhotoImages = "
+CREATE TABLE IF NOT EXISTS photo_images (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    photo_id INT(11) NOT NULL COMMENT '相册ID',
+    photo_code VARCHAR(20) NOT NULL DEFAULT '' COMMENT '相册code',
+    img_url VARCHAR(1000) NOT NULL COMMENT '图片/视频URL',
+    img_thumb VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '缩略图URL',
+    img_type TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0:图片 1:视频',
+    img_text VARCHAR(500) NOT NULL DEFAULT '' COMMENT '图片描述',
+    location VARCHAR(100) NOT NULL DEFAULT '' COMMENT '拍摄地点',
+    lng DECIMAL(11,6) NOT NULL DEFAULT 0 COMMENT '经度',
+    lat DECIMAL(10,6) NOT NULL DEFAULT 0 COMMENT '纬度',
+    sort_order INT(11) NOT NULL DEFAULT 0 COMMENT '排序',
+    views INT(11) NOT NULL DEFAULT 0 COMMENT '浏览数',
+    likes INT(11) NOT NULL DEFAULT 0 COMMENT '点赞数',
+    date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '拍摄时间',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_photo_images_photo_id (photo_id),
+    KEY idx_photo_images_photo_code (photo_code),
+    KEY idx_photo_images_sort (sort_order),
+    KEY idx_photo_images_date (date)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='相册图片明细表'
+";
+
+if (mysqli_query($connect, $createPhotoImages)) {
+    $messages[] = "✓ 创建表: photo_images";
+    // 迁移现有 photo.img 中的换行分隔图片
+    $photoResult = mysqli_query($connect, "SELECT id, code, img, date, location, lng, lat FROM photo WHERE img != ''");
+    if ($photoResult && mysqli_num_rows($photoResult) > 0) {
+        $migratedCount = 0;
+        while ($photoRow = mysqli_fetch_assoc($photoResult)) {
+            $imgLines = explode("\n", $photoRow['img']);
+            $sortOrder = 1;
+            foreach ($imgLines as $line) {
+                $line = trim($line);
+                if (!empty($line)) {
+                    $isVideo = preg_match('/\.(mp4|mov|avi|webm)(\?|$)/i', $line) ? 1 : 0;
+                    $imgUrl = mysqli_real_escape_string($connect, $line);
+                    $photoCode = mysqli_real_escape_string($connect, $photoRow['code']);
+                    $photoDate = !empty($photoRow['date']) ? "'" . mysqli_real_escape_string($connect, $photoRow['date']) . "'" : 'NOW()';
+                    $location = mysqli_real_escape_string($connect, $photoRow['location'] ?? '');
+                    $lng = $photoRow['lng'] ?? 0;
+                    $lat = $photoRow['lat'] ?? 0;
+                    // 避免重复插入
+                    $checkExist = mysqli_query($connect, "SELECT id FROM photo_images WHERE photo_id = {$photoRow['id']} AND img_url = '$imgUrl' LIMIT 1");
+                    if ($checkExist && mysqli_num_rows($checkExist) == 0) {
+                        mysqli_query($connect, "INSERT INTO photo_images (photo_id, photo_code, img_url, img_type, location, lng, lat, sort_order, date) VALUES ({$photoRow['id']}, '$photoCode', '$imgUrl', $isVideo, '$location', $lng, $lat, $sortOrder, $photoDate)");
+                        $migratedCount++;
+                    }
+                    $sortOrder++;
+                }
+            }
+        }
+        if ($migratedCount > 0) {
+            $messages[] = "✓ 迁移 photo.img 到 photo_images：共 $migratedCount 条记录";
+        }
+    }
+} else {
+    $err = mysqli_error($connect);
+    if (strpos($err, 'already exists') !== false) {
+        $messages[] = "○ 表已存在: photo_images";
+    } else {
+        $messages[] = "✗ 创建表失败: photo_images - $err";
+    }
+}
+
+// 6. 创建 little_images 点滴图片表（规范化 little.text 中的 img 标签）
+$createLittleImages = "
+CREATE TABLE IF NOT EXISTS little_images (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    little_id INT(11) NOT NULL COMMENT '点滴ID',
+    img_url VARCHAR(1000) NOT NULL COMMENT '图片URL',
+    img_alt VARCHAR(500) NOT NULL DEFAULT '' COMMENT '图片alt文本',
+    sort_order INT(11) NOT NULL DEFAULT 0 COMMENT '在正文中的顺序',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    KEY idx_little_images_little_id (little_id),
+    KEY idx_little_images_sort (sort_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='点滴文章图片索引表'
+";
+
+if (mysqli_query($connect, $createLittleImages)) {
+    $messages[] = "✓ 创建表: little_images";
+    // 迁移 little.text 中的 <img> 标签
+    $littleResult = mysqli_query($connect, "SELECT id, text FROM little WHERE text LIKE '%<img%'");
+    if ($littleResult && mysqli_num_rows($littleResult) > 0) {
+        $migratedCount = 0;
+        while ($littleRow = mysqli_fetch_assoc($littleResult)) {
+            if (preg_match_all('/<img[^>]+src=[\'"]([^\'"]+)[\'"][^>]*alt=[\'"]([^\'"]*)[\'"]/i', $littleRow['text'], $matches, PREG_SET_ORDER)) {
+                $sortOrder = 1;
+                foreach ($matches as $match) {
+                    $imgUrl = mysqli_real_escape_string($connect, $match[1]);
+                    $imgAlt = isset($match[2]) ? mysqli_real_escape_string($connect, $match[2]) : '';
+                    $checkExist = mysqli_query($connect, "SELECT id FROM little_images WHERE little_id = {$littleRow['id']} AND img_url = '$imgUrl' LIMIT 1");
+                    if ($checkExist && mysqli_num_rows($checkExist) == 0) {
+                        mysqli_query($connect, "INSERT INTO little_images (little_id, img_url, img_alt, sort_order) VALUES ({$littleRow['id']}, '$imgUrl', '$imgAlt', $sortOrder)");
+                        $migratedCount++;
+                    }
+                    $sortOrder++;
+                }
+            }
+        }
+        if ($migratedCount > 0) {
+            $messages[] = "✓ 迁移 little.text 中的图片到 little_images：共 $migratedCount 张图片";
+        }
+    }
+} else {
+    $err = mysqli_error($connect);
+    if (strpos($err, 'already exists') !== false) {
+        $messages[] = "○ 表已存在: little_images";
+    } else {
+        $messages[] = "✗ 创建表失败: little_images - $err";
+    }
+}
+
 echo "<!DOCTYPE html>";
 echo "<html><head>";
 echo "<meta charset='UTF-8'>";

@@ -368,6 +368,57 @@ INSERT INTO `music` (`id`, `music_name`, `music_artist`, `music_url`, `music_cov
 (2, '简单爱', '周杰伦', 'https://music.163.com/song/media/outer/url?id=186016', '', '');
 
 -- ============================================================================
+-- 17. photo_images - 相册图片（v5.2.1 新增：规范化 photo.img 换行分隔存储）
+-- ============================================================================
+DROP TABLE IF EXISTS `photo_images`;
+CREATE TABLE `photo_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `photo_id` int(11) NOT NULL COMMENT '相册ID',
+  `photo_code` varchar(20) NOT NULL DEFAULT '' COMMENT '相册code（冗余便于查询）',
+  `img_url` varchar(1000) NOT NULL COMMENT '图片/视频URL',
+  `img_thumb` varchar(1000) NOT NULL DEFAULT '' COMMENT '缩略图URL',
+  `img_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0:图片 1:视频',
+  `img_text` varchar(500) NOT NULL DEFAULT '' COMMENT '图片描述',
+  `location` varchar(100) NOT NULL DEFAULT '' COMMENT '拍摄地点',
+  `lng` decimal(11,6) NOT NULL DEFAULT 0 COMMENT '经度',
+  `lat` decimal(10,6) NOT NULL DEFAULT 0 COMMENT '纬度',
+  `sort_order` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
+  `views` int(11) NOT NULL DEFAULT 0 COMMENT '浏览数',
+  `likes` int(11) NOT NULL DEFAULT 0 COMMENT '点赞数',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '拍摄时间',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_photo_images_photo_id` (`photo_id`),
+  KEY `idx_photo_images_photo_code` (`photo_code`),
+  KEY `idx_photo_images_sort` (`sort_order`),
+  KEY `idx_photo_images_date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='相册图片明细表';
+
+INSERT INTO `photo_images` (`photo_id`, `photo_code`, `img_url`, `img_thumb`, `img_type`, `img_text`, `location`, `lng`, `lat`, `sort_order`, `date`) VALUES
+(1, 'P20240101', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '', 0, '初春的断桥', '杭州·西湖', 120.149317, 30.246780, 1, '2024-03-15 10:00:00'),
+(1, 'P20240101', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '', 0, '柳絮飞舞', '杭州·西湖', 120.149317, 30.246780, 2, '2024-03-15 10:15:00'),
+(1, 'P20240101', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '', 0, '春风拂面', '杭州·西湖', 120.149317, 30.246780, 3, '2024-03-15 10:30:00'),
+(2, 'P20240820', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '', 0, '海边的夏天', '厦门·鼓浪屿', 118.067013, 24.448018, 1, '2024-08-20 16:30:00'),
+(2, 'P20240820', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '', 0, '浪花', '厦门·鼓浪屿', 118.067013, 24.448018, 2, '2024-08-20 17:00:00'),
+(3, 'P20241225', 'https://ice.frostsky.com/2024/11/06/570374efdc2bb75a8b722c969118afb5.webp', '', 0, '圣诞夜', '家', 0, 0, 1, '2024-12-25 21:00:00');
+
+-- ============================================================================
+-- 18. little_images - 点滴图片（v5.2.1 新增：规范化 little.text 中的图片索引）
+-- ============================================================================
+DROP TABLE IF EXISTS `little_images`;
+CREATE TABLE `little_images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `little_id` int(11) NOT NULL COMMENT '点滴ID',
+  `img_url` varchar(1000) NOT NULL COMMENT '图片URL',
+  `img_alt` varchar(500) NOT NULL DEFAULT '' COMMENT '图片alt文本',
+  `sort_order` int(11) NOT NULL DEFAULT 0 COMMENT '在正文中的顺序',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `idx_little_images_little_id` (`little_id`),
+  KEY `idx_little_images_sort` (`sort_order`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='点滴文章图片索引表';
+
+-- ============================================================================
 -- 兼容：保留原 v5.2.0 的旧表结构（不再使用，但为兼容外部脚本保留）
 -- ============================================================================
 DROP TABLE IF EXISTS `article`;
