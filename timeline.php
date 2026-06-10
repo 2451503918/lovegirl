@@ -15,10 +15,10 @@ if (!isset($text) || !is_array($text)) {
 $boyimg = $text['boyimg'] ?? '';
 $girlimg = $text['girlimg'] ?? '';
 if ($boyimg && !preg_match('/^https?:\/\//', $boyimg)) {
-    $boyimg = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyimg . '&s=640';
+    $boyimg = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($boyimg) . '&s=640';
 }
 if ($girlimg && !preg_match('/^https?:\/\//', $girlimg)) {
-    $girlimg = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg . '&s=640';
+    $girlimg = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($girlimg) . '&s=640';
 }
 ?>
 <div id="pjax-container">

@@ -56,10 +56,10 @@ if ($stmt) {
 $boyAvatar = $text['boyimg'] ?? '';
 $girlAvatar = $text['girlimg'] ?? '';
 if ($boyAvatar && !preg_match('/^https?:\/\//', $boyAvatar)) {
-    $boyAvatar = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyAvatar . '&s=640';
+    $boyAvatar = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($boyAvatar) . '&s=640';
 }
 if ($girlAvatar && !preg_match('/^https?:\/\//', $girlAvatar)) {
-    $girlAvatar = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlAvatar . '&s=640';
+    $girlAvatar = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($girlAvatar) . '&s=640';
 }
 
 $boyName = $text['boy'] ?? 'Ta';

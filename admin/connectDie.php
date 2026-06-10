@@ -84,7 +84,7 @@
                             <div class="info">请检查数据库信息是否配置正确<i style="color: #ff9b9b;"></i></div>
                         </div>
                         <div class="text-center w-75 m-auto" style="margin-bottom: 40px!important;">
-                            <img src="https://img.gejiba.com/images/2bce316a4c0cb6754127769d614d4a82.png"
+                            <img src="/Style/img/db-error-illustration.png"
                                  style="width: 100%;border-radius: 10px;box-shadow: 0 5px 12px #b9c7dc;" alt="">
                         </div>
                         <div class="text-center info">配置成功后可到admin目录下删除当前页面<i style="color: #ff9b9b;"></i></div>

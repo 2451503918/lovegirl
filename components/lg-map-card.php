@@ -58,8 +58,8 @@ $girlMapX = 100 + ($girlLng + 180) / 360 * $mapScaleX;
 $girlMapY = 100 - ($girlLat + 90) / 180 * $mapScaleY;
 
 // 头像URL
-$boyAvatar = $boyImg ? "https://q1.qlogo.cn/g?b=qq&nk={$boyImg}&s=640" : "https://ui-avatars.com/api/?name=" . urlencode($boyName) . "&background=667eea&color=fff&size=128";
-$girlAvatar = $girlImg ? "https://q1.qlogo.cn/g?b=qq&nk={$girlImg}&s=640" : "https://ui-avatars.com/api/?name=" . urlencode($girlName) . "&background=f5576c&color=fff&size=128";
+$boyAvatar = $boyImg ? "/services/avatar-proxy.php?type=qq&qq=" . urlencode($boyImg) . "&s=640" : "/services/avatar-generate.php?name=" . urlencode($boyName) . "&size=128&bg=667eea";
+$girlAvatar = $girlImg ? "/services/avatar-proxy.php?type=qq&qq=" . urlencode($girlImg) . "&s=640" : "/services/avatar-generate.php?name=" . urlencode($girlName) . "&size=128&bg=f5576c";
 ?>
 
 <!-- 地图显示组件 -->

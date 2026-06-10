@@ -133,7 +133,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <!-- 男方头像 -->
                 <div class="img-male">
                     <div class="avatarArea lgewui-head-avatar-boy">
-                        <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
+                        <img draggable="false" class="avatarFrame" src="/Style/img/avatar-frame.png" style="transform: scale(1.6);top: 2px;left: 2px;">
                         <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($boyimg_val ?? '/Style/img/boy.png', ENT_QUOTES, 'UTF-8') ?>">
                         <div class="lgewui-head-avatar-mask">
                             <div class="lgewui-head-avatar-top lgewui-head-avatar-anim-item">
@@ -164,7 +164,7 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                 <!-- 女方头像 -->
                 <div class="img-female">
                     <div class="avatarArea lgewui-head-avatar-girl">
-                        <img draggable="false" class="avatarFrame" src="https://s1.locimg.com/2024/10/18/db01c99842e69.png" style="transform: scale(1.6);top: 2px;left: 2px;">
+                        <img draggable="false" class="avatarFrame" src="/Style/img/avatar-frame.png" style="transform: scale(1.6);top: 2px;left: 2px;">
                         <img draggable="false" class="aiv_touxiang" src="<?php echo htmlspecialchars($girlimg_val ?? '/Style/img/girl.png', ENT_QUOTES, 'UTF-8') ?>">
                         <div class="lgewui-head-avatar-mask">
                             <div class="lgewui-head-avatar-top lgewui-head-avatar-anim-item">
@@ -977,9 +977,9 @@ $runtimeDays = floor((time() - $startTs) / 86400);
                             $msgLevel = $msg['level'] ?? 0;
                             // 头像：优先使用自定义头像，否则使用 weavatar
                             if (empty($msgAvatar) && !empty($msgQQ)) {
-                                $msgAvatar = 'https://weavatar.com/avatar/' . md5(strtolower(trim($msgQQ))) . '?s=120&d=mp';
+                                $msgAvatar = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($msgQQ) . '&s=120';
                             } elseif (empty($msgAvatar)) {
-                                $msgAvatar = 'https://weavatar.com/avatar/?s=120&d=mp';
+                                $msgAvatar = '/assets/img/avatars/default.png';
                             }
                     ?>
                     <div class="lgnewui-home-message-card">

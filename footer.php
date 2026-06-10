@@ -130,7 +130,7 @@
 <script>
     window.LG_CONFIG = window.LG_CONFIG || {};
     window.LG_CONFIG.userCity = "中国 · 中国";
-    window.LG_CONFIG.anonymousAvatar = "https://loveli.kikiw.cn/Lovefolder/20250310095445_67ce466597b24.webp";
+    window.LG_CONFIG.anonymousAvatar = "/assets/img/avatars/default.png";
 </script>
 
 <!-- 极验验证与留言提交绑定 -->

@@ -16,7 +16,7 @@
   margin: 0 0.6rem;
 }
 .central-600 {
-  background: url("https://img.gejiba.com/images/2e34a88491d60fa809883cc7cd149759.jpg") no-repeat center;
+  background: url("/Style/img/about-bg.jpg") no-repeat center;
   border-radius: 3rem;
   background-size: cover;
   overflow: hidden;

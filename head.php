@@ -48,12 +48,12 @@ $Animation = $text['Animation'] ?? '';
 $boyimg_val = $text['boyimg'] ?? '';
 $girlimg_val = $text['girlimg'] ?? '';
 if ($boyimg_val && !preg_match('/^https?:\/\//', $boyimg_val)) {
-    $boyimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyimg_val . '&s=640';
+    $boyimg_val = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($boyimg_val) . '&s=640';
 } elseif (!$boyimg_val) {
     $boyimg_val = '/Style/img/boy.png';
 }
 if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
-    $girlimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg_val . '&s=640';
+    $girlimg_val = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($girlimg_val) . '&s=640';
 } elseif (!$girlimg_val) {
     $girlimg_val = '/Style/img/girl.png';
 }
@@ -85,7 +85,7 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <meta property="og:site_name" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:title" content="<?php echo htmlspecialchars($text['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
 <meta property="og:description" content="<?php echo htmlspecialchars($text['writing'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-<meta property="og:url" content="https://love.54oimx.top/">
+<meta property="og:url" content="<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . ($_SERVER['REQUEST_URI'] ?? '/') ?>">
 <meta property="og:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
 
 <!-- Twitter Card -->
@@ -95,12 +95,8 @@ if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
 <meta name="twitter:image" content="<?php echo htmlspecialchars($boyimg_val, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="x-lg-license-instance" content="858ee1d099b9">
 
-    <!-- Google Fonts CDN 版本 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,500&family=Oswald:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Crimson+Pro:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&family=Montserrat:wght@400&family=Niconne&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&display=swap"
-        rel="stylesheet">
+    <!-- Google Fonts 本地版本 -->
+    <link rel="stylesheet" href="/Style/fonts/google-fonts.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/google-fonts/fonts-non-google.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/vendor/fontawesome/css/all.min.css?LikeGirl=<?php echo $version ?>">
 <link rel="stylesheet" href="/Style/css/leaving.css?LikeGirl=<?php echo $version ?>">
@@ -207,7 +203,7 @@ function setMusicSetting(key, value) {
 <link rel="stylesheet" href="/Style/css/video-modal.css?LikeGirl=<?php echo $version ?>">
 <script src="/Style/dplayer/DPlayer.min.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/video-modal.js?LikeGirl=<?php echo $version ?>"></script>
-<script src="https://static.geetest.com/v4/gt4.js"></script>
+<script src="/assets/vendor/geetest/gt4.js?LikeGirl=<?php echo $version ?>"></script>
 <script src="/Style/js/geetest-helper.js?LikeGirl=<?php echo $version ?>"></script>
 <script>if (typeof GeetestHelper !== 'undefined') GeetestHelper.setCaptchaId("");</script>
 <script src="/Style/js/nprogress.js?LikeGirl=<?php echo $version ?>"></script>
@@ -498,7 +494,7 @@ function loadPhotos() {
                 placeholder: "Style/img/Loading2.gif",
                 effect: "show",
                 strictLazyMode: false,
-                useErrorImagePlaceholder: "https://img.gejiba.com/images/dbc7f2562e051afc3c39f916689ba5f0.png"
+                useErrorImagePlaceholder: "/Style/img/error-placeholder.png"
             });
 
             currentPage++;

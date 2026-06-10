@@ -72,7 +72,7 @@ $reslist = mysqli_query($connect, $lovelist);
         </div> <!-- end card -->
     </div><!-- end col-->
 </div>
-<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="/assets/vendor/jquery/jquery-1.11.3.min.js"></script>
 <script src="../Style/pagelir/spotlight.bundle.js"></script>
 <script>
     $(function () {

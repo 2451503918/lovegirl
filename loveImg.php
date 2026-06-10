@@ -14,10 +14,10 @@ if (!isset($text) || !is_array($text)) {
 $boyimg_val = $text['boyimg'] ?? '';
 $girlimg_val = $text['girlimg'] ?? '';
 if ($boyimg_val && !preg_match('/^https?:\/\//', $boyimg_val)) {
-    $boyimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyimg_val . '&s=640';
+    $boyimg_val = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($boyimg_val) . '&s=640';
 }
 if ($girlimg_val && !preg_match('/^https?:\/\//', $girlimg_val)) {
-    $girlimg_val = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlimg_val . '&s=640';
+    $girlimg_val = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($girlimg_val) . '&s=640';
 }
 
 // 从数据库获取相册数据

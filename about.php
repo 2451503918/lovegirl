@@ -6,10 +6,10 @@ include_once 'head.php';
 $boyAvatarUrl = $text['boyimg'] ?? '';
 $girlAvatarUrl = $text['girlimg'] ?? '';
 if ($boyAvatarUrl && !preg_match('/^https?:\/\//', $boyAvatarUrl)) {
-    $boyAvatarUrl = 'https://q1.qlogo.cn/g?b=qq&nk=' . $boyAvatarUrl . '&s=640';
+    $boyAvatarUrl = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($boyAvatarUrl) . '&s=640';
 }
 if ($girlAvatarUrl && !preg_match('/^https?:\/\//', $girlAvatarUrl)) {
-    $girlAvatarUrl = 'https://q1.qlogo.cn/g?b=qq&nk=' . $girlAvatarUrl . '&s=640';
+    $girlAvatarUrl = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($girlAvatarUrl) . '&s=640';
 }
 $boyName = $text['boy'] ?? 'Ta';
 $girlName = $text['girl'] ?? 'Ta';

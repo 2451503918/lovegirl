@@ -60,8 +60,7 @@ if ($result && mysqli_num_rows($result)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
+    <link href="/Style/fonts/google-fonts.css" rel="stylesheet">
     <!-- App css -->
     <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" />
@@ -147,7 +146,7 @@ if ($result && mysqli_num_rows($result)) {
                     <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown"
                         id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="account-user-avatar">
-                            <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['userQQ'], ENT_QUOTES, 'UTF-8') ?>&s=640"
+                            <img src="/services/avatar-proxy.php?type=qq&qq=<?php echo htmlspecialchars($text['userQQ'], ENT_QUOTES, 'UTF-8') ?>&s=640"
                                 alt="user-image" class="rounded-circle">
                         </span>
                         <span>
@@ -198,7 +197,7 @@ if ($result && mysqli_num_rows($result)) {
             <div class="left-side-menu">
                 <div class="leftbar-user">
                     <a href="#">
-                        <img src="https://q1.qlogo.cn/g?b=qq&nk=<?php echo htmlspecialchars($text['userQQ'], ENT_QUOTES, 'UTF-8') ?>&s=640" alt="user-image"
+                        <img src="/services/avatar-proxy.php?type=qq&qq=<?php echo htmlspecialchars($text['userQQ'], ENT_QUOTES, 'UTF-8') ?>&s=640" alt="user-image"
                             height="42" class="rounded-circle shadow-sm">
                         <span class="leftbar-user-name"><?php echo htmlspecialchars($text['title'], ENT_QUOTES, 'UTF-8') ?></span>
                     </a>

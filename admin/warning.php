@@ -110,7 +110,7 @@ if ($file){
                             <div class="info">温馨提示：请停止你的行为<i style="color: #ff9b9b;"><?php echo htmlspecialchars($ip, ENT_QUOTES, 'UTF-8') ?></i></div>
                         </div>
                         <div class="text-center w-75 m-auto" style="margin-bottom: 40px!important;">
-                            <img src="https://img.gejiba.com/images/ff63a429a6fbd20d6748242b182d2159.jpg" style="width: 100%;border-radius: 10px;box-shadow: 0 0 35px 0 rgb(154 161 171 / 25%);">
+                            <img src="/Style/img/banned-illustration.jpg" style="width: 100%;border-radius: 10px;box-shadow: 0 0 35px 0 rgb(154 161 171 / 25%);">
                         </div>
 
                         <div class="form-group mb-0 text-center">

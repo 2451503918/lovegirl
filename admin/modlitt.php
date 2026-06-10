@@ -41,7 +41,7 @@ $mod = mysqli_fetch_array($result);
 </div>
 
 
-<script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="/assets/vendor/jquery/jquery-1.11.3.min.js"></script>
 <script src="/admin/editormd/editormd.js"></script>
 <script type="text/javascript">
     $(function () {

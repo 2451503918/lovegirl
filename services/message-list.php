@@ -62,7 +62,7 @@ try {
             }
             $avatarUrl = '';
             if (!empty($qqRaw)) {
-                $avatarUrl = 'https://weavatar.com/avatar/' . $qqHash . '?s=100&d=https://q1.qlogo.cn/g?b=qq&nk=' . urlencode($qqRaw) . '&s=100';
+                $avatarUrl = '/services/avatar-proxy.php?type=qq&qq=' . urlencode($qqRaw) . '&s=100';
             }
             $response['data']['items'][] = [
                 'id' => intval($row['id']),

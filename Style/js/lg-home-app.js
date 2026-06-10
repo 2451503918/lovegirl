@@ -45,7 +45,7 @@
             if (mediaEl && photo.img) {
                 mediaEl.style.backgroundImage = 'url(' + photo.img + ')';
             }
-            if (avatarEl) avatarEl.src = 'https://q1.qlogo.cn/g?b=qq&nk=' + (window.LG_CONFIG ? window.LG_CONFIG.boyImg : '') + '&s=640';
+            if (avatarEl) avatarEl.src = '/services/avatar-proxy.php?type=qq&qq=' + encodeURIComponent(window.LG_CONFIG ? window.LG_CONFIG.boyImg : '') + '&s=640';
             if (nameEl) nameEl.textContent = photo.who || '';
             if (timeEl) timeEl.textContent = photo.date || '';
             if (titleEl) titleEl.textContent = photo.text || '美好瞬间';

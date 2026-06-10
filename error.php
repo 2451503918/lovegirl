@@ -43,8 +43,7 @@ mysqli_stmt_close($stmt);
     <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css"/>
     <link href="/Style/css/loading.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400&display=swap" rel="stylesheet">
+    <link href="/Style/fonts/google-fonts.css" rel="stylesheet">
 </head>
 
 <div id="Loadanimation" style="z-index:999999;">
@@ -124,7 +123,7 @@ mysqli_stmt_close($stmt);
                             </p>
                         </div>
                         <div class="text-center w-75 m-auto" style="margin-bottom: 40px!important;">
-                            <?php if ($text){?> <img src="https://img.gejiba.com/images/ff63a429a6fbd20d6748242b182d2159.jpg" style="width: 100%;border-radius: 20px;" alt=""> <?php } ?>
+                            <?php if ($text){?> <img src="/Style/img/banned-illustration.jpg" style="width: 100%;border-radius: 20px;" alt=""> <?php } ?>
 
                         </div>
 
