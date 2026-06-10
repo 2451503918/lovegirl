@@ -339,20 +339,22 @@ $(function() {
     </div>
 </div>
 <script>
-// getMusicSetting: 读取 local/sessionStorage 中的音乐设置
-function getMusicSetting(key, defaultValue) {
-    try {
-        var raw = localStorage.getItem('lg_music_' + key);
-        if (raw !== null) return raw === 'true' ? true : raw === 'false' ? false : raw;
-        raw = sessionStorage.getItem('lg_music_' + key);
-        if (raw !== null) return raw === 'true' ? true : raw === 'false' ? false : raw;
-    } catch (e) {}
-    return defaultValue;
+// getMusicSetting / setMusicSetting 已在 head.php 中提前定义，此处作为 fallback
+if (typeof getMusicSetting === 'undefined') {
+    function getMusicSetting(key, defaultValue) {
+        try {
+            var raw = localStorage.getItem('lg_music_' + key);
+            if (raw !== null) return raw === 'true' ? true : raw === 'false' ? false : raw;
+            raw = sessionStorage.getItem('lg_music_' + key);
+            if (raw !== null) return raw === 'true' ? true : raw === 'false' ? false : raw;
+        } catch (e) {}
+        return defaultValue;
+    }
 }
-function setMusicSetting(key, value) {
-    try {
-        localStorage.setItem('lg_music_' + key, value);
-    } catch (e) {}
+if (typeof setMusicSetting === 'undefined') {
+    function setMusicSetting(key, value) {
+        try { localStorage.setItem('lg_music_' + key, value); } catch (e) {}
+    }
 }
 
 // 音乐播放确认弹窗逻辑
@@ -614,12 +616,14 @@ function setMusicSetting(key, value) {
             }
         });
 
-        FunLazy({
-            placeholder: "Style/img/Loading2.gif",
-            effect: "show",
-            strictLazyMode: false,
-            useErrorImagePlaceholder: "Style/img/error.svg"
-        });
+        if (typeof FunLazy === 'function') {
+            FunLazy({
+                placeholder: "Style/img/Loading2.gif",
+                effect: "show",
+                strictLazyMode: false,
+                useErrorImagePlaceholder: "Style/img/error.svg"
+            });
+        }
     })
     </script>
     <style>

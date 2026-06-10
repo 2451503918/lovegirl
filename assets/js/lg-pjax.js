@@ -206,22 +206,28 @@
             }
 
             // 重置 pjax-container 内的懒加载图片状态
-            document.querySelectorAll('#pjax-container [data-src]').forEach(el => {
-                el.removeAttribute('data-ll-status');
-                el.classList.remove('loaded', 'entered', 'error', 'applied');
-            });
-
-            // 重新初始化
-            if (typeof LazyLoad !== 'undefined') {
-                window.lazyLoadInstance = new LazyLoad({
-                    threshold: 200,
-                    elements_selector: this._selector,
-                    callback_loaded: () => {
-                        // 图片加载完成后触发 Masonry 重新布局
-                        MasonryManager.initAlbumGrid();
-                    }
+            const pjaxContainer = document.getElementById('pjax-container');
+            if (pjaxContainer) {
+                const lazyImages = pjaxContainer.querySelectorAll('[data-src]');
+                Array.from(lazyImages).forEach(el => {
+                    el.removeAttribute('data-ll-status');
+                    el.classList.remove('loaded', 'entered', 'error', 'applied');
                 });
             }
+
+            // 重新初始化 LazyLoad
+            this._initLazyLoad();
+        },
+        
+        _initLazyLoad() {
+            if (typeof LazyLoad === 'undefined') return;
+            window.lazyLoadInstance = new LazyLoad({
+                threshold: 200,
+                elements_selector: this._selector,
+                callback_loaded: () => {
+                    MasonryManager.initAlbumGrid();
+                }
+            });
         }
     };
 
