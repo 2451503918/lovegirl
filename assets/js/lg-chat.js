@@ -46,6 +46,7 @@
                     if (res.code === 0 && res.data) {
                         chatData = res.data;
                         applyHeaderInfo();
+                        showWrapper();
                         startPlayback();
                     } else {
                         showError('数据加载失败');
@@ -67,6 +68,12 @@
 
     function showError(msg) {
         chatBox.innerHTML = '<div style="text-align:center;padding:40px;color:#999;">' + msg + '</div>';
+        showWrapper();
+    }
+
+    function showWrapper() {
+        var w = document.querySelector('.lgnewui-chat-wrapper');
+        if (w) w.style.opacity = '1';
     }
 
     // ------------------------------------------------------------------ header

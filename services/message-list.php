@@ -2,6 +2,7 @@
 /**
  * 留言列表 API
  * 分页获取留言数据，支持匿名头像
+ * 兼容前端 page-messages.js 的 AJAX 调用格式
  */
 header('Content-Type: application/json; charset=utf-8');
 
@@ -22,14 +23,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 error_reporting(0);
 
-$page = max(1, intval($_GET['page'] ?? 1));
-$limit = min(50, max(5, intval($_GET['limit'] ?? 10)));
-$offset = ($page - 1) * $limit;
-$response = ['success' => true, 'code' => 200, 'data' => [], 'total' => 0, 'page' => $page, 'limit' => $limit];
+$action = $_GET['action'] ?? $_POST['action'] ?? '';
+
+// 前端使用 offset/limit 分页
+$limit = min(50, max(5, intval($_GET['limit'] ?? 20)));
+$offset = max(0, intval($_GET['offset'] ?? 0));
+
+$response = ['code' => 200, 'msg' => '查询成功', 'data' => ['items' => [], 'pagination' => ['total' => 0, 'has_more' => false]]];
 
 include_once __DIR__ . '/../admin/connect.php';
 
 if (!$connect) {
+    // 数据库未连接时返回示例数据
+    $response['data']['items'] = [];
+    $response['data']['pagination'] = ['total' => 0, 'has_more' => false];
     echo json_encode($response, JSON_UNESCAPED_UNICODE);
     exit;
 }
@@ -48,10 +55,20 @@ try {
     $r = mysqli_stmt_get_result($stmt);
     if ($r) {
         while ($row = mysqli_fetch_assoc($r)) {
-            $response['data'][] = [
+            $qqRaw = $row['QQ'] ?? '';
+            $qqHash = '';
+            if (!empty($qqRaw)) {
+                $qqHash = md5(strtolower(trim($qqRaw)));
+            }
+            $avatarUrl = '';
+            if (!empty($qqRaw)) {
+                $avatarUrl = 'https://weavatar.com/avatar/' . $qqHash . '?s=100&d=https://q1.qlogo.cn/g?b=qq&nk=' . urlencode($qqRaw) . '&s=100';
+            }
+            $response['data']['items'][] = [
                 'id' => intval($row['id']),
                 'name' => $row['name'] ?? '匿名',
                 'qq' => $row['QQ'] ?? '',
+                'qq_hash' => $qqHash,
                 'text' => $row['text'] ?? '',
                 'time' => $row['time'] ?? '',
                 'city' => $row['city'] ?? '未知',
@@ -59,12 +76,15 @@ try {
                 'browser' => $row['browser'] ?? '',
                 'likes' => intval($row['likes'] ?? 0),
                 'parent_id' => intval($row['parent_id'] ?? 0),
-                'avatar' => !empty($row['QQ']) ? 'https://q1.qlogo.cn/g?b=qq&nk=' . $row['QQ'] . '&s=640' : '',
+                'avatar' => $avatarUrl,
             ];
         }
     }
     mysqli_stmt_close($stmt);
-    $response['total'] = $total;
+    $response['data']['pagination'] = [
+        'total' => $total,
+        'has_more' => ($offset + $limit) < $total
+    ];
 } catch (Throwable $e) {
     // 静默失败，保持空数据
 }

@@ -56,6 +56,14 @@
             var list = LGConfig.anonAvatars || [];
             return list.length ? list[Math.floor(Math.random() * list.length)] : _defaultAvatar;
         }
+        // 使用 QQ 号生成头像 URL
+        if (qq && qq !== 'anon') {
+            // 提取纯数字 QQ 号（去除脱敏星号）
+            var pureQQ = String(qq).replace(/\*/g, '');
+            if (pureQQ && /^\d+$/.test(pureQQ) && pureQQ.length >= 4) {
+                return 'https://q1.qlogo.cn/g?b=qq&nk=' + pureQQ + '&s=100';
+            }
+        }
         return _defaultAvatar;
     }
 

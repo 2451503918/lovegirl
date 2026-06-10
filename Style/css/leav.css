@@ -958,3 +958,18 @@ span.itpsStyle {
         opacity: 0;
     }
 }
+
+/* 留言图标尺寸约束 */
+.MessageCard img {
+    max-width: 100%;
+    height: auto;
+}
+.MessageCard .MsgAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.MessageCard i {
+    font-size: inherit;
+}

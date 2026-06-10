@@ -966,7 +966,7 @@ quote.shadow-blur::after {
 }
 
 #md-view desc::before{
-  content: "“";
+  content: "\201C";
   position: absolute;
   font-size: 6rem;
   color: #b9b9b9;
@@ -974,4 +974,15 @@ quote.shadow-blur::after {
   left: .5rem;
   font-family: Georgia, serif;
   text-indent:0;
+}
+
+/* 图片尺寸约束 */
+.lgnewui-article-card-base img {
+    max-width: 100%;
+    height: auto;
+}
+.lgnewui-article-detail-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
 }

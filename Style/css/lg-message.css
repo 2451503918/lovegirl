@@ -4063,3 +4063,17 @@ html.lg-scroll-locked #lgnewuiFloatingActions {
         justify-content: center;
     }
 }
+
+/* Lucide 图标尺寸约束 */
+.lgnewui-message-drawer [data-lucide],
+.lgnewui-message-drawer i[data-lucide],
+.lgnewui-message-modal [data-lucide],
+.lgnewui-message-modal i[data-lucide] {
+    width: 18px;
+    height: 18px;
+}
+.lgnewui-message-tb-btn i,
+.lgnewui-message-tb-btn [data-lucide] {
+    width: 18px !important;
+    height: 18px !important;
+}

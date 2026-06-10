@@ -149,6 +149,14 @@ $girlName = $text['girl'] ?? 'Ta';
         };
     </script>
 
+    <script>
+    // 安全回退：如果聊天模块5秒内未初始化，强制显示容器
+    setTimeout(function() {
+        var w = document.querySelector('.lgnewui-chat-wrapper');
+        if (w) w.style.opacity = '1';
+    }, 5000);
+    </script>
+
 </div><!-- /#pjax-container -->
 
 <?php include_once 'footer.php'; ?>

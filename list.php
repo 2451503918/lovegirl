@@ -88,7 +88,9 @@ if ($connect) {
         .event-name { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); font-family: 'Noto Serif SC', serif; transition: color 0.3s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
         .status-dot.air + .event-name { color: #bbb; font-weight: 500; }
         .event-tags { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; margin-left: 6px; }
-        .event-tags .etag { width: 22px; height: 22px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .event-tags .etag { width: 22px; height: 22px; border-radius: 50%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+        .event-tags .etag svg { width: 14px; height: 14px; }
+        .event-tags .etag i { font-size: 12px; }
         .toggle-icon { font-size: 1rem; color: #ccc; transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
         .love-card.active .toggle-icon { transform: rotate(180deg); color: var(--main-accent); }
         .love-card.active .card-header { background: #fafafa; }

@@ -140,7 +140,7 @@ if ($connect) {
             <div class="lgnewui-article-detail-content">
                 <h1 class="lgnewui-article-detail-title"><?php echo htmlspecialchars($articleData['title'], ENT_QUOTES, 'UTF-8'); ?></h1>
                 <div class="lgnewui-article-detail-body">
-                    <?php echo htmlspecialchars($articleData['text'], ENT_QUOTES, 'UTF-8'); ?>
+                    <?php echo $articleData['text']; ?>
                 </div>
             </div>
 

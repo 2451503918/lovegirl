@@ -615,6 +615,9 @@
             $(document).on('pjax:start.lgPjax', () => {
                 $('html').css('scroll-behavior', 'auto');
                 LoadingIndicator.show();
+                // 页面淡出过渡
+                const container = document.getElementById('pjax-container');
+                if (container) container.classList.add('pjax-loading');
 
                 // ---- 统一清理：防止内存泄漏 ----
                 // 0. 强制释放滚动锁（弹窗打开时切页会导致 lg-scroll-locked 残留）
@@ -693,6 +696,9 @@
             // ========== pjax:complete ==========
             $(document).on('pjax:complete.lgPjax', () => {
                 $('html').css('scroll-behavior', 'smooth');
+                // 页面淡入过渡
+                const container = document.getElementById('pjax-container');
+                if (container) container.classList.remove('pjax-loading');
 
                 // 如果是 lovelist.php#event-xxx 或 messages.php#comment_xxx 跳转，跳过通用滚动
                 const hash = window.location.hash;
