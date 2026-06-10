@@ -623,3 +623,121 @@ a:hover {
   width: 24px;
   height: 24px;
 }
+
+/* === 参考站内联CSS补充 === */
+
+/* 气泡与头像交互样式 */
+.bg-wrap .love-icon {
+    position: relative;
+    z-index: 200 !important;
+}
+
+.bg-wrap .love-icon>img {
+    cursor: pointer !important;
+    transition: filter 0.3s ease, transform 0.15s ease;
+    pointer-events: auto !important;
+}
+
+.bg-wrap .love-icon>img:hover {
+    filter: drop-shadow(0 0 15px rgba(252, 93, 121, 0.8)) drop-shadow(0 0 25px rgba(252, 93, 121, 0.5)) brightness(1.1);
+}
+
+.bg-wrap .love-icon>img:active {
+    transform: scale(0.95);
+    filter: drop-shadow(0 0 20px rgba(252, 93, 121, 1)) brightness(1.2);
+}
+
+ul.mask_black::before {
+    pointer-events: none !important;
+}
+
+.bg-wrap.central.limg {
+    z-index: 150 !important;
+}
+
+.bg-wrap.central.limg .avatarArea,
+.bg-wrap.central.limg .img-male,
+.bg-wrap.central.limg .img-female {
+    pointer-events: auto;
+}
+
+.bg-wrap.central.limg[data-avatar-swap="1"] .middle {
+    flex-direction: row-reverse;
+}
+
+.bg-wrap.central.limg[data-solo-mode="1"] .middle .love-icon>img {
+    display: none;
+}
+
+.bg-wrap.central.limg[data-solo-mode="1"] .middle {
+    position: relative;
+    justify-content: center;
+}
+
+.bg-wrap.central.limg[data-solo-mode="1"] .middle .love-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -204px);
+    z-index: 260 !important;
+    width: auto;
+}
+
+.bg-wrap.central.limg[data-solo-mode="1"] .middle .love-info-wrapper {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+}
+
+@media (min-width: 769px) {
+    .bg-wrap.central.limg[data-avatar-spacing="compact"] .bg-img .middle {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+}
+
+.love-info-wrapper {
+    position: absolute;
+    top: -7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    text-align: center;
+    pointer-events: none;
+}
+
+.love-info-wrapper .distance-bubble {
+    pointer-events: auto;
+}
+
+.love-info-wrapper .mr-1 {
+    margin-right: .3rem;
+}
+
+.online-status {
+    margin-top: 10px;
+    padding: 5px 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(255, 105, 180, 0.9), rgba(255, 182, 193, 0.8));
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 192, 203, 0.4);
+    animation: glow 2.5s ease-in-out infinite;
+}
+
+@keyframes bubbleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@media (max-width: 768px) {
+    .online-status {
+        font-size: 0.85rem;
+    }
+}

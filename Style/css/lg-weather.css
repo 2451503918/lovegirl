@@ -84,3 +84,294 @@
     .lgnewui-home-weather-icon-main { font-size: 2rem; }
     .lgnewui-home-weather-grid-stats { flex-wrap: wrap; }
 }
+
+/* === 参考站内联CSS补充 === */
+
+/* 天气面板 - 灵动岛弹出式 */
+.lgnewui-header-weather-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 288px;
+    padding: 14px;
+    border-radius: 26px;
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.38), rgba(247, 248, 250, 0.2) 58%, rgba(235, 241, 249, 0.26));
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    box-shadow:
+        0 26px 60px rgba(15, 23, 42, 0.16),
+        0 8px 18px rgba(15, 23, 42, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    backdrop-filter: saturate(180%) blur(34px);
+    -webkit-backdrop-filter: saturate(180%) blur(34px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.96);
+    pointer-events: none;
+    filter: blur(10px);
+    transform-origin: top right;
+    isolation: isolate;
+    transition: opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.24s ease;
+    z-index: 10002;
+    overflow: hidden;
+}
+
+.lgnewui-header-weather-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    filter: blur(0);
+}
+
+.lgnewui-header-weather-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.46), transparent 30%),
+        radial-gradient(circle at 86% 16%, rgba(147, 197, 253, 0.16), transparent 28%),
+        radial-gradient(circle at 18% 100%, rgba(251, 191, 153, 0.12), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.16), transparent 34%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.lgnewui-header-weather-panel::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 25px;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04)),
+        linear-gradient(180deg, rgba(148, 163, 184, 0.08), rgba(255, 255, 255, 0));
+    pointer-events: none;
+    z-index: 0;
+}
+
+.lgnewui-header-weather-sheet {
+    position: relative;
+    z-index: 1;
+}
+
+.lgnewui-header-weather-hero {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 2px 2px 14px;
+}
+
+.lgnewui-header-weather-hero-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16));
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 8px 20px rgba(15, 23, 42, 0.06);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    flex-shrink: 0;
+}
+
+.lgnewui-header-weather-hero-icon i {
+    font-size: 24px;
+    background: linear-gradient(180deg, #667085 0%, #344054 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.2));
+}
+
+.lgnewui-header-weather-hero-main {
+    min-width: 0;
+    padding-top: 0;
+}
+
+.lgnewui-header-weather-hero-title {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.lgnewui-header-weather-hero-desc {
+    min-width: 0;
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.02em;
+}
+
+.lgnewui-header-weather-hero-temp {
+    display: block;
+    padding-top: 0;
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.05em;
+    text-align: right;
+    white-space: nowrap;
+    align-self: center;
+}
+
+.lgnewui-header-weather-hero-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.2;
+}
+
+.lgnewui-header-weather-hero-sub i {
+    font-size: 13px;
+    color: #8896ab;
+}
+
+.lgnewui-header-weather-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.lgnewui-header-weather-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 10px 12px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.12));
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.42),
+        0 8px 18px rgba(15, 23, 42, 0.04);
+    backdrop-filter: blur(14px) saturate(145%);
+    -webkit-backdrop-filter: blur(14px) saturate(145%);
+}
+
+.lgnewui-header-weather-meta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.2));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #475569;
+    flex-shrink: 0;
+}
+
+.lgnewui-header-weather-meta-icon i {
+    font-size: 15px;
+}
+
+.lgnewui-header-weather-meta-copy {
+    min-width: 0;
+}
+
+.lgnewui-header-weather-meta-label {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 10px;
+    color: #8b98ab;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.lgnewui-header-weather-meta-value {
+    display: block;
+    font-size: 12px;
+    color: #162033;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.lgnewui-header-weather-foot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 4px;
+    padding: 10px 4px 2px;
+}
+
+.lgnewui-header-weather-foot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
+}
+
+.lgnewui-header-weather-updated {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(86, 98, 116, 0.88);
+    min-width: 0;
+}
+
+.lgnewui-header-weather-updated i {
+    font-size: 13px;
+    color: rgba(112, 124, 141, 0.88);
+}
+
+.lgnewui-header-weather-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(76, 88, 106, 0.84);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.lgnewui-header-weather-note i {
+    font-size: 13px;
+    color: rgba(104, 116, 134, 0.86);
+}
+
+@keyframes lgHeaderWeatherSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 980px) {
+    .lgnewui-header-weather-text {
+        max-width: 78px;
+    }
+
+    .lgnewui-header-weather-panel {
+        width: 264px;
+    }
+}

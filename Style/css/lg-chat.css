@@ -489,3 +489,105 @@
         max-width: 80%;
     }
 }
+
+/* === 参考站内联CSS补充 === */
+
+/* About 页面样式 */
+.NotAbout {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 10px;
+}
+
+.about_y {
+    text-align: center;
+    padding: 0 0 0 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.about_y:hover {
+    color: #FE9600;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.avatar {
+    position: relative;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.github-badge {
+    display: inline-block;
+    border-radius: 4px;
+    color: #fff;
+    background: #555;
+    font-size: 12px;
+    line-height: 1;
+    padding: 4px 6px 3px;
+    margin: 2px;
+    font-family: "Open Sans", sans-serif;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.github-badge .badge-subject {
+    display: inline-block;
+    background: #4d4d4d;
+    padding: 4px 4px 4px 6px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.github-badge .badge-value {
+    display: inline-block;
+    padding: 4px 6px 4px 4px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.github-badge .bg-blue {
+    background: #007ec6;
+}
+
+.github-badge .bg-orange {
+    background: #fe7d37;
+}
+
+.github-badge .bg-green {
+    background: #97ca00;
+}
+
+.github-badge .bg-red {
+    background: #e05d44;
+}
+
+.github-badge .bg-purple {
+    background: #6f42c1;
+}
+
+#footer-animal {
+    position: relative;
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.animal {
+    width: 0;
+    height: 0;
+    margin: 0 auto;
+    display: block;
+}
+
+#footer-animal canvas {
+    margin: 0 auto;
+    display: block;
+}

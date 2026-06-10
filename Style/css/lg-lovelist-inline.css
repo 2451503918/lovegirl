@@ -143,3 +143,277 @@
     .search-box { width: 95%; }
     .Tab_Warp { margin: 0.5rem auto 1.5rem; }
 }
+
+/* === 参考站内联CSS补充 === */
+
+/* 列表容器 */
+#list_container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 心愿卡片高亮动画 */
+.love-card.lgnewui-highlight {
+    position: relative;
+    overflow: visible;
+    animation: highlightGlow 0.6s ease-out;
+}
+
+.love-card.lgnewui-highlight::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: calc(var(--radius-lg) + 3px);
+    background: conic-gradient(from var(--highlight-angle, 0deg), #71b7ff, #a78bfa, #f472b6, #fb923c, #71b7ff);
+    z-index: -1;
+    opacity: 0;
+    animation: highlightSweep 1.2s ease-out forwards;
+}
+
+.love-card.lgnewui-highlight::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    z-index: 0;
+}
+
+.love-card.lgnewui-highlight > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes highlightSweep {
+    0% {
+        opacity: 0;
+        --highlight-angle: 0deg;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+        --highlight-angle: 360deg;
+    }
+}
+
+@keyframes highlightGlow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(113, 183, 255, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 20px 4px rgba(113, 183, 255, 0.3);
+    }
+    100% {
+        box-shadow: var(--shadow-soft);
+    }
+}
+
+.love-card.lgnewui-highlight-fade::before {
+    animation: highlightSweep 1.2s ease-out forwards, highlightFadeOut 0.8s 1.5s ease-out forwards;
+}
+
+@keyframes highlightFadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
+/* 状态点增强 */
+.status-dot.com {
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+}
+
+.status-dot.air {
+    box-shadow: 0 0 0 3px rgba(209, 213, 219, 0.2);
+}
+
+/* 相册ConventionPhoto */
+.ConventionPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+}
+
+/* 隐藏fancybox导航 */
+.f-carousel__nav {
+    display: none !important;
+}
+
+/* 图片计数器 */
+.img-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 2;
+}
+
+/* 列表数据区 */
+#list_data,
+.query_data {
+    min-height: 200px;
+}
+
+/* 列表加载阶段 */
+.lg-list-loading-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem 1rem;
+    color: #999;
+}
+
+/* 列表淡入动画 */
+.lg-list-fade-in {
+    animation: lgListFadeIn 0.4s ease-out;
+}
+
+@keyframes lgListFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lgCardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* scope-tag 文字 */
+.scope-tag-text {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 搜索框带scope-tag时的padding调整 */
+.Search_warp #search.has-scope-tag {
+    padding-left: 100px;
+}
+
+/* 搜索按钮图标 */
+.Search_warp #search_btn i {
+    font-size: 1rem;
+}
+
+.Search_warp #search_btn:hover {
+    background: #5aa8f5;
+    box-shadow: 0 4px 12px rgba(113, 183, 255, 0.3);
+}
+
+.Search_warp #search_btn i.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Tab hover效果 */
+.LgLoveList-tab:hover:not(.LgLoveList-tab-active) {
+    color: #333;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+}
+
+/* Tab图标增强 */
+.LgLoveList-tab i {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.LgLoveList-tab:hover i {
+    transform: scale(1.1);
+}
+
+/* 骨架屏增强 - 渐变动画 */
+.lgnewui-skeleton-screen-wrap {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.lgnewui-skeleton-screen-wrap.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* tab-badge增强 */
+.tab-badge {
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.LgLoveList-tab:hover .tab-badge {
+    transform: scale(1.05);
+}
+
+/* 移动端适配增强 */
+@media (max-width: 768px) {
+    .love-card.lgnewui-highlight::before {
+        inset: -2px;
+        border-radius: calc(var(--radius-lg) + 2px);
+    }
+
+    .body-gallery {
+        height: 180px;
+    }
+
+    .lgnewui-header-weather-panel {
+        width: 264px;
+    }
+
+    .Search_warp #search.has-scope-tag {
+        padding-left: 90px;
+    }
+
+    .scope-tag {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+
+    .scope-tag-text {
+        max-width: 60px;
+    }
+
+    .info-item.remark-item .info-value {
+        font-size: 0.9rem;
+    }
+
+    .LgLoveList-tab {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .LgLoveList-tab i {
+        font-size: 0.9rem;
+    }
+}

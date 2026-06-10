@@ -219,3 +219,23 @@
     letter-spacing: 0.15em;
     font-family: var(--lg-font-sans, 'Inter', sans-serif);
 }
+
+/* === 参考站内联CSS补充 === */
+
+/* PJAX 追逐脉冲动画 */
+@keyframes pjax-pulse-chase {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    @keyframes pjax-pulse-chase {
+        0%, 100% {
+            transform: none;
+        }
+    }
+}

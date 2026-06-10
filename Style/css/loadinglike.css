@@ -640,3 +640,55 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
     transform: rotate(360deg);
   }
 }
+
+/* === 参考站内联CSS补充 === */
+
+.delay-03s {
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s;
+}
+
+.Blurkg {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.cpt-loading-mask.column {
+    background: transparent !important;
+}
+
+img.photo_style,
+img.aiv_touxiang,
+img.lazy {
+    opacity: 0;
+    -webkit-transition: .8s ease-in-out opacity;
+    transition: .8s ease-in-out opacity;
+    filter: blur(35px);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+img.loaded {
+    filter: blur(0);
+    opacity: 1;
+    transition: .7s filter linear, .7s -webkit-filter linear;
+}
+
+@keyframes MaskFadeOut {
+    0% {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+
+    95% {
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
