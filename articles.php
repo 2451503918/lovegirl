@@ -34,6 +34,8 @@ $moodIconMap = [
 ?>
 
 <div id="pjax-container">
+    <!-- PJAX 切换时重新注入文章样式 -->
+    <link rel="stylesheet" href="/Style/css/little.css?LikeGirl=<?php echo $version ?? '1.0' ?>">
     <div class="Width_limit_10rem">
         <div class="central mar_t0">
 

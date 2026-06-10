@@ -20,6 +20,8 @@ if ($connect) {
 ?>
 
 <div id="pjax-container">
+    <!-- PJAX 切换时重新注入留言样式 -->
+    <link rel="stylesheet" href="/Style/css/lg-message.css?LikeGirl=<?php echo $version ?? '1.0' ?>">
     <div class="Width_limit_10rem leav">
 
         <!-- 留言卡片容器（由 JS 渲染） -->
