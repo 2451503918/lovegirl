@@ -10,6 +10,11 @@ Thumbs.db
 # 缓存
 .cache/
 node_modules/
+.phpunit.cache/
+
+# Composer
+/vendor/
+composer.lock
 
 # 日志
 *.log
