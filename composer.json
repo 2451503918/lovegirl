@@ -1,0 +1,16 @@
+{
+    "name": "like-girl/test-suite",
+    "description": "Like Girl 5.2.1 Test Suite",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
